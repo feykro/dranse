@@ -1,0 +1,8 @@
+{
+  "generator-jhipster:7.1.0": {
+    "promptValues": {
+      "packageName": "fr.dranse.myapp",
+      "nativeLanguage": "fr"
+    }
+  }
+}
