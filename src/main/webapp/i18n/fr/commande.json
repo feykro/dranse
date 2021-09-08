@@ -1,0 +1,37 @@
+{
+  "projetDranseApp": {
+    "commande": {
+      "home": {
+        "title": "Commandes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Commande",
+        "createOrEditLabel": "Créer ou éditer un Commande",
+        "search": "Recherche pour Commande",
+        "notFound": "Aucun Commande trouvé"
+      },
+      "created": "Un nouveau Commande a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Commande avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Commande avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Commande {{ id }} ?"
+      },
+      "detail": {
+        "title": "Commande"
+      },
+      "id": "ID",
+      "date": "Date",
+      "paysLivraison": "Pays Livraison",
+      "codePostalLivraison": "Code Postal Livraison",
+      "villeLivraison": "Ville Livraison",
+      "rueLivraison": "Rue Livraison",
+      "nomLivraison": "Nom Livraison",
+      "paysFacturation": "Pays Facturation",
+      "codePostalFacturation": "Code Postal Facturation",
+      "villeFacturation": "Ville Facturation",
+      "rueFacturation": "Rue Facturation",
+      "nomFacturation": "Nom Facturation",
+      "utilisateur": "Utilisateur",
+      "ligneCommande": "Ligne Commande"
+    }
+  }
+}

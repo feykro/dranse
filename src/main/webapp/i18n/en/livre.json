@@ -1,0 +1,33 @@
+{
+  "projetDranseApp": {
+    "livre": {
+      "home": {
+        "title": "Livres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Livre",
+        "createOrEditLabel": "Create or edit a Livre",
+        "search": "Search for Livre",
+        "notFound": "No Livres found"
+      },
+      "created": "A new Livre is created with identifier {{ param }}",
+      "updated": "A Livre is updated with identifier {{ param }}",
+      "deleted": "A Livre is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Livre {{ id }}?"
+      },
+      "detail": {
+        "title": "Livre"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "auteur": "Auteur",
+      "prix": "Prix",
+      "synopsis": "Synopsis",
+      "edition": "Edition",
+      "anneePublication": "Annee Publication",
+      "editeur": "Editeur",
+      "stock": "Stock",
+      "categorie": "Categorie"
+    }
+  }
+}

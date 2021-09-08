@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commande">
+      <h2 data-cy="commandeDetailsHeading"><span jhiTranslate="projetDranseApp.commande.detail.title">Commande</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ commande.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.date">Date</span></dt>
+        <dd>
+          <span>{{ commande.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.paysLivraison">Pays Livraison</span></dt>
+        <dd>
+          <span>{{ commande.paysLivraison }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.codePostalLivraison">Code Postal Livraison</span></dt>
+        <dd>
+          <span>{{ commande.codePostalLivraison }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.villeLivraison">Ville Livraison</span></dt>
+        <dd>
+          <span>{{ commande.villeLivraison }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.rueLivraison">Rue Livraison</span></dt>
+        <dd>
+          <span>{{ commande.rueLivraison }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.nomLivraison">Nom Livraison</span></dt>
+        <dd>
+          <span>{{ commande.nomLivraison }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.paysFacturation">Pays Facturation</span></dt>
+        <dd>
+          <span>{{ commande.paysFacturation }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.codePostalFacturation">Code Postal Facturation</span></dt>
+        <dd>
+          <span>{{ commande.codePostalFacturation }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.villeFacturation">Ville Facturation</span></dt>
+        <dd>
+          <span>{{ commande.villeFacturation }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.rueFacturation">Rue Facturation</span></dt>
+        <dd>
+          <span>{{ commande.rueFacturation }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.nomFacturation">Nom Facturation</span></dt>
+        <dd>
+          <span>{{ commande.nomFacturation }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.utilisateur">Utilisateur</span></dt>
+        <dd>
+          <div *ngIf="commande.utilisateur">
+            <a [routerLink]="['/utilisateur', commande.utilisateur?.id, 'view']">{{ commande.utilisateur?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commande', commande.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
