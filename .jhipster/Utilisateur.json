@@ -1,0 +1,59 @@
+{
+  "fields": [
+    {
+      "fieldName": "mail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "motDePasse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adrRue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adrCodePostal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "adrPays",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adrVille",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numCB",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "commande",
+      "otherEntityName": "commande",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "utilisateur"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Utilisateur",
+  "changelogDate": "20210908135123"
+}

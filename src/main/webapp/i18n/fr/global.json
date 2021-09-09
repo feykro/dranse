@@ -7,6 +7,12 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
+        "utilisateur": "Utilisateur",
+        "commande": "Commande",
+        "ligneCommande": "Ligne Commande",
+        "livre": "Livre",
+        "categorie": "Categorie",
+        "avis": "Avis",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

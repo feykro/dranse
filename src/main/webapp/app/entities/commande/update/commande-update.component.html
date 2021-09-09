@@ -1,0 +1,204 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-commande-heading" data-cy="CommandeCreateUpdateHeading" jhiTranslate="projetDranseApp.commande.home.createOrEditLabel">
+        Create or edit a Commande
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.paysLivraison" for="field_paysLivraison"
+            >Pays Livraison</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="paysLivraison"
+            id="field_paysLivraison"
+            data-cy="paysLivraison"
+            formControlName="paysLivraison"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.codePostalLivraison" for="field_codePostalLivraison"
+            >Code Postal Livraison</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="codePostalLivraison"
+            id="field_codePostalLivraison"
+            data-cy="codePostalLivraison"
+            formControlName="codePostalLivraison"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.villeLivraison" for="field_villeLivraison"
+            >Ville Livraison</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="villeLivraison"
+            id="field_villeLivraison"
+            data-cy="villeLivraison"
+            formControlName="villeLivraison"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.rueLivraison" for="field_rueLivraison"
+            >Rue Livraison</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="rueLivraison"
+            id="field_rueLivraison"
+            data-cy="rueLivraison"
+            formControlName="rueLivraison"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.nomLivraison" for="field_nomLivraison"
+            >Nom Livraison</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nomLivraison"
+            id="field_nomLivraison"
+            data-cy="nomLivraison"
+            formControlName="nomLivraison"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.paysFacturation" for="field_paysFacturation"
+            >Pays Facturation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="paysFacturation"
+            id="field_paysFacturation"
+            data-cy="paysFacturation"
+            formControlName="paysFacturation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.codePostalFacturation" for="field_codePostalFacturation"
+            >Code Postal Facturation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codePostalFacturation"
+            id="field_codePostalFacturation"
+            data-cy="codePostalFacturation"
+            formControlName="codePostalFacturation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.villeFacturation" for="field_villeFacturation"
+            >Ville Facturation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="villeFacturation"
+            id="field_villeFacturation"
+            data-cy="villeFacturation"
+            formControlName="villeFacturation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.rueFacturation" for="field_rueFacturation"
+            >Rue Facturation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="rueFacturation"
+            id="field_rueFacturation"
+            data-cy="rueFacturation"
+            formControlName="rueFacturation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.nomFacturation" for="field_nomFacturation"
+            >Nom Facturation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nomFacturation"
+            id="field_nomFacturation"
+            data-cy="nomFacturation"
+            formControlName="nomFacturation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.utilisateur" for="field_utilisateur">Utilisateur</label>
+          <select class="form-control" id="field_utilisateur" data-cy="utilisateur" name="utilisateur" formControlName="utilisateur">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                utilisateurOption.id === editForm.get('utilisateur')!.value?.id ? editForm.get('utilisateur')!.value : utilisateurOption
+              "
+              *ngFor="let utilisateurOption of utilisateursSharedCollection; trackBy: trackUtilisateurById"
+            >
+              {{ utilisateurOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-avis-heading" data-cy="AvisCreateUpdateHeading" jhiTranslate="projetDranseApp.avis.home.createOrEditLabel">
+        Create or edit a Avis
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.avis.note" for="field_note">Note</label>
+          <input type="number" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+          <div *ngIf="editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('note')?.errors?.min"
+              jhiTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('note')?.errors?.max"
+              jhiTranslate="entity.validation.max"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be more than 10.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('note')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.avis.commentaire" for="field_commentaire">Commentaire</label>
+          <input
+            type="text"
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.avis.datePublication" for="field_datePublication"
+            >Date Publication</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_datePublication"
+              data-cy="datePublication"
+              type="datetime-local"
+              class="form-control"
+              name="datePublication"
+              formControlName="datePublication"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.avis.affiche" for="field_affiche">Affiche</label>
+          <input type="checkbox" class="form-check" name="affiche" id="field_affiche" data-cy="affiche" formControlName="affiche" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.avis.livre" for="field_livre">Livre</label>
+          <select class="form-control" id="field_livre" data-cy="livre" name="livre" formControlName="livre">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="livreOption.id === editForm.get('livre')!.value?.id ? editForm.get('livre')!.value : livreOption"
+              *ngFor="let livreOption of livresSharedCollection; trackBy: trackLivreById"
+            >
+              {{ livreOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.avis.utilisateur" for="field_utilisateur">Utilisateur</label>
+          <select class="form-control" id="field_utilisateur" data-cy="utilisateur" name="utilisateur" formControlName="utilisateur">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                utilisateurOption.id === editForm.get('utilisateur')!.value?.id ? editForm.get('utilisateur')!.value : utilisateurOption
+              "
+              *ngFor="let utilisateurOption of utilisateursSharedCollection; trackBy: trackUtilisateurById"
+            >
+              {{ utilisateurOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

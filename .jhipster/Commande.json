@@ -1,0 +1,69 @@
+{
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "paysLivraison",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codePostalLivraison",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "villeLivraison",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rueLivraison",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomLivraison",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paysFacturation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codePostalFacturation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "villeFacturation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rueFacturation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomFacturation",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "utilisateur",
+      "otherEntityName": "utilisateur",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipName": "ligneCommande",
+      "otherEntityName": "ligneCommande",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "commande"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Commande",
+  "changelogDate": "20210908140655"
+}

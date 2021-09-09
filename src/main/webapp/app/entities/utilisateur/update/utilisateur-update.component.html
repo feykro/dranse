@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-utilisateur-heading"
+        data-cy="UtilisateurCreateUpdateHeading"
+        jhiTranslate="projetDranseApp.utilisateur.home.createOrEditLabel"
+      >
+        Create or edit a Utilisateur
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.mail" for="field_mail">Mail</label>
+          <input type="text" class="form-control" name="mail" id="field_mail" data-cy="mail" formControlName="mail" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.motDePasse" for="field_motDePasse"
+            >Mot De Passe</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="motDePasse"
+            id="field_motDePasse"
+            data-cy="motDePasse"
+            formControlName="motDePasse"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.adrRue" for="field_adrRue">Adr Rue</label>
+          <input type="text" class="form-control" name="adrRue" id="field_adrRue" data-cy="adrRue" formControlName="adrRue" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.adrCodePostal" for="field_adrCodePostal"
+            >Adr Code Postal</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="adrCodePostal"
+            id="field_adrCodePostal"
+            data-cy="adrCodePostal"
+            formControlName="adrCodePostal"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.adrPays" for="field_adrPays">Adr Pays</label>
+          <input type="text" class="form-control" name="adrPays" id="field_adrPays" data-cy="adrPays" formControlName="adrPays" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.adrVille" for="field_adrVille">Adr Ville</label>
+          <input type="text" class="form-control" name="adrVille" id="field_adrVille" data-cy="adrVille" formControlName="adrVille" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.telephone" for="field_telephone">Telephone</label>
+          <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.numCB" for="field_numCB">Num CB</label>
+          <input type="text" class="form-control" name="numCB" id="field_numCB" data-cy="numCB" formControlName="numCB" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

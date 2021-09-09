@@ -1,0 +1,44 @@
+{
+  "fields": [
+    {
+      "fieldName": "note",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "10"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datePublication",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "affiche",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "livre",
+      "otherEntityName": "livre",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipName": "utilisateur",
+      "otherEntityName": "utilisateur",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Avis",
+  "changelogDate": "20210908160528"
+}

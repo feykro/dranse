@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-livre-heading" data-cy="LivreCreateUpdateHeading" jhiTranslate="projetDranseApp.livre.home.createOrEditLabel">
+        Create or edit a Livre
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.titre" for="field_titre">Titre</label>
+          <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.auteur" for="field_auteur">Auteur</label>
+          <input type="text" class="form-control" name="auteur" id="field_auteur" data-cy="auteur" formControlName="auteur" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.prix" for="field_prix">Prix</label>
+          <input type="number" class="form-control" name="prix" id="field_prix" data-cy="prix" formControlName="prix" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.synopsis" for="field_synopsis">Synopsis</label>
+          <input type="text" class="form-control" name="synopsis" id="field_synopsis" data-cy="synopsis" formControlName="synopsis" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.edition" for="field_edition">Edition</label>
+          <input type="number" class="form-control" name="edition" id="field_edition" data-cy="edition" formControlName="edition" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.anneePublication" for="field_anneePublication"
+            >Annee Publication</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="anneePublication"
+            id="field_anneePublication"
+            data-cy="anneePublication"
+            formControlName="anneePublication"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.editeur" for="field_editeur">Editeur</label>
+          <input type="text" class="form-control" name="editeur" id="field_editeur" data-cy="editeur" formControlName="editeur" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.livre.stock" for="field_stock">Stock</label>
+          <input type="number" class="form-control" name="stock" id="field_stock" data-cy="stock" formControlName="stock" />
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="projetDranseApp.livre.categorie" for="field_categories">Categorie</label>
+          <select class="form-control" id="field_categories" data-cy="categorie" multiple name="categories" formControlName="categories">
+            <option
+              [ngValue]="getSelectedCategorie(categorieOption, editForm.get('categories')!.value)"
+              *ngFor="let categorieOption of categoriesSharedCollection; trackBy: trackCategorieById"
+            >
+              {{ categorieOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

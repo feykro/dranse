@@ -1,0 +1,28 @@
+{
+  "projetDranseApp": {
+    "ligneCommande": {
+      "home": {
+        "title": "Ligne Commandes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ligne Commande",
+        "createOrEditLabel": "Create or edit a Ligne Commande",
+        "search": "Search for Ligne Commande",
+        "notFound": "No Ligne Commandes found"
+      },
+      "created": "A new Ligne Commande is created with identifier {{ param }}",
+      "updated": "A Ligne Commande is updated with identifier {{ param }}",
+      "deleted": "A Ligne Commande is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ligne Commande {{ id }}?"
+      },
+      "detail": {
+        "title": "Ligne Commande"
+      },
+      "id": "ID",
+      "quantite": "Quantite",
+      "prixPaye": "Prix Paye",
+      "commande": "Commande",
+      "livre": "Livre"
+    }
+  }
+}
