@@ -3,17 +3,22 @@ package fr.dranse.myapp.web.rest;
 import fr.dranse.myapp.domain.Livre;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.service.LivreService;
+import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +30,11 @@ import java.util.Optional;
 public class LivreControllerResource {
 
     private final Logger log = LoggerFactory.getLogger(LivreControllerResource.class);
+
+    private static final String ENTITY_NAME = "livre";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     //additions
     private final LivreService livreService;
@@ -41,9 +51,24 @@ public class LivreControllerResource {
      * POST creationLivre
      */
     @PostMapping("/creation-livre")
-    public String creationLivre() {
-        return "creationLivre";
+    //public String creationLivre() {
+        //    return "creationLivre";
+    //}
+    public ResponseEntity<Livre> creationLivre(@RequestBody Livre livre) throws URISyntaxException {
+        log.debug("REST request to save Livre : {}", livre);
+        if (livre.getId() != null) {
+            throw new BadRequestAlertException("A new livre cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if ((livre.getTitre() == null)||(livre.getAuteur() == null)||(livre.getPrix() == null)||(livre.getSynopsis() == null)||(livre.getEditeur() == null)||(livre.getStock() == null)){
+            throw new BadRequestAlertException("A new livre needs a titre, auteur, prix, synopsis, editeur, stock", ENTITY_NAME, "idexists");
+        }
+        Livre result = livreService.save(livre);
+        return ResponseEntity
+            .created(new URI("/api/livres/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
+
 
     /**
      * PUT modifInfoLivre
@@ -123,8 +148,6 @@ public class LivreControllerResource {
         return ResponseUtil.wrapOrNotFound(livre);
 
     }
-
-
     /**
      * DELETE deleteLivre
      */
