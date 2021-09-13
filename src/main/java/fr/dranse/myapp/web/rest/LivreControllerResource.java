@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.PaginationUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * LivreControllerResource controller
@@ -73,18 +75,28 @@ public class LivreControllerResource {
     /**
      * GET rechercheParTitre
      */
-    @GetMapping("/recherche-par-titre")
-    public String rechercheParTitre() {
-        return "rechercheParTitre";
-    }
+    @GetMapping("/recherche-par-titre/{titre}")
+    //public String rechercheParTitre() {
+    //    return "rechercheParTitre";
+    //}
+    public ResponseEntity<List<Livre>> rechercheParTitre(Pageable pageable, @PathVariable String titre){
+        Page<Livre> page = livreService.findByTitle(pageable, titre);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
 
+    }
     /**
-     * GET rechercheParCategorie
+     * TODO: GET rechercheParCategorie
      */
     @GetMapping("/recherche-par-categorie")
     public String rechercheParCategorie() {
         return "rechercheParCategorie";
     }
+    /*public ResponseEntity<List<Livre>> rechercheParCategorie(Pageable pageable, @PathVariable String categorie){
+        Page<Livre> page = livreService.findByCategorie(pageable, categorie);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }*/
 
     /**
      * GET getBestseller
@@ -105,10 +117,13 @@ public class LivreControllerResource {
     /**
      * GET getLivre
      */
-    @GetMapping("/get-livre")
-    public String getLivre() {
-        return "getLivre";
+    @GetMapping("/get-livre/{id}")
+    public ResponseEntity<Livre> rechercheParTitre(Pageable pageable, @PathVariable Long id){
+        Optional<Livre> livre = livreService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(livre);
+
     }
+
 
     /**
      * DELETE deleteLivre
