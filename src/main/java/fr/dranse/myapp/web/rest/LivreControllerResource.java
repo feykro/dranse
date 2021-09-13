@@ -20,6 +20,7 @@ import tech.jhipster.web.util.ResponseUtil;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -73,9 +74,30 @@ public class LivreControllerResource {
     /**
      * PUT modifInfoLivre
      */
-    @PutMapping("/modif-info-livre")
-    public String modifInfoLivre() {
-        return "modifInfoLivre";
+    @PutMapping("/modif-info-livre/{id}")
+    //public String modifInfoLivre() {
+      //  return "modifInfoLivre";
+    //}
+
+    public ResponseEntity<Livre> modifInfoLivre(@PathVariable(value = "id", required = false) final Long id, @RequestBody Livre livre)
+        throws URISyntaxException {
+        log.debug("REST request to update Livre : {}, {}", id, livre);
+        if (livre.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, livre.getId())) {
+            throw new BadRequestAlertException("Invalid ID " + livre.getId() + " vs "+ id, ENTITY_NAME, "idinvalid");
+        }
+
+        if (!livreRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Livre result = livreService.save(livre);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, livre.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -151,8 +173,13 @@ public class LivreControllerResource {
     /**
      * DELETE deleteLivre
      */
-    @DeleteMapping("/delete-livre")
-    public String deleteLivre() {
-        return "deleteLivre";
+    @DeleteMapping("/delete-livre/{id}")
+    public ResponseEntity<Void> deleteLivre(@PathVariable Long id) {
+        log.debug("REST request to delete Livre : {}", id);
+        livreService.delete(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }
