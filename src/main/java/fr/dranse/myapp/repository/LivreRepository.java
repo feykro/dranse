@@ -14,6 +14,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LivreRepository extends JpaRepository<Livre, Long> {
+
+    // additions
+    @Query("SELECT l from Livre l where l.auteur =:auteur")
+    Page<Livre> findAllWithAuthor(Pageable pageable, @Param("auteur") String author);
+
     @Query(
         value = "select distinct livre from Livre livre left join fetch livre.categories",
         countQuery = "select count(distinct livre) from Livre livre"

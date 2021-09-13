@@ -49,6 +49,8 @@ public interface LivreService {
      */
     Optional<Livre> findOne(Long id);
 
+    Page<Livre> findByAuthor(Pageable pageable, String author);
+
     /**
      * Delete the "id" livre.
      *
