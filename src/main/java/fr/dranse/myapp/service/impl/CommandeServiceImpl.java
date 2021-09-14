@@ -81,6 +81,9 @@ public class CommandeServiceImpl implements CommandeService {
                     if (commande.getNomFacturation() != null) {
                         existingCommande.setNomFacturation(commande.getNomFacturation());
                     }
+                    if (commande.getPayee() != null) {
+                        existingCommande.setPayee(commande.getPayee());
+                    }
 
                     return existingCommande;
                 }

@@ -46,6 +46,10 @@
         <dd>
           <span>{{ livre.stock }}</span>
         </dd>
+        <dt><span jhiTranslate="projetDranseApp.livre.urlImage">Url Image</span></dt>
+        <dd>
+          <span>{{ livre.urlImage }}</span>
+        </dd>
         <dt><span jhiTranslate="projetDranseApp.livre.categorie">Categorie</span></dt>
         <dd>
           <span *ngFor="let categorie of livre.categories; let last = last">

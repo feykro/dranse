@@ -49,6 +49,9 @@ public class Livre implements Serializable {
     @Column(name = "stock")
     private Integer stock;
 
+    @Column(name = "url_image")
+    private String urlImage;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
@@ -177,6 +180,19 @@ public class Livre implements Serializable {
         this.stock = stock;
     }
 
+    public String getUrlImage() {
+        return this.urlImage;
+    }
+
+    public Livre urlImage(String urlImage) {
+        this.urlImage = urlImage;
+        return this;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
     public Set<Categorie> getCategories() {
         return this.categories;
     }
@@ -234,6 +250,7 @@ public class Livre implements Serializable {
             ", anneePublication=" + getAnneePublication() +
             ", editeur='" + getEditeur() + "'" +
             ", stock=" + getStock() +
+            ", urlImage='" + getUrlImage() + "'" +
             "}";
     }
 }

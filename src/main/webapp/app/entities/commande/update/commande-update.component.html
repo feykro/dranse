@@ -169,6 +169,11 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.commande.payee" for="field_payee">Payee</label>
+          <input type="checkbox" class="form-check" name="payee" id="field_payee" data-cy="payee" formControlName="payee" />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="projetDranseApp.commande.utilisateur" for="field_utilisateur">Utilisateur</label>
           <select class="form-control" id="field_utilisateur" data-cy="utilisateur" name="utilisateur" formControlName="utilisateur">
             <option [ngValue]="null"></option>

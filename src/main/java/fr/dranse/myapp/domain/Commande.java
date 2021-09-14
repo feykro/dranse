@@ -59,6 +59,9 @@ public class Commande implements Serializable {
     @Column(name = "nom_facturation")
     private String nomFacturation;
 
+    @Column(name = "payee")
+    private Boolean payee;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "commandes" }, allowSetters = true)
     private Utilisateur utilisateur;
@@ -225,6 +228,19 @@ public class Commande implements Serializable {
         this.nomFacturation = nomFacturation;
     }
 
+    public Boolean getPayee() {
+        return this.payee;
+    }
+
+    public Commande payee(Boolean payee) {
+        this.payee = payee;
+        return this;
+    }
+
+    public void setPayee(Boolean payee) {
+        this.payee = payee;
+    }
+
     public Utilisateur getUtilisateur() {
         return this.utilisateur;
     }
@@ -304,6 +320,7 @@ public class Commande implements Serializable {
             ", villeFacturation='" + getVilleFacturation() + "'" +
             ", rueFacturation='" + getRueFacturation() + "'" +
             ", nomFacturation='" + getNomFacturation() + "'" +
+            ", payee='" + getPayee() + "'" +
             "}";
     }
 }

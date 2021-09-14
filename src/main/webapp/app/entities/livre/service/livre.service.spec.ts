@@ -30,6 +30,7 @@ describe('Service Tests', () => {
         anneePublication: 0,
         editeur: 'AAAAAAA',
         stock: 0,
+        urlImage: 'AAAAAAA',
       };
     });
 
@@ -73,6 +74,7 @@ describe('Service Tests', () => {
             anneePublication: 1,
             editeur: 'BBBBBB',
             stock: 1,
+            urlImage: 'BBBBBB',
           },
           elemDefault
         );
@@ -92,6 +94,7 @@ describe('Service Tests', () => {
             auteur: 'BBBBBB',
             anneePublication: 1,
             stock: 1,
+            urlImage: 'BBBBBB',
           },
           new Livre()
         );
@@ -119,6 +122,7 @@ describe('Service Tests', () => {
             anneePublication: 1,
             editeur: 'BBBBBB',
             stock: 1,
+            urlImage: 'BBBBBB',
           },
           elemDefault
         );
@@ -170,7 +174,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Livre to an array', () => {
-          const livreArray: ILivre[] = [{ id: 123 }, { id: 456 }, { id: 95195 }];
+          const livreArray: ILivre[] = [{ id: 123 }, { id: 456 }, { id: 72951 }];
           const livreCollection: ILivre[] = [{ id: 123 }];
           expectedResult = service.addLivreToCollectionIfMissing(livreCollection, ...livreArray);
           expect(expectedResult).toHaveLength(3);

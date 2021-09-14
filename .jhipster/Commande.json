@@ -43,6 +43,10 @@
     {
       "fieldName": "nomFacturation",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "payee",
+      "fieldType": "Boolean"
     }
   ],
   "relationships": [

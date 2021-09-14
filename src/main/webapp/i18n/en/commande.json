@@ -30,6 +30,7 @@
       "villeFacturation": "Ville Facturation",
       "rueFacturation": "Rue Facturation",
       "nomFacturation": "Nom Facturation",
+      "payee": "Payee",
       "utilisateur": "Utilisateur",
       "ligneCommande": "Ligne Commande"
     }

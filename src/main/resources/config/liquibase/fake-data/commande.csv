@@ -1,11 +1,11 @@
-id;date;pays_livraison;code_postal_livraison;ville_livraison;rue_livraison;nom_livraison;pays_facturation;code_postal_facturation;ville_facturation;rue_facturation;nom_facturation
-1;2021-09-08T03:19:56;Towels bricks-and-clicks calculating;77157;portals b c;navigating Progressive;full-range connecting Haute-Normandie;leading azure;Automotive customized exploit;circuit Oro Berkshire;Aquitaine Designer;payment mobile Ouzbékistan
-2;2021-09-07T20:10:47;Mexique;34996;mindshare;Picardie;Berkshire technologies;Chicken Plastic EXE;yellow magenta Alsace;Rhône-Alpes encompassing;Berkshire c Île-de-France;Wooden
-3;2021-09-07T21:57:32;USB;96963;convergence;virtual ivory monetize;deposit;microchip Malawi;Borders leading-edge;quantify red cross-platform;Producteur ADP;Ergonomic non-volatile Luxembourg
-4;2021-09-08T03:05:20;non-volatile Haute-Normandie Account;6327;hack SMS Franche-Comté;Mandatory;Sports;Executif payment;array TCP Books;Colombie lavender;red;generate
-5;2021-09-07T15:06:16;c models;78180;deposit;transmitting c Consultant;deposit Congo even-keeled;b Belize;generate Consultant a;c XML EXE;Fresh Profit-focused;index Loan
-6;2021-09-07T22:55:01;Intelligent exploit;36172;vortals clear-thinking;Estonie;Fantastic;PNG FTP Producteur;Grèce communities mobile;cross-platform;pixel Rubber;Plastic Avon
-7;2021-09-08T11:28:15;deliverables;52886;Plastic;port;Manager Keyboard mint;Granite;Bike Saint-Honoré des;ubiquitous Avon model;Buckinghamshire solid c;copy Consultant b
-8;2021-09-08T10:09:05;wireless Auto;13393;front-end;virtual;Haute-Normandie Small;c feed c;Soap generate;Rubber monitor generate;ADP Hat;transmit Salad
-9;2021-09-08T01:27:23;communities;77390;Steel revolutionize Grocery;copy portal;redundant XML;Fresh;Books;multi-byte;radical;Extended
-10;2021-09-07T16:56:59;asynchronous;25061;withdrawal b;bleeding-edge eyeballs Dollar;Bike;XSS;Proactive intranet overriding;envisioneer Laffitte;quantifying withdrawal;Account content-based
+id;date;pays_livraison;code_postal_livraison;ville_livraison;rue_livraison;nom_livraison;pays_facturation;code_postal_facturation;ville_facturation;rue_facturation;nom_facturation;payee
+1;2021-09-08T03:19:56;Towels bricks-and-clicks calculating;77157;portals b c;navigating Progressive;full-range connecting Haute-Normandie;leading azure;Automotive customized exploit;circuit Oro Berkshire;Aquitaine Designer;payment mobile Ouzbékistan;true
+2;2021-09-08T08:14:52;Midi-Pyrénées Managed;64279;Picardie;Berkshire technologies;Chicken Plastic EXE;yellow magenta Alsace;Rhône-Alpes encompassing;Berkshire c Île-de-France;Wooden;Outdoors web convergence;true
+3;2021-09-07T18:52:22;Bourgogne;11381;internet deposit;microchip Malawi;Borders leading-edge;quantify red cross-platform;Producteur ADP;Ergonomic non-volatile Luxembourg;a Designer;Account;false
+4;2021-09-07T19:35:43;Cheese pixel experiences;23583;de COM;Ergonomic Buckinghamshire array;Jewelery Shoes Colombie;b;Toys;Slovénie États-Unis content;virtual Rubber;SMS matrix 1080p;true
+5;2021-09-08T09:16:47;Congo;29262;b Havre;Cambridgeshire;Rhône-Alpes Outdoors;capacitor;XML EXE platforms;Profit-focused invoice Technicien;payment pink;exploit;false
+6;2021-09-08T01:34:03;Pastourelle Chicken;52728;backing;Presbourg navigate;well-modulated;Analyste best-of-breed;mobile;cross-platform;pixel Rubber;Plastic Avon;false
+7;2021-09-08T08:44:21;index yellow;11862;port;Manager Keyboard mint;Granite;Bike Saint-Honoré des;ubiquitous Avon model;Buckinghamshire solid c;copy Consultant b;withdrawal;false
+8;2021-09-07T23:15:39;Keyboard front-end Self-enabling;25261;Haute-Normandie Small;c feed c;Soap generate;Rubber monitor generate;ADP Hat;transmit Salad;Cotton Jewelery;Music;true
+9;2021-09-08T10:25:09;metrics;74688;Directeur;Buckinghamshire;XML approach c;Books;multi-byte;radical;Extended;Plastic white withdrawal;true
+10;2021-09-08T05:59:13;copying;90219;azure Developpeur;plum;b Proactive intranet;teal envisioneer Laffitte;quantifying withdrawal;Account content-based;Lesotho Computer functionalities;Small Clothing;true

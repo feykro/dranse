@@ -1,0 +1,22 @@
+<img
+  src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg"
+  alt="Image de la couverture du livre"
+  class="image-livre"
+/>
+<div class="infos">
+  <div class="main-info">
+    <p class="titre">{{ livreInfo.titre }}</p>
+    <p class="note">Note</p>
+    <p class="auteur">{{ livreInfo.auteur }}</p>
+  </div>
+  <div class="extra-info">
+    <div class="edition">Edition<br />{{ livreInfo.edition }}</div>
+    <div class="annee-publication">Annee de publiccation<br />{{ livreInfo.anneePublication }}</div>
+  </div>
+</div>
+<div class="prix-button">
+  <p class="prix">{{ livreInfo.prix }} &euro;</p>
+  <button class="ajout-panier" (click)="ajoutPanier()">Ajouter au panier</button>
+</div>
+<p class="synopsis">Synopsis :</p>
+<div class="synopsis-text">{{ livreInfo.synopsis }}</div>
