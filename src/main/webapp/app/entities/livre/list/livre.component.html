@@ -80,6 +80,9 @@
           <th scope="col" jhiSortBy="stock">
             <span jhiTranslate="projetDranseApp.livre.stock">Stock</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="urlImage">
+            <span jhiTranslate="projetDranseApp.livre.urlImage">Url Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -96,6 +99,7 @@
           <td>{{ livre.anneePublication }}</td>
           <td>{{ livre.editeur }}</td>
           <td>{{ livre.stock }}</td>
+          <td>{{ livre.urlImage }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/livre', livre.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

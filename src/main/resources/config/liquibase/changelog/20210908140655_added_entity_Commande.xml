@@ -47,6 +47,9 @@
             <column name="nom_facturation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="payee" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="utilisateur_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -82,6 +85,7 @@
             <column name="ville_facturation" type="string"/>
             <column name="rue_facturation" type="string"/>
             <column name="nom_facturation" type="string"/>
+            <column name="payee" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

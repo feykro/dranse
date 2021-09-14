@@ -65,6 +65,9 @@ class LivreResourceIT {
     private static final Integer DEFAULT_STOCK = 1;
     private static final Integer UPDATED_STOCK = 2;
 
+    private static final String DEFAULT_URL_IMAGE = "AAAAAAAAAA";
+    private static final String UPDATED_URL_IMAGE = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/livres";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
     private static final String ENTITY_SEARCH_API_URL = "/api/_search/livres";
@@ -112,7 +115,8 @@ class LivreResourceIT {
             .edition(DEFAULT_EDITION)
             .anneePublication(DEFAULT_ANNEE_PUBLICATION)
             .editeur(DEFAULT_EDITEUR)
-            .stock(DEFAULT_STOCK);
+            .stock(DEFAULT_STOCK)
+            .urlImage(DEFAULT_URL_IMAGE);
         return livre;
     }
 
@@ -131,7 +135,8 @@ class LivreResourceIT {
             .edition(UPDATED_EDITION)
             .anneePublication(UPDATED_ANNEE_PUBLICATION)
             .editeur(UPDATED_EDITEUR)
-            .stock(UPDATED_STOCK);
+            .stock(UPDATED_STOCK)
+            .urlImage(UPDATED_URL_IMAGE);
         return livre;
     }
 
@@ -161,6 +166,7 @@ class LivreResourceIT {
         assertThat(testLivre.getAnneePublication()).isEqualTo(DEFAULT_ANNEE_PUBLICATION);
         assertThat(testLivre.getEditeur()).isEqualTo(DEFAULT_EDITEUR);
         assertThat(testLivre.getStock()).isEqualTo(DEFAULT_STOCK);
+        assertThat(testLivre.getUrlImage()).isEqualTo(DEFAULT_URL_IMAGE);
 
         // Validate the Livre in Elasticsearch
         verify(mockLivreSearchRepository, times(1)).save(testLivre);
@@ -206,7 +212,8 @@ class LivreResourceIT {
             .andExpect(jsonPath("$.[*].edition").value(hasItem(DEFAULT_EDITION)))
             .andExpect(jsonPath("$.[*].anneePublication").value(hasItem(DEFAULT_ANNEE_PUBLICATION)))
             .andExpect(jsonPath("$.[*].editeur").value(hasItem(DEFAULT_EDITEUR)))
-            .andExpect(jsonPath("$.[*].stock").value(hasItem(DEFAULT_STOCK)));
+            .andExpect(jsonPath("$.[*].stock").value(hasItem(DEFAULT_STOCK)))
+            .andExpect(jsonPath("$.[*].urlImage").value(hasItem(DEFAULT_URL_IMAGE)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -246,7 +253,8 @@ class LivreResourceIT {
             .andExpect(jsonPath("$.edition").value(DEFAULT_EDITION))
             .andExpect(jsonPath("$.anneePublication").value(DEFAULT_ANNEE_PUBLICATION))
             .andExpect(jsonPath("$.editeur").value(DEFAULT_EDITEUR))
-            .andExpect(jsonPath("$.stock").value(DEFAULT_STOCK));
+            .andExpect(jsonPath("$.stock").value(DEFAULT_STOCK))
+            .andExpect(jsonPath("$.urlImage").value(DEFAULT_URL_IMAGE));
     }
 
     @Test
@@ -276,7 +284,8 @@ class LivreResourceIT {
             .edition(UPDATED_EDITION)
             .anneePublication(UPDATED_ANNEE_PUBLICATION)
             .editeur(UPDATED_EDITEUR)
-            .stock(UPDATED_STOCK);
+            .stock(UPDATED_STOCK)
+            .urlImage(UPDATED_URL_IMAGE);
 
         restLivreMockMvc
             .perform(
@@ -298,6 +307,7 @@ class LivreResourceIT {
         assertThat(testLivre.getAnneePublication()).isEqualTo(UPDATED_ANNEE_PUBLICATION);
         assertThat(testLivre.getEditeur()).isEqualTo(UPDATED_EDITEUR);
         assertThat(testLivre.getStock()).isEqualTo(UPDATED_STOCK);
+        assertThat(testLivre.getUrlImage()).isEqualTo(UPDATED_URL_IMAGE);
 
         // Validate the Livre in Elasticsearch
         verify(mockLivreSearchRepository).save(testLivre);
@@ -402,6 +412,7 @@ class LivreResourceIT {
         assertThat(testLivre.getAnneePublication()).isEqualTo(DEFAULT_ANNEE_PUBLICATION);
         assertThat(testLivre.getEditeur()).isEqualTo(DEFAULT_EDITEUR);
         assertThat(testLivre.getStock()).isEqualTo(DEFAULT_STOCK);
+        assertThat(testLivre.getUrlImage()).isEqualTo(DEFAULT_URL_IMAGE);
     }
 
     @Test
@@ -424,7 +435,8 @@ class LivreResourceIT {
             .edition(UPDATED_EDITION)
             .anneePublication(UPDATED_ANNEE_PUBLICATION)
             .editeur(UPDATED_EDITEUR)
-            .stock(UPDATED_STOCK);
+            .stock(UPDATED_STOCK)
+            .urlImage(UPDATED_URL_IMAGE);
 
         restLivreMockMvc
             .perform(
@@ -446,6 +458,7 @@ class LivreResourceIT {
         assertThat(testLivre.getAnneePublication()).isEqualTo(UPDATED_ANNEE_PUBLICATION);
         assertThat(testLivre.getEditeur()).isEqualTo(UPDATED_EDITEUR);
         assertThat(testLivre.getStock()).isEqualTo(UPDATED_STOCK);
+        assertThat(testLivre.getUrlImage()).isEqualTo(UPDATED_URL_IMAGE);
     }
 
     @Test
@@ -556,6 +569,7 @@ class LivreResourceIT {
             .andExpect(jsonPath("$.[*].edition").value(hasItem(DEFAULT_EDITION)))
             .andExpect(jsonPath("$.[*].anneePublication").value(hasItem(DEFAULT_ANNEE_PUBLICATION)))
             .andExpect(jsonPath("$.[*].editeur").value(hasItem(DEFAULT_EDITEUR)))
-            .andExpect(jsonPath("$.[*].stock").value(hasItem(DEFAULT_STOCK)));
+            .andExpect(jsonPath("$.[*].stock").value(hasItem(DEFAULT_STOCK)))
+            .andExpect(jsonPath("$.[*].urlImage").value(hasItem(DEFAULT_URL_IMAGE)));
     }
 }

@@ -31,6 +31,10 @@
     {
       "fieldName": "stock",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "urlImage",
+      "fieldType": "String"
     }
   ],
   "relationships": [

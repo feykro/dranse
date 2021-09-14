@@ -10,6 +10,7 @@ export interface ILivre {
   anneePublication?: number | null;
   editeur?: string | null;
   stock?: number | null;
+  urlImage?: string | null;
   categories?: ICategorie[] | null;
 }
 
@@ -24,6 +25,7 @@ export class Livre implements ILivre {
     public anneePublication?: number | null,
     public editeur?: string | null,
     public stock?: number | null,
+    public urlImage?: string | null,
     public categories?: ICategorie[] | null
   ) {}
 }

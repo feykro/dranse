@@ -72,6 +72,9 @@ public class LivreServiceImpl implements LivreService {
                     if (livre.getStock() != null) {
                         existingLivre.setStock(livre.getStock());
                     }
+                    if (livre.getUrlImage() != null) {
+                        existingLivre.setUrlImage(livre.getUrlImage());
+                    }
 
                     return existingLivre;
                 }

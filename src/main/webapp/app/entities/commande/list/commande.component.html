@@ -92,6 +92,9 @@
           <th scope="col" jhiSortBy="nomFacturation">
             <span jhiTranslate="projetDranseApp.commande.nomFacturation">Nom Facturation</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="payee">
+            <span jhiTranslate="projetDranseApp.commande.payee">Payee</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="utilisateur.id">
             <span jhiTranslate="projetDranseApp.commande.utilisateur">Utilisateur</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -114,6 +117,7 @@
           <td>{{ commande.villeFacturation }}</td>
           <td>{{ commande.rueFacturation }}</td>
           <td>{{ commande.nomFacturation }}</td>
+          <td>{{ commande.payee }}</td>
           <td>
             <div *ngIf="commande.utilisateur">
               <a [routerLink]="['/utilisateur', commande.utilisateur?.id, 'view']">{{ commande.utilisateur?.id }}</a>

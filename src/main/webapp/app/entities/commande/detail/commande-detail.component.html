@@ -58,6 +58,10 @@
         <dd>
           <span>{{ commande.nomFacturation }}</span>
         </dd>
+        <dt><span jhiTranslate="projetDranseApp.commande.payee">Payee</span></dt>
+        <dd>
+          <span>{{ commande.payee }}</span>
+        </dd>
         <dt><span jhiTranslate="projetDranseApp.commande.utilisateur">Utilisateur</span></dt>
         <dd>
           <div *ngIf="commande.utilisateur">
