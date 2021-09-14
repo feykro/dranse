@@ -1,18 +1,8 @@
-.welcomePage {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: 2fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    'bestSellers bestSellers'
-    'categories categories';
-  grid-gap: 0.2rem;
-  color: #004d40;
-}
-
+// ==== Gestion des cartes ======
 .bookCard {
   background-color: #dd3505;
   border: solid black 0.1em;
+  min-width: 220px;
 }
 
 .catCard {
@@ -30,6 +20,20 @@
   margin: auto;
 }
 
+// ==== Style des grandes sections =====
+
+.welcomePage {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'bestSellers bestSellers'
+    'categories categories';
+  grid-gap: 0.2rem;
+  color: #004d40;
+}
+
 #bestSellers {
   background-color: #00a450;
   grid-area: bestSellers;
@@ -42,6 +46,8 @@
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
+
+  overflow: scroll;
 
   grid-template-areas:
     'catTitle catTitle catTitle catTitle catTitle'
@@ -60,6 +66,8 @@
   padding-right: 5px;
   padding-bottom: 5px;
 
+  overflow: scroll;
+
   grid-template-areas:
     'catTitle catTitle catTitle catTitle catTitle catTitle'
     'catCard1 catCard2 catCard3 catCard4 catCard5 catCard6'
@@ -70,33 +78,4 @@
   font-size: 32pt;
   color: white;
   grid-area: catTitle;
-}
-
-@media only screen and (max-width: 650px) {
-  .welcomePage {
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 0.5fr;
-    grid-template-areas:
-      'bestSellers'
-      'categories';
-  }
-
-  #bestSeller {
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.2fr 0.8fr;
-
-    grid-template-areas:
-      'catTitle'
-      'bookCard1';
-  }
-
-  #categories {
-    grid-template-columns: 0.5fr 0.5fr;
-    grid-template-rows: 0.2fr 0.4fr 0.4fr;
-
-    grid-template-areas:
-      'catTitle catTitle'
-      'catCard1 catCard2'
-      'catCard1 catCard2';
-  }
 }
