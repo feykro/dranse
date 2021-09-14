@@ -14,18 +14,6 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="mail" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="mot_de_passe" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="nom" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="prenom" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="adr_rue" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -43,6 +31,9 @@
             </column>
             <column name="num_cb" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_utilisateur__user_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -64,10 +55,6 @@
                   separator=";"
                   tableName="utilisateur">
             <column name="id" type="numeric"/>
-            <column name="mail" type="string"/>
-            <column name="mot_de_passe" type="string"/>
-            <column name="nom" type="string"/>
-            <column name="prenom" type="string"/>
             <column name="adr_rue" type="string"/>
             <column name="adr_code_postal" type="numeric"/>
             <column name="adr_pays" type="string"/>

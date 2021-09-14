@@ -14,22 +14,6 @@
         <dd>
           <span>{{ utilisateur.id }}</span>
         </dd>
-        <dt><span jhiTranslate="projetDranseApp.utilisateur.mail">Mail</span></dt>
-        <dd>
-          <span>{{ utilisateur.mail }}</span>
-        </dd>
-        <dt><span jhiTranslate="projetDranseApp.utilisateur.motDePasse">Mot De Passe</span></dt>
-        <dd>
-          <span>{{ utilisateur.motDePasse }}</span>
-        </dd>
-        <dt><span jhiTranslate="projetDranseApp.utilisateur.nom">Nom</span></dt>
-        <dd>
-          <span>{{ utilisateur.nom }}</span>
-        </dd>
-        <dt><span jhiTranslate="projetDranseApp.utilisateur.prenom">Prenom</span></dt>
-        <dd>
-          <span>{{ utilisateur.prenom }}</span>
-        </dd>
         <dt><span jhiTranslate="projetDranseApp.utilisateur.adrRue">Adr Rue</span></dt>
         <dd>
           <span>{{ utilisateur.adrRue }}</span>
@@ -53,6 +37,10 @@
         <dt><span jhiTranslate="projetDranseApp.utilisateur.numCB">Num CB</span></dt>
         <dd>
           <span>{{ utilisateur.numCB }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.user">User</span></dt>
+        <dd>
+          <span>{{ utilisateur.user?.login }}</span>
         </dd>
       </dl>
 

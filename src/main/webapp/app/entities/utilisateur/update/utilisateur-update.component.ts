@@ -3,10 +3,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import { IUtilisateur, Utilisateur } from '../utilisateur.model';
 import { UtilisateurService } from '../service/utilisateur.service';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 
 @Component({
   selector: 'jhi-utilisateur-update',
@@ -15,25 +17,31 @@ import { UtilisateurService } from '../service/utilisateur.service';
 export class UtilisateurUpdateComponent implements OnInit {
   isSaving = false;
 
+  usersSharedCollection: IUser[] = [];
+
   editForm = this.fb.group({
     id: [],
-    mail: [],
-    motDePasse: [],
-    nom: [],
-    prenom: [],
     adrRue: [],
     adrCodePostal: [],
     adrPays: [],
     adrVille: [],
     telephone: [],
     numCB: [],
+    user: [],
   });
 
-  constructor(protected utilisateurService: UtilisateurService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected utilisateurService: UtilisateurService,
+    protected userService: UserService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ utilisateur }) => {
       this.updateForm(utilisateur);
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -49,6 +57,10 @@ export class UtilisateurUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.utilisateurService.create(utilisateur));
     }
+  }
+
+  trackUserById(index: number, item: IUser): number {
+    return item.id!;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IUtilisateur>>): void {
@@ -73,33 +85,37 @@ export class UtilisateurUpdateComponent implements OnInit {
   protected updateForm(utilisateur: IUtilisateur): void {
     this.editForm.patchValue({
       id: utilisateur.id,
-      mail: utilisateur.mail,
-      motDePasse: utilisateur.motDePasse,
-      nom: utilisateur.nom,
-      prenom: utilisateur.prenom,
       adrRue: utilisateur.adrRue,
       adrCodePostal: utilisateur.adrCodePostal,
       adrPays: utilisateur.adrPays,
       adrVille: utilisateur.adrVille,
       telephone: utilisateur.telephone,
       numCB: utilisateur.numCB,
+      user: utilisateur.user,
     });
+
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, utilisateur.user);
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.userService
+      .query()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value)))
+      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
   }
 
   protected createFromForm(): IUtilisateur {
     return {
       ...new Utilisateur(),
       id: this.editForm.get(['id'])!.value,
-      mail: this.editForm.get(['mail'])!.value,
-      motDePasse: this.editForm.get(['motDePasse'])!.value,
-      nom: this.editForm.get(['nom'])!.value,
-      prenom: this.editForm.get(['prenom'])!.value,
       adrRue: this.editForm.get(['adrRue'])!.value,
       adrCodePostal: this.editForm.get(['adrCodePostal'])!.value,
       adrPays: this.editForm.get(['adrPays'])!.value,
       adrVille: this.editForm.get(['adrVille'])!.value,
       telephone: this.editForm.get(['telephone'])!.value,
       numCB: this.editForm.get(['numCB'])!.value,
+      user: this.editForm.get(['user'])!.value,
     };
   }
 }
