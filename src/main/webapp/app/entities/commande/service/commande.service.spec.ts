@@ -37,6 +37,7 @@ describe('Service Tests', () => {
         villeFacturation: 'AAAAAAA',
         rueFacturation: 'AAAAAAA',
         nomFacturation: 'AAAAAAA',
+        payee: false,
       };
     });
 
@@ -94,6 +95,7 @@ describe('Service Tests', () => {
             villeFacturation: 'BBBBBB',
             rueFacturation: 'BBBBBB',
             nomFacturation: 'BBBBBB',
+            payee: true,
           },
           elemDefault
         );
@@ -157,6 +159,7 @@ describe('Service Tests', () => {
             villeFacturation: 'BBBBBB',
             rueFacturation: 'BBBBBB',
             nomFacturation: 'BBBBBB',
+            payee: true,
           },
           elemDefault
         );
@@ -213,7 +216,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Commande to an array', () => {
-          const commandeArray: ICommande[] = [{ id: 123 }, { id: 456 }, { id: 13582 }];
+          const commandeArray: ICommande[] = [{ id: 123 }, { id: 456 }, { id: 50134 }];
           const commandeCollection: ICommande[] = [{ id: 123 }];
           expectedResult = service.addCommandeToCollectionIfMissing(commandeCollection, ...commandeArray);
           expect(expectedResult).toHaveLength(3);

@@ -35,6 +35,7 @@ export class CommandeUpdateComponent implements OnInit {
     villeFacturation: [],
     rueFacturation: [],
     nomFacturation: [],
+    payee: [],
     utilisateur: [],
   });
 
@@ -109,6 +110,7 @@ export class CommandeUpdateComponent implements OnInit {
       villeFacturation: commande.villeFacturation,
       rueFacturation: commande.rueFacturation,
       nomFacturation: commande.nomFacturation,
+      payee: commande.payee,
       utilisateur: commande.utilisateur,
     });
 
@@ -145,6 +147,7 @@ export class CommandeUpdateComponent implements OnInit {
       villeFacturation: this.editForm.get(['villeFacturation'])!.value,
       rueFacturation: this.editForm.get(['rueFacturation'])!.value,
       nomFacturation: this.editForm.get(['nomFacturation'])!.value,
+      payee: this.editForm.get(['payee'])!.value,
       utilisateur: this.editForm.get(['utilisateur'])!.value,
     };
   }

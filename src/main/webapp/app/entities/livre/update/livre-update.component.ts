@@ -29,6 +29,7 @@ export class LivreUpdateComponent implements OnInit {
     anneePublication: [],
     editeur: [],
     stock: [],
+    urlImage: [],
     categories: [],
   });
 
@@ -106,6 +107,7 @@ export class LivreUpdateComponent implements OnInit {
       anneePublication: livre.anneePublication,
       editeur: livre.editeur,
       stock: livre.stock,
+      urlImage: livre.urlImage,
       categories: livre.categories,
     });
 
@@ -139,6 +141,7 @@ export class LivreUpdateComponent implements OnInit {
       anneePublication: this.editForm.get(['anneePublication'])!.value,
       editeur: this.editForm.get(['editeur'])!.value,
       stock: this.editForm.get(['stock'])!.value,
+      urlImage: this.editForm.get(['urlImage'])!.value,
       categories: this.editForm.get(['categories'])!.value,
     };
   }

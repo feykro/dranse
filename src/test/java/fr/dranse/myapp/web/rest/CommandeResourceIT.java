@@ -77,6 +77,9 @@ class CommandeResourceIT {
     private static final String DEFAULT_NOM_FACTURATION = "AAAAAAAAAA";
     private static final String UPDATED_NOM_FACTURATION = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_PAYEE = false;
+    private static final Boolean UPDATED_PAYEE = true;
+
     private static final String ENTITY_API_URL = "/api/commandes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
     private static final String ENTITY_SEARCH_API_URL = "/api/_search/commandes";
@@ -121,7 +124,8 @@ class CommandeResourceIT {
             .codePostalFacturation(DEFAULT_CODE_POSTAL_FACTURATION)
             .villeFacturation(DEFAULT_VILLE_FACTURATION)
             .rueFacturation(DEFAULT_RUE_FACTURATION)
-            .nomFacturation(DEFAULT_NOM_FACTURATION);
+            .nomFacturation(DEFAULT_NOM_FACTURATION)
+            .payee(DEFAULT_PAYEE);
         return commande;
     }
 
@@ -143,7 +147,8 @@ class CommandeResourceIT {
             .codePostalFacturation(UPDATED_CODE_POSTAL_FACTURATION)
             .villeFacturation(UPDATED_VILLE_FACTURATION)
             .rueFacturation(UPDATED_RUE_FACTURATION)
-            .nomFacturation(UPDATED_NOM_FACTURATION);
+            .nomFacturation(UPDATED_NOM_FACTURATION)
+            .payee(UPDATED_PAYEE);
         return commande;
     }
 
@@ -176,6 +181,7 @@ class CommandeResourceIT {
         assertThat(testCommande.getVilleFacturation()).isEqualTo(DEFAULT_VILLE_FACTURATION);
         assertThat(testCommande.getRueFacturation()).isEqualTo(DEFAULT_RUE_FACTURATION);
         assertThat(testCommande.getNomFacturation()).isEqualTo(DEFAULT_NOM_FACTURATION);
+        assertThat(testCommande.getPayee()).isEqualTo(DEFAULT_PAYEE);
 
         // Validate the Commande in Elasticsearch
         verify(mockCommandeSearchRepository, times(1)).save(testCommande);
@@ -224,7 +230,8 @@ class CommandeResourceIT {
             .andExpect(jsonPath("$.[*].codePostalFacturation").value(hasItem(DEFAULT_CODE_POSTAL_FACTURATION)))
             .andExpect(jsonPath("$.[*].villeFacturation").value(hasItem(DEFAULT_VILLE_FACTURATION)))
             .andExpect(jsonPath("$.[*].rueFacturation").value(hasItem(DEFAULT_RUE_FACTURATION)))
-            .andExpect(jsonPath("$.[*].nomFacturation").value(hasItem(DEFAULT_NOM_FACTURATION)));
+            .andExpect(jsonPath("$.[*].nomFacturation").value(hasItem(DEFAULT_NOM_FACTURATION)))
+            .andExpect(jsonPath("$.[*].payee").value(hasItem(DEFAULT_PAYEE.booleanValue())));
     }
 
     @Test
@@ -249,7 +256,8 @@ class CommandeResourceIT {
             .andExpect(jsonPath("$.codePostalFacturation").value(DEFAULT_CODE_POSTAL_FACTURATION))
             .andExpect(jsonPath("$.villeFacturation").value(DEFAULT_VILLE_FACTURATION))
             .andExpect(jsonPath("$.rueFacturation").value(DEFAULT_RUE_FACTURATION))
-            .andExpect(jsonPath("$.nomFacturation").value(DEFAULT_NOM_FACTURATION));
+            .andExpect(jsonPath("$.nomFacturation").value(DEFAULT_NOM_FACTURATION))
+            .andExpect(jsonPath("$.payee").value(DEFAULT_PAYEE.booleanValue()));
     }
 
     @Test
@@ -282,7 +290,8 @@ class CommandeResourceIT {
             .codePostalFacturation(UPDATED_CODE_POSTAL_FACTURATION)
             .villeFacturation(UPDATED_VILLE_FACTURATION)
             .rueFacturation(UPDATED_RUE_FACTURATION)
-            .nomFacturation(UPDATED_NOM_FACTURATION);
+            .nomFacturation(UPDATED_NOM_FACTURATION)
+            .payee(UPDATED_PAYEE);
 
         restCommandeMockMvc
             .perform(
@@ -307,6 +316,7 @@ class CommandeResourceIT {
         assertThat(testCommande.getVilleFacturation()).isEqualTo(UPDATED_VILLE_FACTURATION);
         assertThat(testCommande.getRueFacturation()).isEqualTo(UPDATED_RUE_FACTURATION);
         assertThat(testCommande.getNomFacturation()).isEqualTo(UPDATED_NOM_FACTURATION);
+        assertThat(testCommande.getPayee()).isEqualTo(UPDATED_PAYEE);
 
         // Validate the Commande in Elasticsearch
         verify(mockCommandeSearchRepository).save(testCommande);
@@ -421,6 +431,7 @@ class CommandeResourceIT {
         assertThat(testCommande.getVilleFacturation()).isEqualTo(DEFAULT_VILLE_FACTURATION);
         assertThat(testCommande.getRueFacturation()).isEqualTo(UPDATED_RUE_FACTURATION);
         assertThat(testCommande.getNomFacturation()).isEqualTo(UPDATED_NOM_FACTURATION);
+        assertThat(testCommande.getPayee()).isEqualTo(DEFAULT_PAYEE);
     }
 
     @Test
@@ -446,7 +457,8 @@ class CommandeResourceIT {
             .codePostalFacturation(UPDATED_CODE_POSTAL_FACTURATION)
             .villeFacturation(UPDATED_VILLE_FACTURATION)
             .rueFacturation(UPDATED_RUE_FACTURATION)
-            .nomFacturation(UPDATED_NOM_FACTURATION);
+            .nomFacturation(UPDATED_NOM_FACTURATION)
+            .payee(UPDATED_PAYEE);
 
         restCommandeMockMvc
             .perform(
@@ -471,6 +483,7 @@ class CommandeResourceIT {
         assertThat(testCommande.getVilleFacturation()).isEqualTo(UPDATED_VILLE_FACTURATION);
         assertThat(testCommande.getRueFacturation()).isEqualTo(UPDATED_RUE_FACTURATION);
         assertThat(testCommande.getNomFacturation()).isEqualTo(UPDATED_NOM_FACTURATION);
+        assertThat(testCommande.getPayee()).isEqualTo(UPDATED_PAYEE);
     }
 
     @Test
@@ -584,6 +597,7 @@ class CommandeResourceIT {
             .andExpect(jsonPath("$.[*].codePostalFacturation").value(hasItem(DEFAULT_CODE_POSTAL_FACTURATION)))
             .andExpect(jsonPath("$.[*].villeFacturation").value(hasItem(DEFAULT_VILLE_FACTURATION)))
             .andExpect(jsonPath("$.[*].rueFacturation").value(hasItem(DEFAULT_RUE_FACTURATION)))
-            .andExpect(jsonPath("$.[*].nomFacturation").value(hasItem(DEFAULT_NOM_FACTURATION)));
+            .andExpect(jsonPath("$.[*].nomFacturation").value(hasItem(DEFAULT_NOM_FACTURATION)))
+            .andExpect(jsonPath("$.[*].payee").value(hasItem(DEFAULT_PAYEE.booleanValue())));
     }
 }
