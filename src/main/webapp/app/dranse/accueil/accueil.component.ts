@@ -1,5 +1,5 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { BookCardComponent } from '../components/book-card/book-card.component';
 
 @Component({
   selector: 'jhi-accueil',
@@ -7,11 +7,17 @@ import { BookCardComponent } from '../components/book-card/book-card.component';
   styleUrls: ['./accueil.component.scss'],
 })
 export class AccueilComponent implements OnInit {
-  constructor() {
+  public idList = [1, 2, 3, 4, 5];
+
+  constructor(private router: Router) {
     const a = 0;
   }
 
   ngOnInit(): void {
     const b = 1;
+  }
+
+  navigate(n: number): void {
+    this.router.navigate(['/produit', this.idList[n]]);
   }
 }

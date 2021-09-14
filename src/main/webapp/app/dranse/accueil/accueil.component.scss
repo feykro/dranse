@@ -17,6 +17,10 @@ $accent-color: #f1f2de;
     'bookPrice';
 }
 
+.bookCard:hover {
+  border: solid lightblue 0.2em;
+}
+
 #bookImage {
   max-height: 100%;
   height: 100%;
