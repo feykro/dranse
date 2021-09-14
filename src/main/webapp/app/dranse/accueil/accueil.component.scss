@@ -1,0 +1,102 @@
+.welcomePage {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'bestSellers bestSellers'
+    'categories categories';
+  grid-gap: 0.2rem;
+  color: #004d40;
+}
+
+.bookCard {
+  background-color: #dd3505;
+  border: solid black 0.1em;
+}
+
+.catCard {
+  display: table-cell;
+  width: 180px;
+  height: 180px;
+  line-height: 180px;
+  background-color: #dddddd;
+  border-radius: 50%;
+  border: solid black 0.1em;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto;
+}
+
+#bestSellers {
+  background-color: #00a450;
+  grid-area: bestSellers;
+  border: solid black 0.1em;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-template-rows: 0.2fr 0.8fr;
+  grid-gap: 0.2rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+
+  grid-template-areas:
+    'catTitle catTitle catTitle catTitle catTitle'
+    'bookCard1 bookCard2 bookCard3 bookCard4 bookCard5';
+}
+
+#categories {
+  background-color: #008080;
+  grid-area: categories;
+  border: solid black 0.1em;
+  display: grid;
+  grid-template-columns: 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-template-rows: 0.2fr 0.4fr 0.4;
+  grid-gap: 0.2rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+
+  grid-template-areas:
+    'catTitle catTitle catTitle catTitle catTitle catTitle'
+    'catCard1 catCard2 catCard3 catCard4 catCard5 catCard6'
+    'catCard1 catCard2 catCard3 catCard4 catCard5 catCard6';
+}
+
+#categorieTitle {
+  font-size: 32pt;
+  color: white;
+  grid-area: catTitle;
+}
+
+@media only screen and (max-width: 650px) {
+  .welcomePage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-areas:
+      'bestSellers'
+      'categories';
+  }
+
+  #bestSeller {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+
+    grid-template-areas:
+      'catTitle'
+      'bookCard1';
+  }
+
+  #categories {
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-rows: 0.2fr 0.4fr 0.4fr;
+
+    grid-template-areas:
+      'catTitle catTitle'
+      'catCard1 catCard2'
+      'catCard1 catCard2';
+  }
+}

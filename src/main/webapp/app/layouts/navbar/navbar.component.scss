@@ -36,11 +36,14 @@ Navbar
 /* ==========================================================================
 Logo styles
 ========================================================================== */
+
+//TODO: fix the bar to display full size logo
+
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 65px;
+  width: 65px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/logo_dranse_v1.png') no-repeat center center;
   background-size: contain;
 }

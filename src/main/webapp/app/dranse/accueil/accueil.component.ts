@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookCardComponent } from '../components/book-card/book-card.component';
 
 @Component({
   selector: 'jhi-accueil',
