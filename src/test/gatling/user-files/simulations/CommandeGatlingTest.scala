@@ -82,6 +82,7 @@ class CommandeGatlingTest extends Simulation {
                 , "villeFacturation":"SAMPLE_TEXT"
                 , "rueFacturation":"SAMPLE_TEXT"
                 , "nomFacturation":"SAMPLE_TEXT"
+                , "payee":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_commande_url"))).exitHereIfFailed

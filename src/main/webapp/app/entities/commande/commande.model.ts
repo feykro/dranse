@@ -15,6 +15,7 @@ export interface ICommande {
   villeFacturation?: string | null;
   rueFacturation?: string | null;
   nomFacturation?: string | null;
+  payee?: boolean | null;
   utilisateur?: IUtilisateur | null;
   ligneCommandes?: ILigneCommande[] | null;
 }
@@ -33,9 +34,12 @@ export class Commande implements ICommande {
     public villeFacturation?: string | null,
     public rueFacturation?: string | null,
     public nomFacturation?: string | null,
+    public payee?: boolean | null,
     public utilisateur?: IUtilisateur | null,
     public ligneCommandes?: ILigneCommande[] | null
-  ) {}
+  ) {
+    this.payee = this.payee ?? false;
+  }
 }
 
 export function getCommandeIdentifier(commande: ICommande): number | undefined {

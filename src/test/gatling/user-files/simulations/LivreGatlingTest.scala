@@ -79,6 +79,7 @@ class LivreGatlingTest extends Simulation {
                 , "anneePublication":"0"
                 , "editeur":"SAMPLE_TEXT"
                 , "stock":"0"
+                , "urlImage":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_livre_url"))).exitHereIfFailed

@@ -25,4 +25,8 @@ public interface CategorieRepository extends JpaRepository<Categorie, Long> {
 
     @Query("select categorie from Categorie categorie left join fetch categorie.livres where categorie.id =:id")
     Optional<Categorie> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select distinct categorie from Categorie categorie order by categorie.id")
+    List<Categorie> getMostPopular(Pageable pageable);
+    // todo
 }

@@ -6,7 +6,7 @@ import { ProduitComponent } from './produit/produit.component';
 
 const dranseRoute: Routes = [
   {
-    path: 'produit',
+    path: 'produit/:livreId',
     component: ProduitComponent,
     //resolve: {
     //  livre: LivreRoutingResolveService,
