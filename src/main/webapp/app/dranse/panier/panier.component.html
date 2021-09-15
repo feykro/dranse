@@ -1,8 +1,24 @@
 <div class="all">
   <div class="items-list">
-    <div class="order-item">hello</div>
-    <div class="order-item">hi</div>
-    <div class="order-item">chick fill a</div>
+    <div class="order-item" *ngFor="let item of itemListTest">
+      <img id="cover-image" src="{{ item.urlImage }}" />
+      <div id="informations">
+        <div id="titre">{{ item.titre }}</div>
+        <div id="auteur">{{ item.auteur }}</div>
+      </div>
+      <div class="qte">
+        {{ item.qte }}
+      </div>
+      <div class="price">
+        {{ item.prix }}
+      </div>
+    </div>
   </div>
-  <div class="bandeau-total">Salut</div>
+
+  <div class="bandeau-total">
+    <div id="total">146.47€</div>
+    <div id="commande-button-area">
+      <button>COMMANDER</button>
+    </div>
+  </div>
 </div>

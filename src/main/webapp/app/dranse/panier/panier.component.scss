@@ -21,13 +21,54 @@
   height: 100%;
   background-color: lightseagreen;
   grid-area: 'bandeau-total';
+  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'total' 'commande-button-area';
 }
 
-// === Contenu ===
+// === Contenu commande ===
 .order-item {
   width: calc(100% - 20pt);
-  height: 220pt;
+  height: 180pt;
   background-color: lightcoral;
   padding: 5pt 5pt 5pt 5pt;
   margin: 10pt 10pt 0pt 10pt;
+
+  display: grid;
+  grid-template-columns: 0.15fr 0.45fr 0.2fr 0.2fr;
+  grid-template-rows: 1fr;
+  grid-area: 'order-item';
+
+  grid-template-areas: 'cover-image' 'informations' 'qte' 'price';
+}
+
+#cover-image {
+  height: 170pt;
+  grid-area: 'order-item';
+}
+
+#informations {
+  grid-area: 'informations';
+  #titre {
+    font-size: 25pt;
+  }
+
+  #auteur {
+    font-size: 20pt;
+  }
+}
+
+// === contenu bandeau ===
+#total {
+  float: left;
+  font-size: 36pt;
+  font-weight: bold;
+  vertical-align: middle;
+  grid-area: total;
+}
+
+#commande-button-area {
+  float: right;
+  vertical-align: middle;
+  grid-area: commande-button-area;
 }
