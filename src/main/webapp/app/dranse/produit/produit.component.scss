@@ -76,6 +76,10 @@
 }
 
 .ajout-panier:hover {
+  border-color: lightgrey;
+}
+
+.ajout-panier:active {
   background-color: rgba(144, 238, 144, 0.644);
 }
 
