@@ -19,6 +19,7 @@ $accent-color: #f1f2de;
 
 .bookCard:hover {
   border: solid lightblue 0.2em;
+  cursor: pointer;
 }
 
 #bookImage {
@@ -29,7 +30,8 @@ $accent-color: #f1f2de;
 }
 
 #bookTitle {
-  font-size: 24px;
+  font-size: 15px;
+  font-weight: bold;
   max-height: 15%;
   vertical-align: middle;
 

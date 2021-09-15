@@ -2,64 +2,49 @@
   <div id="topSection">
     <p id="topTitle">Best Sellers</p>
     <div id="bestSellers">
-      <div (click)="navigate(0)" routerLinkActive="router-link-active" class="bookCard" id="bookCard1">
+      <div (click)="navigate(bestSellers[0].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard1">
         <div id="bookImage">
-          <img
-            id="coverTest"
-            src="https://kbimages1-a.akamaihd.net/93affabc-5161-421e-80d5-4477a07b8cee/353/569/90/False/harry-potter-and-the-philosopher-s-stone-3.jpg"
-          />
+          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
         </div>
-        <div id="bookTitle">Harry Potter</div>
-        <div id="bookAuthor">Nicolas Sarkozy</div>
-        <div id="bookPrice">20€</div>
+        <div id="bookTitle">{{ bestSellers[0].titre }}</div>
+        <div id="bookAuthor">{{ bestSellers[0].auteur }}</div>
+        <div id="bookPrice">{{ bestSellers[0].prix }}€</div>
       </div>
 
-      <div class="bookCard" id="bookCard1">
+      <div (click)="navigate(bestSellers[1].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard2">
         <div id="bookImage">
-          <img
-            id="coverTest"
-            src="https://kbimages1-a.akamaihd.net/93affabc-5161-421e-80d5-4477a07b8cee/353/569/90/False/harry-potter-and-the-philosopher-s-stone-3.jpg"
-          />
+          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
         </div>
-        <div id="bookTitle">Harry Potter</div>
-        <div id="bookAuthor">Nicolas Sarkozy</div>
-        <div id="bookPrice">20€</div>
+        <div id="bookTitle">{{ bestSellers[1].titre }}</div>
+        <div id="bookAuthor">{{ bestSellers[1].auteur }}</div>
+        <div id="bookPrice">{{ bestSellers[1].prix }}€</div>
       </div>
 
-      <div class="bookCard" id="bookCard1">
+      <div (click)="navigate(bestSellers[2].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard3">
         <div id="bookImage">
-          <img
-            id="coverTest"
-            src="https://kbimages1-a.akamaihd.net/93affabc-5161-421e-80d5-4477a07b8cee/353/569/90/False/harry-potter-and-the-philosopher-s-stone-3.jpg"
-          />
+          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
         </div>
-        <div id="bookTitle">Harry Potter</div>
-        <div id="bookAuthor">Nicolas Sarkozy</div>
-        <div id="bookPrice">20€</div>
+        <div id="bookTitle">{{ bestSellers[2].titre }}</div>
+        <div id="bookAuthor">{{ bestSellers[2].auteur }}</div>
+        <div id="bookPrice">{{ bestSellers[2].prix }}€</div>
       </div>
 
-      <div class="bookCard" id="bookCard1">
+      <div (click)="navigate(bestSellers[3].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard4">
         <div id="bookImage">
-          <img
-            id="coverTest"
-            src="https://kbimages1-a.akamaihd.net/93affabc-5161-421e-80d5-4477a07b8cee/353/569/90/False/harry-potter-and-the-philosopher-s-stone-3.jpg"
-          />
+          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
         </div>
-        <div id="bookTitle">Harry Potter</div>
-        <div id="bookAuthor">Nicolas Sarkozy</div>
-        <div id="bookPrice">20€</div>
+        <div id="bookTitle">{{ bestSellers[3].titre }}</div>
+        <div id="bookAuthor">{{ bestSellers[3].auteur }}</div>
+        <div id="bookPrice">{{ bestSellers[3].prix }}€</div>
       </div>
 
-      <div class="bookCard" id="bookCard1">
+      <div (click)="navigate(bestSellers[4].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard5">
         <div id="bookImage">
-          <img
-            id="coverTest"
-            src="https://kbimages1-a.akamaihd.net/93affabc-5161-421e-80d5-4477a07b8cee/353/569/90/False/harry-potter-and-the-philosopher-s-stone-3.jpg"
-          />
+          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
         </div>
-        <div id="bookTitle">Harry Potter</div>
-        <div id="bookAuthor">Nicolas Sarkozy</div>
-        <div id="bookPrice">20€</div>
+        <div id="bookTitle">{{ bestSellers[4].titre }}</div>
+        <div id="bookAuthor">{{ bestSellers[4].auteur }}</div>
+        <div id="bookPrice">{{ bestSellers[4].prix }}€</div>
       </div>
     </div>
   </div>
