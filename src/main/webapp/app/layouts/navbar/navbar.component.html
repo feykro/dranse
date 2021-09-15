@@ -18,6 +18,15 @@
   </a>
   <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
     <ul class="navbar-nav ml-auto">
+      <!-- testing search bar -->
+      <!-- TODO: ajuster la taille mieux, centrer, connecter au backend-->
+      <li>
+        <input class="searchBar" placeholder="Effectuer une recherche" />
+        <button mat-raised-button>
+          <fa-icon icon="search"></fa-icon>
+        </button>
+      </li>
+      <!-- end -->
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
           <span>
@@ -26,7 +35,8 @@
           </span>
         </a>
       </li>
-      <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+
+      <!-- jhipster-needle-add-element-to-menu "- JHipster will add new menu items here -->
       <li
         *ngSwitchCase="true"
         ngbDropdown
