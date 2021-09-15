@@ -11,7 +11,7 @@
 .items-list {
   width: 100%;
   height: 100%;
-  background-color: lightcoral;
+  background-color: coral;
   grid-area: 'items-list';
   overflow: scroll;
 }
@@ -24,8 +24,10 @@
 }
 
 // === Contenu ===
-#testScroll {
-  width: 100%;
-  height: 200px;
-  background-color: red;
+.order-item {
+  width: calc(100% - 20pt);
+  height: 220pt;
+  background-color: lightcoral;
+  padding: 5pt 5pt 5pt 5pt;
+  margin: 10pt 10pt 0pt 10pt;
 }
