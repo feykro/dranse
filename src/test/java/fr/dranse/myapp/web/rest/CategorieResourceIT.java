@@ -11,8 +11,6 @@ import fr.dranse.myapp.IntegrationTest;
 import fr.dranse.myapp.domain.Categorie;
 import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.search.CategorieSearchRepository;
-import fr.dranse.myapp.service.CategorieService;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -56,12 +54,6 @@ class CategorieResourceIT {
 
     @Autowired
     private CategorieRepository categorieRepository;
-
-    @Mock
-    private CategorieRepository categorieRepositoryMock;
-
-    @Mock
-    private CategorieService categorieServiceMock;
 
     /**
      * This repository is mocked in the fr.dranse.myapp.repository.search test package.
@@ -161,24 +153,6 @@ class CategorieResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(categorie.getId().intValue())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllCategoriesWithEagerRelationshipsIsEnabled() throws Exception {
-        when(categorieServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restCategorieMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(categorieServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllCategoriesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(categorieServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restCategorieMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(categorieServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

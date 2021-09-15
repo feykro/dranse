@@ -39,7 +39,7 @@
   ],
   "relationships": [
     {
-      "relationshipName": "categorie",
+      "relationshipName": "livre_cat",
       "otherEntityName": "categorie",
       "relationshipType": "many-to-many",
       "otherEntityField": "id",

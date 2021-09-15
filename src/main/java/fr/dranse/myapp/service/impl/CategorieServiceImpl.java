@@ -75,15 +75,11 @@ public class CategorieServiceImpl implements CategorieService {
         return categorieRepository.findAll(pageable);
     }
 
-    public Page<Categorie> findAllWithEagerRelationships(Pageable pageable) {
-        return categorieRepository.findAllWithEagerRelationships(pageable);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public Optional<Categorie> findOne(Long id) {
         log.debug("Request to get Categorie : {}", id);
-        return categorieRepository.findOneWithEagerRelationships(id);
+        return categorieRepository.findById(id);
     }
 
     @Override

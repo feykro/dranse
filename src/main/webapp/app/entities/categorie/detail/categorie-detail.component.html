@@ -22,13 +22,6 @@
         <dd>
           <span>{{ categorie.description }}</span>
         </dd>
-        <dt><span jhiTranslate="projetDranseApp.categorie.livre">Livre</span></dt>
-        <dd>
-          <span *ngFor="let livre of categorie.livres; let last = last">
-            <a [routerLink]="['/livre', livre?.id, 'view']">{{ livre.id }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
