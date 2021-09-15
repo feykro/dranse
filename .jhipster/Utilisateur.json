@@ -1,22 +1,6 @@
 {
   "fields": [
     {
-      "fieldName": "mail",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "motDePasse",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "nom",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "prenom",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "adrRue",
       "fieldType": "String"
     },
@@ -46,6 +30,15 @@
       "relationshipName": "commande",
       "otherEntityName": "commande",
       "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "utilisateur"
+    },
+    {
+      "relationshipName": "user",
+      "otherEntityName": "user",
+      "relationshipType": "one-to-one",
+      "otherEntityField": "login",
+      "ownerSide": true,
+      "id": false,
       "otherEntityRelationshipName": "utilisateur"
     }
   ],

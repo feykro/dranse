@@ -22,10 +22,6 @@ describe('Service Tests', () => {
 
       elemDefault = {
         id: 0,
-        mail: 'AAAAAAA',
-        motDePasse: 'AAAAAAA',
-        nom: 'AAAAAAA',
-        prenom: 'AAAAAAA',
         adrRue: 'AAAAAAA',
         adrCodePostal: 0,
         adrPays: 'AAAAAAA',
@@ -67,10 +63,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            mail: 'BBBBBB',
-            motDePasse: 'BBBBBB',
-            nom: 'BBBBBB',
-            prenom: 'BBBBBB',
             adrRue: 'BBBBBB',
             adrCodePostal: 1,
             adrPays: 'BBBBBB',
@@ -93,12 +85,9 @@ describe('Service Tests', () => {
       it('should partial update a Utilisateur', () => {
         const patchObject = Object.assign(
           {
-            motDePasse: 'BBBBBB',
-            nom: 'BBBBBB',
-            adrRue: 'BBBBBB',
+            adrCodePostal: 1,
             adrPays: 'BBBBBB',
             telephone: 'BBBBBB',
-            numCB: 'BBBBBB',
           },
           new Utilisateur()
         );
@@ -118,10 +107,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
-            mail: 'BBBBBB',
-            motDePasse: 'BBBBBB',
-            nom: 'BBBBBB',
-            prenom: 'BBBBBB',
             adrRue: 'BBBBBB',
             adrCodePostal: 1,
             adrPays: 'BBBBBB',
@@ -179,7 +164,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Utilisateur to an array', () => {
-          const utilisateurArray: IUtilisateur[] = [{ id: 123 }, { id: 456 }, { id: 83904 }];
+          const utilisateurArray: IUtilisateur[] = [{ id: 123 }, { id: 456 }, { id: 87472 }];
           const utilisateurCollection: IUtilisateur[] = [{ id: 123 }];
           expectedResult = service.addUtilisateurToCollectionIfMissing(utilisateurCollection, ...utilisateurArray);
           expect(expectedResult).toHaveLength(3);

@@ -58,18 +58,6 @@
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="mail">
-            <span jhiTranslate="projetDranseApp.utilisateur.mail">Mail</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="motDePasse">
-            <span jhiTranslate="projetDranseApp.utilisateur.motDePasse">Mot De Passe</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="nom">
-            <span jhiTranslate="projetDranseApp.utilisateur.nom">Nom</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="prenom">
-            <span jhiTranslate="projetDranseApp.utilisateur.prenom">Prenom</span> <fa-icon icon="sort"></fa-icon>
-          </th>
           <th scope="col" jhiSortBy="adrRue">
             <span jhiTranslate="projetDranseApp.utilisateur.adrRue">Adr Rue</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -88,6 +76,9 @@
           <th scope="col" jhiSortBy="numCB">
             <span jhiTranslate="projetDranseApp.utilisateur.numCB">Num CB</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="user.login">
+            <span jhiTranslate="projetDranseApp.utilisateur.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -96,16 +87,15 @@
           <td>
             <a [routerLink]="['/utilisateur', utilisateur.id, 'view']">{{ utilisateur.id }}</a>
           </td>
-          <td>{{ utilisateur.mail }}</td>
-          <td>{{ utilisateur.motDePasse }}</td>
-          <td>{{ utilisateur.nom }}</td>
-          <td>{{ utilisateur.prenom }}</td>
           <td>{{ utilisateur.adrRue }}</td>
           <td>{{ utilisateur.adrCodePostal }}</td>
           <td>{{ utilisateur.adrPays }}</td>
           <td>{{ utilisateur.adrVille }}</td>
           <td>{{ utilisateur.telephone }}</td>
           <td>{{ utilisateur.numCB }}</td>
+          <td>
+            {{ utilisateur.user?.login }}
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

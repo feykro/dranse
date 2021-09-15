@@ -71,11 +71,7 @@ class UtilisateurGatlingTest extends Simulation {
             .post("/api/utilisateurs")
             .headers(headers_http_authenticated)
             .body(StringBody("""{
-                "mail":"SAMPLE_TEXT"
-                , "motDePasse":"SAMPLE_TEXT"
-                , "nom":"SAMPLE_TEXT"
-                , "prenom":"SAMPLE_TEXT"
-                , "adrRue":"SAMPLE_TEXT"
+                "adrRue":"SAMPLE_TEXT"
                 , "adrCodePostal":"0"
                 , "adrPays":"SAMPLE_TEXT"
                 , "adrVille":"SAMPLE_TEXT"
