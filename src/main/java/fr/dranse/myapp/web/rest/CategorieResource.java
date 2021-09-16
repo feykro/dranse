@@ -69,6 +69,7 @@ public class CategorieResource {
             .body(result);
     }
 
+
     /**
      * {@code PUT  /categories/:id} : Updates an existing categorie.
      *

@@ -20,7 +20,8 @@
       },
       "id": "ID",
       "nom": "Nom",
-      "description": "Description"
+      "description": "Description",
+      "livre": "Livre"
     }
   }
 }

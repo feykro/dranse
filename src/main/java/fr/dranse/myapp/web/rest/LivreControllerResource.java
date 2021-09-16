@@ -1,7 +1,9 @@
 package fr.dranse.myapp.web.rest;
 
 import fr.dranse.myapp.domain.Livre;
+import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.LivreRepository;
+import fr.dranse.myapp.service.CategorieService;
 import fr.dranse.myapp.service.LivreService;
 import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
@@ -42,9 +44,15 @@ public class LivreControllerResource {
 
     private final LivreRepository livreRepository;
 
-    public LivreControllerResource(LivreService livreService, LivreRepository livreRepository) {
+    private final CategorieService categorieService;
+
+    private final CategorieRepository categorieRepository;
+
+    public LivreControllerResource(LivreService livreService, LivreRepository livreRepository, CategorieService categorieService, CategorieRepository categorieRepository) {
         this.livreService = livreService;
         this.livreRepository = livreRepository;
+        this.categorieService = categorieService;
+        this.categorieRepository = categorieRepository;
     }
 
 
@@ -63,6 +71,9 @@ public class LivreControllerResource {
         if ((livre.getTitre() == null)||(livre.getAuteur() == null)||(livre.getPrix() == null)||(livre.getSynopsis() == null)||(livre.getEditeur() == null)||(livre.getStock() == null)){
             throw new BadRequestAlertException("A new livre needs a titre, auteur, prix, synopsis, editeur, stock", ENTITY_NAME, "idexists");
         }
+        /*if (livre.getLivre_cats() != null){
+            categorieService.
+        }*/
         Livre result = livreService.save(livre);
         return ResponseEntity
             .created(new URI("/api/livres/" + result.getId()))

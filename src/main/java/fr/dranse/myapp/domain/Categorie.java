@@ -1,6 +1,9 @@
 package fr.dranse.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -27,6 +30,11 @@ public class Categorie implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(mappedBy = "livre_cats")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
+    private Set<Livre> livres = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -66,6 +74,37 @@ public class Categorie implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Livre> getLivres() {
+        return this.livres;
+    }
+
+    public Categorie livres(Set<Livre> Livres) {
+        this.setLivres(Livres);
+        return this;
+    }
+
+    public Categorie addLivre(Livre Livre) {
+        this.livres.add(Livre);
+        Livre.getLivre_cats().add(this);
+        return this;
+    }
+
+    public Categorie removeLivre(Livre Livre) {
+        this.livres.remove(Livre);
+        Livre.getLivre_cats().remove(this);
+        return this;
+    }
+
+    public void setLivres(Set<Livre> Livres) {
+        if (this.livres != null) {
+            this.livres.forEach(i -> i.removeLivre_cat(this));
+        }
+        if (Livres != null) {
+            Livres.forEach(i -> i.addLivre_cat(this));
+        }
+        this.livres = Livres;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

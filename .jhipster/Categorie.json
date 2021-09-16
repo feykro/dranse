@@ -9,7 +9,16 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "livre",
+      "otherEntityName": "Livre",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "livre_cat"
+    }
+  ],
   "service": "serviceImpl",
   "dto": "no",
   "jpaMetamodelFiltering": false,

@@ -1,5 +1,6 @@
 package fr.dranse.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -58,6 +59,7 @@ public class Livre implements Serializable {
         joinColumns = @JoinColumn(name = "livre_id"),
         inverseJoinColumns = @JoinColumn(name = "livre_cat_id")
     )
+    @JsonIgnoreProperties(value = { "livres" }, allowSetters = true)
     private Set<Categorie> livre_cats = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -202,11 +204,13 @@ public class Livre implements Serializable {
 
     public Livre addLivre_cat(Categorie categorie) {
         this.livre_cats.add(categorie);
+        categorie.getLivres().add(this);
         return this;
     }
 
     public Livre removeLivre_cat(Categorie categorie) {
         this.livre_cats.remove(categorie);
+        categorie.getLivres().remove(this);
         return this;
     }
 
