@@ -19,5 +19,13 @@
                                  constraintName="fk_rel_livre__livre_cat__livre_cat_id"
                                  referencedColumnNames="id"
                                  referencedTableName="categorie"/>
+        <loadData
+            file="config/liquibase/fake-data/livre_cat.csv"
+            separator=";"
+            tableName="rel_livre__livre_cat">
+            <column name="livre_id" type="numeric"/>
+            <column name="livre_cat_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
     </changeSet>
 </databaseChangeLog>
