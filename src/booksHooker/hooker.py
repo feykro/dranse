@@ -111,7 +111,7 @@ dataDir="data"
 bookFile = open(os.path.join(dataDir,'livre.csv'),'w')
 categorieFile = open(os.path.join(dataDir,'categorie.csv'),'w')
 livre_catFile = open(os.path.join(dataDir,'livre_cat.csv'),'w')
-bookFile.write('id;titre;auteur;prix;synopsis;edition;annee_publication;editeur;stock;url_image\n')
+bookFile.write('id;titre;auteur;prix;synopsis;edition;annee_publication;editeur;url_image;stock\n')
 categorieFile.write('id;nom;description\n')
 livre_catFile.write('categorie_id;livre_id\n')
 
