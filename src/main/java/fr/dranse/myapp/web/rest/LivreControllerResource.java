@@ -71,9 +71,6 @@ public class LivreControllerResource {
         if ((livre.getTitre() == null)||(livre.getAuteur() == null)||(livre.getPrix() == null)||(livre.getSynopsis() == null)||(livre.getEditeur() == null)||(livre.getStock() == null)){
             throw new BadRequestAlertException("A new livre needs a titre, auteur, prix, synopsis, editeur, stock", ENTITY_NAME, "idexists");
         }
-        /*if (livre.getLivre_cats() != null){
-            categorieService.
-        }*/
         Livre result = livreService.save(livre);
         return ResponseEntity
             .created(new URI("/api/livres/" + result.getId()))

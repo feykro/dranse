@@ -92,7 +92,9 @@ public class Categorie implements Serializable {
     }
 
     public Categorie removeLivre(Livre Livre) {
-        this.livres.remove(Livre);
+        System.out.println("We currently are removing \n"  + Livre + "\n from \n" + this.livres);
+        boolean n = this.livres.remove(Livre);
+        System.out.println("\nHere is the resulting set :\n " + this.livres + " \nit was a\n " + n);
         Livre.getLivre_cats().remove(this);
         return this;
     }
