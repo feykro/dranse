@@ -66,9 +66,9 @@ public class Commande implements Serializable {
     @JsonIgnoreProperties(value = { "commandes", "userP" }, allowSetters = true)
     private Utilisateur utilisateur;
 
-    @OneToMany(mappedBy = "commande")
+    @OneToMany(mappedBy = "commande", fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "commande", "livre" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "commande" }, allowSetters = true)
     private Set<LigneCommande> ligneCommandes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
