@@ -7,6 +7,7 @@ $accent-color: #f1f2de;
   background-color: whitesmoke;
   border: solid black 0.1em;
   min-width: 220px;
+  min-height: 300px;
   height: 37vh;
 
   grid-template-columns: 1fr;
@@ -86,6 +87,7 @@ $accent-color: #f1f2de;
 .welcomePage {
   display: grid;
   height: 100vh;
+  min-height: 1000px;
   grid-template-columns: 1fr;
   grid-template-rows: 0.5fr 0.5fr;
   grid-template-areas:
@@ -102,6 +104,8 @@ $accent-color: #f1f2de;
   border: solid black 0.1em;
   display: grid;
   height: 50vh;
+  min-height: 440px;
+
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 0.8fr;
   grid-gap: 0.2rem;
@@ -120,6 +124,7 @@ $accent-color: #f1f2de;
   border: solid black 0.1em;
   display: grid;
   height: 39vh;
+  min-height: 330px;
   grid-template-columns: 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
   grid-template-rows: 1fr;
   grid-gap: 0.2rem;
@@ -149,6 +154,7 @@ $accent-color: #f1f2de;
   border: solid black 0.1em;
   display: grid;
   height: 51vh;
+  min-height: 530px;
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 0.8fr;
   grid-gap: 0.2rem;
@@ -164,6 +170,7 @@ $accent-color: #f1f2de;
 #categories {
   background-color: $accent-color;
   height: 40vh;
+  min-height: 400px;
   grid-area: categories;
   border: solid black 0.1em;
   display: grid;
@@ -188,7 +195,7 @@ $accent-color: #f1f2de;
   padding: 10px 0px 0px 10px;
 }
 #coverTest {
-  height: 200px;
+  height: 22.2vh;
 }
 img {
   max-height: 100%;
