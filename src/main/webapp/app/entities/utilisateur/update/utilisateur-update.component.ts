@@ -27,7 +27,7 @@ export class UtilisateurUpdateComponent implements OnInit {
     adrVille: [],
     telephone: [],
     numCB: [],
-    user: [],
+    userP: [],
   });
 
   constructor(
@@ -91,17 +91,17 @@ export class UtilisateurUpdateComponent implements OnInit {
       adrVille: utilisateur.adrVille,
       telephone: utilisateur.telephone,
       numCB: utilisateur.numCB,
-      user: utilisateur.user,
+      userP: utilisateur.userP,
     });
 
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, utilisateur.user);
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, utilisateur.userP);
   }
 
   protected loadRelationshipsOptions(): void {
     this.userService
       .query()
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
-      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value)))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('userP')!.value)))
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
   }
 
@@ -115,7 +115,7 @@ export class UtilisateurUpdateComponent implements OnInit {
       adrVille: this.editForm.get(['adrVille'])!.value,
       telephone: this.editForm.get(['telephone'])!.value,
       numCB: this.editForm.get(['numCB'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      userP: this.editForm.get(['userP'])!.value,
     };
   }
 }

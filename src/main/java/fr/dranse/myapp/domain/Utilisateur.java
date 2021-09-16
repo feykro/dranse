@@ -50,7 +50,7 @@ public class Utilisateur implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private User user;
+    private User userP;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -175,17 +175,17 @@ public class Utilisateur implements Serializable {
         this.commandes = commandes;
     }
 
-    public User getUser() {
-        return this.user;
+    public User getUserP() {
+        return this.userP;
     }
 
-    public Utilisateur user(User user) {
-        this.setUser(user);
+    public Utilisateur userP(User user) {
+        this.setUserP(user);
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserP(User user) {
+        this.userP = user;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
