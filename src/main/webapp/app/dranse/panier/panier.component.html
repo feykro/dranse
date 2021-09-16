@@ -1,6 +1,6 @@
 <div class="all">
   <div class="items-list">
-    <div class="order-item" *ngFor="let item of itemListTest">
+    <div class="order-item" *ngFor="let item of itemListCommande">
       <img id="cover-image" src="{{ item.urlImage }}" />
       <div id="informations">
         <div id="titre">{{ item.titre }}</div>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="bandeau-total">
-    <div id="total">195,65€</div>
+    <div id="total">Total : {{ prixTotal }}€ TTC</div>
     <div id="commande-button-area">
       <button>Commander</button>
     </div>
