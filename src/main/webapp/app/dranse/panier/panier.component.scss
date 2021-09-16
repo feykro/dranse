@@ -16,20 +16,31 @@
   overflow: scroll;
 }
 
+/*
 .bandeau-total {
   width: 100%;
-  height: 100%;
-  background-color: lightseagreen;
+  height: 16,4vh;
+  display: grid;
   grid-area: 'bandeau-total';
-  grid-template-columns: 0.5fr 0.5fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: 'total' 'commande-button-area';
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr;
+  grid-template-areas: 
+  'total' 'commande-button-area';
+}
+*/
+
+.bandeau-total {
+  background-color: lightgrey;
+  border: solid 0.1em;
+  border-color: black;
+  width: 100%;
+  height: 16, 4vh;
 }
 
 // === Contenu commande ===
 .order-item {
   width: calc(100% - 20pt);
-  height: 180pt;
+  height: 25, 6vh;
   background-color: lightcoral;
   padding: 5pt 5pt 5pt 5pt;
   margin: 10pt 10pt 0pt 10pt;
@@ -59,16 +70,35 @@
 }
 
 // === contenu bandeau ===
+
 #total {
-  float: left;
+  margin: 0 0 0 0;
+  display: inline-block;
+  text-align: center;
+  width: calc(50% - 0.1em);
+  height: 16, 4vh;
+  background-color: lightblue;
+
   font-size: 36pt;
   font-weight: bold;
-  vertical-align: middle;
+
   grid-area: total;
 }
 
 #commande-button-area {
-  float: right;
-  vertical-align: middle;
+  //padding-top: 10vh;
+  margin: 0 0 0 0;
+  display: inline-block;
+  width: calc(50% - 0.1em);
+  height: 16, 4vh;
+  background-color: lightseagreen;
+  text-align: center;
+
   grid-area: commande-button-area;
+}
+
+#order-button {
+  display: block;
+  width: 25wh;
+  margin: 0 auto;
 }
