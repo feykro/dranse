@@ -3,10 +3,17 @@ package fr.dranse.myapp.service.impl;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 import fr.dranse.myapp.domain.Categorie;
+import fr.dranse.myapp.domain.Livre;
 import fr.dranse.myapp.repository.CategorieRepository;
+import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CategorieSearchRepository;
 import fr.dranse.myapp.service.CategorieService;
+
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,16 +34,32 @@ public class CategorieServiceImpl implements CategorieService {
 
     private final CategorieSearchRepository categorieSearchRepository;
 
-    public CategorieServiceImpl(CategorieRepository categorieRepository, CategorieSearchRepository categorieSearchRepository) {
+    private final LivreRepository livreRepository;
+
+    public CategorieServiceImpl(CategorieRepository categorieRepository, CategorieSearchRepository categorieSearchRepository, LivreRepository livreRepository) {
         this.categorieRepository = categorieRepository;
         this.categorieSearchRepository = categorieSearchRepository;
+        this.livreRepository = livreRepository;
     }
 
     @Override
     public Categorie save(Categorie categorie) {
         log.debug("Request to save Categorie : {}", categorie);
+        // todo: optimize this (Hugo)
+        Set<Livre> bufferSet = new HashSet<Livre>();
+        for (Livre livre : categorie.getLivres()){
+            Livre currentLivre = livreRepository.getOne(livre.getId());
+            bufferSet.add(currentLivre);
+        }
+        categorie.getLivres().clear();
+
+        for (Livre l : bufferSet) {
+                categorie.addLivre(l);
+        }
+
         Categorie result = categorieRepository.save(categorie);
-        categorieSearchRepository.save(result);
+        // todo : figure out why the following line produces stackoverflow
+        //categorieSearchRepository.save(result);
         return result;
     }
 
@@ -75,15 +98,11 @@ public class CategorieServiceImpl implements CategorieService {
         return categorieRepository.findAll(pageable);
     }
 
-    public Page<Categorie> findAllWithEagerRelationships(Pageable pageable) {
-        return categorieRepository.findAllWithEagerRelationships(pageable);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public Optional<Categorie> findOne(Long id) {
         log.debug("Request to get Categorie : {}", id);
-        return categorieRepository.findOneWithEagerRelationships(id);
+        return categorieRepository.findById(id);
     }
 
     @Override

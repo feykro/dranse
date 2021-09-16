@@ -12,11 +12,11 @@
   "relationships": [
     {
       "relationshipName": "livre",
-      "otherEntityName": "livre",
+      "otherEntityName": "Livre",
       "relationshipType": "many-to-many",
       "otherEntityField": "id",
-      "ownerSide": true,
-      "otherEntityRelationshipName": "categorie"
+      "ownerSide": false,
+      "otherEntityRelationshipName": "livre_cat"
     }
   ],
   "service": "serviceImpl",

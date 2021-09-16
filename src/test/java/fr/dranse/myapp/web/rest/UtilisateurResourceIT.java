@@ -39,18 +39,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class UtilisateurResourceIT {
 
-    private static final String DEFAULT_MAIL = "AAAAAAAAAA";
-    private static final String UPDATED_MAIL = "BBBBBBBBBB";
-
-    private static final String DEFAULT_MOT_DE_PASSE = "AAAAAAAAAA";
-    private static final String UPDATED_MOT_DE_PASSE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_NOM = "AAAAAAAAAA";
-    private static final String UPDATED_NOM = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PRENOM = "AAAAAAAAAA";
-    private static final String UPDATED_PRENOM = "BBBBBBBBBB";
-
     private static final String DEFAULT_ADR_RUE = "AAAAAAAAAA";
     private static final String UPDATED_ADR_RUE = "BBBBBBBBBB";
 
@@ -103,10 +91,6 @@ class UtilisateurResourceIT {
      */
     public static Utilisateur createEntity(EntityManager em) {
         Utilisateur utilisateur = new Utilisateur()
-            .mail(DEFAULT_MAIL)
-            .motDePasse(DEFAULT_MOT_DE_PASSE)
-            .nom(DEFAULT_NOM)
-            .prenom(DEFAULT_PRENOM)
             .adrRue(DEFAULT_ADR_RUE)
             .adrCodePostal(DEFAULT_ADR_CODE_POSTAL)
             .adrPays(DEFAULT_ADR_PAYS)
@@ -124,10 +108,6 @@ class UtilisateurResourceIT {
      */
     public static Utilisateur createUpdatedEntity(EntityManager em) {
         Utilisateur utilisateur = new Utilisateur()
-            .mail(UPDATED_MAIL)
-            .motDePasse(UPDATED_MOT_DE_PASSE)
-            .nom(UPDATED_NOM)
-            .prenom(UPDATED_PRENOM)
             .adrRue(UPDATED_ADR_RUE)
             .adrCodePostal(UPDATED_ADR_CODE_POSTAL)
             .adrPays(UPDATED_ADR_PAYS)
@@ -155,10 +135,6 @@ class UtilisateurResourceIT {
         List<Utilisateur> utilisateurList = utilisateurRepository.findAll();
         assertThat(utilisateurList).hasSize(databaseSizeBeforeCreate + 1);
         Utilisateur testUtilisateur = utilisateurList.get(utilisateurList.size() - 1);
-        assertThat(testUtilisateur.getMail()).isEqualTo(DEFAULT_MAIL);
-        assertThat(testUtilisateur.getMotDePasse()).isEqualTo(DEFAULT_MOT_DE_PASSE);
-        assertThat(testUtilisateur.getNom()).isEqualTo(DEFAULT_NOM);
-        assertThat(testUtilisateur.getPrenom()).isEqualTo(DEFAULT_PRENOM);
         assertThat(testUtilisateur.getAdrRue()).isEqualTo(DEFAULT_ADR_RUE);
         assertThat(testUtilisateur.getAdrCodePostal()).isEqualTo(DEFAULT_ADR_CODE_POSTAL);
         assertThat(testUtilisateur.getAdrPays()).isEqualTo(DEFAULT_ADR_PAYS);
@@ -203,10 +179,6 @@ class UtilisateurResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(utilisateur.getId().intValue())))
-            .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL)))
-            .andExpect(jsonPath("$.[*].motDePasse").value(hasItem(DEFAULT_MOT_DE_PASSE)))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM)))
-            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM)))
             .andExpect(jsonPath("$.[*].adrRue").value(hasItem(DEFAULT_ADR_RUE)))
             .andExpect(jsonPath("$.[*].adrCodePostal").value(hasItem(DEFAULT_ADR_CODE_POSTAL)))
             .andExpect(jsonPath("$.[*].adrPays").value(hasItem(DEFAULT_ADR_PAYS)))
@@ -227,10 +199,6 @@ class UtilisateurResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(utilisateur.getId().intValue()))
-            .andExpect(jsonPath("$.mail").value(DEFAULT_MAIL))
-            .andExpect(jsonPath("$.motDePasse").value(DEFAULT_MOT_DE_PASSE))
-            .andExpect(jsonPath("$.nom").value(DEFAULT_NOM))
-            .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM))
             .andExpect(jsonPath("$.adrRue").value(DEFAULT_ADR_RUE))
             .andExpect(jsonPath("$.adrCodePostal").value(DEFAULT_ADR_CODE_POSTAL))
             .andExpect(jsonPath("$.adrPays").value(DEFAULT_ADR_PAYS))
@@ -259,10 +227,6 @@ class UtilisateurResourceIT {
         // Disconnect from session so that the updates on updatedUtilisateur are not directly saved in db
         em.detach(updatedUtilisateur);
         updatedUtilisateur
-            .mail(UPDATED_MAIL)
-            .motDePasse(UPDATED_MOT_DE_PASSE)
-            .nom(UPDATED_NOM)
-            .prenom(UPDATED_PRENOM)
             .adrRue(UPDATED_ADR_RUE)
             .adrCodePostal(UPDATED_ADR_CODE_POSTAL)
             .adrPays(UPDATED_ADR_PAYS)
@@ -282,10 +246,6 @@ class UtilisateurResourceIT {
         List<Utilisateur> utilisateurList = utilisateurRepository.findAll();
         assertThat(utilisateurList).hasSize(databaseSizeBeforeUpdate);
         Utilisateur testUtilisateur = utilisateurList.get(utilisateurList.size() - 1);
-        assertThat(testUtilisateur.getMail()).isEqualTo(UPDATED_MAIL);
-        assertThat(testUtilisateur.getMotDePasse()).isEqualTo(UPDATED_MOT_DE_PASSE);
-        assertThat(testUtilisateur.getNom()).isEqualTo(UPDATED_NOM);
-        assertThat(testUtilisateur.getPrenom()).isEqualTo(UPDATED_PRENOM);
         assertThat(testUtilisateur.getAdrRue()).isEqualTo(UPDATED_ADR_RUE);
         assertThat(testUtilisateur.getAdrCodePostal()).isEqualTo(UPDATED_ADR_CODE_POSTAL);
         assertThat(testUtilisateur.getAdrPays()).isEqualTo(UPDATED_ADR_PAYS);
@@ -374,12 +334,7 @@ class UtilisateurResourceIT {
         Utilisateur partialUpdatedUtilisateur = new Utilisateur();
         partialUpdatedUtilisateur.setId(utilisateur.getId());
 
-        partialUpdatedUtilisateur
-            .mail(UPDATED_MAIL)
-            .prenom(UPDATED_PRENOM)
-            .adrPays(UPDATED_ADR_PAYS)
-            .adrVille(UPDATED_ADR_VILLE)
-            .numCB(UPDATED_NUM_CB);
+        partialUpdatedUtilisateur.adrRue(UPDATED_ADR_RUE).adrVille(UPDATED_ADR_VILLE);
 
         restUtilisateurMockMvc
             .perform(
@@ -393,16 +348,12 @@ class UtilisateurResourceIT {
         List<Utilisateur> utilisateurList = utilisateurRepository.findAll();
         assertThat(utilisateurList).hasSize(databaseSizeBeforeUpdate);
         Utilisateur testUtilisateur = utilisateurList.get(utilisateurList.size() - 1);
-        assertThat(testUtilisateur.getMail()).isEqualTo(UPDATED_MAIL);
-        assertThat(testUtilisateur.getMotDePasse()).isEqualTo(DEFAULT_MOT_DE_PASSE);
-        assertThat(testUtilisateur.getNom()).isEqualTo(DEFAULT_NOM);
-        assertThat(testUtilisateur.getPrenom()).isEqualTo(UPDATED_PRENOM);
-        assertThat(testUtilisateur.getAdrRue()).isEqualTo(DEFAULT_ADR_RUE);
+        assertThat(testUtilisateur.getAdrRue()).isEqualTo(UPDATED_ADR_RUE);
         assertThat(testUtilisateur.getAdrCodePostal()).isEqualTo(DEFAULT_ADR_CODE_POSTAL);
-        assertThat(testUtilisateur.getAdrPays()).isEqualTo(UPDATED_ADR_PAYS);
+        assertThat(testUtilisateur.getAdrPays()).isEqualTo(DEFAULT_ADR_PAYS);
         assertThat(testUtilisateur.getAdrVille()).isEqualTo(UPDATED_ADR_VILLE);
         assertThat(testUtilisateur.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
-        assertThat(testUtilisateur.getNumCB()).isEqualTo(UPDATED_NUM_CB);
+        assertThat(testUtilisateur.getNumCB()).isEqualTo(DEFAULT_NUM_CB);
     }
 
     @Test
@@ -418,10 +369,6 @@ class UtilisateurResourceIT {
         partialUpdatedUtilisateur.setId(utilisateur.getId());
 
         partialUpdatedUtilisateur
-            .mail(UPDATED_MAIL)
-            .motDePasse(UPDATED_MOT_DE_PASSE)
-            .nom(UPDATED_NOM)
-            .prenom(UPDATED_PRENOM)
             .adrRue(UPDATED_ADR_RUE)
             .adrCodePostal(UPDATED_ADR_CODE_POSTAL)
             .adrPays(UPDATED_ADR_PAYS)
@@ -441,10 +388,6 @@ class UtilisateurResourceIT {
         List<Utilisateur> utilisateurList = utilisateurRepository.findAll();
         assertThat(utilisateurList).hasSize(databaseSizeBeforeUpdate);
         Utilisateur testUtilisateur = utilisateurList.get(utilisateurList.size() - 1);
-        assertThat(testUtilisateur.getMail()).isEqualTo(UPDATED_MAIL);
-        assertThat(testUtilisateur.getMotDePasse()).isEqualTo(UPDATED_MOT_DE_PASSE);
-        assertThat(testUtilisateur.getNom()).isEqualTo(UPDATED_NOM);
-        assertThat(testUtilisateur.getPrenom()).isEqualTo(UPDATED_PRENOM);
         assertThat(testUtilisateur.getAdrRue()).isEqualTo(UPDATED_ADR_RUE);
         assertThat(testUtilisateur.getAdrCodePostal()).isEqualTo(UPDATED_ADR_CODE_POSTAL);
         assertThat(testUtilisateur.getAdrPays()).isEqualTo(UPDATED_ADR_PAYS);
@@ -556,10 +499,6 @@ class UtilisateurResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(utilisateur.getId().intValue())))
-            .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL)))
-            .andExpect(jsonPath("$.[*].motDePasse").value(hasItem(DEFAULT_MOT_DE_PASSE)))
-            .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM)))
-            .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM)))
             .andExpect(jsonPath("$.[*].adrRue").value(hasItem(DEFAULT_ADR_RUE)))
             .andExpect(jsonPath("$.[*].adrCodePostal").value(hasItem(DEFAULT_ADR_CODE_POSTAL)))
             .andExpect(jsonPath("$.[*].adrPays").value(hasItem(DEFAULT_ADR_PAYS)))

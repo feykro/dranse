@@ -48,18 +48,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             .findById(utilisateur.getId())
             .map(
                 existingUtilisateur -> {
-                    if (utilisateur.getMail() != null) {
-                        existingUtilisateur.setMail(utilisateur.getMail());
-                    }
-                    if (utilisateur.getMotDePasse() != null) {
-                        existingUtilisateur.setMotDePasse(utilisateur.getMotDePasse());
-                    }
-                    if (utilisateur.getNom() != null) {
-                        existingUtilisateur.setNom(utilisateur.getNom());
-                    }
-                    if (utilisateur.getPrenom() != null) {
-                        existingUtilisateur.setPrenom(utilisateur.getPrenom());
-                    }
                     if (utilisateur.getAdrRue() != null) {
                         existingUtilisateur.setAdrRue(utilisateur.getAdrRue());
                     }

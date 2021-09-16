@@ -42,12 +42,12 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call Categorie query and add missing value', () => {
         const livre: ILivre = { id: 456 };
-        const categories: ICategorie[] = [{ id: 17790 }];
-        livre.categories = categories;
+        const livre_cats: ICategorie[] = [{ id: 17790 }];
+        livre.livre_cats = livre_cats;
 
         const categorieCollection: ICategorie[] = [{ id: 63543 }];
         jest.spyOn(categorieService, 'query').mockReturnValue(of(new HttpResponse({ body: categorieCollection })));
-        const additionalCategories = [...categories];
+        const additionalCategories = [...livre_cats];
         const expectedCollection: ICategorie[] = [...additionalCategories, ...categorieCollection];
         jest.spyOn(categorieService, 'addCategorieToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -61,14 +61,14 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const livre: ILivre = { id: 456 };
-        const categories: ICategorie = { id: 87656 };
-        livre.categories = [categories];
+        const livre_cats: ICategorie = { id: 87656 };
+        livre.livre_cats = [livre_cats];
 
         activatedRoute.data = of({ livre });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(livre));
-        expect(comp.categoriesSharedCollection).toContain(categories);
+        expect(comp.categoriesSharedCollection).toContain(livre_cats);
       });
     });
 

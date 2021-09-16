@@ -40,11 +40,11 @@ public class Avis implements Serializable {
     private Boolean affiche;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "categories" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
     private Livre livre;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "commandes" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "commandes", "user" }, allowSetters = true)
     private Utilisateur utilisateur;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -63,7 +63,7 @@ public class Commande implements Serializable {
     private Boolean payee;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "commandes" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "commandes", "user" }, allowSetters = true)
     private Utilisateur utilisateur;
 
     @OneToMany(mappedBy = "commande")
