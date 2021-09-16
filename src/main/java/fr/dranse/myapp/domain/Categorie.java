@@ -31,7 +31,7 @@ public class Categorie implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "livre_cats")
+    @ManyToMany(mappedBy = "livre_cats", fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
     private Set<Livre> livres = new HashSet<>();
