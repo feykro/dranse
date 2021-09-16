@@ -1,11 +1,10 @@
-import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
 import { ILivre } from 'app/entities/livre/livre.model';
 import { LigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { LivreService } from 'app/entities/livre/service/livre.service';
 import { Observable } from 'rxjs';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { PanierService } from '../panier/panier.service';
 
 @Component({
@@ -16,14 +15,8 @@ import { PanierService } from '../panier/panier.service';
 export class ProduitComponent implements OnInit {
   public livreId = 0;
   public livreInfo!: ILivre;
-  public ligneCommande!: LigneCommande;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private livreService: LivreService,
-    private panierService: PanierService,
-    private commandeService: CommandeControllerRessourceService
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute, private livreService: LivreService, private panierService: PanierService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -37,17 +30,13 @@ export class ProduitComponent implements OnInit {
   }
 
   ajoutPanier(): void {
-    //TODO Ajouter la livreId dans un objet Panier du frontEnd
     const panierId = this.panierService.getPanierId();
-    this.ligneCommande.livre = this.livreInfo;
-    this.ligneCommande.prixPaye = this.livreInfo.prix;
-    this.ligneCommande.quantite = 1;
+    const lignecommande = new LigneCommande(undefined, 1, this.livreInfo.prix, undefined, this.livreInfo);
+    console.log(panierId);
     if (panierId === -1) {
-      this.panierService.creationCommande(this.ligneCommande);
+      this.panierService.creationCommande(lignecommande);
     } else {
-      this.panierService.ajoutLigne(this.ligneCommande);
+      this.panierService.ajoutLigne(lignecommande);
     }
-    confirm('Le produit a été ajouté au panier');
-    //alert("Le livre n'a pas été trouvé ou n'est plus en stock");
   }
 }
