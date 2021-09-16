@@ -5,6 +5,10 @@ import fr.dranse.myapp.domain.LigneCommande;
 import fr.dranse.myapp.repository.CommandeRepository;
 import fr.dranse.myapp.service.CommandeService;
 import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Objects;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * CommandeControllerResource controller
@@ -27,8 +26,10 @@ public class CommandeControllerResource {
 
     private final Logger log = LoggerFactory.getLogger(CommandeControllerResource.class);
     private static final String ENTITY_NAME = "commande";
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
     private final CommandeService commandeService;
     private final CommandeRepository commandeRepository;
 
@@ -42,15 +43,15 @@ public class CommandeControllerResource {
      */
     // todo transaction
     @PostMapping("")
-    public ResponseEntity<Commande> creationCommande(@RequestBody Commande commande) throws URISyntaxException {
-        log.debug("REST request to create a command for an item: {}", commande);
-        if (commande.getId() != null) {
-            throw new BadRequestAlertException("A new commande cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<Commande> creationCommande(@RequestBody LigneCommande ligneCommande) throws URISyntaxException {
+        log.debug("REST request to create a new command with an item: {}", ligneCommande);
+        if (ligneCommande.getId() != null) {
+            throw new BadRequestAlertException("A new ligneCommande cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Commande result = commandeService.save(commande);
+        Commande result = commandeService.newCommande(ligneCommande);
         return ResponseEntity
             .created(new URI("/api/commande-controller/get-commande/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.toString()))
             .body(result);
     }
 
@@ -58,7 +59,7 @@ public class CommandeControllerResource {
      * PUT ajoutLigne
      */
     // todo transact
-    @PutMapping("/ajout/{id}")
+    @PutMapping("/ajout/{id}") // todo rename to update??
     public ResponseEntity<Commande> ajoutLigne(
         @PathVariable(value = "id", required = true) final Long id,
         @RequestBody LigneCommande ligneCommande
@@ -67,7 +68,7 @@ public class CommandeControllerResource {
         if (!commandeRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-        Commande result = new Commande(); // todo commandeService.addLine(id, ligneCommande);
+        Commande result = commandeService.ajouterLigne(id, ligneCommande);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
@@ -106,15 +107,13 @@ public class CommandeControllerResource {
             .build();
     }
 
-
     /**
      * DELETE deleteLigne
      */
     @DeleteMapping("/ligne/{idCommande}/{idLigne}")
     public ResponseEntity<Void> deleteLigne(@PathVariable Long idCommande, @PathVariable Long idLigne) {
         log.debug("REST request to delete ligne {} from commande {}", idCommande, idLigne);
-        // todo check in service that idligne in id commmande
-        // commandeService.deleteLigne(idCommande, idLigne);
+        commandeService.SupprimerLigne(idCommande, idLigne);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, idLigne.toString()))

@@ -1,6 +1,7 @@
 package fr.dranse.myapp.service;
 
 import fr.dranse.myapp.domain.Commande;
+import fr.dranse.myapp.domain.LigneCommande;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,10 +52,38 @@ public interface CommandeService {
     /**
      * Search for the commande corresponding to the query.
      *
-     * @param query the query of the search.
-     *
+     * @param query    the query of the search.
      * @param pageable the pagination information.
      * @return the list of entities.
      */
     Page<Commande> search(String query, Pageable pageable);
+
+    /**
+     * Créer une nouvelle commande contenant ligneCommande
+     *
+     * @param ligneCommande
+     * @return
+     */
+    Commande newCommande(LigneCommande ligneCommande);
+
+    /**
+     * Ajouter un ligneCommande à une commande existante
+     *
+     * @param id
+     * @param ligneCommande
+     * @return
+     */
+    Commande ajouterLigne(Long id, LigneCommande ligneCommande);
+
+    /**
+     * Supprime une ligneCommande d'une commande
+     *
+     * @param idCommande
+     * @param idLigne
+     * @return
+     */
+    Commande SupprimerLigne(Long idCommande, Long idLigne);
+    // todo modifier le nombre d'items dans une ligneCommande
+
+    // todo verify stock of livre and update stock
 }

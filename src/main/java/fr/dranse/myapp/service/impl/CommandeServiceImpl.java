@@ -3,9 +3,12 @@ package fr.dranse.myapp.service.impl;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 import fr.dranse.myapp.domain.Commande;
+import fr.dranse.myapp.domain.LigneCommande;
 import fr.dranse.myapp.repository.CommandeRepository;
+import fr.dranse.myapp.repository.LigneCommandeRepository;
 import fr.dranse.myapp.repository.search.CommandeSearchRepository;
 import fr.dranse.myapp.service.CommandeService;
+import fr.dranse.myapp.service.LigneCommandeService;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +30,16 @@ public class CommandeServiceImpl implements CommandeService {
 
     private final CommandeSearchRepository commandeSearchRepository;
 
-    public CommandeServiceImpl(CommandeRepository commandeRepository, CommandeSearchRepository commandeSearchRepository) {
+    private final LigneCommandeRepository ligneCommandeRepository;
+
+    public CommandeServiceImpl(
+        CommandeRepository commandeRepository,
+        CommandeSearchRepository commandeSearchRepository,
+        LigneCommandeRepository ligneCommandeRepository
+    ) {
         this.commandeRepository = commandeRepository;
         this.commandeSearchRepository = commandeSearchRepository;
+        this.ligneCommandeRepository = ligneCommandeRepository;
     }
 
     @Override
@@ -124,5 +134,39 @@ public class CommandeServiceImpl implements CommandeService {
     public Page<Commande> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Commandes for query {}", query);
         return commandeSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Override
+    @Transactional
+    public Commande newCommande(LigneCommande ligneCommande) {
+        Commande commande = new Commande();
+        commande.addLigneCommande(ligneCommande);
+        ligneCommande.setCommande(commande);
+        Commande result = commandeRepository.save(commande);
+        ligneCommandeRepository.save(ligneCommande);
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public Commande ajouterLigne(Long id, LigneCommande ligneCommande) {
+        Commande commande = commandeRepository.getOne(id);
+        commande.addLigneCommande(ligneCommande);
+        ligneCommande.setCommande(commande);
+        // todo verify if not already added
+        Commande result = commandeRepository.save(commande);
+        ligneCommandeRepository.save(ligneCommande);
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public Commande SupprimerLigne(Long idCommande, Long idLigne) {
+        Commande commande = commandeRepository.getOne(idCommande);
+        LigneCommande ligneCommande = ligneCommandeRepository.getOne(idLigne);
+        commande.removeLigneCommande(ligneCommande);
+        ligneCommandeRepository.delete(ligneCommande);
+        // todo verify if not another commande
+        return commandeRepository.save(commande);
     }
 }

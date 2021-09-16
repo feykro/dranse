@@ -25,18 +25,6 @@ public class Utilisateur implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "mail")
-    private String mail;
-
-    @Column(name = "mot_de_passe")
-    private String motDePasse;
-
-    @Column(name = "nom")
-    private String nom;
-
-    @Column(name = "prenom")
-    private String prenom;
-
     @Column(name = "adr_rue")
     private String adrRue;
 
@@ -60,6 +48,10 @@ public class Utilisateur implements Serializable {
     @JsonIgnoreProperties(value = { "utilisateur", "ligneCommandes" }, allowSetters = true)
     private Set<Commande> commandes = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User userP;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -72,58 +64,6 @@ public class Utilisateur implements Serializable {
     public Utilisateur id(Long id) {
         this.id = id;
         return this;
-    }
-
-    public String getMail() {
-        return this.mail;
-    }
-
-    public Utilisateur mail(String mail) {
-        this.mail = mail;
-        return this;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getMotDePasse() {
-        return this.motDePasse;
-    }
-
-    public Utilisateur motDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-        return this;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
-
-    public String getNom() {
-        return this.nom;
-    }
-
-    public Utilisateur nom(String nom) {
-        this.nom = nom;
-        return this;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return this.prenom;
-    }
-
-    public Utilisateur prenom(String prenom) {
-        this.prenom = prenom;
-        return this;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
     }
 
     public String getAdrRue() {
@@ -235,6 +175,19 @@ public class Utilisateur implements Serializable {
         this.commandes = commandes;
     }
 
+    public User getUserP() {
+        return this.userP;
+    }
+
+    public Utilisateur userP(User user) {
+        this.setUserP(user);
+        return this;
+    }
+
+    public void setUserP(User user) {
+        this.userP = user;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -259,10 +212,6 @@ public class Utilisateur implements Serializable {
     public String toString() {
         return "Utilisateur{" +
             "id=" + getId() +
-            ", mail='" + getMail() + "'" +
-            ", motDePasse='" + getMotDePasse() + "'" +
-            ", nom='" + getNom() + "'" +
-            ", prenom='" + getPrenom() + "'" +
             ", adrRue='" + getAdrRue() + "'" +
             ", adrCodePostal=" + getAdrCodePostal() +
             ", adrPays='" + getAdrPays() + "'" +
