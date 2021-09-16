@@ -76,8 +76,8 @@
           <th scope="col" jhiSortBy="numCB">
             <span jhiTranslate="projetDranseApp.utilisateur.numCB">Num CB</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="user.login">
-            <span jhiTranslate="projetDranseApp.utilisateur.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="userP.login">
+            <span jhiTranslate="projetDranseApp.utilisateur.userP">User P</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -94,7 +94,7 @@
           <td>{{ utilisateur.telephone }}</td>
           <td>{{ utilisateur.numCB }}</td>
           <td>
-            {{ utilisateur.user?.login }}
+            {{ utilisateur.userP?.login }}
           </td>
           <td class="text-right">
             <div class="btn-group">
