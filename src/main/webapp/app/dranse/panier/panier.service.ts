@@ -1,46 +1,68 @@
-import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
+import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
 import { Injectable } from '@angular/core';
-import { Commande } from 'app/entities/commande/commande.model';
+import { ICommande } from 'app/entities/commande/commande.model';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PanierService {
-  panierId = -1;
-  commande!: Commande;
+  private commande!: ICommande;
 
   constructor(private commandeService: CommandeControllerRessourceService) {
-    //Not empty
+    // Not empty
   }
 
   getPanierId(): number {
-    return this.panierId;
+    const id = <number | null>JSON.parse(<string>localStorage.getItem('panierId'));
+    if (id === null) {
+      return -1;
+    }
+    return id;
   }
 
   setPanierId(id: number): void {
-    this.panierId = id;
+    localStorage.setItem('panierId', JSON.stringify(id));
   }
 
-  getCommande(): Commande {
-    this.commandeService.getCommande(this.panierId).subscribe;
-    //Recuperer la commande
+  getCommande(): ICommande {
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.getCommande(this.getPanierId())
+    );
+    commandeRequest.subscribe(value => {
+      this.commande = <ICommande>value.body;
+    });
     return this.commande;
   }
 
-  //Return True = Ok
-  //Return False = Error
-  creationCommande(ligneCommande: LigneCommande): boolean {
-    this.commandeService.creationCommande(ligneCommande).subscribe();
-    //TODO Changer la valeur du panierId
-    return true;
+  creationCommande(ligneCommande: ILigneCommande): void {
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.creationCommande(ligneCommande)
+    );
+    commandeRequest.subscribe(value => {
+      if (value.body === null) {
+        alert("Le livre n'a pas été trouvé ou n'est plus en stock");
+      } else {
+        this.commande = value.body;
+        localStorage.setItem('panierId', JSON.stringify(<number>value.body.id));
+        confirm('Le produit a été ajouté au panier');
+      }
+    });
   }
 
-  //Return True = Ok
-  //Return False = Error
-  ajoutLigne(ligneCommande: LigneCommande): boolean {
-    this.commandeService.ajoutLigneCommande(ligneCommande, this.panierId).subscribe();
-    //Retourne la commande ou erreur
-    return true;
+  ajoutLigne(ligneCommande: ILigneCommande): void {
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.ajoutLigneCommande(ligneCommande, this.getPanierId())
+    );
+    commandeRequest.subscribe(value => {
+      if (value.body === null) {
+        alert("Le livre n'a pas été trouvé ou n'est plus en stock");
+      } else {
+        this.commande = value.body;
+        confirm('Le produit a été ajouté au panier');
+      }
+    });
   }
 }
