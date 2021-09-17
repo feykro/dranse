@@ -55,12 +55,12 @@ public class Livre implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
-        name = "rel_livre__categorie",
+        name = "rel_livre__livre_cat",
         joinColumns = @JoinColumn(name = "livre_id"),
-        inverseJoinColumns = @JoinColumn(name = "categorie_id")
+        inverseJoinColumns = @JoinColumn(name = "livre_cat_id")
     )
     @JsonIgnoreProperties(value = { "livres" }, allowSetters = true)
-    private Set<Categorie> categories = new HashSet<>();
+    private Set<Categorie> livre_cats = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -193,29 +193,29 @@ public class Livre implements Serializable {
         this.urlImage = urlImage;
     }
 
-    public Set<Categorie> getCategories() {
-        return this.categories;
+    public Set<Categorie> getLivre_cats() {
+        return this.livre_cats;
     }
 
-    public Livre categories(Set<Categorie> categories) {
-        this.setCategories(categories);
+    public Livre livre_cats(Set<Categorie> categories) {
+        this.setLivre_cats(categories);
         return this;
     }
 
-    public Livre addCategorie(Categorie categorie) {
-        this.categories.add(categorie);
+    public Livre addLivre_cat(Categorie categorie) {
+        this.livre_cats.add(categorie);
         categorie.getLivres().add(this);
         return this;
     }
 
-    public Livre removeCategorie(Categorie categorie) {
-        this.categories.remove(categorie);
+    public Livre removeLivre_cat(Categorie categorie) {
+        this.livre_cats.remove(categorie);
         categorie.getLivres().remove(this);
         return this;
     }
 
-    public void setCategories(Set<Categorie> categories) {
-        this.categories = categories;
+    public void setLivre_cats(Set<Categorie> categories) {
+        this.livre_cats = categories;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

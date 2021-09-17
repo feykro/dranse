@@ -2,11 +2,17 @@ package fr.dranse.myapp.service.impl;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
+import fr.dranse.myapp.domain.Categorie;
 import fr.dranse.myapp.domain.Livre;
+import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
+
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,16 +33,30 @@ public class LivreServiceImpl implements LivreService {
 
     private final LivreSearchRepository livreSearchRepository;
 
-    public LivreServiceImpl(LivreRepository livreRepository, LivreSearchRepository livreSearchRepository) {
+    private final CategorieRepository categorieRepository;
+
+    public LivreServiceImpl(LivreRepository livreRepository, LivreSearchRepository livreSearchRepository, CategorieRepository categorieRepository) {
         this.livreRepository = livreRepository;
         this.livreSearchRepository = livreSearchRepository;
+        this.categorieRepository = categorieRepository;
     }
 
     @Override
     public Livre save(Livre livre) {
         log.debug("Request to save Livre : {}", livre);
+        Set<Categorie> bufferSet = new HashSet<>();
+        // todo: add robustness (don't allow cats that don't exist)
+        for (Categorie cat : livre.getLivre_cats()){
+            Categorie currentCat = categorieRepository.getOne(cat.getId());
+            bufferSet.add(currentCat);
+        }
+        livre.getLivre_cats().clear();
+        for (Categorie cat : bufferSet){
+            livre.addLivre_cat(cat);
+        }
         Livre result = livreRepository.save(livre);
-        livreSearchRepository.save(result);
+        // todo: figure out why the following line results in stackoverflow
+        //livreSearchRepository.save(result);
         return result;
     }
 

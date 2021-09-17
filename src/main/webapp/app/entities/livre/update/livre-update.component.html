@@ -68,10 +68,10 @@
         </div>
 
         <div class="form-group">
-          <label jhiTranslate="projetDranseApp.livre.categorie" for="field_categories">Categorie</label>
-          <select class="form-control" id="field_categories" data-cy="categorie" multiple name="categories" formControlName="categories">
+          <label jhiTranslate="projetDranseApp.livre.livre_cat" for="field_livre_cats">Livre Cat</label>
+          <select class="form-control" id="field_livre_cats" data-cy="livre_cat" multiple name="livre_cats" formControlName="livre_cats">
             <option
-              [ngValue]="getSelectedCategorie(categorieOption, editForm.get('categories')!.value)"
+              [ngValue]="getSelectedCategorie(categorieOption, editForm.get('livre_cats')!.value)"
               *ngFor="let categorieOption of categoriesSharedCollection; trackBy: trackCategorieById"
             >
               {{ categorieOption.id }}

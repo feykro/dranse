@@ -109,6 +109,7 @@
   },
   "defaultProject": "projet-dranse",
   "cli": {
+    "analytics": false,
     "packageManager": "npm"
   }
 }
