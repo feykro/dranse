@@ -29,18 +29,6 @@
             formControlName="description"
           />
         </div>
-
-        <div class="form-group">
-          <label jhiTranslate="projetDranseApp.categorie.livre" for="field_livres">Livre</label>
-          <select class="form-control" id="field_livres" data-cy="livre" multiple name="livres" formControlName="livres">
-            <option
-              [ngValue]="getSelectedLivre(livreOption, editForm.get('livres')!.value)"
-              *ngFor="let livreOption of livresSharedCollection; trackBy: trackLivreById"
-            >
-              {{ livreOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

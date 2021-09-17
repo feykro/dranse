@@ -11,7 +11,7 @@ export interface ILivre {
   editeur?: string | null;
   stock?: number | null;
   urlImage?: string | null;
-  categories?: ICategorie[] | null;
+  livre_cats?: ICategorie[] | null;
 }
 
 export class Livre implements ILivre {
@@ -26,7 +26,7 @@ export class Livre implements ILivre {
     public editeur?: string | null,
     public stock?: number | null,
     public urlImage?: string | null,
-    public categories?: ICategorie[] | null
+    public livre_cats?: ICategorie[] | null
   ) {}
 }
 

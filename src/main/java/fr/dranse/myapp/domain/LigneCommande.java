@@ -34,7 +34,7 @@ public class LigneCommande implements Serializable {
     private Commande commande;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "categories" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
     private Livre livre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

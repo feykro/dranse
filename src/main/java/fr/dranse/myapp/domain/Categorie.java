@@ -31,14 +31,9 @@ public class Categorie implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "livre_cats", fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(
-        name = "rel_categorie__livre",
-        joinColumns = @JoinColumn(name = "categorie_id"),
-        inverseJoinColumns = @JoinColumn(name = "livre_id")
-    )
-    @JsonIgnoreProperties(value = { "categories" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
     private Set<Livre> livres = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -85,25 +80,33 @@ public class Categorie implements Serializable {
         return this.livres;
     }
 
-    public Categorie livres(Set<Livre> livres) {
-        this.setLivres(livres);
+    public Categorie livres(Set<Livre> Livres) {
+        this.setLivres(Livres);
         return this;
     }
 
-    public Categorie addLivre(Livre livre) {
-        this.livres.add(livre);
-        livre.getCategories().add(this);
+    public Categorie addLivre(Livre Livre) {
+        this.livres.add(Livre);
+        Livre.getLivre_cats().add(this);
         return this;
     }
 
-    public Categorie removeLivre(Livre livre) {
-        this.livres.remove(livre);
-        livre.getCategories().remove(this);
+    public Categorie removeLivre(Livre Livre) {
+        System.out.println("We currently are removing \n"  + Livre + "\n from \n" + this.livres);
+        boolean n = this.livres.remove(Livre);
+        System.out.println("\nHere is the resulting set :\n " + this.livres + " \nit was a\n " + n);
+        Livre.getLivre_cats().remove(this);
         return this;
     }
 
-    public void setLivres(Set<Livre> livres) {
-        this.livres = livres;
+    public void setLivres(Set<Livre> Livres) {
+        if (this.livres != null) {
+            this.livres.forEach(i -> i.removeLivre_cat(this));
+        }
+        if (Livres != null) {
+            Livres.forEach(i -> i.addLivre_cat(this));
+        }
+        this.livres = Livres;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -50,10 +50,10 @@
         <dd>
           <span>{{ livre.urlImage }}</span>
         </dd>
-        <dt><span jhiTranslate="projetDranseApp.livre.categorie">Categorie</span></dt>
+        <dt><span jhiTranslate="projetDranseApp.livre.livre_cat">Livre Cat</span></dt>
         <dd>
-          <span *ngFor="let categorie of livre.categories; let last = last">
-            <a [routerLink]="['/categorie', categorie?.id, 'view']">{{ categorie.id }}</a
+          <span *ngFor="let livre_cat of livre.livre_cats; let last = last">
+            <a [routerLink]="['/categorie', livre_cat?.id, 'view']">{{ livre_cat.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>

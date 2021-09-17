@@ -30,7 +30,7 @@ export class LivreUpdateComponent implements OnInit {
     editeur: [],
     stock: [],
     urlImage: [],
-    categories: [],
+    livre_cats: [],
   });
 
   constructor(
@@ -108,12 +108,12 @@ export class LivreUpdateComponent implements OnInit {
       editeur: livre.editeur,
       stock: livre.stock,
       urlImage: livre.urlImage,
-      categories: livre.categories,
+      livre_cats: livre.livre_cats,
     });
 
     this.categoriesSharedCollection = this.categorieService.addCategorieToCollectionIfMissing(
       this.categoriesSharedCollection,
-      ...(livre.categories ?? [])
+      ...(livre.livre_cats ?? [])
     );
   }
 
@@ -123,7 +123,7 @@ export class LivreUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<ICategorie[]>) => res.body ?? []))
       .pipe(
         map((categories: ICategorie[]) =>
-          this.categorieService.addCategorieToCollectionIfMissing(categories, ...(this.editForm.get('categories')!.value ?? []))
+          this.categorieService.addCategorieToCollectionIfMissing(categories, ...(this.editForm.get('livre_cats')!.value ?? []))
         )
       )
       .subscribe((categories: ICategorie[]) => (this.categoriesSharedCollection = categories));
@@ -142,7 +142,7 @@ export class LivreUpdateComponent implements OnInit {
       editeur: this.editForm.get(['editeur'])!.value,
       stock: this.editForm.get(['stock'])!.value,
       urlImage: this.editForm.get(['urlImage'])!.value,
-      categories: this.editForm.get(['categories'])!.value,
+      livre_cats: this.editForm.get(['livre_cats'])!.value,
     };
   }
 }
