@@ -1,6 +1,8 @@
 package fr.dranse.myapp.repository;
 
 import fr.dranse.myapp.domain.Categorie;
+import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

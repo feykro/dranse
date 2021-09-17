@@ -22,7 +22,7 @@ class CommandeControllerResourceIT {
 
     @BeforeEach
     public void setUp() {
-     /*   MockitoAnnotations.initMocks(this);
+        /*   MockitoAnnotations.initMocks(this);
 
         CommandeControllerResource commandeControllerResource = new CommandeControllerResource();
         restMockMvc = MockMvcBuilders.standaloneSetup(commandeControllerResource).build();*/

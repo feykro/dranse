@@ -3,6 +3,7 @@ package fr.dranse.myapp.web.rest;
 import fr.dranse.myapp.domain.Categorie;
 import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.service.CategorieService;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.PaginationUtil;
-
-import java.util.List;
 
 /**
  * CategorieControllerResource controller
