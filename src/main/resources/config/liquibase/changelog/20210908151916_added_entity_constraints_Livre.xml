@@ -9,15 +9,23 @@
     <changeSet id="20210908151916-2" author="jhipster">
 
         <addForeignKeyConstraint baseColumnNames="livre_id"
-                                 baseTableName="rel_livre__categorie"
-                                 constraintName="fk_rel_livre__categorie__livre_id"
+                                 baseTableName="rel_livre__livre_cat"
+                                 constraintName="fk_rel_livre__livre_cat__livre_id"
                                  referencedColumnNames="id"
                                  referencedTableName="livre"/>
 
-        <addForeignKeyConstraint baseColumnNames="categorie_id"
-                                 baseTableName="rel_livre__categorie"
-                                 constraintName="fk_rel_livre__categorie__categorie_id"
+        <addForeignKeyConstraint baseColumnNames="livre_cat_id"
+                                 baseTableName="rel_livre__livre_cat"
+                                 constraintName="fk_rel_livre__livre_cat__livre_cat_id"
                                  referencedColumnNames="id"
                                  referencedTableName="categorie"/>
+        <loadData
+            file="config/liquibase/fake-data/livre_cat.csv"
+            separator=";"
+            tableName="rel_livre__livre_cat">
+            <column name="livre_id" type="numeric"/>
+            <column name="livre_cat_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
     </changeSet>
 </databaseChangeLog>

@@ -23,7 +23,7 @@
             <column name="prix" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="synopsis" type="varchar(255)">
+            <column name="synopsis" type="varchar(6000)">
                 <constraints nullable="true" />
             </column>
             <column name="edition" type="integer">
@@ -47,8 +47,8 @@
 
     <changeSet id="20210908151916-1-relations" author="jhipster">
 
-        <createTable tableName="rel_livre__categorie">
-            <column name="categorie_id" type="bigint">
+        <createTable tableName="rel_livre__livre_cat">
+            <column name="livre_cat_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="livre_id" type="bigint">
@@ -56,7 +56,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="livre_id, categorie_id" tableName="rel_livre__categorie"/>
+        <addPrimaryKey columnNames="livre_id, livre_cat_id" tableName="rel_livre__livre_cat"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

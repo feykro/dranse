@@ -40,7 +40,7 @@ public class Avis implements Serializable {
     private Boolean affiche;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "categories" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
     private Livre livre;
 
     @ManyToOne

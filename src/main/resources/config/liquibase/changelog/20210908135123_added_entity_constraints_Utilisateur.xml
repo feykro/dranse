@@ -8,9 +8,11 @@
     -->
     <changeSet id="20210908135123-2" author="jhipster">
 
+
         <addForeignKeyConstraint baseColumnNames="userp_id"
                                  baseTableName="utilisateur"
                                  constraintName="fk_utilisateur__userp_id"
+                                 
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
     </changeSet>
