@@ -3,19 +3,28 @@ package fr.dranse.myapp.service;
 import fr.dranse.myapp.config.Constants;
 import fr.dranse.myapp.domain.Authority;
 import fr.dranse.myapp.domain.User;
+import fr.dranse.myapp.domain.Utilisateur;
 import fr.dranse.myapp.repository.AuthorityRepository;
 import fr.dranse.myapp.repository.UserRepository;
+import fr.dranse.myapp.repository.UtilisateurRepository;
 import fr.dranse.myapp.repository.search.UserSearchRepository;
+import fr.dranse.myapp.repository.search.UtilisateurSearchRepository;
 import fr.dranse.myapp.security.AuthoritiesConstants;
 import fr.dranse.myapp.security.SecurityUtils;
 import fr.dranse.myapp.service.dto.AdminUserDTO;
 import fr.dranse.myapp.service.dto.UserDTO;
+
+import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import fr.dranse.myapp.web.rest.UtilisateurResource;
+import org.elasticsearch.common.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +37,9 @@ import tech.jhipster.security.RandomUtil;
 /**
  * Service class for managing users.
  */
+
+
+
 @Service
 @Transactional
 public class UserService {
@@ -43,6 +55,19 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+
+    @Autowired
+    private UtilisateurRepository  utilisateurRepository;
+
+    @Autowired
+    private UtilisateurService utilisateurService;
+
+    @Autowired
+    private UtilisateurResource utilisateurResource;
+
+    @Autowired
+    private UtilisateurSearchRepository utilisateurSearchRepository;
+
 
     public UserService(
         UserRepository userRepository,
@@ -105,7 +130,7 @@ public class UserService {
             );
     }
 
-    public User registerUser(AdminUserDTO userDTO, String password) {
+    public User registerUser(AdminUserDTO userDTO, String password, String telephone, String AdrCodePostal, String AdrPays, String AdrRue, String AdrVille, String numCB) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .ifPresent(
@@ -136,6 +161,7 @@ public class UserService {
         if (userDTO.getEmail() != null) {
             newUser.setEmail(userDTO.getEmail().toLowerCase());
         }
+
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
@@ -149,6 +175,23 @@ public class UserService {
         userSearchRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        //Utilisateur
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setUser(newUser);
+        utilisateur.setTelephone(telephone);
+        utilisateur.getAdrCodePostal();
+        utilisateur.getAdrPays();
+        utilisateur.getAdrRue();
+        utilisateur.getAdrVille();
+        utilisateur.getNumCB();
+        try {
+            utilisateurResource.createUtilisateur(utilisateur);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        // utilisateurSearchRepository.save(utilisateur);
+        //log.debug("Created Information for Utilisateur: {}", utilisateur);
         return newUser;
     }
 
