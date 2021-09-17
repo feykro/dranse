@@ -1,17 +1,66 @@
-.progression-bar-1 {
-  width: 33%;
-  height: 3vh;
-  background-color: chartreuse;
-}
-
-.progression-bar-2 {
-  width: 66%;
-  height: 3vh;
-  background-color: chartreuse;
-}
-
-.progression-bar-3 {
+.progression-bar {
   width: 100%;
-  height: 3vh;
-  background-color: chartreuse;
+  height: 10vh;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  background-color: lightgray;
+  border-style: dotted dotted dotted dotted;
+  border-width: 5px;
+}
+
+.gauche {
+  display: -webkit-flex;
+  width: 100%;
+  height: 100%;
+  padding-left: 5ch;
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+.droite {
+  display: -webkit-flex;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.extend {
+  width: 25pt;
+  height: 25pt;
+}
+
+.extend:hover {
+  border-color: lightskyblue;
+}
+
+.formulaire {
+  padding-left: 5ch;
+}
+
+.valider {
+  width: 100pt;
+  height: 30pt;
+  margin-left: 30ch;
+  margin-top: 2vh;
+}
+
+.valider:hover {
+  border-color: greenyellow;
+}
+
+.bottom {
+  text-align: center;
+}
+
+.validation {
+  width: 150pt;
+  height: 40pt;
+  background-color: greenyellow;
+}
+
+.validation:hover {
+  background-color: green;
 }

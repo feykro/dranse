@@ -1,7 +1,12 @@
-<div class="progression-bar-1"></div>
 <div class="form-1">
-  <h3 class="livraison">LIVRAISON</h3>
-  <form (submit)="submit1()" #profileForm>
+  <div class="progression-bar">
+    <div class="gauche">LIVRAISON</div>
+    <div class="droite">
+      <button class="extend" (click)="showLivraison()">+</button>
+    </div>
+  </div>
+  <form class="formulaire" (submit)="submit1()" #profileForm [hidden]="livraison">
+    <br />
     <label> Nom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <label> Prenom : <input [name]="prenomLivraison" [(ngModel)]="prenomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
@@ -12,41 +17,61 @@
     <br />
     <label> Pays : <input [name]="paysLivraison" [(ngModel)]="paysLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
-    <button type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
+    <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
   </form>
 </div>
-
-<div class="progression-bar-2"></div>
+<br />
 <div class="form-2">
-  <h3 class="facturation">FACTURATION</h3>
-  <form (submit)="submit2()" #profileForm>
+  <div class="progression-bar">
+    <div class="gauche">FACTURATION</div>
+    <div class="droite">
+      <button class="extend" (click)="showFacturation()">+</button>
+    </div>
+  </div>
+  <form class="formulaire" (submit)="submit2()" #profileForm [hidden]="facturation">
+    <br />
     <label> Nom : <input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <label> Prenom : <input [name]="prenomFacturation" [(ngModel)]="prenomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
-    <br />
-    <label> Société : <input [name]="societe" [(ngModel)]="societe" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <label>
       Adresse : <input [name]="adresseFacturation" [(ngModel)]="adresseFacturation" [ngModelOptions]="{ standalone: true }" />
     </label>
     <br />
     <label> Ville : <input [name]="villeFacturation" [(ngModel)]="villeFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Pays : <input [name]="paysFacturation" [(ngModel)]="paysFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
-    <br />
     <label> Code Postal : <input [name]="cpFacturation" [(ngModel)]="cpFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
-    <button type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
+    <label> Pays : <input [name]="paysFacturation" [(ngModel)]="paysFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
+    <br />
+    <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
   </form>
 </div>
-
-<div class="progression-bar-3"></div>
+<br />
 <div class="form-3">
-  <h3 class="paiement">PAIEMENT</h3>
-  <form (submit)="submit3()" #profileForm>
-    <label> Numéro CB : <input /> </label>
+  <div class="progression-bar">
+    <div class="gauche">PAIEMENT</div>
+    <div class="droite">
+      <button class="extend" (click)="showPaiement()">+</button>
+    </div>
+  </div>
+  <form class="formulaire" (submit)="submit3()" #profileForm [hidden]="paiement">
     <br />
-    <label> Date Expiration : <input /> </label>
-    <label> Cryptogramme : <input /> </label>
+    <label>
+      Numéro CB :
+      <input placeholder="ex : 0000 1111 2222 333" value="yes" [name]="numCB" [(ngModel)]="numCB" [ngModelOptions]="{ standalone: true }" />
+    </label>
     <br />
-    <button type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
+    <label>
+      Date Expiration :
+      <input placeholder="mm/aa" [name]="dateExpiration" [(ngModel)]="dateExpiration" [ngModelOptions]="{ standalone: true }" />
+    </label>
+    <label>
+      Cryptogramme :
+      <input placeholder="ex : 123" [name]="cryptogramme" [(ngModel)]="cryptogramme" [ngModelOptions]="{ standalone: true }" />
+    </label>
+    <br />
+    <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
   </form>
+</div>
+<div class="bottom">
+  <button class="validation" (click)="validationAll()">VALIDER</button>
 </div>

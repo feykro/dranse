@@ -10,7 +10,6 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class PanierService {
   private commande!: ICommande;
-  private lignes!: ILigneCommande[];
 
   constructor(private commandeService: CommandeControllerRessourceService) {
     // Not empty
@@ -26,6 +25,10 @@ export class PanierService {
 
   setPanierId(id: number): void {
     localStorage.setItem('panierId', JSON.stringify(id));
+  }
+
+  clearId(): void {
+    localStorage.removeItem('panierId');
   }
 
   getCommande(): ICommande {
