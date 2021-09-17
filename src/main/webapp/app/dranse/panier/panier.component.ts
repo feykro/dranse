@@ -91,8 +91,7 @@ export class PanierComponent implements OnInit {
   }
 
   loadVerifPage(): void {
-    if (this.panierService.getPanierId() !== -1) {
-      // A CHANGER !== -> ===
+    if (this.panierService.getPanierId() === -1) {
       alert('Impossible de payer avec un panier vide');
     } else {
       this.router.navigate(['/verification']);

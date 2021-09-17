@@ -34,7 +34,7 @@ export class FormspaiementComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.panierService.getPanierId() === -1) {
-      // this.router.navigate(['/404']);
+      this.router.navigate(['/404']);
     }
     this.commande = this.panierService.getCommande();
     this.utilisateur;
@@ -45,9 +45,10 @@ export class FormspaiementComponent implements OnInit {
     this.commande.rueLivraison = this.adresseLivraison;
     this.commande.villeLivraison = this.villeLivraison;
     this.commande.paysLivraison = this.paysLivraison;
-    const regex = new RegExp('d*');
+    console.log('YOLLLOOOOO');
+    const regex = new RegExp('\\d*');
     if (regex.test(this.cpLivraison)) {
-      this.commande.codePostalLivraison = parseInt(this.cpLivraison);
+      this.commande.codePostalLivraison = parseInt(this.cpLivraison, 10);
     } else {
       alert('Le code postal ne doit etre composer que de chiffres');
     }
@@ -55,6 +56,16 @@ export class FormspaiementComponent implements OnInit {
 
   submit2(): void {
     // CORE
+    this.commande.nomFacturation = this.nomFacturation.concat(' ', this.prenomFacturation);
+    this.commande.rueFacturation = this.adresseFacturation;
+    this.commande.villeFacturation = this.villeFacturation;
+    this.commande.paysFacturation = this.paysFacturation;
+    const regex = new RegExp('\\d*');
+    if (regex.test(this.cpFacturation)) {
+      //this.commande.codePostalFacturation = parseInt(this.cpFacturation,10);
+    } else {
+      alert('Le code postal ne doit etre composer que de chiffres');
+    }
   }
 
   submit3(): void {

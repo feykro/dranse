@@ -67,5 +67,10 @@ export class PanierService {
     });
   }
 
-  passerCommande(commande: ICommande): void {}
+  passerCommande(commande: ICommande): void {
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.passerCommande(this.getPanierId(), commande)
+    );
+    commandeRequest.subscribe();
+  }
 }
