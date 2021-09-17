@@ -23,7 +23,7 @@
             <column name="prix" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="synopsis" type="varchar(255)">
+            <column name="synopsis" type="varchar(6000)">
                 <constraints nullable="true" />
             </column>
             <column name="edition" type="integer">
