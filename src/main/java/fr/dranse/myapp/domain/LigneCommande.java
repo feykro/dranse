@@ -1,8 +1,10 @@
 package fr.dranse.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import javax.persistence.*;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -30,11 +32,11 @@ public class LigneCommande implements Serializable {
     private Float prixPaye;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "utilisateur", "ligneCommandes" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"utilisateur", "ligneCommandes"}, allowSetters = true)
     private Commande commande;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
+    @ManyToOne // todo: remove multiple fields of lignecommande
+    @JsonIgnoreProperties(value = {"livre_cats"}, allowSetters = true)
     private Livre livre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -130,5 +132,18 @@ public class LigneCommande implements Serializable {
             ", quantite=" + getQuantite() +
             ", prixPaye=" + getPrixPaye() +
             "}";
+    }
+
+    public void setLivreQuantite(Livre livre, int quantite) {
+        this.setLivre(livre);
+        this.setQuantite(quantite);
+        this.setPrixPaye(livre.getPrix() * quantite);
+    }
+
+    public void updateQuantite(int quantite) {
+        setQuantite(quantite);
+        if (getLivre() != null) {
+            setPrixPaye(getLivre().getPrix() * quantite);
+        }
     }
 }

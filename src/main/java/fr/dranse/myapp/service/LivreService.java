@@ -69,4 +69,7 @@ public interface LivreService {
      * @return the list of entities.
      */
     Page<Livre> search(String query, Pageable pageable);
+
+
+    Livre reserver(Long id, int quantite);
 }
