@@ -32,8 +32,8 @@
             <column name="num_cb" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_utilisateur__user_id" />
+            <column name="userp_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_utilisateur__userp_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>

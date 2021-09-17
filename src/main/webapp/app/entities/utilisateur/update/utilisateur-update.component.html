@@ -57,11 +57,11 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.user" for="field_user">User</label>
-          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+          <label class="form-control-label" jhiTranslate="projetDranseApp.utilisateur.userP" for="field_userP">User P</label>
+          <select class="form-control" id="field_userP" data-cy="userP" name="userP" formControlName="userP">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              [ngValue]="userOption.id === editForm.get('userP')!.value?.id ? editForm.get('userP')!.value : userOption"
               *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
             >
               {{ userOption.login }}
