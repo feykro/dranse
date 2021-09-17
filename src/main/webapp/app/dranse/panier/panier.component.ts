@@ -26,8 +26,8 @@ export class PanierComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //  this.getLignesCommande();
-    this.fakeCommandeInit(); //  Pour tester avec des faux livre
+    this.getLignesCommande();
+    //  this.fakeCommandeInit(); //  Pour tester avec des faux livre
   }
 
   updatePrice(qte: number, itemPrice: string): void {
