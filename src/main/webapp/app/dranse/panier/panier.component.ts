@@ -1,10 +1,8 @@
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
-import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
-import { ILivre, Livre } from './../../entities/livre/livre.model';
 import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { Component, OnInit } from '@angular/core';
 import { PanierService } from './panier.service';
-import { Commande, ICommande } from 'app/entities/commande/commande.model';
+import { ICommande } from 'app/entities/commande/commande.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 
@@ -15,7 +13,6 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class PanierComponent implements OnInit {
   panierId!: number;
-  //commande!: Commande;
   lignes!: ILigneCommande[];
   prixTotal = 0;
 
@@ -30,20 +27,7 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLignesCommande();
-    //this.fakeCommandeInit();
-  }
-
-  /**
-   * Créer une commande de placeholder
-   */
-  fakeCommandeInit(): void {
-    const itemTest = new itemCommande(this.urlTest, 'Harry Potter', 'Nicolas Sarkozy', '36.99', 1);
-
-    for (let i = 0; i < 4; i++) {
-      this.itemListCommande.push(itemTest);
-      const x: number = +itemTest.prix;
-      this.prixTotal += x * itemTest.qte;
-    }
+    //  this.fakeCommandeInit();  //  Pour tester avec des faux livre
   }
 
   /**
@@ -51,7 +35,7 @@ export class PanierComponent implements OnInit {
    */
   convertCommande(): void {
     const iterableLignes = Object.entries(this.lignes);
-    for (const [name, ligne] of iterableLignes) {
+    for (const [, ligne] of iterableLignes) {
       this.itemListCommande.push(this.convertLigneCommande(ligne));
     }
   }
@@ -90,6 +74,19 @@ export class PanierComponent implements OnInit {
 
     return new itemCommande(this.urlTest, bookTitle, bookAuthor, bookPrice, quantite);
   }
+
+  /**
+   * Créer une commande de placeholder
+   */
+  fakeCommandeInit(): void {
+    const itemTest = new itemCommande(this.urlTest, 'Harry Potter', 'Nicolas Sarkozy', '36.99', 1);
+
+    for (let i = 0; i < 4; i++) {
+      this.itemListCommande.push(itemTest);
+      const x: number = +itemTest.prix;
+      this.prixTotal += x * itemTest.qte;
+    }
+  }
 }
 
 /**
@@ -97,6 +94,6 @@ export class PanierComponent implements OnInit {
  */
 class itemCommande {
   constructor(public urlImage: string, public titre: string, public auteur: string, public prix: string, public qte: number) {
-    const a = 0;
+    //  shutting down warnings
   }
 }

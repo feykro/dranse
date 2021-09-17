@@ -1,4 +1,3 @@
-import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
 import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
 import { Injectable } from '@angular/core';

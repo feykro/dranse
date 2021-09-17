@@ -85,5 +85,28 @@ public interface CommandeService {
     Commande SupprimerLigne(Long idCommande, Long idLigne);
     // todo modifier le nombre d'items dans une ligneCommande
 
-    // todo verify stock of livre and update stock
+
+    /**
+     *  Modifier une ligne commande appartenant à commande
+     * @param idCommande
+     * @param idLivre
+     * @param quantite
+     * @return
+     */
+    Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite);
+
+    /**
+     * return the history of commands of an user
+     * @param id
+     * @param pageable
+     * @return
+     */
+    Page<Commande> getHistory(Long id, Pageable pageable);
+
+    /**
+     * Valider et passer une commande.
+     * @param commande
+     * @return
+     */
+    boolean commander(Commande commande);
 }

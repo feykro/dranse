@@ -9,10 +9,6 @@ const dranseRoute: Routes = [
   {
     path: 'produit/:livreId',
     component: ProduitComponent,
-    //resolve: {
-    //  livre: LivreRoutingResolveService,
-    //},
-    //canActivate: [UserRouteAccessService],
   },
   {
     path: 'panier',

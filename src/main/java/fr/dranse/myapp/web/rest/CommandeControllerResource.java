@@ -5,16 +5,24 @@ import fr.dranse.myapp.domain.LigneCommande;
 import fr.dranse.myapp.repository.CommandeRepository;
 import fr.dranse.myapp.service.CommandeService;
 import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -59,7 +67,7 @@ public class CommandeControllerResource {
      * PUT ajoutLigne
      */
     // todo transact
-    @PutMapping("/ajout/{id}") // todo rename to update??
+    @PutMapping("/ajout/{id}") // todo rename to update?? and simplifier avec 1qqt et 1 idlivre?
     public ResponseEntity<Commande> ajoutLigne(
         @PathVariable(value = "id", required = true) final Long id,
         @RequestBody LigneCommande ligneCommande
@@ -68,7 +76,7 @@ public class CommandeControllerResource {
         if (!commandeRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-        Commande result = commandeService.ajouterLigne(id, ligneCommande);
+        Commande result = commandeService.modifierLigneCommande(id, ligneCommande.getLivre().getId(), ligneCommande.getQuantite());
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
@@ -79,9 +87,12 @@ public class CommandeControllerResource {
      * PUT passerCommande
      */
     @PutMapping("/commander/{id}")
-    public boolean passerCommande(@PathVariable(value = "id", required = true) final Long id) {
+    public boolean passerCommande(
+        @PathVariable(value = "id", required = true) final Long id,
+        @RequestBody Commande commande
+    ) {
         // todo transactionnal
-        return true;
+        return commandeService.commander(commande);
     }
 
     /**
@@ -118,5 +129,13 @@ public class CommandeControllerResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, idLigne.toString()))
             .build();
+    }
+
+    @GetMapping("/history/{id}")
+    public ResponseEntity<List<Commande>> getHistory(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get the history of a user");
+        Page<Commande> page = commandeService.getHistory(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }
