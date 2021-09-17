@@ -1,10 +1,8 @@
 package fr.dranse.myapp.service;
 
 import fr.dranse.myapp.domain.Commande;
-
-import java.util.Optional;
-
 import fr.dranse.myapp.domain.LigneCommande;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -85,7 +83,6 @@ public interface CommandeService {
      * @return
      */
     Commande SupprimerLigne(Long idCommande, Long idLigne);
-
     // todo modifier le nombre d'items dans une ligneCommande
 
     // todo verify stock of livre and update stock

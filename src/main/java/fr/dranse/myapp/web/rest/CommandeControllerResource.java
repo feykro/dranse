@@ -5,6 +5,10 @@ import fr.dranse.myapp.domain.LigneCommande;
 import fr.dranse.myapp.repository.CommandeRepository;
 import fr.dranse.myapp.service.CommandeService;
 import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Objects;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * CommandeControllerResource controller
@@ -27,8 +26,10 @@ public class CommandeControllerResource {
 
     private final Logger log = LoggerFactory.getLogger(CommandeControllerResource.class);
     private static final String ENTITY_NAME = "commande";
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
     private final CommandeService commandeService;
     private final CommandeRepository commandeRepository;
 
@@ -105,7 +106,6 @@ public class CommandeControllerResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
-
 
     /**
      * DELETE deleteLigne

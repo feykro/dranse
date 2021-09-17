@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ProduitComponent } from './produit/produit.component';
+import { PanierComponent } from './panier/panier.component';
 
 const dranseRoute: Routes = [
   {
@@ -12,6 +13,10 @@ const dranseRoute: Routes = [
     //  livre: LivreRoutingResolveService,
     //},
     //canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'panier',
+    component: PanierComponent,
   },
   {
     path: '',

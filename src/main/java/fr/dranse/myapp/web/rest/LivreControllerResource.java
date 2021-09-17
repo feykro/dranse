@@ -6,6 +6,11 @@ import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.service.CategorieService;
 import fr.dranse.myapp.service.LivreService;
 import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,12 +23,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * LivreControllerResource controller
@@ -55,21 +54,31 @@ public class LivreControllerResource {
         this.categorieRepository = categorieRepository;
     }
 
-
     /**
      * POST creationLivre
      */
     @PostMapping("/creation-livre")
     //public String creationLivre() {
-        //    return "creationLivre";
+    //    return "creationLivre";
     //}
     public ResponseEntity<Livre> creationLivre(@RequestBody Livre livre) throws URISyntaxException {
         log.debug("REST request to save Livre : {}", livre);
         if (livre.getId() != null) {
             throw new BadRequestAlertException("A new livre cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        if ((livre.getTitre() == null)||(livre.getAuteur() == null)||(livre.getPrix() == null)||(livre.getSynopsis() == null)||(livre.getEditeur() == null)||(livre.getStock() == null)){
-            throw new BadRequestAlertException("A new livre needs a titre, auteur, prix, synopsis, editeur, stock", ENTITY_NAME, "idexists");
+        if (
+            (livre.getTitre() == null) ||
+            (livre.getAuteur() == null) ||
+            (livre.getPrix() == null) ||
+            (livre.getSynopsis() == null) ||
+            (livre.getEditeur() == null) ||
+            (livre.getStock() == null)
+        ) {
+            throw new BadRequestAlertException(
+                "A new livre needs a titre, auteur, prix, synopsis, editeur, stock",
+                ENTITY_NAME,
+                "idexists"
+            );
         }
         Livre result = livreService.save(livre);
         return ResponseEntity
@@ -78,13 +87,12 @@ public class LivreControllerResource {
             .body(result);
     }
 
-
     /**
      * PUT modifInfoLivre
      */
     @PutMapping("/modif-info-livre/{id}")
     //public String modifInfoLivre() {
-      //  return "modifInfoLivre";
+    //  return "modifInfoLivre";
     //}
 
     public ResponseEntity<Livre> modifInfoLivre(@PathVariable(value = "id", required = false) final Long id, @RequestBody Livre livre)
@@ -94,7 +102,7 @@ public class LivreControllerResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         if (!Objects.equals(id, livre.getId())) {
-            throw new BadRequestAlertException("Invalid ID " + livre.getId() + " vs "+ id, ENTITY_NAME, "idinvalid");
+            throw new BadRequestAlertException("Invalid ID " + livre.getId() + " vs " + id, ENTITY_NAME, "idinvalid");
         }
 
         if (!livreRepository.existsById(id)) {
@@ -121,7 +129,7 @@ public class LivreControllerResource {
     //public String rechercheParAuteur() {
     //    return "rechercheParAuteur";
     //}
-    public ResponseEntity<List<Livre>> rechercheParAuteur(Pageable pageable, @PathVariable String auteur){
+    public ResponseEntity<List<Livre>> rechercheParAuteur(Pageable pageable, @PathVariable String auteur) {
         Page<Livre> page = livreService.findByAuthor(pageable, auteur);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -134,12 +142,12 @@ public class LivreControllerResource {
     //public String rechercheParTitre() {
     //    return "rechercheParTitre";
     //}
-    public ResponseEntity<List<Livre>> rechercheParTitre(Pageable pageable, @PathVariable String titre){
+    public ResponseEntity<List<Livre>> rechercheParTitre(Pageable pageable, @PathVariable String titre) {
         Page<Livre> page = livreService.findByTitle(pageable, titre);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-
     }
+
     /**
      * TODO: GET rechercheParCategorie
      */
@@ -147,6 +155,7 @@ public class LivreControllerResource {
     public String rechercheParCategorie() {
         return "rechercheParCategorie";
     }
+
     /*public ResponseEntity<List<Livre>> rechercheParCategorie(Pageable pageable, @PathVariable String categorie){
         Page<Livre> page = livreService.findByCategorie(pageable, categorie);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
@@ -173,11 +182,11 @@ public class LivreControllerResource {
      * GET getLivre
      */
     @GetMapping("/get-livre/{id}")
-    public ResponseEntity<Livre> rechercheParTitre(Pageable pageable, @PathVariable Long id){
+    public ResponseEntity<Livre> rechercheParTitre(Pageable pageable, @PathVariable Long id) {
         Optional<Livre> livre = livreService.findOne(id);
         return ResponseUtil.wrapOrNotFound(livre);
-
     }
+
     /**
      * DELETE deleteLivre
      */
