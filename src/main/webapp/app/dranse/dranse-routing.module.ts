@@ -1,3 +1,4 @@
+import { FormspaiementComponent } from './formspaiement/formspaiement.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,14 +10,18 @@ const dranseRoute: Routes = [
   {
     path: 'produit/:livreId',
     component: ProduitComponent,
-    //resolve: {
+    // resolve: {
     //  livre: LivreRoutingResolveService,
-    //},
-    //canActivate: [UserRouteAccessService],
+    // },
+    // canActivate: [UserRouteAccessService],
   },
   {
     path: 'panier',
     component: PanierComponent,
+  },
+  {
+    path: 'verification',
+    component: FormspaiementComponent,
   },
   {
     path: '',

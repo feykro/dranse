@@ -27,4 +27,8 @@ export class CommandeControllerRessourceService {
   getCommande(id: number): Observable<EntityResponseType> {
     return this.http.get<ICommande>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  passerCommande(id: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.resourceUrl}/commander/${id}`, { observe: 'response' });
+  }
 }
