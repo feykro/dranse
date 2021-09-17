@@ -10,7 +10,7 @@ export interface IUtilisateur {
   telephone?: string | null;
   numCB?: string | null;
   commandes?: ICommande[] | null;
-  user?: IUser | null;
+  userP?: IUser | null;
 }
 
 export class Utilisateur implements IUtilisateur {
@@ -23,7 +23,7 @@ export class Utilisateur implements IUtilisateur {
     public telephone?: string | null,
     public numCB?: string | null,
     public commandes?: ICommande[] | null,
-    public user?: IUser | null
+    public userP?: IUser | null
   ) {}
 }
 

@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CategorieRepository extends JpaRepository<Categorie, Long> {}
+public interface CategorieRepository extends JpaRepository<Categorie, Long> {
+    @Query("select distinct categorie from Categorie categorie order by categorie.id")
+    List<Categorie> getMostPopular(Pageable pageable);
+    //todo : manu
+}

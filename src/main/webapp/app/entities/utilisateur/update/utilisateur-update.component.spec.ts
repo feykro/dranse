@@ -43,12 +43,12 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const utilisateur: IUtilisateur = { id: 456 };
-        const user: IUser = { id: 74654 };
-        utilisateur.user = user;
+        const userP: IUser = { id: 74654 };
+        utilisateur.userP = userP;
 
         const userCollection: IUser[] = [{ id: 95229 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user];
+        const additionalUsers = [userP];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -62,14 +62,14 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const utilisateur: IUtilisateur = { id: 456 };
-        const user: IUser = { id: 57517 };
-        utilisateur.user = user;
+        const userP: IUser = { id: 57517 };
+        utilisateur.userP = userP;
 
         activatedRoute.data = of({ utilisateur });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(utilisateur));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(userP);
       });
     });
 

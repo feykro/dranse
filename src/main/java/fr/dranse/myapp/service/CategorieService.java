@@ -1,6 +1,7 @@
 package fr.dranse.myapp.service;
 
 import fr.dranse.myapp.domain.Categorie;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,4 +58,6 @@ public interface CategorieService {
      * @return the list of entities.
      */
     Page<Categorie> search(String query, Pageable pageable);
+
+    List<Categorie> getMostPopular();
 }
