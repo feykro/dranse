@@ -13,8 +13,10 @@ import fr.dranse.myapp.service.CommandeService;
 
 import java.util.Optional;
 
+import fr.dranse.myapp.service.LivreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,9 @@ public class CommandeServiceImpl implements CommandeService {
     private final LigneCommandeRepository ligneCommandeRepository;
 
     private final LivreRepository livreRepository;
+
+    @Autowired
+    LivreService livreService;
 
     public CommandeServiceImpl(CommandeRepository commandeRepository, CommandeSearchRepository commandeSearchRepository, LigneCommandeRepository ligneCommandeRepository, LivreRepository livreRepository) {
         this.commandeRepository = commandeRepository;
@@ -174,6 +179,7 @@ public class CommandeServiceImpl implements CommandeService {
 
 
     // todo faire la difference entre ajouter et modifier !! (ajout = modifier avec ++)
+    // verifier si il ne decommande pas des livre non précedemment commandé
     public Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite) {
         Optional<Commande> opt = commandeRepository.findById(idCommande);
         if (opt.isEmpty()) {
@@ -185,22 +191,23 @@ public class CommandeServiceImpl implements CommandeService {
             if (ligne.getLivre().getId() == idLivre) {
                 newLivre = false;
                 if (ligne.getQuantite() != quantite) {
-                    // todo if reserverLivre(newqqt - oldqqt)
-                    ligne.updateQuantite(quantite);
-                    ligneCommandeRepository.save(ligne);
+                    if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
+                        ligne.updateQuantite(quantite);
+                        ligneCommandeRepository.save(ligne);
+                    }
                 }
             }
         }
         if (newLivre) { // creation d'une nouvelle ligneCommande
             LigneCommande ligneCommande = new LigneCommande();
-            Livre livre = livreRepository.getOne(idLivre);
-            // todo Livre livre = reserver() (suppr livrerepo and add livreservice ??) (check si le livre existe et si la quantité est nécessaire
-            ligneCommande.setLivreQuantite(livre, quantite);
-            commande.addLigneCommande(ligneCommande);
-            ligneCommandeRepository.save(ligneCommande);
+            Livre livre = livreService.reserver(idLivre, quantite);
+            if(livre != null){
+                ligneCommande.setLivreQuantite(livre, quantite);
+                commande.addLigneCommande(ligneCommande);
+                ligneCommandeRepository.save(ligneCommande);
+            }
         }
         return commandeRepository.save(commande);
-        // todo test if commande is uptated??
     }
 
     public Page<Commande> getHistory(Long id, Pageable pageable) {

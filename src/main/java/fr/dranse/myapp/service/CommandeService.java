@@ -2,9 +2,7 @@ package fr.dranse.myapp.service;
 
 import fr.dranse.myapp.domain.Commande;
 import fr.dranse.myapp.domain.LigneCommande;
-
 import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -89,8 +87,7 @@ public interface CommandeService {
 
 
     /**
-     * Modifier une ligne commande appartenant à commande
-     *
+     *  Modifier une ligne commande appartenant à commande
      * @param idCommande
      * @param idLivre
      * @param quantite
@@ -100,7 +97,6 @@ public interface CommandeService {
 
     /**
      * return the history of commands of an user
-     *
      * @param id
      * @param pageable
      * @return
@@ -109,7 +105,6 @@ public interface CommandeService {
 
     /**
      * Valider et passer une commande.
-     *
      * @param commande
      * @return
      */

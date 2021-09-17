@@ -86,8 +86,9 @@ public class CommandeControllerResource {
     /**
      * PUT passerCommande
      */
-    @PutMapping("/commander")
+    @PutMapping("/commander/{id}")
     public boolean passerCommande(
+        @PathVariable(value = "id", required = true) final Long id,
         @RequestBody Commande commande
     ) {
         // todo transactionnal
