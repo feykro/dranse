@@ -9,14 +9,17 @@ import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CategorieSearchRepository;
 import fr.dranse.myapp.service.CategorieService;
 
+
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -117,5 +120,11 @@ public class CategorieServiceImpl implements CategorieService {
     public Page<Categorie> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Categories for query {}", query);
         return categorieSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Override
+    public List<Categorie> getMostPopular() {
+        log.debug("Request to get most popular Categories");
+        return categorieRepository.getMostPopular(PageRequest.of(0, 15));
     }
 }

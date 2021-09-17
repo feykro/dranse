@@ -33,7 +33,7 @@
       "otherEntityRelationshipName": "utilisateur"
     },
     {
-      "relationshipName": "user",
+      "relationshipName": "userP",
       "otherEntityName": "user",
       "relationshipType": "one-to-one",
       "otherEntityField": "login",
