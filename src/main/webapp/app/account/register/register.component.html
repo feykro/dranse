@@ -224,7 +224,6 @@
             placeholder="{{ 'global.form.telephone.placeholder' | translate }}"
             formControlName="telephone"
             data-cy="telephone"
-            #login
           />
 
           <div *ngIf="registerForm.get('telephone')!.invalid && (registerForm.get('telephone')!.dirty || registerForm.get('telephone')!.touched)">
@@ -247,7 +246,6 @@
             placeholder="{{ 'global.form.adrRue.placeholder' | translate }}"
             formControlName="adrRue"
             data-cy="adrRue"
-            #login
           />
 
           <div *ngIf="registerForm.get('adrRue')!.invalid && (registerForm.get('adrRue')!.dirty || registerForm.get('adrRue')!.touched)">

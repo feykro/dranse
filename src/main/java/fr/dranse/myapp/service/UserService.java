@@ -56,17 +56,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    @Autowired
+    @Inject
     private UtilisateurRepository  utilisateurRepository;
 
-    @Autowired
-    private UtilisateurService utilisateurService;
-
-    @Autowired
-    private UtilisateurResource utilisateurResource;
-
-    @Autowired
+    @Inject
     private UtilisateurSearchRepository utilisateurSearchRepository;
+
+    @Inject
+    private UtilisateurResource utilisateurResource;
 
 
     public UserService(
@@ -74,13 +71,17 @@ public class UserService {
         PasswordEncoder passwordEncoder,
         UserSearchRepository userSearchRepository,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        UtilisateurRepository utilisateurRepository,
+        UtilisateurResource utilisateurResource
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.utilisateurRepository = utilisateurRepository;
+        this.utilisateurResource = utilisateurResource;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -178,16 +179,20 @@ public class UserService {
 
         //Utilisateur
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setUser(newUser);
+        System.out.println("user id " + newUser.toString() + newUser.getId() + "\n\n\n");
+        //utilisateur.setUserP(newUser);
+        utilisateur.setUserP(userRepository.getOne(newUser.getId()));
         utilisateur.setTelephone(telephone);
-        utilisateur.getAdrCodePostal();
-        utilisateur.getAdrPays();
-        utilisateur.getAdrRue();
-        utilisateur.getAdrVille();
-        utilisateur.getNumCB();
+        utilisateur.setAdrCodePostal(Integer.parseInt(AdrCodePostal));
+        utilisateur.setAdrPays(AdrPays);
+        utilisateur.setAdrRue(AdrRue);
+        utilisateur.setAdrVille(AdrVille);
+        utilisateur.setNumCB(numCB);
+        System.out.println("user id " + utilisateur.toString() + utilisateur.getId() + "\n\n\n");
         try {
             utilisateurResource.createUtilisateur(utilisateur);
         } catch (URISyntaxException e) {
+            System.out.println("\n\n\nFAILED\n\n\n");
             e.printStackTrace();
         }
         // utilisateurSearchRepository.save(utilisateur);
