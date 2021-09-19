@@ -7,8 +7,7 @@
   </div>
   <form class="formulaire" (submit)="submit1()" #profileForm [hidden]="livraison">
     <br />
-    <label> Nom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Prenom : <input [name]="prenomLivraison" [(ngModel)]="prenomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label> Nom Prenom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <label> Adresse : <input [name]="adresseLivraison" [(ngModel)]="adresseLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
@@ -30,8 +29,7 @@
   </div>
   <form class="formulaire" (submit)="submit2()" #profileForm [hidden]="facturation">
     <br />
-    <label> Nom : <input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Prenom : <input [name]="prenomFacturation" [(ngModel)]="prenomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label> Nom Prenom : <input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <label>
       Adresse : <input [name]="adresseFacturation" [(ngModel)]="adresseFacturation" [ngModelOptions]="{ standalone: true }" />
@@ -57,7 +55,7 @@
     <br />
     <label>
       Numéro CB :
-      <input placeholder="ex : 0000 1111 2222 333" value="yes" [name]="numCB" [(ngModel)]="numCB" [ngModelOptions]="{ standalone: true }" />
+      <input placeholder="ex : 0000 1111 2222 333" [name]="numCB" [(ngModel)]="numCB" [ngModelOptions]="{ standalone: true }" />
     </label>
     <br />
     <label>
