@@ -57,4 +57,6 @@ public interface UtilisateurService {
      * @return the list of entities.
      */
     Page<Utilisateur> search(String query, Pageable pageable);
+
+    Optional<Utilisateur> utilisateurFromLogin(String login);
 }
