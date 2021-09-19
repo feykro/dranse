@@ -70,4 +70,8 @@ export class NavbarComponent implements OnInit {
   gotoPanier(): void {
     this.router.navigate(['/panier']);
   }
+
+  gotoRecherche(): void {
+    this.router.navigate(['/recherche']);
+  }
 }
