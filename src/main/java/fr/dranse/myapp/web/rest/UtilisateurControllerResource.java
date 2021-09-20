@@ -1,8 +1,17 @@
 package fr.dranse.myapp.web.rest;
 
+import fr.dranse.myapp.domain.Utilisateur;
+import fr.dranse.myapp.service.UtilisateurService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import tech.jhipster.web.util.ResponseUtil;
+
+import java.security.Principal;
+import java.util.Optional;
 
 /**
  * UtilisateurControllerResource controller
@@ -12,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 public class UtilisateurControllerResource {
 
     private final Logger log = LoggerFactory.getLogger(UtilisateurControllerResource.class);
+
+    @Autowired
+    UtilisateurService utilisateurService;
 
     /**
      * POST infoUtilisateur
@@ -75,5 +87,13 @@ public class UtilisateurControllerResource {
     @DeleteMapping("/delete-utilisateur")
     public String deleteUtilisateur() {
         return "deleteUtilisateur";
+    }
+
+    @GetMapping("/utilisateur-courant")
+    ResponseEntity<Utilisateur> utilisateurCourant(Principal principal) {
+        log.debug("REST request to get current user ");
+        String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<Utilisateur> utilisateur = utilisateurService.utilisateurFromLogin(userLogin);
+        return ResponseUtil.wrapOrNotFound(utilisateur);
     }
 }
