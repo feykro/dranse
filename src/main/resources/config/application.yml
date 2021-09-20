@@ -155,7 +155,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: projetDranse@localhost
+    from: projetdranse@gmail
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/.*
     management-include-pattern: ${server.servlet.context-path:}/management/.*

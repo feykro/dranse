@@ -26,7 +26,7 @@
     <include file="config/liquibase/changelog/20210908145419_added_entity_constraints_LigneCommande.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210908151916_added_entity_constraints_Livre.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210908160528_added_entity_constraints_Avis.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210908135123_added_entity_constraints_Utilisateur.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

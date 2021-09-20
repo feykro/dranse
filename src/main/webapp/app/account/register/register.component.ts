@@ -33,6 +33,12 @@ export class RegisterComponent implements AfterViewInit {
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+    telephone: ['', [Validators.required]],
+    adrRue: ['', [Validators.required]],
+    adrPays: ['', [Validators.required]],
+    adrVille: ['', [Validators.required]],
+    adrCodePostal: ['', [Validators.required]],
+    numCB: ['', [Validators.required]]
   });
 
   constructor(private translateService: TranslateService, private registerService: RegisterService, private fb: FormBuilder) {}
@@ -55,7 +61,13 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: this.translateService.currentLang }).subscribe(
+      const telephone = this.registerForm.get(['telephone'])!.value;
+      const adrRue = this.registerForm.get(['adrRue'])!.value;
+      const adrCodePostal = this.registerForm.get(['adrCodePostal'])!.value;
+      const adrPays = this.registerForm.get(['adrPays'])!.value;
+      const adrVille = this.registerForm.get(['adrVille'])!.value;
+      const numCB = this.registerForm.get(['numCB'])!.value;
+      this.registerService.save({ login, email, password, telephone, adrRue, adrCodePostal, adrPays, adrVille, numCB, langKey: this.translateService.currentLang }).subscribe(
         () => (this.success = true),
         response => this.processError(response)
       );

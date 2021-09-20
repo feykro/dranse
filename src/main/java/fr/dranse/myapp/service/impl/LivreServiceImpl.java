@@ -138,17 +138,16 @@ public class LivreServiceImpl implements LivreService {
     @Override
     @Transactional(readOnly = true)
     public Page<Livre> findByTitle(Pageable pageable, String title) {
-        log.debug("Request to get Livre by author {}", title);
+        log.debug("Request to get Livre by title {}", title);
         return livreRepository.findAllWithTitle(pageable, title);
     }
 
-    /*@Override
+    @Override
     @Transactional(readOnly = true)
     public Page<Livre> findByCategorie(Pageable pageable, String categorie) {
-        log.debug("Request to get Livre by author {}", categorie);
-        return livreRepository.findAllWithTitle(pageable, categorie);
+        log.debug("Request to get Livre by categorie {}", categorie);
+        return livreRepository.findAllWithCat(pageable, categorie);
     }
-    */
 
     @Override
     public void delete(Long id) {

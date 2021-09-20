@@ -1,11 +1,3 @@
-id;adr_rue;adr_code_postal;adr_pays;adr_ville;telephone;num_cb
-1;Burundi Frozen Concrete;28896;Berkshire a;plug-and-play;0183373325;Grocery Movies Avon
-2;value-added;21477;dynamic b firewall;cyan Shoes;0767587228;Salad Account
-3;Corse;55488;withdrawal;Garden;+33 107854077;navigate Keyboard
-4;Suisse Bretagne invoice;20247;Stagiaire Midi-Pyrénées Ergonomic;generation quantifying;+33 158521956;tangible incremental Unbranded
-5;Steel grey framework;60481;invoice Chair Tasty;c;0361842024;Open-source
-6;GB;58470;Île-de-France;Account SQL Bourgogne;+33 190480084;Italie system-worthy
-7;end-to-end Chair scale;73181;systems;transmit Berkshire Ergonomic;+33 185715073;Ball Movies b
-8;Corse Shirt;22882;quantify Chair c;Table adapter;+33 359497650;cross-platform
-9;Steel;19930;copy;proactive transmitting;0694933493;bottom-line Cambridgeshire scalable
-10;global eyeballs;21152;Soft front-end invoice;Gloves redundant Rica;+33 394772558;deposit Plastic invoice
+userp_id;adr_rue;adr_code_postal;adr_pays;adr_ville;telephone;num_cb
+1;rue Admin;38000;AdminLand;AdminCity;0183373325;00000000000
+2;Burundi Frozen Concrete;28896;Berkshire a;plug-and-play;0183373325;Grocery Movies Avon
