@@ -16,6 +16,6 @@ export class CategoriesControllerRessourceService {
   constructor(private http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   getPopularCategories(): Observable<EntityArrayResponseType> {
-    return this.http.get<ICategorie[]>(`${this.resourceUrl}/get-most-popular`, { observe: 'response' });
+    return this.http.get<ICategorie[]>(`${this.resourceUrl}/most-popular`, { observe: 'response' });
   }
 }

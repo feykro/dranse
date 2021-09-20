@@ -68,18 +68,27 @@ $accent-color: #f1f2de;
 }
 
 .catCard {
-  display: table-cell;
+  display: table;
   width: 180px;
   height: 180px;
-  line-height: 180px;
   background-color: #dddddd;
   border-radius: 50%;
   border: solid black 0.1em;
+
   text-align: center;
-  vertical-align: middle;
+
   padding-top: 10px;
   padding-bottom: 10px;
-  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  #catName {
+    display: table-cell;
+    vertical-align: middle;
+
+    word-wrap: normal;
+    font-size: 18pt;
+  }
 }
 
 // ==== Style des grandes sections =====
@@ -182,10 +191,6 @@ $accent-color: #f1f2de;
 
   overflow-x: scroll;
   overflow-y: visible;
-
-  grid-template-areas:
-    'catCard1 catCard2 catCard3 catCard4 catCard5 catCard6'
-    'catCard1 catCard2 catCard3 catCard4 catCard5 catCard6';
 }
 
 #botTitle {

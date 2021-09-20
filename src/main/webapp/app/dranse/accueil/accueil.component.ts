@@ -16,6 +16,7 @@ import { CategoriesControllerRessourceService } from '../service/categories-cont
 })
 export class AccueilComponent implements OnInit {
   public nbBS = 5; //  nombre de best seller
+  public nbCat = 12;
   public idList = [1, 2, 3, 4, 5];
   public bestSellers = new Array<ILivre>();
   public popularCategories: ICategorie[] = [];
@@ -49,8 +50,11 @@ export class AccueilComponent implements OnInit {
     );
     catRequest.subscribe(data => {
       this.popularCategories = <ICategorie[]>data.body;
+      while (this.popularCategories.length > this.nbCat) {
+        this.popularCategories.pop();
+      }
       console.log('WWWWW wwwww WWWWWW');
-      console.log(this.popularCategories);
+      console.log(this.popularCategories[4].nom);
     });
   }
 }
