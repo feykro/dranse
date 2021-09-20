@@ -175,6 +175,9 @@ export class FormspaiementComponent implements OnInit {
           this.commande.utilisateur = this.utilisateur;
           this.panierService.passerCommande(this.commande);
           this.panierService.clearId();
+          setTimeout(() => {
+            this.router.navigate(['']);
+          }, 5000);
         }
       }
     }
