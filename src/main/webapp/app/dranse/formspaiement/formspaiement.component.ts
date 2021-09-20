@@ -8,6 +8,7 @@ import { ICommande } from 'app/entities/commande/commande.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { IUser } from 'app/entities/user/user.model';
+import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 
 @Component({
   selector: 'jhi-formspaiement',
@@ -33,6 +34,8 @@ export class FormspaiementComponent implements OnInit {
   public numCB = '';
   public dateExpiration = '';
   public cryptogramme = '';
+
+  public prixTotal = 0;
 
   public livraison!: boolean;
   public facturation!: boolean;
@@ -68,6 +71,14 @@ export class FormspaiementComponent implements OnInit {
     );
     commandeRequest.subscribe(value => {
       this.commande = <ICommande>value.body;
+      let prix = 0;
+      for (const item of <ILigneCommande[]>this.commande.ligneCommandes) {
+        const price = item.livre?.prix === null || item.livre?.prix === undefined ? 0 : item.livre.prix;
+        const qte = item.quantite === null || item.quantite === undefined ? 0 : item.quantite;
+        prix += price * qte;
+      }
+      this.prixTotal = prix;
+      this.prixTotal = +this.prixTotal.toFixed(2);
     });
 
     // GET UTILISATEUR
