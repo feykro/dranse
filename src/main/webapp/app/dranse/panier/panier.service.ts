@@ -9,7 +9,8 @@ import { HttpResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PanierService {
-  private commande!: ICommande;
+  public commande!: ICommande;
+  private lignes!: ILigneCommande[];
 
   constructor(private commandeService: CommandeControllerRessourceService) {
     // Not empty
@@ -75,5 +76,13 @@ export class PanierService {
       this.commandeService.passerCommande(this.getPanierId(), commande)
     );
     commandeRequest.subscribe();
+  }
+
+  modifierLigne(ligneCommande: ILigneCommande): Observable<HttpResponse<ICommande>> {
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.ajoutLigneCommande(ligneCommande, this.getPanierId())
+    );
+
+    return commandeRequest;
   }
 }

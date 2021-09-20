@@ -1,16 +1,16 @@
 <div class="all">
   <div class="items-list">
     <div class="order-item" *ngFor="let item of itemListCommande">
-      <img id="cover-image" src="{{ item.urlImage }}" />
+      <img id="cover-image" src="{{ item.urlImage }}" (click)="gotoItem(item.identifiant)" />
       <div id="informations">
         <div id="titre">{{ item.titre }}</div>
         <div id="auteur">{{ item.auteur }}</div>
       </div>
       <div class="qte-container">
         <div class="qte">
-          <button id="leftButton" class="qte-button" (click)="item.decreaseQte(); updatePrice(-1, item.prix)">-</button>
+          <button id="leftButton" class="qte-button" (click)="decrementerObjet(item.position)">-</button>
           <div id="item-qte">{{ item.qte }}</div>
-          <button id="rightButton" class="qte-button" (click)="item.inscreaseQte(); updatePrice(1, item.prix)">+</button>
+          <button id="rightButton" class="qte-button" (click)="incrementerObjet(item.position)">+</button>
         </div>
       </div>
 
