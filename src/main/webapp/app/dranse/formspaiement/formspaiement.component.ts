@@ -1,9 +1,13 @@
+import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
 import { UtilisateurControllerRessourceService } from './../service/utilisateur-controller-ressource.service';
 import { IUtilisateur } from 'app/entities/utilisateur/utilisateur.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PanierService } from '../panier/panier.service';
 import { ICommande } from 'app/entities/commande/commande.model';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { IUser } from 'app/entities/user/user.model';
 
 @Component({
   selector: 'jhi-formspaiement',
@@ -14,21 +18,21 @@ export class FormspaiementComponent implements OnInit {
   public commande!: ICommande;
   public utilisateur!: IUtilisateur;
 
-  public nomLivraison: string;
-  public adresseLivraison: string;
-  public villeLivraison: string;
-  public cpLivraison: string;
-  public paysLivraison: string;
+  public nomLivraison = '';
+  public adresseLivraison = '';
+  public villeLivraison = '';
+  public cpLivraison = '';
+  public paysLivraison = '';
 
-  public nomFacturation: string;
-  public adresseFacturation: string;
-  public villeFacturation: string;
-  public paysFacturation: string;
-  public cpFacturation: string;
+  public nomFacturation = '';
+  public adresseFacturation = '';
+  public villeFacturation = '';
+  public paysFacturation = '';
+  public cpFacturation = '';
 
-  public numCB: string;
-  public dateExpiration: string;
-  public cryptogramme: string;
+  public numCB = '';
+  public dateExpiration = '';
+  public cryptogramme = '';
 
   public livraison!: boolean;
   public facturation!: boolean;
@@ -40,6 +44,7 @@ export class FormspaiementComponent implements OnInit {
 
   constructor(
     private panierService: PanierService,
+    private commandeService: CommandeControllerRessourceService,
     private router: Router,
     private utilisateurService: UtilisateurControllerRessourceService
   ) {
@@ -50,46 +55,60 @@ export class FormspaiementComponent implements OnInit {
     this.livraisonDone = false;
     this.facturationDone = false;
     this.paiementDone = false;
-
-    this.utilisateur = <IUtilisateur>utilisateurService.utilisateurCourrant();
-
-    // LIVRAISON
-    this.nomLivraison = 'Nom'; // <string>this.utilisateur;
-    this.adresseLivraison = <string>this.utilisateur.adrRue;
-    this.villeLivraison = <string>this.utilisateur.adrVille;
-    this.paysLivraison = <string>this.utilisateur.adrPays;
-    this.cpLivraison = (<number>this.utilisateur.adrCodePostal).toString();
-
-    // FACTURATION
-    this.nomFacturation = 'Nom'; // <string>this.utilisateur;
-    this.adresseFacturation = <string>this.utilisateur.adrRue;
-    this.villeFacturation = <string>this.utilisateur.adrVille;
-    this.paysFacturation = <string>this.utilisateur.adrPays;
-    this.cpFacturation = (<number>this.utilisateur.adrCodePostal).toString();
-
-    // PAIEMENT
-    this.numCB = <string>this.utilisateur.numCB;
-    this.cryptogramme = '';
-    this.dateExpiration = '';
   }
 
   ngOnInit(): void {
     if (this.panierService.getPanierId() === -1) {
-      // this.router.navigate(['/404']);
+      this.router.navigate(['/404']);
     }
-    this.commande = this.panierService.getCommande();
+
+    // GET COMMANDE
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.getCommande(this.panierService.getPanierId())
+    );
+    commandeRequest.subscribe(value => {
+      this.commande = <ICommande>value.body;
+    });
+
+    // GET UTILISATEUR
+    const utilisateurRequest: Observable<HttpResponse<IUtilisateur>> = <Observable<HttpResponse<IUtilisateur>>>(
+      this.utilisateurService.utilisateurCourrant()
+    );
+    utilisateurRequest.subscribe(value => {
+      this.utilisateur = <IUtilisateur>value.body;
+
+      // LIVRAISON
+      this.nomLivraison = <string>(<IUser>this.utilisateur.userP).lastName;
+      this.adresseLivraison = <string>this.utilisateur.adrRue;
+      this.villeLivraison = <string>this.utilisateur.adrVille;
+      this.paysLivraison = <string>this.utilisateur.adrPays;
+      if (this.utilisateur.adrCodePostal !== undefined) {
+        this.cpLivraison = (<number>this.utilisateur.adrCodePostal).toString();
+      }
+      // FACTURATION
+      this.nomFacturation = <string>(<IUser>this.utilisateur.userP).lastName;
+      this.adresseFacturation = <string>this.utilisateur.adrRue;
+      this.villeFacturation = <string>this.utilisateur.adrVille;
+      this.paysFacturation = <string>this.utilisateur.adrPays;
+      if (this.utilisateur.adrCodePostal !== undefined) {
+        this.cpFacturation = (<number>this.utilisateur.adrCodePostal).toString();
+      }
+      // PAIEMENT
+      this.numCB = <string>this.utilisateur.numCB;
+      console.log(this.utilisateur);
+    });
   }
 
   submit1(): void {
     const regexCP = /\d{5}/g;
-    const regexNomPrenom = /[a-zA-Z]+\s*[a-zA-Z]*/g;
-    if (regexCP.test(this.cpLivraison.toString()) === false) {
+    const regexNomPrenom = /[a-zA-Z]+/g;
+    if (regexCP.test(this.cpLivraison)) {
       if (regexNomPrenom.test(this.nomLivraison)) {
         this.commande.nomLivraison = this.nomLivraison;
         this.commande.rueLivraison = this.adresseLivraison;
         this.commande.villeLivraison = this.villeLivraison;
         this.commande.paysLivraison = this.paysLivraison;
-        this.commande.codePostalLivraison = parseInt(this.cpLivraison.toString(), 10);
+        this.commande.codePostalLivraison = this.cpLivraison;
         this.livraisonDone = true;
         this.showFacturation();
       } else {
@@ -102,10 +121,10 @@ export class FormspaiementComponent implements OnInit {
 
   submit2(): void {
     const regexCP = /\d{5}/g;
-    const regexNomPrenom = /[a-zA-Z]+\s*[a-zA-Z]*/g;
+    const regexNomPrenom = /[a-zA-Z]+/g;
     if (regexCP.test(this.cpFacturation)) {
       if (regexNomPrenom.test(this.nomFacturation)) {
-        // this.commande.codePostalFacturation = parseInt(this.cpFacturation,10);
+        this.commande.codePostalFacturation = this.cpFacturation;
         this.commande.nomFacturation = this.nomFacturation;
         this.commande.rueFacturation = this.adresseFacturation;
         this.commande.villeFacturation = this.villeFacturation;
@@ -124,9 +143,6 @@ export class FormspaiementComponent implements OnInit {
     const regexnumCB = /(\d{16})|(\d{4}\s\d{4}\s\d{4}\s\d{4})/g;
     const regexdateExp = /\d{2}\/\d{2}/g;
     const regexcrypto = /\d{2,3}/g;
-    console.log(this.numCB);
-    console.log(this.dateExpiration);
-    console.log(this.cryptogramme);
     if (regexnumCB.test(this.numCB)) {
       if (regexdateExp.test(this.dateExpiration)) {
         if (regexcrypto.test(this.cryptogramme)) {
@@ -144,23 +160,21 @@ export class FormspaiementComponent implements OnInit {
   }
 
   validationAll(): void {
-    if (this.livraisonDone === false || this.facturationDone === false || this.paiementDone === false) {
-      if (this.livraisonDone === false) {
-        this.showLivraison();
-        alert('Faire le formulaire Livraison avant de valider');
+    if (this.livraisonDone === false) {
+      this.showLivraison();
+      alert('Faire le formulaire Livraison avant de valider');
+    } else {
+      if (this.facturationDone === false) {
+        this.showFacturation();
+        alert('Faire le formulaire Facuration avant de valider');
       } else {
-        if (this.facturationDone === false) {
-          this.showFacturation();
-          alert('Faire le formulaire Facuration avant de valider');
+        if (this.paiementDone === false) {
+          this.showPaiement();
+          alert('Faire le paiement Facuration avant de valider');
         } else {
-          if (this.paiementDone === false) {
-            this.showPaiement();
-            alert('Faire le paiement Facuration avant de valider');
-          } else {
-            this.commande.utilisateur = this.utilisateur;
-            this.panierService.passerCommande(this.commande);
-            this.panierService.clearId();
-          }
+          this.commande.utilisateur = this.utilisateur;
+          this.panierService.passerCommande(this.commande);
+          this.panierService.clearId();
         }
       }
     }

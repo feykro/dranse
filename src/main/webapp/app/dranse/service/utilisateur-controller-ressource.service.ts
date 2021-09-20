@@ -16,6 +16,6 @@ export class UtilisateurControllerRessourceService {
   constructor(private http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   utilisateurCourrant(): Observable<EntityResponseType> {
-    return this.http.get<IUtilisateur>(`${this.resourceUrl}/utilisateur-courrant`, { observe: 'response' });
+    return this.http.get<IUtilisateur>(`${this.resourceUrl}/utilisateur-courant`, { observe: 'response' });
   }
 }

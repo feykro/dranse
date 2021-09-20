@@ -7,7 +7,7 @@
   </div>
   <form class="formulaire" (submit)="submit1()" #profileForm [hidden]="livraison">
     <br />
-    <label> Nom Prenom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label> Nom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <label> Adresse : <input [name]="adresseLivraison" [(ngModel)]="adresseLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
@@ -29,7 +29,7 @@
   </div>
   <form class="formulaire" (submit)="submit2()" #profileForm [hidden]="facturation">
     <br />
-    <label> Nom Prenom : <input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label> Nom : <input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <label>
       Adresse : <input [name]="adresseFacturation" [(ngModel)]="adresseFacturation" [ngModelOptions]="{ standalone: true }" />

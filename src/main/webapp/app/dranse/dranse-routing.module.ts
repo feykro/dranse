@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ProduitComponent } from './produit/produit.component';
 import { PanierComponent } from './panier/panier.component';
+import { FormspaiementComponent } from './formspaiement/formspaiement.component';
 
 const dranseRoute: Routes = [
   {
