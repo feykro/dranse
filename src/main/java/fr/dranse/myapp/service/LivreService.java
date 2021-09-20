@@ -51,7 +51,7 @@ public interface LivreService {
 
     Page<Livre> findByAuthor(Pageable pageable, String author);
     Page<Livre> findByTitle(Pageable pageable, String title);
-    //Page<Livre> findByCategorie(Pageable pageable, String Categorie);
+    Page<Livre> findByCategorie(Pageable pageable, String Categorie);
 
     /**
      * Delete the "id" livre.
@@ -69,7 +69,6 @@ public interface LivreService {
      * @return the list of entities.
      */
     Page<Livre> search(String query, Pageable pageable);
-
 
     Livre reserver(Long id, int quantite);
 }

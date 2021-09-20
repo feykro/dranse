@@ -11,18 +11,17 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./accueil.component.scss'],
 })
 export class AccueilComponent implements OnInit {
-  public nbBS = 5; //nombre de best seller
+  public nbBS = 5; //  nombre de best seller
   public idList = [1, 2, 3, 4, 5];
   public bestSellers = new Array<ILivre>();
-  public livre1!: ILivre;
+  //  public livre1!: ILivre;
 
   constructor(private router: Router, private bookService: LivreService) {
-    const a = 0;
+    // shutting down warnings
   }
 
   ngOnInit(): void {
     this.getBestSellers();
-    const b = 0;
   }
 
   navigate(n: number): void {
@@ -30,8 +29,8 @@ export class AccueilComponent implements OnInit {
   }
 
   getBestSellers(): void {
-    (<Observable<HttpResponse<ILivre>>>this.bookService.find(1)).subscribe(data => (this.livre1 = <ILivre>data));
-    //todo: rechercher comment attendre un observable et gérer l'attente
+    //  (<Observable<HttpResponse<ILivre>>>this.bookService.find(1)).subscribe(data => (this.livre1 = <ILivre>data));
+
     for (let i = 0; i < this.nbBS; i++) {
       const bouquinRequest: Observable<HttpResponse<ILivre>> = <Observable<HttpResponse<ILivre>>>this.bookService.find(i + 1);
 
@@ -39,11 +38,9 @@ export class AccueilComponent implements OnInit {
         this.bestSellers.push(<ILivre>data.body);
       });
     }
-    //this.bestSellers = this.bestSellers.sort(this.sortBooks);
-    console.log('WWWWWWWWWWWW ');
-    console.log(this.bestSellers);
   }
 
+  /*
   sortBooks(a: ILivre, b: ILivre): number {
     if (b.id === undefined) {
       return 1;
@@ -56,4 +53,5 @@ export class AccueilComponent implements OnInit {
     }
     return -1;
   }
+  */
 }

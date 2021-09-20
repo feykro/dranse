@@ -1,9 +1,11 @@
 import { Router } from '@angular/router';
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
+import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
+import { ILivre, Livre } from './../../entities/livre/livre.model';
 import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { Component, OnInit } from '@angular/core';
 import { PanierService } from './panier.service';
-import { ICommande } from 'app/entities/commande/commande.model';
+import { Commande, ICommande } from 'app/entities/commande/commande.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 
@@ -14,7 +16,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class PanierComponent implements OnInit {
   panierId!: number;
-  // commande!: Commande;
+  //commande!: Commande;
   lignes!: ILigneCommande[];
   prixTotal = 0;
 
@@ -29,20 +31,13 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLignesCommande();
-    // this.fakeCommandeInit();
+    //this.fakeCommandeInit();
   }
 
-  /**
-   * Créer une commande de placeholder
-   */
-  fakeCommandeInit(): void {
-    const itemTest = new itemCommande(this.urlTest, 'Harry Potter', 'Nicolas Sarkozy', '36.99', 1);
-
-    for (let i = 0; i < 4; i++) {
-      this.itemListCommande.push(itemTest);
-      const x: number = +itemTest.prix;
-      this.prixTotal += x * itemTest.qte;
-    }
+  updatePrice(qte: number, itemPrice: string): void {
+    const itemPrix: number = +itemPrice;
+    this.prixTotal += qte * itemPrix;
+    this.prixTotal = +this.prixTotal.toFixed(2);
   }
 
   /**
@@ -50,8 +45,10 @@ export class PanierComponent implements OnInit {
    */
   convertCommande(): void {
     const iterableLignes = Object.entries(this.lignes);
-    for (const [name, ligne] of iterableLignes) {
-      this.itemListCommande.push(this.convertLigneCommande(ligne));
+    let i = 0;
+    for (const [, ligne] of iterableLignes) {
+      this.itemListCommande.push(this.convertLigneCommande(ligne, i));
+      i++;
     }
   }
 
@@ -70,7 +67,7 @@ export class PanierComponent implements OnInit {
     });
   }
 
-  convertLigneCommande(ligne: ILigneCommande): itemCommande {
+  convertLigneCommande(ligne: ILigneCommande, position: number): itemCommande {
     let bookTitle = '';
     let bookAuthor = '';
     let bookPrice = '';
@@ -80,14 +77,28 @@ export class PanierComponent implements OnInit {
 
     book?.titre === undefined || book.titre === null ? (bookTitle = 'undefinedTitled') : (bookTitle = book.titre);
     book?.auteur === undefined || book.auteur === null ? (bookAuthor = 'underfinedAuthor') : (bookAuthor = book.auteur);
-    ligne.quantite === undefined || ligne.quantite === null ? (quantite = -1) : (quantite = ligne.quantite);
+    ligne.quantite === undefined || ligne.quantite === null ? (quantite = 0) : (quantite = ligne.quantite);
 
     if (!(book?.prix === undefined || book.prix === null)) {
       this.prixTotal += book.prix;
+      this.prixTotal = +this.prixTotal.toFixed(2);
       bookPrice = book.prix.toString();
     }
 
-    return new itemCommande(this.urlTest, bookTitle, bookAuthor, bookPrice, quantite);
+    return new itemCommande(this.urlTest, bookTitle, bookAuthor, bookPrice, quantite, position);
+  }
+
+  /**
+   * Créer une commande de placeholder
+   */
+  fakeCommandeInit(): void {
+    for (let i = 0; i < 4; i++) {
+      const itemTest = new itemCommande(this.urlTest, 'Harry Potter', 'Nicolas Sarkozy', '36.99', 1, i);
+      this.itemListCommande.push(itemTest);
+      const x: number = +itemTest.prix;
+      this.prixTotal += x * itemTest.qte;
+      this.prixTotal = +this.prixTotal.toFixed(2);
+    }
   }
 
   loadVerifPage(): void {
@@ -103,7 +114,22 @@ export class PanierComponent implements OnInit {
  * Cette classe permet de peupler une liste et d'afficher les objets contenus par la commande
  */
 class itemCommande {
-  constructor(public urlImage: string, public titre: string, public auteur: string, public prix: string, public qte: number) {
-    const a = 0;
+  constructor(
+    public urlImage: string,
+    public titre: string,
+    public auteur: string,
+    public prix: string,
+    public qte: number,
+    public position: number
+  ) {
+    //  shutting down warnings
+  }
+
+  inscreaseQte(): void {
+    this.qte++;
+  }
+
+  decreaseQte(): void {
+    this.qte--;
   }
 }

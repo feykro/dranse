@@ -33,7 +33,7 @@ public class Commande implements Serializable {
     private String paysLivraison;
 
     @Column(name = "code_postal_livraison")
-    private Integer codePostalLivraison;
+    private String codePostalLivraison;
 
     @Column(name = "ville_livraison")
     private String villeLivraison;
@@ -111,16 +111,16 @@ public class Commande implements Serializable {
         this.paysLivraison = paysLivraison;
     }
 
-    public Integer getCodePostalLivraison() {
+    public String getCodePostalLivraison() {
         return this.codePostalLivraison;
     }
 
-    public Commande codePostalLivraison(Integer codePostalLivraison) {
+    public Commande codePostalLivraison(String codePostalLivraison) {
         this.codePostalLivraison = codePostalLivraison;
         return this;
     }
 
-    public void setCodePostalLivraison(Integer codePostalLivraison) {
+    public void setCodePostalLivraison(String codePostalLivraison) {
         this.codePostalLivraison = codePostalLivraison;
     }
 

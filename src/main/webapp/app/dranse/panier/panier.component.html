@@ -6,11 +6,16 @@
         <div id="titre">{{ item.titre }}</div>
         <div id="auteur">{{ item.auteur }}</div>
       </div>
-      <div class="qte">
-        {{ item.qte }}
+      <div class="qte-container">
+        <div class="qte">
+          <button id="leftButton" class="qte-button" (click)="item.decreaseQte(); updatePrice(-1, item.prix)">-</button>
+          <div id="item-qte">{{ item.qte }}</div>
+          <button id="rightButton" class="qte-button" (click)="item.inscreaseQte(); updatePrice(1, item.prix)">+</button>
+        </div>
       </div>
+
       <div class="price">
-        {{ item.prix }}
+        <div id="item-prix">{{ item.prix }}</div>
       </div>
     </div>
   </div>
@@ -21,13 +26,4 @@
       <button id="order-button" (click)="loadVerifPage()">Hello fwend</button>
     </div>
   </div>
-
-  <!--
-  <div class="bandeau-total">
-    <div id="total">Total : {{ prixTotal }}€ TTC</div>
-    <div id="commande-button-area">
-      <button>Commander</button>
-    </div>
-  </div>
-  -->
 </div>

@@ -20,10 +20,16 @@ public class Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    //@SequenceGenerator(name = "sequenceGenerator")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+
+    @OneToOne
+    @MapsId
+    private User userP;
+
+    //@JoinColumn(unique = true)
 
     @Column(name = "adr_rue")
     private String adrRue;
@@ -47,10 +53,6 @@ public class Utilisateur implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "utilisateur", "ligneCommandes" }, allowSetters = true)
     private Set<Commande> commandes = new HashSet<>();
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private User userP;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {

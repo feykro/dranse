@@ -47,7 +47,12 @@ public class LivreControllerResource {
 
     private final CategorieRepository categorieRepository;
 
-    public LivreControllerResource(LivreService livreService, LivreRepository livreRepository, CategorieService categorieService, CategorieRepository categorieRepository) {
+    public LivreControllerResource(
+        LivreService livreService,
+        LivreRepository livreRepository,
+        CategorieService categorieService,
+        CategorieRepository categorieRepository
+    ) {
         this.livreService = livreService;
         this.livreRepository = livreRepository;
         this.categorieService = categorieService;
@@ -151,9 +156,11 @@ public class LivreControllerResource {
     /**
      * TODO: GET rechercheParCategorie
      */
-    @GetMapping("/recherche-par-categorie")
-    public String rechercheParCategorie() {
-        return "rechercheParCategorie";
+    @GetMapping("/recherche-par-categorie/{categorie}")
+    public ResponseEntity<List<Livre>> rechercheParCategorie(Pageable pageable, @PathVariable String categorie) {
+        Page<Livre> page = livreService.findByCategorie(pageable, categorie);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /*public ResponseEntity<List<Livre>> rechercheParCategorie(Pageable pageable, @PathVariable String categorie){
