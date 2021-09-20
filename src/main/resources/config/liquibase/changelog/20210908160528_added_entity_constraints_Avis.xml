@@ -14,9 +14,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="livre"/>
 
-        <addForeignKeyConstraint baseColumnNames="utilisateur_id"
+        <addForeignKeyConstraint baseColumnNames="utilisateur_userp_id"
                                  baseTableName="avis"
-                                 constraintName="fk_avis__utilisateur_id"
+                                 constraintName="fk_avis__utilisateur_userp_id"
                                  referencedColumnNames="userp_id"
                                  referencedTableName="utilisateur"/>
     </changeSet>
