@@ -50,8 +50,8 @@ class CommandeResourceIT {
     private static final String DEFAULT_PAYS_LIVRAISON = "AAAAAAAAAA";
     private static final String UPDATED_PAYS_LIVRAISON = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_CODE_POSTAL_LIVRAISON = 1;
-    private static final Integer UPDATED_CODE_POSTAL_LIVRAISON = 2;
+    private static final String DEFAULT_CODE_POSTAL_LIVRAISON = "AAAAAAAAAA";
+    private static final String UPDATED_CODE_POSTAL_LIVRAISON = "BBBBBBBBBB";
 
     private static final String DEFAULT_VILLE_LIVRAISON = "AAAAAAAAAA";
     private static final String UPDATED_VILLE_LIVRAISON = "BBBBBBBBBB";

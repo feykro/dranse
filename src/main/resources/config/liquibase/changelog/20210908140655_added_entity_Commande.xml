@@ -20,7 +20,7 @@
             <column name="pays_livraison" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="code_postal_livraison" type="integer">
+            <column name="code_postal_livraison" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="ville_livraison" type="varchar(255)">

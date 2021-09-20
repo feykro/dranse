@@ -10,7 +10,7 @@
     },
     {
       "fieldName": "codePostalLivraison",
-      "fieldType": "Integer"
+      "fieldType": "String"
     },
     {
       "fieldName": "villeLivraison",
