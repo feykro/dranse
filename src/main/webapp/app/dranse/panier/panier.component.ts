@@ -1,9 +1,11 @@
 import { Router } from '@angular/router';
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
+import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
+import { ILivre, Livre } from './../../entities/livre/livre.model';
 import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { Component, OnInit } from '@angular/core';
 import { PanierService } from './panier.service';
-import { ICommande } from 'app/entities/commande/commande.model';
+import { Commande, ICommande } from 'app/entities/commande/commande.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 
@@ -14,6 +16,7 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class PanierComponent implements OnInit {
   panierId!: number;
+  //commande!: Commande;
   lignes!: ILigneCommande[];
   prixTotal = 0;
 
@@ -28,7 +31,7 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLignesCommande();
-    //  this.fakeCommandeInit(); //  Pour tester avec des faux livre
+    //this.fakeCommandeInit();
   }
 
   /**
@@ -148,6 +151,14 @@ export class PanierComponent implements OnInit {
       const x: number = +itemTest.prix;
       this.prixTotal += x * itemTest.qte;
       this.prixTotal = +this.prixTotal.toFixed(2);
+    }
+  }
+
+  loadVerifPage(): void {
+    if (this.panierService.getPanierId() === -1) {
+      alert('Impossible de payer avec un panier vide');
+    } else {
+      this.router.navigate(['/verification']);
     }
   }
 }

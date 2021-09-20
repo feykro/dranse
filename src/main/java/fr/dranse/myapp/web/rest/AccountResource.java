@@ -62,7 +62,7 @@ public class AccountResource {
         if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        System.out.println("\n\n\nCurrently sending firt tel " + managedUserVM.getAdrVille() +"\n\n\n");
+        System.out.println("\n\n\nCurrently sending firt tel " + managedUserVM.getAdrVille() + "\n\n\n");
         User user = userService.registerUser(
             managedUserVM,
             managedUserVM.getPassword(),

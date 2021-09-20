@@ -212,8 +212,6 @@
           </div>
         </div>
 
-
-
         <div class="form-group">
           <label class="form-control-label" for="telephone">telephone</label>
           <input
@@ -226,11 +224,12 @@
             data-cy="telephone"
           />
 
-          <div *ngIf="registerForm.get('telephone')!.invalid && (registerForm.get('telephone')!.dirty || registerForm.get('telephone')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('telephone')?.errors?.required"
-            >
+          <div
+            *ngIf="
+              registerForm.get('telephone')!.invalid && (registerForm.get('telephone')!.dirty || registerForm.get('telephone')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('telephone')?.errors?.required">
               Your telephone is required.
             </small>
           </div>
@@ -249,12 +248,7 @@
           />
 
           <div *ngIf="registerForm.get('adrRue')!.invalid && (registerForm.get('adrRue')!.dirty || registerForm.get('adrRue')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('adrRue')?.errors?.required"
-            >
-              Your adrRue is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrRue')?.errors?.required"> Your adrRue is required. </small>
           </div>
         </div>
 
@@ -271,11 +265,13 @@
             #login
           />
 
-          <div *ngIf="registerForm.get('adrCodePostal')!.invalid && (registerForm.get('adrCodePostal')!.dirty || registerForm.get('adrCodePostal')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('adrCodePostal')?.errors?.required"
-            >
+          <div
+            *ngIf="
+              registerForm.get('adrCodePostal')!.invalid &&
+              (registerForm.get('adrCodePostal')!.dirty || registerForm.get('adrCodePostal')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrCodePostal')?.errors?.required">
               Your adrCodePostal is required.
             </small>
           </div>
@@ -295,12 +291,7 @@
           />
 
           <div *ngIf="registerForm.get('adrPays')!.invalid && (registerForm.get('adrPays')!.dirty || registerForm.get('adrPays')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('adrPays')?.errors?.required"
-            >
-              Your adrPays is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrPays')?.errors?.required"> Your adrPays is required. </small>
           </div>
         </div>
 
@@ -317,13 +308,10 @@
             #login
           />
 
-          <div *ngIf="registerForm.get('adrVille')!.invalid && (registerForm.get('adrVille')!.dirty || registerForm.get('adrVille')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('adrVille')?.errors?.required"
-            >
-              Your adrVille is required.
-            </small>
+          <div
+            *ngIf="registerForm.get('adrVille')!.invalid && (registerForm.get('adrVille')!.dirty || registerForm.get('adrVille')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrVille')?.errors?.required"> Your adrVille is required. </small>
           </div>
         </div>
 
@@ -341,18 +329,9 @@
           />
 
           <div *ngIf="registerForm.get('numCB')!.invalid && (registerForm.get('numCB')!.dirty || registerForm.get('numCB')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('numCB')?.errors?.required"
-            >
-              Your numCB is required.
-            </small>
+            <small class="form-text text-danger" *ngIf="registerForm.get('numCB')?.errors?.required"> Your numCB is required. </small>
           </div>
         </div>
-
-
-
-
 
         <button
           type="submit"

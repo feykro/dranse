@@ -13,14 +13,12 @@ import fr.dranse.myapp.security.AuthoritiesConstants;
 import fr.dranse.myapp.security.SecurityUtils;
 import fr.dranse.myapp.service.dto.AdminUserDTO;
 import fr.dranse.myapp.service.dto.UserDTO;
-
+import fr.dranse.myapp.web.rest.UtilisateurResource;
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import fr.dranse.myapp.web.rest.UtilisateurResource;
 import org.elasticsearch.common.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +35,6 @@ import tech.jhipster.security.RandomUtil;
 /**
  * Service class for managing users.
  */
-
-
 
 @Service
 @Transactional
@@ -57,14 +53,13 @@ public class UserService {
     private final CacheManager cacheManager;
 
     @Inject
-    private UtilisateurRepository  utilisateurRepository;
+    private UtilisateurRepository utilisateurRepository;
 
     @Inject
     private UtilisateurSearchRepository utilisateurSearchRepository;
 
     @Inject
     private UtilisateurResource utilisateurResource;
-
 
     public UserService(
         UserRepository userRepository,
@@ -131,7 +126,16 @@ public class UserService {
             );
     }
 
-    public User registerUser(AdminUserDTO userDTO, String password, String telephone, String AdrCodePostal, String AdrPays, String AdrRue, String AdrVille, String numCB) {
+    public User registerUser(
+        AdminUserDTO userDTO,
+        String password,
+        String telephone,
+        String AdrCodePostal,
+        String AdrPays,
+        String AdrRue,
+        String AdrVille,
+        String numCB
+    ) {
         userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .ifPresent(
