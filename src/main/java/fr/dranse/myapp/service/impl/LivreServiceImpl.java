@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -161,5 +162,21 @@ public class LivreServiceImpl implements LivreService {
     public Page<Livre> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Livres for query {}", query);
         return livreSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public Livre reserver(Long id, int quantite){
+        Optional<Livre> opt = livreRepository.findById(id);
+        if(opt.isEmpty()){
+            return null;
+        }
+        Livre livre = opt.get();
+        if(livre.getStock() >= quantite){
+            livre.setStock(livre.getStock() - quantite);
+            return livreRepository.save(livre);
+        }else{
+            return null;
+        }
     }
 }

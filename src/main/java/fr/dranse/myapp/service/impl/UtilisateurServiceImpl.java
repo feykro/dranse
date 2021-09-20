@@ -108,4 +108,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         log.debug("Request to search for a page of Utilisateurs for query {}", query);
         return utilisateurSearchRepository.search(queryStringQuery(query), pageable);
     }
+
+    @Override
+    public Optional<Utilisateur> utilisateurFromLogin(String login){
+        return utilisateurRepository.utilisateurFromLogin(login);
+    }
 }

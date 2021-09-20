@@ -1,10 +1,8 @@
 package fr.dranse.myapp.service;
 
 import fr.dranse.myapp.domain.Commande;
-
-import java.util.Optional;
-
 import fr.dranse.myapp.domain.LigneCommande;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -85,8 +83,30 @@ public interface CommandeService {
      * @return
      */
     Commande SupprimerLigne(Long idCommande, Long idLigne);
-
     // todo modifier le nombre d'items dans une ligneCommande
 
-    // todo verify stock of livre and update stock
+
+    /**
+     *  Modifier une ligne commande appartenant à commande
+     * @param idCommande
+     * @param idLivre
+     * @param quantite
+     * @return
+     */
+    Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite);
+
+    /**
+     * return the history of commands of an user
+     * @param id
+     * @param pageable
+     * @return
+     */
+    Page<Commande> getHistory(Long id, Pageable pageable);
+
+    /**
+     * Valider et passer une commande.
+     * @param commande
+     * @return
+     */
+    boolean commander(Commande commande);
 }

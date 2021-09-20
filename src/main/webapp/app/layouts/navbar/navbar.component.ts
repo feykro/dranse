@@ -66,4 +66,8 @@ export class NavbarComponent implements OnInit {
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
+
+  gotoPanier(): void {
+    this.router.navigate(['/panier']);
+  }
 }
