@@ -1,3 +1,4 @@
+import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
 import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
 import { Injectable } from '@angular/core';
@@ -9,7 +10,7 @@ import { HttpResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PanierService {
-  private commande!: ICommande;
+  public commande!: ICommande;
   private lignes!: ILigneCommande[];
 
   constructor(private commandeService: CommandeControllerRessourceService) {
@@ -65,5 +66,13 @@ export class PanierService {
         confirm('Le produit a été ajouté au panier');
       }
     });
+  }
+
+  modifierLigne(ligneCommande: ILigneCommande): Observable<HttpResponse<ICommande>> {
+    const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+      this.commandeService.ajoutLigneCommande(ligneCommande, this.getPanierId())
+    );
+
+    return commandeRequest;
   }
 }
