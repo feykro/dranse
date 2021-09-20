@@ -35,6 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur save(Utilisateur utilisateur) {
         log.debug("Request to save Utilisateur : {}", utilisateur);
+        System.out.println("\n\nIn service.save : " + utilisateur.toString() + "\n\n");
         Utilisateur result = utilisateurRepository.save(utilisateur);
         utilisateurSearchRepository.save(result);
         return result;

@@ -36,7 +36,7 @@
       "relationshipName": "userP",
       "otherEntityName": "user",
       "relationshipType": "one-to-one",
-      "otherEntityField": "login",
+      "otherEntityField": "id",
       "ownerSide": true,
       "id": false,
       "otherEntityRelationshipName": "utilisateur"

@@ -17,7 +17,7 @@
         <addForeignKeyConstraint baseColumnNames="utilisateur_id"
                                  baseTableName="avis"
                                  constraintName="fk_avis__utilisateur_id"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="userp_id"
                                  referencedTableName="utilisateur"/>
     </changeSet>
 </databaseChangeLog>
