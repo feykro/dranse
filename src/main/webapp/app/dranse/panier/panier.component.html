@@ -1,16 +1,21 @@
 <div class="all">
   <div class="items-list">
     <div class="order-item" *ngFor="let item of itemListCommande">
-      <img id="cover-image" src="{{ item.urlImage }}" />
+      <img id="cover-image" src="{{ item.urlImage }}" (click)="gotoItem(item.identifiant)" />
       <div id="informations">
         <div id="titre">{{ item.titre }}</div>
         <div id="auteur">{{ item.auteur }}</div>
       </div>
-      <div class="qte">
-        {{ item.qte }}
+      <div class="qte-container">
+        <div class="qte">
+          <button id="leftButton" class="qte-button" (click)="decrementerObjet(item.position)">-</button>
+          <div id="item-qte">{{ item.qte }}</div>
+          <button id="rightButton" class="qte-button" (click)="incrementerObjet(item.position)">+</button>
+        </div>
       </div>
+
       <div class="price">
-        {{ item.prix }}
+        <div id="item-prix">{{ item.prix }}</div>
       </div>
     </div>
   </div>
@@ -18,16 +23,7 @@
   <div class="bandeau-total">
     <div id="total">Total : {{ prixTotal }}€ TTC</div>
     <div id="button-area">
-      <button id="order-button">Hello fwend</button>
+      <button id="order-button" (click)="loadVerifPage()">Hello fwend</button>
     </div>
   </div>
-
-  <!--
-  <div class="bandeau-total">
-    <div id="total">Total : {{ prixTotal }}€ TTC</div>
-    <div id="commande-button-area">
-      <button>Commander</button>
-    </div>
-  </div>
-  -->
 </div>

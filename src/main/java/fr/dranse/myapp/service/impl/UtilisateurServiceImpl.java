@@ -110,7 +110,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Optional<Utilisateur> utilisateurFromLogin(String login){
+    public Optional<Utilisateur> utilisateurFromLogin(String login) {
         return utilisateurRepository.utilisateurFromLogin(login);
     }
 }

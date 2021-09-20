@@ -70,6 +70,5 @@ public interface LivreService {
      */
     Page<Livre> search(String query, Pageable pageable);
 
-
     Livre reserver(Long id, int quantite);
 }

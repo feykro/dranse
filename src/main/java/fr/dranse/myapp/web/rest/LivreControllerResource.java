@@ -47,7 +47,12 @@ public class LivreControllerResource {
 
     private final CategorieRepository categorieRepository;
 
-    public LivreControllerResource(LivreService livreService, LivreRepository livreRepository, CategorieService categorieService, CategorieRepository categorieRepository) {
+    public LivreControllerResource(
+        LivreService livreService,
+        LivreRepository livreRepository,
+        CategorieService categorieService,
+        CategorieRepository categorieRepository
+    ) {
         this.livreService = livreService;
         this.livreRepository = livreRepository;
         this.categorieService = categorieService;

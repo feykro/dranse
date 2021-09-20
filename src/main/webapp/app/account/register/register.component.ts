@@ -38,7 +38,7 @@ export class RegisterComponent implements AfterViewInit {
     adrPays: ['', [Validators.required]],
     adrVille: ['', [Validators.required]],
     adrCodePostal: ['', [Validators.required]],
-    numCB: ['', [Validators.required]]
+    numCB: ['', [Validators.required]],
   });
 
   constructor(private translateService: TranslateService, private registerService: RegisterService, private fb: FormBuilder) {}
@@ -67,10 +67,23 @@ export class RegisterComponent implements AfterViewInit {
       const adrPays = this.registerForm.get(['adrPays'])!.value;
       const adrVille = this.registerForm.get(['adrVille'])!.value;
       const numCB = this.registerForm.get(['numCB'])!.value;
-      this.registerService.save({ login, email, password, telephone, adrRue, adrCodePostal, adrPays, adrVille, numCB, langKey: this.translateService.currentLang }).subscribe(
-        () => (this.success = true),
-        response => this.processError(response)
-      );
+      this.registerService
+        .save({
+          login,
+          email,
+          password,
+          telephone,
+          adrRue,
+          adrCodePostal,
+          adrPays,
+          adrVille,
+          numCB,
+          langKey: this.translateService.currentLang,
+        })
+        .subscribe(
+          () => (this.success = true),
+          response => this.processError(response)
+        );
     }
   }
 

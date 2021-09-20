@@ -1,7 +1,6 @@
 package fr.dranse.myapp.web.rest.vm;
 
 import fr.dranse.myapp.service.dto.AdminUserDTO;
-
 import javax.validation.constraints.Size;
 
 /**
@@ -41,7 +40,9 @@ public class ManagedUserVM extends AdminUserDTO {
     }
 
     //telephone
-    public String getTelephone() {return telephone; }
+    public String getTelephone() {
+        return telephone;
+    }
 
     public String getAdrRue() {
         return adrRue;
