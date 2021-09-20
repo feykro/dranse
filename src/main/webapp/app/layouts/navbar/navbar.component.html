@@ -31,7 +31,7 @@
       <!-- jhipster-needle-add-element-to-menu "- JHipster will add new menu items here -->
       <!-- Menu entité pour admin -->
       <li
-        *ngSwitchCase="true"
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown
         class="nav-item-dropdown"
         display="dynamic"
