@@ -54,12 +54,10 @@ export class AccueilComponent implements OnInit {
       while (this.popularCategories.length > this.nbCat) {
         this.popularCategories.pop();
       }
-      console.log('WWWWW wwwww WWWWWW');
-      console.log(this.popularCategories[4].nom);
     });
   }
 
   gotoSearch(cat: string): void {
-    this.router.navigate(['/recherche', 'cat', 1, cat]);
+    this.router.navigate(['/recherche', 'cat', cat, 1]);
   }
 }

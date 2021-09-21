@@ -32,6 +32,8 @@ export class PageRechercheComponent implements OnInit {
       this.typeRecherche = params['type'];
       this.pageRecherche = params['page'];
       this.argumentRecherche = params['arg'];
+      console.log('WWW --- WWWW---- WWWW');
+      console.log(this.typeRecherche, this.pageRecherche, this.argumentRecherche);
     });
 
     //  todo: mettre des tests et des valeurs par défaut pour la robustesse
