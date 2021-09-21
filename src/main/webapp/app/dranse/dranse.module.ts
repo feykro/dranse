@@ -6,9 +6,10 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { PanierComponent } from './panier/panier.component';
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
 import { FormsModule } from '@angular/forms';
+import { HistoriqueComponent } from './historique/historique.component';
 
 @NgModule({
-  declarations: [ProduitComponent, AccueilComponent, PanierComponent, FormspaiementComponent],
+  declarations: [ProduitComponent, AccueilComponent, PanierComponent, FormspaiementComponent, HistoriqueComponent],
   imports: [CommonModule, DranseRoutingModule, FormsModule],
 })
 export class DranseModule {}

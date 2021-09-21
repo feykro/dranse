@@ -5,6 +5,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 import fr.dranse.myapp.domain.Commande;
 import fr.dranse.myapp.domain.LigneCommande;
 import fr.dranse.myapp.domain.Livre;
+import fr.dranse.myapp.domain.Utilisateur;
 import fr.dranse.myapp.repository.CommandeRepository;
 import fr.dranse.myapp.repository.LigneCommandeRepository;
 import fr.dranse.myapp.repository.LivreRepository;
@@ -14,11 +15,13 @@ import fr.dranse.myapp.service.CommandeService;
 import java.util.Optional;
 
 import fr.dranse.myapp.service.LivreService;
+import fr.dranse.myapp.service.UtilisateurService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +44,9 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Autowired
     LivreService livreService;
+
+    @Autowired
+    UtilisateurService utilisateurService;
 
     public CommandeServiceImpl(CommandeRepository commandeRepository, CommandeSearchRepository commandeSearchRepository, LigneCommandeRepository ligneCommandeRepository, LivreRepository livreRepository) {
         this.commandeRepository = commandeRepository;
@@ -210,8 +216,12 @@ public class CommandeServiceImpl implements CommandeService {
         return commandeRepository.save(commande);
     }
 
-    public Page<Commande> getHistory(Long id, Pageable pageable) {
-        return commandeRepository.getHistory(id, pageable);
+    public Page<Commande> getHistory(Pageable pageable) {
+        String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+        //System.out.print("\n\nHere is the login : " + userLogin + "\n\n\n");
+        Optional<Utilisateur> utilisateur = utilisateurService.utilisateurFromLogin(userLogin);
+        System.out.println("\n\nHERE IS THE USER ID " + utilisateur.get().getId().toString() + "\n\n\n");
+        return commandeRepository.getHistory(utilisateur.get().getId(), pageable);
     }
 
     public boolean commander(Commande commande) {

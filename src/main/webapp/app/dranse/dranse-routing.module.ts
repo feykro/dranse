@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProduitComponent } from './produit/produit.component';
 import { PanierComponent } from './panier/panier.component';
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
+import { HistoriqueComponent } from './historique/historique.component';
 
 const dranseRoute: Routes = [
   {
@@ -19,6 +20,10 @@ const dranseRoute: Routes = [
     path: 'panier',
     component: PanierComponent,
   },
+  {
+      path: 'historique',
+      component: HistoriqueComponent,
+    },
   {
     path: 'verification',
     component: FormspaiementComponent,
