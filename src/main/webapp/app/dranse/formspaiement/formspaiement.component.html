@@ -1,5 +1,5 @@
-<div class="form-1">
-  <div class="progression-bar">
+<div class="form-1" xmlns:background="http://www.w3.org/1999/xhtml">
+  <div class="progression-bar" [style]="livraisonDone ? 'background:lightgreen' : 'background:lightgrey'">
     <div class="gauche">LIVRAISON</div>
     <div class="droite">
       <button class="extend" (click)="showLivraison()">+</button>
@@ -21,7 +21,7 @@
 </div>
 <br />
 <div class="form-2">
-  <div class="progression-bar">
+  <div class="progression-bar" [style]="facturationDone ? 'background:lightgreen' : 'background:lightgrey'">
     <div class="gauche">FACTURATION</div>
     <div class="droite">
       <button class="extend" (click)="showFacturation()">+</button>
@@ -45,7 +45,7 @@
 </div>
 <br />
 <div class="form-3">
-  <div class="progression-bar">
+  <div class="progression-bar" [style]="paiementDone ? 'background:lightgreen' : 'background:lightgrey'">
     <div class="gauche">PAIEMENT</div>
     <div class="droite">
       <button class="extend" (click)="showPaiement()">+</button>

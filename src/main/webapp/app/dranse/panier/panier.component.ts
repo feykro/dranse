@@ -20,9 +20,6 @@ export class PanierComponent implements OnInit {
   lignes!: ILigneCommande[];
   prixTotal = 0;
 
-  urlTest =
-    'https://kbimages1-a.akamaihd.net/93affabc-5161-421e-80d5-4477a07b8cee/353/569/90/False/harry-potter-and-the-philosopher-s-stone-3.jpg';
-
   itemListCommande: itemCommande[] = [];
 
   constructor(private panierService: PanierService, public commandeService: CommandeControllerRessourceService, private router: Router) {
@@ -68,6 +65,7 @@ export class PanierComponent implements OnInit {
     let bookPrice = '';
     let quantite = 0;
     let idLivre = 0;
+    let urlImage = '';
 
     const book = ligne.livre;
 
@@ -75,6 +73,7 @@ export class PanierComponent implements OnInit {
     book?.auteur === undefined || book.auteur === null ? (bookAuthor = 'underfinedAuthor') : (bookAuthor = book.auteur);
     ligne.quantite === undefined || ligne.quantite === null ? (quantite = 0) : (quantite = ligne.quantite);
     book?.id === undefined || ligne.quantite === null ? (idLivre = 0) : (idLivre = book.id);
+    book?.urlImage === undefined || book.urlImage === null ? (urlImage = 'Image') : (urlImage = book.urlImage);
 
     if (!(book?.prix === undefined || book.prix === null)) {
       this.prixTotal += book.prix;
@@ -82,7 +81,7 @@ export class PanierComponent implements OnInit {
       bookPrice = book.prix.toString();
     }
 
-    return new itemCommande(this.urlTest, bookTitle, bookAuthor, bookPrice, quantite, position, idLivre);
+    return new itemCommande(urlImage, bookTitle, bookAuthor, bookPrice, quantite, position, idLivre);
   }
 
   updateAll(): void {
@@ -146,7 +145,8 @@ export class PanierComponent implements OnInit {
    */
   fakeCommandeInit(): void {
     for (let i = 0; i < 4; i++) {
-      const itemTest = new itemCommande(this.urlTest, 'Harry Potter', 'Nicolas Sarkozy', '36.99', 1, i, i);
+      const urlTest = '';
+      const itemTest = new itemCommande(urlTest, 'Harry Potter', 'Nicolas Sarkozy', '36.99', 1, i, i);
       this.itemListCommande.push(itemTest);
       const x: number = +itemTest.prix;
       this.prixTotal += x * itemTest.qte;
