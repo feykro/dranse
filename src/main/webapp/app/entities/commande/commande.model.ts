@@ -4,7 +4,8 @@ import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model
 
 export interface ICommande {
   id?: number;
-  date?: dayjs.Dayjs | null;
+  dateCreation?: dayjs.Dayjs | null;
+  dateModification?: dayjs.Dayjs | null;
   paysLivraison?: string | null;
   codePostalLivraison?: string | null;
   villeLivraison?: string | null;
@@ -23,7 +24,8 @@ export interface ICommande {
 export class Commande implements ICommande {
   constructor(
     public id?: number,
-    public date?: dayjs.Dayjs | null,
+    public dateCreation?: dayjs.Dayjs | null,
+    public dateModification?: dayjs.Dayjs | null,
     public paysLivraison?: string | null,
     public codePostalLivraison?: string | null,
     public villeLivraison?: string | null,

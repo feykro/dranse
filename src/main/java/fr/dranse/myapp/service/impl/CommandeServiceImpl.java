@@ -10,15 +10,17 @@ import fr.dranse.myapp.repository.LigneCommandeRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CommandeSearchRepository;
 import fr.dranse.myapp.service.CommandeService;
-
-import java.util.Optional;
-
 import fr.dranse.myapp.service.LivreService;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +44,12 @@ public class CommandeServiceImpl implements CommandeService {
     @Autowired
     LivreService livreService;
 
-    public CommandeServiceImpl(CommandeRepository commandeRepository, CommandeSearchRepository commandeSearchRepository, LigneCommandeRepository ligneCommandeRepository, LivreRepository livreRepository) {
+    public CommandeServiceImpl(
+        CommandeRepository commandeRepository,
+        CommandeSearchRepository commandeSearchRepository,
+        LigneCommandeRepository ligneCommandeRepository,
+        LivreRepository livreRepository
+    ) {
         this.commandeRepository = commandeRepository;
         this.commandeSearchRepository = commandeSearchRepository;
         this.ligneCommandeRepository = ligneCommandeRepository;
@@ -60,13 +67,16 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public Optional<Commande> partialUpdate(Commande commande) {
         log.debug("Request to partially update Commande : {}", commande);
-
+        commande.setDateModification(ZonedDateTime.now());
         return commandeRepository
             .findById(commande.getId())
             .map(
                 existingCommande -> {
-                    if (commande.getDate() != null) {
-                        existingCommande.setDate(commande.getDate());
+                    if (commande.getDateCreation() != null) {
+                        existingCommande.setDateCreation(commande.getDateCreation());
+                    }
+                    if (commande.getDateModification() != null) {
+                        existingCommande.setDateModification(commande.getDateModification());
                     }
                     if (commande.getPaysLivraison() != null) {
                         existingCommande.setPaysLivraison(commande.getPaysLivraison());
@@ -144,9 +154,11 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Commande newCommande(LigneCommande ligneCommande) {
         Commande commande = new Commande();
+        commande.setDateCreation(ZonedDateTime.now());
+        commande.setDateModification(ZonedDateTime.now());
         commande.addLigneCommande(ligneCommande);
         ligneCommande.setCommande(commande);
         Commande result = commandeRepository.save(commande);
@@ -155,9 +167,10 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Commande ajouterLigne(Long id, LigneCommande ligneCommande) {
         Commande commande = commandeRepository.getOne(id);
+        commande.setDateModification(ZonedDateTime.now());
         commande.addLigneCommande(ligneCommande);
         ligneCommande.setCommande(commande); // todo remove (implicit in addLigne commande)
         // todo verify if not already added
@@ -167,16 +180,16 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Commande SupprimerLigne(Long idCommande, Long idLigne) {
         Commande commande = commandeRepository.getOne(idCommande);
+        commande.setDateModification(ZonedDateTime.now());
         LigneCommande ligneCommande = ligneCommandeRepository.getOne(idLigne);
         commande.removeLigneCommande(ligneCommande);
         ligneCommandeRepository.delete(ligneCommande);
         // todo verify if not another commande
         return commandeRepository.save(commande);
     }
-
 
     // todo faire la difference entre ajouter et modifier !! (ajout = modifier avec ++)
     // verifier si il ne decommande pas des livre non précedemment commandé
@@ -186,12 +199,13 @@ public class CommandeServiceImpl implements CommandeService {
             return null;
         }
         Commande commande = opt.get();
+        commande.setDateModification(ZonedDateTime.now());
         boolean newLivre = true;
         for (LigneCommande ligne : commande.getLigneCommandes()) {
             if (ligne.getLivre().getId() == idLivre) {
                 newLivre = false;
                 if (ligne.getQuantite() != quantite) {
-                    if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
+                    if (livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null) {
                         ligne.updateQuantite(quantite);
                         ligneCommandeRepository.save(ligne);
                     }
@@ -201,7 +215,7 @@ public class CommandeServiceImpl implements CommandeService {
         if (newLivre) { // creation d'une nouvelle ligneCommande
             LigneCommande ligneCommande = new LigneCommande();
             Livre livre = livreService.reserver(idLivre, quantite);
-            if(livre != null){
+            if (livre != null) {
                 ligneCommande.setLivreQuantite(livre, quantite);
                 commande.addLigneCommande(ligneCommande);
                 ligneCommandeRepository.save(ligneCommande);
@@ -216,8 +230,16 @@ public class CommandeServiceImpl implements CommandeService {
 
     public boolean commander(Commande commande) {
         // todo check for null fields
+        commande.setDateModification(ZonedDateTime.now());
         commande.setPayee(true);
         commandeRepository.save(commande);
         return true;
+    }
+
+    @Scheduled(fixedDelay = 1000 * 60 * 2)
+    public void removeUselessCommande() {
+        System.out.println("removing useless commands.");
+        ZonedDateTime currentTime = ZonedDateTime.now();
+        commandeRepository.cleanIdsToDelete(currentTime.minusMinutes(120), currentTime.minusMinutes(30));
     }
 }

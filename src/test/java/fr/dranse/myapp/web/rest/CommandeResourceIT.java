@@ -114,7 +114,7 @@ class CommandeResourceIT {
      */
     public static Commande createEntity(EntityManager em) {
         Commande commande = new Commande()
-            .date(DEFAULT_DATE)
+            .dateCreation(DEFAULT_DATE)
             .paysLivraison(DEFAULT_PAYS_LIVRAISON)
             .codePostalLivraison(DEFAULT_CODE_POSTAL_LIVRAISON)
             .villeLivraison(DEFAULT_VILLE_LIVRAISON)
@@ -137,7 +137,7 @@ class CommandeResourceIT {
      */
     public static Commande createUpdatedEntity(EntityManager em) {
         Commande commande = new Commande()
-            .date(UPDATED_DATE)
+            .dateModification(UPDATED_DATE)
             .paysLivraison(UPDATED_PAYS_LIVRAISON)
             .codePostalLivraison(UPDATED_CODE_POSTAL_LIVRAISON)
             .villeLivraison(UPDATED_VILLE_LIVRAISON)
@@ -170,7 +170,7 @@ class CommandeResourceIT {
         List<Commande> commandeList = commandeRepository.findAll();
         assertThat(commandeList).hasSize(databaseSizeBeforeCreate + 1);
         Commande testCommande = commandeList.get(commandeList.size() - 1);
-        assertThat(testCommande.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testCommande.getDateCreation()).isEqualTo(DEFAULT_DATE);
         assertThat(testCommande.getPaysLivraison()).isEqualTo(DEFAULT_PAYS_LIVRAISON);
         assertThat(testCommande.getCodePostalLivraison()).isEqualTo(DEFAULT_CODE_POSTAL_LIVRAISON);
         assertThat(testCommande.getVilleLivraison()).isEqualTo(DEFAULT_VILLE_LIVRAISON);
@@ -280,7 +280,7 @@ class CommandeResourceIT {
         // Disconnect from session so that the updates on updatedCommande are not directly saved in db
         em.detach(updatedCommande);
         updatedCommande
-            .date(UPDATED_DATE)
+            .dateModification(UPDATED_DATE)
             .paysLivraison(UPDATED_PAYS_LIVRAISON)
             .codePostalLivraison(UPDATED_CODE_POSTAL_LIVRAISON)
             .villeLivraison(UPDATED_VILLE_LIVRAISON)
@@ -305,7 +305,7 @@ class CommandeResourceIT {
         List<Commande> commandeList = commandeRepository.findAll();
         assertThat(commandeList).hasSize(databaseSizeBeforeUpdate);
         Commande testCommande = commandeList.get(commandeList.size() - 1);
-        assertThat(testCommande.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testCommande.getDateCreation()).isEqualTo(UPDATED_DATE);
         assertThat(testCommande.getPaysLivraison()).isEqualTo(UPDATED_PAYS_LIVRAISON);
         assertThat(testCommande.getCodePostalLivraison()).isEqualTo(UPDATED_CODE_POSTAL_LIVRAISON);
         assertThat(testCommande.getVilleLivraison()).isEqualTo(UPDATED_VILLE_LIVRAISON);
@@ -400,7 +400,7 @@ class CommandeResourceIT {
         partialUpdatedCommande.setId(commande.getId());
 
         partialUpdatedCommande
-            .date(UPDATED_DATE)
+            .dateModification(UPDATED_DATE)
             .villeLivraison(UPDATED_VILLE_LIVRAISON)
             .rueLivraison(UPDATED_RUE_LIVRAISON)
             .paysFacturation(UPDATED_PAYS_FACTURATION)
@@ -420,7 +420,7 @@ class CommandeResourceIT {
         List<Commande> commandeList = commandeRepository.findAll();
         assertThat(commandeList).hasSize(databaseSizeBeforeUpdate);
         Commande testCommande = commandeList.get(commandeList.size() - 1);
-        assertThat(testCommande.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testCommande.getDateCreation()).isEqualTo(UPDATED_DATE);
         assertThat(testCommande.getPaysLivraison()).isEqualTo(DEFAULT_PAYS_LIVRAISON);
         assertThat(testCommande.getCodePostalLivraison()).isEqualTo(DEFAULT_CODE_POSTAL_LIVRAISON);
         assertThat(testCommande.getVilleLivraison()).isEqualTo(UPDATED_VILLE_LIVRAISON);
@@ -447,7 +447,7 @@ class CommandeResourceIT {
         partialUpdatedCommande.setId(commande.getId());
 
         partialUpdatedCommande
-            .date(UPDATED_DATE)
+            .dateModification(UPDATED_DATE)
             .paysLivraison(UPDATED_PAYS_LIVRAISON)
             .codePostalLivraison(UPDATED_CODE_POSTAL_LIVRAISON)
             .villeLivraison(UPDATED_VILLE_LIVRAISON)
@@ -472,7 +472,7 @@ class CommandeResourceIT {
         List<Commande> commandeList = commandeRepository.findAll();
         assertThat(commandeList).hasSize(databaseSizeBeforeUpdate);
         Commande testCommande = commandeList.get(commandeList.size() - 1);
-        assertThat(testCommande.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testCommande.getDateModification()).isEqualTo(UPDATED_DATE);
         assertThat(testCommande.getPaysLivraison()).isEqualTo(UPDATED_PAYS_LIVRAISON);
         assertThat(testCommande.getCodePostalLivraison()).isEqualTo(UPDATED_CODE_POSTAL_LIVRAISON);
         assertThat(testCommande.getVilleLivraison()).isEqualTo(UPDATED_VILLE_LIVRAISON);

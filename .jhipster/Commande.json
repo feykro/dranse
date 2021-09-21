@@ -1,7 +1,11 @@
 {
   "fields": [
     {
-      "fieldName": "date",
+      "fieldName": "dateCreation",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dateModification",
       "fieldType": "ZonedDateTime"
     },
     {

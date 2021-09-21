@@ -1,6 +1,8 @@
 package fr.dranse.myapp.repository;
 
 import fr.dranse.myapp.domain.Commande;
+import java.time.ZonedDateTime;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -18,4 +20,13 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
         countQuery = "select count(distinct categorie) from Categorie categorie"
     )
     Page<Commande> getHistory(@Param("id") Long id, Pageable pageable);
+
+    @Modifying
+    @Query(
+        value = "delete from Commande where utilisateur IS NULL AND (:tempsLimiteCreation > dateCreation OR :tempsLimiteModification > dateModification)"
+    )
+    void cleanIdsToDelete(
+        @Param("tempsLimiteCreation") ZonedDateTime tempsLimiteCreation,
+        @Param("tempsLimiteModification") ZonedDateTime tempsLimiteModification
+    );
 }
