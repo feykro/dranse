@@ -22,7 +22,6 @@ export class ProduitComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.livreId = params['livreId'];
     });
-    console.log(this.livreId);
     const bouquinRequest: Observable<HttpResponse<ILivre>> = <Observable<HttpResponse<ILivre>>>this.livreService.find(this.livreId);
     bouquinRequest.subscribe(value => {
       this.livreInfo = <ILivre>value.body;

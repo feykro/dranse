@@ -35,6 +35,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur save(Utilisateur utilisateur) {
         log.debug("Request to save Utilisateur : {}", utilisateur);
+        System.out.println("\n\nIn service.save : " + utilisateur.toString() + "\n\n");
         Utilisateur result = utilisateurRepository.save(utilisateur);
         utilisateurSearchRepository.save(result);
         return result;
@@ -106,5 +107,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Page<Utilisateur> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Utilisateurs for query {}", query);
         return utilisateurSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Override
+    public Optional<Utilisateur> utilisateurFromLogin(String login) {
+        return utilisateurRepository.utilisateurFromLogin(login);
     }
 }

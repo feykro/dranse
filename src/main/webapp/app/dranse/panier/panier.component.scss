@@ -9,14 +9,15 @@
 }
 
 .items-list {
+  border: solid black 0.1em;
   width: 100%;
   height: 100%;
-  background-color: coral;
   grid-area: 'items-list';
   overflow: scroll;
 }
 
 .bandeau-total {
+  border: solid black 0.1em;
   height: 100%;
   width: 100%;
   display: grid;
@@ -27,7 +28,7 @@
 .order-item {
   width: calc(100% - 20pt);
   height: 25, 6vh;
-  background-color: lightcoral;
+  background-color: lightblue;
   padding: 5pt 5pt 5pt 5pt;
   margin: 10pt 10pt 0pt 10pt;
 
@@ -44,6 +45,10 @@
   grid-area: 'order-item';
 }
 
+#cover-image:hover {
+  cursor: pointer;
+}
+
 #informations {
   grid-area: 'informations';
   #titre {
@@ -53,6 +58,35 @@
   #auteur {
     font-size: 20pt;
   }
+}
+
+.qte-container {
+  height: 100%;
+  width: 100%;
+  padding: 10pt 10pt 10pt 10pt;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qte {
+  border: solid black 0.1em;
+  height: 20pt;
+  width: 80pt;
+  background-color: whitesmoke;
+  display: -webkit-flex;
+  justify-content: space-around;
+  gap: 10pt;
+  align-items: center;
+
+  #item-qte {
+    font-size: 18pt;
+  }
+}
+
+.qte-button {
+  height: 100%;
+  width: 100%;
 }
 
 // === contenu bandeau ===

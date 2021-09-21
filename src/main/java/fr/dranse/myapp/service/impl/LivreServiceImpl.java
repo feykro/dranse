@@ -8,16 +8,15 @@ import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -35,7 +34,11 @@ public class LivreServiceImpl implements LivreService {
 
     private final CategorieRepository categorieRepository;
 
-    public LivreServiceImpl(LivreRepository livreRepository, LivreSearchRepository livreSearchRepository, CategorieRepository categorieRepository) {
+    public LivreServiceImpl(
+        LivreRepository livreRepository,
+        LivreSearchRepository livreSearchRepository,
+        CategorieRepository categorieRepository
+    ) {
         this.livreRepository = livreRepository;
         this.livreSearchRepository = livreSearchRepository;
         this.categorieRepository = categorieRepository;
@@ -46,12 +49,12 @@ public class LivreServiceImpl implements LivreService {
         log.debug("Request to save Livre : {}", livre);
         Set<Categorie> bufferSet = new HashSet<>();
         // todo: add robustness (don't allow cats that don't exist)
-        for (Categorie cat : livre.getLivre_cats()){
+        for (Categorie cat : livre.getLivre_cats()) {
             Categorie currentCat = categorieRepository.getOne(cat.getId());
             bufferSet.add(currentCat);
         }
         livre.getLivre_cats().clear();
-        for (Categorie cat : bufferSet){
+        for (Categorie cat : bufferSet) {
             livre.addLivre_cat(cat);
         }
         Livre result = livreRepository.save(livre);
@@ -137,17 +140,16 @@ public class LivreServiceImpl implements LivreService {
     @Override
     @Transactional(readOnly = true)
     public Page<Livre> findByTitle(Pageable pageable, String title) {
-        log.debug("Request to get Livre by author {}", title);
+        log.debug("Request to get Livre by title {}", title);
         return livreRepository.findAllWithTitle(pageable, title);
     }
 
-    /*@Override
+    @Override
     @Transactional(readOnly = true)
     public Page<Livre> findByCategorie(Pageable pageable, String categorie) {
-        log.debug("Request to get Livre by author {}", categorie);
-        return livreRepository.findAllWithTitle(pageable, categorie);
+        log.debug("Request to get Livre by categorie {}", categorie);
+        return livreRepository.findAllWithCat(pageable, categorie);
     }
-    */
 
     @Override
     public void delete(Long id) {
@@ -161,5 +163,21 @@ public class LivreServiceImpl implements LivreService {
     public Page<Livre> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Livres for query {}", query);
         return livreSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public Livre reserver(Long id, int quantite) {
+        Optional<Livre> opt = livreRepository.findById(id);
+        if (opt.isEmpty()) {
+            return null;
+        }
+        Livre livre = opt.get();
+        if (livre.getStock() >= quantite) {
+            livre.setStock(livre.getStock() - quantite);
+            return livreRepository.save(livre);
+        } else {
+            return null;
+        }
     }
 }
