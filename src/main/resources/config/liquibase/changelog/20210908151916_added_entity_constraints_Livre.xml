@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Livre.
+    -->
+    <changeSet id="20210908151916-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="livre_id"
+                                 baseTableName="rel_livre__livre_cat"
+                                 constraintName="fk_rel_livre__livre_cat__livre_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="livre"/>
+
+        <addForeignKeyConstraint baseColumnNames="livre_cat_id"
+                                 baseTableName="rel_livre__livre_cat"
+                                 constraintName="fk_rel_livre__livre_cat__livre_cat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categorie"/>
+        <loadData
+            file="config/liquibase/fake-data/livre_cat.csv"
+            separator=";"
+            tableName="rel_livre__livre_cat">
+            <column name="livre_id" type="numeric"/>
+            <column name="livre_cat_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

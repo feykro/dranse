@@ -1,0 +1,33 @@
+{
+  "fields": [
+    {
+      "fieldName": "quantite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "prixPaye",
+      "fieldType": "Float"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "commande",
+      "otherEntityName": "commande",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipName": "livre",
+      "otherEntityName": "livre",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "LigneCommande",
+  "changelogDate": "20210908145419"
+}

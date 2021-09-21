@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="utilisateur">
+      <h2 data-cy="utilisateurDetailsHeading"><span jhiTranslate="projetDranseApp.utilisateur.detail.title">Utilisateur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ utilisateur.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.adrRue">Adr Rue</span></dt>
+        <dd>
+          <span>{{ utilisateur.adrRue }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.adrCodePostal">Adr Code Postal</span></dt>
+        <dd>
+          <span>{{ utilisateur.adrCodePostal }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.adrPays">Adr Pays</span></dt>
+        <dd>
+          <span>{{ utilisateur.adrPays }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.adrVille">Adr Ville</span></dt>
+        <dd>
+          <span>{{ utilisateur.adrVille }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ utilisateur.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.numCB">Num CB</span></dt>
+        <dd>
+          <span>{{ utilisateur.numCB }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.utilisateur.userP">User P</span></dt>
+        <dd>
+          <span>{{ utilisateur.userP?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/utilisateur', utilisateur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

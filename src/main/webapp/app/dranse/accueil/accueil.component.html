@@ -1,0 +1,25 @@
+<div class="welcomePage">
+  <div id="topSection">
+    <p id="topTitle">Best Sellers</p>
+    <div id="bestSellers">
+      <div class="bookCard" *ngFor="let book of bestSellers" (click)="navigate(book.id! - 1)" outerLinkActive="router-link-active">
+        <div id="bookImage">
+          <img id="coverTest" src="https://storage.googleapis.com/bucketdranse/pictures/ {{ book.urlImage }}" />
+        </div>
+        <div id="bookTitle">{{ book.titre }}</div>
+        <div id="bookAuthor">{{ book.auteur }}</div>
+        <div id="bookPrice">{{ book.prix }}€</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bottomSection">
+    <p id="botTitle">Catégories</p>
+    <div id="categories">
+      <div class="catCard" *ngFor="let categorie of popularCategories">
+        <p id="catName">{{ categorie.nom }}</p>
+        <!--{{categorie.nom}}-->
+      </div>
+    </div>
+  </div>
+</div>

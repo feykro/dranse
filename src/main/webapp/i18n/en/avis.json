@@ -1,0 +1,30 @@
+{
+  "projetDranseApp": {
+    "avis": {
+      "home": {
+        "title": "Avis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Avis",
+        "createOrEditLabel": "Create or edit a Avis",
+        "search": "Search for Avis",
+        "notFound": "No Avis found"
+      },
+      "created": "A new Avis is created with identifier {{ param }}",
+      "updated": "A Avis is updated with identifier {{ param }}",
+      "deleted": "A Avis is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Avis {{ id }}?"
+      },
+      "detail": {
+        "title": "Avis"
+      },
+      "id": "ID",
+      "note": "Note",
+      "commentaire": "Commentaire",
+      "datePublication": "Date Publication",
+      "affiche": "Affiche",
+      "livre": "Livre",
+      "utilisateur": "Utilisateur"
+    }
+  }
+}

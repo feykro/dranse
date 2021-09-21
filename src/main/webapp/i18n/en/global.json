@@ -7,6 +7,12 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "utilisateur": "Utilisateur",
+        "commande": "Commande",
+        "ligneCommande": "Ligne Commande",
+        "livre": "Livre",
+        "categorie": "Categorie",
+        "avis": "Avis",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -137,5 +143,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": ""
 }

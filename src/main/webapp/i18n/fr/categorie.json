@@ -1,0 +1,27 @@
+{
+  "projetDranseApp": {
+    "categorie": {
+      "home": {
+        "title": "Categories",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Categorie",
+        "createOrEditLabel": "Créer ou éditer un Categorie",
+        "search": "Recherche pour Categorie",
+        "notFound": "Aucun Categorie trouvé"
+      },
+      "created": "Un nouveau Categorie a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Categorie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Categorie avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Categorie {{ id }} ?"
+      },
+      "detail": {
+        "title": "Categorie"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "description": "Description",
+      "livre": "Livre"
+    }
+  }
+}
