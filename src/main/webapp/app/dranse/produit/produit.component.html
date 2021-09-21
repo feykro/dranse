@@ -10,8 +10,11 @@
     <p class="auteur">{{ livreInfo.auteur }}</p>
   </div>
   <div class="extra-info">
-    <div class="edition">Edition<br />{{ livreInfo.edition }}</div>
-    <div class="annee-publication">Annee de publiccation<br />{{ livreInfo.anneePublication }}</div>
+    <div class="categories">
+      <b>Catégories</b><br />
+      <div class="cat" *ngFor="let categorie of livreInfo.livre_cats">{{ categorie.nom }}</div>
+    </div>
+    <div class="annee-publication"><b>Annee de publiccation</b><br />{{ livreInfo.anneePublication }}</div>
   </div>
 </div>
 <div class="prix-button">
