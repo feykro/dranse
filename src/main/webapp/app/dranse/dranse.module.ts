@@ -7,9 +7,17 @@ import { PanierComponent } from './panier/panier.component';
 import { PageRechercheComponent } from './page-recherche/page-recherche.component';
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationachatComponent } from './confirmationachat/confirmationachat.component';
 
 @NgModule({
-  declarations: [ProduitComponent, AccueilComponent, PanierComponent, FormspaiementComponent, PageRechercheComponent],
+  declarations: [
+    ProduitComponent,
+    AccueilComponent,
+    PanierComponent,
+    FormspaiementComponent,
+    ConfirmationachatComponent,
+    PageRechercheComponent,
+  ],
   imports: [CommonModule, DranseRoutingModule, FormsModule],
 })
 export class DranseModule {}
