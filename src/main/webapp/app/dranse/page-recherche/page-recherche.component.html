@@ -13,4 +13,10 @@
       </div>
     </div>
   </div>
+
+  <div class="page-navigation-area">
+    <button id="navButton" *ngIf="pageRecherche > 1">Page Precedente</button>
+    <div id="affichage-current">{{ pageRecherche }}</div>
+    <button id="navButton">Page Suivante</button>
+  </div>
 </div>

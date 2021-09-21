@@ -1,17 +1,15 @@
 $card-color: lightblue;
 $hover-border-color: rgb(245, 205, 130);
 
+//  === Zones d'affichage ===
 .page-recherche {
-  height: 90vh;
   width: 100%;
 }
 
 .resultats-area {
-  height: 90vh;
   width: 100%;
   background-color: whitesmoke;
-  display: grid;
-  grid-template-rows: 60pt calc(100% - 60pt);
+  display: list-item block;
 }
 
 .result-title {
@@ -23,8 +21,9 @@ $hover-border-color: rgb(245, 205, 130);
 .liste-resultats {
   height: 100%;
   width: 100%;
-  overflow: scroll;
 }
+
+//  === Carte resultat ===
 
 .carte-resultat {
   height: 200pt;
@@ -84,4 +83,32 @@ $hover-border-color: rgb(245, 205, 130);
 .carte-resultat:hover {
   border: solid $hover-border-color 0.1em;
   cursor: pointer;
+}
+
+//  === zone navigation page ===
+.page-navigation-area {
+  width: 100%;
+  height: 50pt;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  border: solid black 0.1em;
+  border-radius: 15pt;
+
+  margin-top: 15pt;
+
+  #navButton {
+    margin-left: 20pt;
+    margin-right: 20pt;
+
+    width: 100pt;
+    height: 22pt;
+  }
+
+  #affichage-current {
+    font-size: 18pt;
+    margin-left: 0;
+  }
 }

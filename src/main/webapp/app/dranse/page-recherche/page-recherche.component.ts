@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetBookControllerRessourceService } from '../service/get-book-controller-ressource.service';
 import { HttpResponse } from '@angular/common/http';
 import { ILivre } from 'app/entities/livre/livre.model';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-recherche',
