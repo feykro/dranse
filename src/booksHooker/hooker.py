@@ -92,11 +92,11 @@ def hookBook():
                         edition   = 1
                         urlImage  = (book['volumeInfo']['imageLinks']['thumbnail']).split('/')[-1]
                         stock     = randint(0,25) * randint(1,5)
-
+                        nameImage = (urlImage.split('=')[1].split('&'))[0].lower()+'.jpeg'
                         # save data
-                        saveBook(id,titre,auteur,prix,synopsis,edition,Date,editeur,urlImage,stock)
+                        saveBook(id,titre,auteur,prix,synopsis,edition,Date,editeur,nameImage,stock)
                         saveCategory(dictionaryCategories,categorie,id)
-                        saveImage(urlImage,os.path.join('data/pictures',(urlImage.split('=')[1].split('&'))[0].lower())+'.jpeg')
+                        saveImage(urlImage,os.path.join('data/pictures',nameImage))
                         nbFind+=1
                         id+=1
                         bar()
@@ -120,6 +120,8 @@ if __name__ == "__main__":
 bookFile.close()
 categorieFile.close()
 livre_catFile.close()
+
+
 
 
 
