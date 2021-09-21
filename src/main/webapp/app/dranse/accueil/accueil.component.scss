@@ -1,6 +1,5 @@
 $main-color: #add8e6;
 $accent-color: #f1f2de;
-
 // ==== Gestion des cartes ======
 .bookCard {
   display: grid;
@@ -9,16 +8,10 @@ $accent-color: #f1f2de;
   min-width: 220px;
   min-height: 300px;
   height: 37vh;
-
   border-radius: 15pt;
-
   grid-template-columns: 1fr;
   grid-template-rows: 60fr 15fr 13fr 17fr;
-  grid-template-areas:
-    'bookImage'
-    'bookTitle'
-    'bookAuthor'
-    'bookPrice';
+  grid-template-areas: 'bookImage' 'bookTitle' 'bookAuthor' 'bookPrice';
 }
 
 .bookCard:hover {
@@ -39,7 +32,6 @@ $accent-color: #f1f2de;
   font-weight: bold;
   max-height: 15%;
   vertical-align: middle;
-
   height: 100%;
   max-height: 100%;
   grid-area: bookTitle;
@@ -51,7 +43,6 @@ $accent-color: #f1f2de;
   max-height: 10%;
   vertical-align: middle;
   padding-left: 7px;
-
   height: 100%;
   max-height: 100%;
   grid-area: bookAuthor;
@@ -64,7 +55,6 @@ $accent-color: #f1f2de;
   max-height: 15%;
   vertical-align: middle;
   padding-left: 7px;
-
   height: 100%;
   max-height: 100%;
   grid-area: bookPrice;
@@ -78,18 +68,14 @@ $accent-color: #f1f2de;
   background-color: $accent-color;
   border-radius: 50%;
   border: solid black 0.1em;
-
   text-align: center;
-
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
-
   #catName {
     display: table-cell;
     vertical-align: middle;
-
     word-wrap: normal;
     font-size: 18pt;
   }
@@ -109,9 +95,7 @@ $accent-color: #f1f2de;
   min-height: 1000px;
   grid-template-columns: 1fr;
   grid-template-rows: 0.5fr 0.5fr;
-  grid-template-areas:
-    'topSection'
-    'bottomSection';
+  grid-template-areas: 'topSection' 'bottomSection';
   grid-gap: 0.2rem;
   color: #004d40;
 }
@@ -124,17 +108,13 @@ $accent-color: #f1f2de;
   display: grid;
   height: 50vh;
   min-height: 440px;
-
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 0.8fr;
   grid-gap: 0.2rem;
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-
-  grid-template-areas:
-    'topTitle'
-    'bestSellers';
+  grid-template-areas: 'topTitle' 'bestSellers';
 }
 
 #bestSellers {
@@ -151,9 +131,7 @@ $accent-color: #f1f2de;
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-
-  overflow: scroll;
-
+  overflow-x: scroll;
   grid-template-areas: 'bookCard1 bookCard2 bookCard3 bookCard4 bookCard5';
 }
 
@@ -181,10 +159,7 @@ $accent-color: #f1f2de;
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
-
-  grid-template-areas:
-    'botTitle'
-    'categories';
+  grid-template-areas: 'botTitle' 'categories';
 }
 
 #categories {
@@ -198,7 +173,6 @@ $accent-color: #f1f2de;
   grid-template-rows: 0.5fr 0.5;
   grid-gap: 0.2rem;
   padding: 5px 5px 5px 5px;
-
   overflow-x: scroll;
   overflow-y: visible;
 }
@@ -212,9 +186,11 @@ $accent-color: #f1f2de;
   padding: 10px 0px 0px 10px;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
+
 #coverTest {
   height: 22.2vh;
 }
+
 img {
   max-height: 100%;
   max-width: 100%;
