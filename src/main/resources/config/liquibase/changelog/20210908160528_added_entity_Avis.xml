@@ -29,7 +29,7 @@
             <column name="livre_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="utilisateur_id" type="bigint">
+            <column name="utilisateur_userp_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

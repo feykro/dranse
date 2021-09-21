@@ -2,49 +2,13 @@
   <div id="topSection">
     <p id="topTitle">Best Sellers</p>
     <div id="bestSellers">
-      <div (click)="navigate(bestSellers[0].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard1">
+      <div class="bookCard" *ngFor="let book of bestSellers" (click)="navigate(book.id! - 1)" outerLinkActive="router-link-active">
         <div id="bookImage">
           <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
         </div>
-        <div id="bookTitle">{{ bestSellers[0].titre }}</div>
-        <div id="bookAuthor">{{ bestSellers[0].auteur }}</div>
-        <div id="bookPrice">{{ bestSellers[0].prix }}€</div>
-      </div>
-
-      <div (click)="navigate(bestSellers[1].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard2">
-        <div id="bookImage">
-          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
-        </div>
-        <div id="bookTitle">{{ bestSellers[1].titre }}</div>
-        <div id="bookAuthor">{{ bestSellers[1].auteur }}</div>
-        <div id="bookPrice">{{ bestSellers[1].prix }}€</div>
-      </div>
-
-      <div (click)="navigate(bestSellers[2].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard3">
-        <div id="bookImage">
-          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
-        </div>
-        <div id="bookTitle">{{ bestSellers[2].titre }}</div>
-        <div id="bookAuthor">{{ bestSellers[2].auteur }}</div>
-        <div id="bookPrice">{{ bestSellers[2].prix }}€</div>
-      </div>
-
-      <div (click)="navigate(bestSellers[3].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard4">
-        <div id="bookImage">
-          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
-        </div>
-        <div id="bookTitle">{{ bestSellers[3].titre }}</div>
-        <div id="bookAuthor">{{ bestSellers[3].auteur }}</div>
-        <div id="bookPrice">{{ bestSellers[3].prix }}€</div>
-      </div>
-
-      <div (click)="navigate(bestSellers[4].id! - 1)" routerLinkActive="router-link-active" class="bookCard" id="bookCard5">
-        <div id="bookImage">
-          <img id="coverTest" src="https://www.aproposdecriture.com/wp-content/uploads/2018/02/marche-livre-prepare-mutation-F.jpg" />
-        </div>
-        <div id="bookTitle">{{ bestSellers[4].titre }}</div>
-        <div id="bookAuthor">{{ bestSellers[4].auteur }}</div>
-        <div id="bookPrice">{{ bestSellers[4].prix }}€</div>
+        <div id="bookTitle">{{ book.titre }}</div>
+        <div id="bookAuthor">{{ book.auteur }}</div>
+        <div id="bookPrice">{{ book.prix }}€</div>
       </div>
     </div>
   </div>
@@ -52,18 +16,10 @@
   <div id="bottomSection">
     <p id="botTitle">Catégories</p>
     <div id="categories">
-      <div class="catCard" id="catCard1">Catégorie 1</div>
-      <div class="catCard" id="catCard2">Catégorie 2</div>
-      <div class="catCard" id="catCard3">Catégorie 3</div>
-      <div class="catCard" id="catCard4">Catégorie 4</div>
-      <div class="catCard" id="catCard5">Catégorie 5</div>
-      <div class="catCard" id="catCard6">Catégorie 6</div>
-      <div class="catCard" id="catCard1">Catégorie A</div>
-      <div class="catCard" id="catCard2">Catégorie B</div>
-      <div class="catCard" id="catCard3">Catégorie C</div>
-      <div class="catCard" id="catCard4">Catégorie D</div>
-      <div class="catCard" id="catCard5">Catégorie E</div>
-      <div class="catCard" id="catCard6">Catégorie F</div>
+      <div class="catCard" *ngFor="let categorie of popularCategories">
+        <p id="catName">{{ categorie.nom }}</p>
+        <!--{{categorie.nom}}-->
+      </div>
     </div>
   </div>
 </div>

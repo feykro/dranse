@@ -6,7 +6,7 @@ export interface ICommande {
   id?: number;
   date?: dayjs.Dayjs | null;
   paysLivraison?: string | null;
-  codePostalLivraison?: number | null;
+  codePostalLivraison?: string | null;
   villeLivraison?: string | null;
   rueLivraison?: string | null;
   nomLivraison?: string | null;
@@ -25,7 +25,7 @@ export class Commande implements ICommande {
     public id?: number,
     public date?: dayjs.Dayjs | null,
     public paysLivraison?: string | null,
-    public codePostalLivraison?: number | null,
+    public codePostalLivraison?: string | null,
     public villeLivraison?: string | null,
     public rueLivraison?: string | null,
     public nomLivraison?: string | null,

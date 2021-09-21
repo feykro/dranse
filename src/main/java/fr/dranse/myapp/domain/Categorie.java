@@ -31,7 +31,7 @@ public class Categorie implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "livre_cats", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "livre_cats")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "livre_cats" }, allowSetters = true)
     private Set<Livre> livres = new HashSet<>();
@@ -92,7 +92,7 @@ public class Categorie implements Serializable {
     }
 
     public Categorie removeLivre(Livre Livre) {
-        System.out.println("We currently are removing \n"  + Livre + "\n from \n" + this.livres);
+        System.out.println("We currently are removing \n" + Livre + "\n from \n" + this.livres);
         boolean n = this.livres.remove(Livre);
         System.out.println("\nHere is the resulting set :\n " + this.livres + " \nit was a\n " + n);
         Livre.getLivre_cats().remove(this);
