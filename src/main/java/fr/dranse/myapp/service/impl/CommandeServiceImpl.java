@@ -210,6 +210,36 @@ public class CommandeServiceImpl implements CommandeService {
         return commandeRepository.save(commande);
     }
 
+    public Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite) {
+        Optional<Commande> opt = commandeRepository.findById(idCommande);
+        if (opt.isEmpty()) {
+            return null;
+        }
+        Commande commande = opt.get();
+        boolean newLivre = true;
+        for (LigneCommande ligne : commande.getLigneCommandes()) {
+            if (ligne.getLivre().getId() == idLivre) {
+                newLivre = false;
+                if (ligne.getQuantite() != quantite) {
+                    if(livreService.reserver(idLivre, quantite) != null){
+                        ligne.updateQuantite(quantite + ligne.getQuantite());
+                        ligneCommandeRepository.save(ligne);
+                    }
+                }
+            }
+        }
+        if (newLivre) { // creation d'une nouvelle ligneCommande
+            LigneCommande ligneCommande = new LigneCommande();
+            Livre livre = livreService.reserver(idLivre, quantite);
+            if(livre != null){
+                ligneCommande.setLivreQuantite(livre, quantite);
+                commande.addLigneCommande(ligneCommande);
+                ligneCommandeRepository.save(ligneCommande);
+            }
+        }
+        return commandeRepository.save(commande);
+    }
+
     public Page<Commande> getHistory(Long id, Pageable pageable) {
         return commandeRepository.getHistory(id, pageable);
     }

@@ -94,6 +94,7 @@ public interface CommandeService {
      * @return
      */
     Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite);
+    Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite);
 
     /**
      * return the history of commands of an user
