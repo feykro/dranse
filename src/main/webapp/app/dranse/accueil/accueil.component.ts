@@ -1,3 +1,4 @@
+import { Search } from './../../core/request/request.model';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ICategorie } from './../../entities/categorie/categorie.model';
 import { CategorieService } from './../../entities/categorie/service/categorie.service';
@@ -56,5 +57,9 @@ export class AccueilComponent implements OnInit {
       console.log('WWWWW wwwww WWWWWW');
       console.log(this.popularCategories[4].nom);
     });
+  }
+
+  gotoSearch(cat: string): void {
+    this.router.navigate(['/recherche', 'cat', 1, cat]);
   }
 }

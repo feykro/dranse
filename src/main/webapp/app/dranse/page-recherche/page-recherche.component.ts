@@ -1,4 +1,9 @@
+import { Observable } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { GetBookControllerRessourceService } from '../service/get-book-controller-ressource.service';
+import { HttpResponse } from '@angular/common/http';
+import { ILivre } from 'app/entities/livre/livre.model';
 
 @Component({
   selector: 'jhi-recherche',
@@ -7,22 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageRechercheComponent implements OnInit {
   resultats: resultatItem[] = [];
-  //todo: récupérer la recherche dans l'url or something
+  livrePage: ILivre[] = [];
 
-  constructor() {
+  pageSize = 20;
+
+  typeRecherche!: string; //  aut ou cat
+  pageRecherche!: number;
+  argumentRecherche!: string; //  nom du livre ou de l'auteur
+
+  constructor(private activeRoute: ActivatedRoute, private getBookController: GetBookControllerRessourceService) {
     //  shutting down warnings
-
     const b = 0;
   }
 
   ngOnInit(): void {
-    this.fakeResultsGen();
-    const a = 0;
-  }
+    //this.fakeResultsGen();
 
-  resultGeneration(): void {
-    //  step 1 : connect to API
-    //  step 2 : get n-th top result
+    this.activeRoute.params.subscribe((params: Params) => {
+      this.typeRecherche = params['type'];
+      this.pageRecherche = params['page'];
+      this.argumentRecherche = params['arg'];
+    });
+
+    //  todo: mettre des tests et des valeurs par défaut pour la robustesse
+
+    const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
+      this.getBookController.getPageParCategorie(this.argumentRecherche, this.pageRecherche, this.pageSize)
+    );
+    livreRqst.subscribe(data => (this.livrePage = <ILivre[]>data.body));
   }
 
   fakeResultsGen(): void {

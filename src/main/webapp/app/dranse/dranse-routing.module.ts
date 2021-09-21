@@ -29,7 +29,7 @@ const dranseRoute: Routes = [
     component: AccueilComponent,
   },
   {
-    path: 'recherche',
+    path: 'recherche/?type?page:arg',
     component: PageRechercheComponent,
   },
 ];

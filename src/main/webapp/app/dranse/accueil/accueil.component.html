@@ -16,7 +16,7 @@
   <div id="bottomSection">
     <p id="botTitle">Catégories</p>
     <div id="categories">
-      <div class="catCard" *ngFor="let categorie of popularCategories">
+      <div class="catCard" *ngFor="let categorie of popularCategories" (click)="gotoSearch(categorie.nom!)">
         <p id="catName">{{ categorie.nom }}</p>
         <!--{{categorie.nom}}-->
       </div>
