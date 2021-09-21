@@ -10,6 +10,8 @@ $accent-color: #f1f2de;
   min-height: 300px;
   height: 37vh;
 
+  border-radius: 15pt;
+
   grid-template-columns: 1fr;
   grid-template-rows: 60fr 15fr 13fr 17fr;
   grid-template-areas:
@@ -20,7 +22,8 @@ $accent-color: #f1f2de;
 }
 
 .bookCard:hover {
-  border: solid lightblue 0.1em;
+  //border: solid lightblue 0.1em;
+  border: solid rgb(245, 205, 130) 0.1em;
   cursor: pointer;
 }
 
@@ -71,7 +74,8 @@ $accent-color: #f1f2de;
   display: table;
   width: 180px;
   height: 180px;
-  background-color: #dddddd;
+  //background-color: #dddddd;
+  background-color: $accent-color;
   border-radius: 50%;
   border: solid black 0.1em;
 
@@ -89,6 +93,12 @@ $accent-color: #f1f2de;
     word-wrap: normal;
     font-size: 18pt;
   }
+}
+
+.catCard:hover {
+  cursor: pointer;
+  //border: solid lightblue 0.1em;
+  border: solid rgb(245, 205, 130) 0.1em;
 }
 
 // ==== Style des grandes sections =====
@@ -128,9 +138,9 @@ $accent-color: #f1f2de;
 }
 
 #bestSellers {
-  background-color: $accent-color;
+  //background-color: $accent-color;
   grid-area: bestSellers;
-  border: solid black 0.1em;
+  //border: solid black 0.1em;
   display: grid;
   height: 39vh;
   min-height: 330px;
@@ -178,11 +188,11 @@ $accent-color: #f1f2de;
 }
 
 #categories {
-  background-color: $accent-color;
+  //background-color: $accent-color;
   height: 40vh;
   min-height: 400px;
   grid-area: categories;
-  border: solid black 0.1em;
+  //border: solid black 0.1em;
   display: grid;
   grid-template-columns: 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
   grid-template-rows: 0.5fr 0.5;

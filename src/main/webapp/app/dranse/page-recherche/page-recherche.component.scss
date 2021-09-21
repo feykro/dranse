@@ -1,20 +1,15 @@
+$card-color: lightblue;
+$hover-border-color: rgb(245, 205, 130);
+
 .page-recherche {
   height: 90vh;
   width: 100%;
-  display: grid;
-  grid-template-columns: 15% 85%;
-}
-
-.filtres {
-  height: 90vh;
-  width: 100%;
-  background-color: lightcoral;
 }
 
 .resultats-area {
   height: 90vh;
   width: 100%;
-  background-color: lightblue;
+  background-color: whitesmoke;
   display: grid;
   grid-template-rows: 60pt calc(100% - 60pt);
 }
@@ -34,8 +29,12 @@
 .carte-resultat {
   height: 200pt;
   width: calc(100% - 20pt);
+  border-radius: 25pt;
+
+  border: solid black 0.1em;
+
   min-width: 600pt;
-  background-color: lightgray;
+  background-color: $card-color;
   margin-top: 10pt;
   margin-left: 10pt;
   margin-right: 10pt;
@@ -52,6 +51,7 @@
   }
 
   #card-cover {
+    margin-left: 25pt;
     height: 100%;
     object-fit: cover;
   }
@@ -59,7 +59,29 @@
   #informations {
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-rows: 50% 25% 25%;
+    display: list-item block;
+    //grid-template-rows: 60% 40%;
+
+    #card-title {
+      font-size: 20pt;
+      font-weight: bold;
+    }
+
+    #card-author {
+      font-size: 16pt;
+    }
   }
+
+  #card-price {
+    display: -webkit-flex;
+    font-size: 20pt;
+    justify-content: left;
+    justify-items: left;
+    margin: auto;
+  }
+}
+
+.carte-resultat:hover {
+  border: solid $hover-border-color 0.1em;
+  cursor: pointer;
 }

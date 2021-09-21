@@ -1,17 +1,15 @@
 <div class="page-recherche">
-  <div class="filtres">Donc ici on met les filtres</div>
   <div class="resultats-area">
-    <div class="result-title">Résultats pour : "Insérer ici le recherche, catégories etc..."</div>
+    <div class="result-title">{{ titlePage }}</div>
 
     <div class="liste-resultats">
-      <div class="carte-resultat" *ngFor="let item of livrePage">
-        <img id="card-cover" src="{{ item.urlImage }}" />
+      <div class="carte-resultat" *ngFor="let item of livrePage" (click)="gotoLivre(item.id)">
+        <img id="card-cover" src="https://storage.googleapis.com/bucketdranse/pictures/ {{ item.urlImage }}" />
         <div id="informations">
           <div id="card-title">{{ item.titre }}</div>
           <div id="card-author">{{ item.auteur }}</div>
-          <div id="card-genre">{{ item.livre_cats }}</div>
         </div>
-        <div id="card-price">{{ item.prix }}</div>
+        <div id="card-price">{{ item.prix }}€</div>
       </div>
     </div>
   </div>

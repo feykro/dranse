@@ -1,5 +1,6 @@
+import { ICategorie } from './../../entities/categorie/categorie.model';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { GetBookControllerRessourceService } from '../service/get-book-controller-ressource.service';
 import { HttpResponse } from '@angular/common/http';
@@ -19,8 +20,9 @@ export class PageRechercheComponent implements OnInit {
   typeRecherche!: string; //  aut ou cat
   pageRecherche!: number;
   argumentRecherche!: string; //  nom du livre ou de l'auteur
+  titlePage = 'Résultat pour: ';
 
-  constructor(private activeRoute: ActivatedRoute, private getBookController: GetBookControllerRessourceService) {
+  constructor(private activeRoute: ActivatedRoute, private getBookController: GetBookControllerRessourceService, private router: Router) {
     //  shutting down warnings
     const b = 0;
   }
@@ -32,8 +34,11 @@ export class PageRechercheComponent implements OnInit {
       this.typeRecherche = params['type'];
       this.pageRecherche = params['page'];
       this.argumentRecherche = params['arg'];
-      console.log('WWW --- WWWW---- WWWW');
-      console.log(this.typeRecherche, this.pageRecherche, this.argumentRecherche);
+
+      if (this.typeRecherche === 'cat') {
+        this.titlePage = this.titlePage + '(catégorie) ';
+      }
+      this.titlePage = this.titlePage + this.argumentRecherche;
     });
 
     //  todo: mettre des tests et des valeurs par défaut pour la robustesse
@@ -42,6 +47,10 @@ export class PageRechercheComponent implements OnInit {
       this.getBookController.getPageParCategorie(this.argumentRecherche, this.pageRecherche, this.pageSize)
     );
     livreRqst.subscribe(data => (this.livrePage = <ILivre[]>data.body));
+  }
+
+  gotoLivre(bookID?: number): void {
+    this.router.navigate(['/produit', bookID]);
   }
 
   fakeResultsGen(): void {
