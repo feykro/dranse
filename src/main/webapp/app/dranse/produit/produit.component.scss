@@ -1,10 +1,11 @@
 .image-livre {
-  width: 25%;
+  height: 200pt;
 }
 
 .infos {
   display: inline-block;
   vertical-align: top;
+  margin-left: 15pt;
   width: 45%;
   min-width: 400px;
 }
@@ -41,13 +42,17 @@
   height: 75px;
 }
 
-.edition {
+.categories {
   display: inline-block;
   padding-top: 15px;
   text-align: center;
   font-size: 15px;
   height: 100%;
   width: 49%;
+}
+
+.cat {
+  text-align: center;
 }
 
 .annee-publication {

@@ -1,0 +1,29 @@
+.all {
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  height: 70%;
+  width: 100%;
+  display: -webkit-flex;
+  justify-content: center;
+}
+
+.img {
+  height: 50vh;
+}
+
+.text {
+  height: 30%;
+  width: 100%;
+  text-align: center;
+  vertical-align: top;
+  font-size: 30px;
+}
+
+.button {
+  text-align: center;
+  width: 30ch;
+  height: 15vh;
+}

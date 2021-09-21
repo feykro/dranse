@@ -113,7 +113,7 @@ export class FormspaiementComponent implements OnInit {
   submit1(): void {
     const regexCP = /\d{5}/g;
     const regexNomPrenom = /[a-zA-Z]+/g;
-    if (regexCP.test(this.cpLivraison)) {
+    if (regexCP.test(this.cpLivraison) && this.cpLivraison.length === 5) {
       if (regexNomPrenom.test(this.nomLivraison)) {
         this.commande.nomLivraison = this.nomLivraison;
         this.commande.rueLivraison = this.adresseLivraison;
@@ -133,7 +133,7 @@ export class FormspaiementComponent implements OnInit {
   submit2(): void {
     const regexCP = /\d{5}/g;
     const regexNomPrenom = /[a-zA-Z]+/g;
-    if (regexCP.test(this.cpFacturation)) {
+    if (regexCP.test(this.cpFacturation) && this.cpFacturation.length === 5) {
       if (regexNomPrenom.test(this.nomFacturation)) {
         this.commande.codePostalFacturation = this.cpFacturation;
         this.commande.nomFacturation = this.nomFacturation;
@@ -153,8 +153,8 @@ export class FormspaiementComponent implements OnInit {
   submit3(): void {
     const regexnumCB = /(\d{16})|(\d{4}\s\d{4}\s\d{4}\s\d{4})/g;
     const regexdateExp = /\d{2}\/\d{2}/g;
-    const regexcrypto = /\d{2,3}/g;
-    if (regexnumCB.test(this.numCB)) {
+    const regexcrypto = /\d{3}/g;
+    if (regexnumCB.test(this.numCB) && this.numCB.replace(/\s/g, '').length === 16) {
       if (regexdateExp.test(this.dateExpiration)) {
         if (regexcrypto.test(this.cryptogramme)) {
           this.paiementDone = true;
@@ -186,9 +186,7 @@ export class FormspaiementComponent implements OnInit {
           this.commande.utilisateur = this.utilisateur;
           this.panierService.passerCommande(this.commande);
           this.panierService.clearId();
-          setTimeout(() => {
-            this.router.navigate(['']);
-          }, 5000);
+          this.router.navigate(['/confirmation']);
         }
       }
     }
