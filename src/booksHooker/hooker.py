@@ -96,7 +96,7 @@ def hookBook():
                         # save data
                         saveBook(id,titre,auteur,prix,synopsis,edition,Date,editeur,urlImage,stock)
                         saveCategory(dictionaryCategories,categorie,id)
-                        saveImage(urlImage,os.path.join('data/pictures',urlImage))
+                        saveImage(urlImage,os.path.join('data/pictures',(urlImage.split('=')[1].split('&'))[0].lower())+'.jpeg')
                         nbFind+=1
                         id+=1
                         bar()
