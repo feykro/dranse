@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProduitComponent } from './produit/produit.component';
 import { PanierComponent } from './panier/panier.component';
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
+import { UserRouteAccessService } from '../core/auth/user-route-access.service';
 
 const dranseRoute: Routes = [
   {
@@ -22,6 +23,7 @@ const dranseRoute: Routes = [
   {
     path: 'verification',
     component: FormspaiementComponent,
+    canActivate: [UserRouteAccessService],
   },
   {
     path: '',
