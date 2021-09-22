@@ -1,3 +1,4 @@
+import { PageRechercheComponent } from './page-recherche/page-recherche.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -39,6 +40,10 @@ const dranseRoute: Routes = [
   {
     path: '',
     component: AccueilComponent,
+  },
+  {
+    path: 'recherche/:type/:arg/:page',
+    component: PageRechercheComponent,
   },
 ];
 
