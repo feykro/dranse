@@ -66,7 +66,7 @@ public class Commande implements Serializable {
     @JsonIgnoreProperties(value = { "commandes", "userP" }, allowSetters = true)
     private Utilisateur utilisateur;
 
-    @OneToMany(mappedBy = "commande", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "commande", fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "commande" }, allowSetters = true)
     private Set<LigneCommande> ligneCommandes = new HashSet<>();

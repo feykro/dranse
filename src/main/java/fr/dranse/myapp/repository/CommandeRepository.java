@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
     @Query(
-        value = "select distinct commande from Commande commande where commande.utilisateur.id =:id",
+        value = "select distinct commande from Commande commande where commande.utilisateur =:id",
         countQuery = "select count(distinct categorie) from Categorie categorie"
     )
     Page<Commande> getHistory(@Param("id") Long id, Pageable pageable);

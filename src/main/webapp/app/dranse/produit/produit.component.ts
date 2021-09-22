@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { PanierService } from '../panier/panier.service';
 
-
-
 @Component({
   selector: 'jhi-produit',
   templateUrl: './produit.component.html',
@@ -18,8 +16,7 @@ export class ProduitComponent implements OnInit {
   public livreId = 0;
   public livreInfo!: ILivre;
 
-
-  constructor(private activatedRoute: ActivatedRoute, private livreService: LivreService, private panierService: PanierService) {   }
+  constructor(private activatedRoute: ActivatedRoute, private livreService: LivreService, private panierService: PanierService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {

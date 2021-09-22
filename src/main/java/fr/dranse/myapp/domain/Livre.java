@@ -9,8 +9,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import static javax.persistence.LockModeType.WRITE;
-
 /**
  * A Livre.
  */
@@ -54,11 +52,7 @@ public class Livre implements Serializable {
     @Column(name = "url_image")
     private String urlImage;
 
-    @Version
-    @Column(name = "version")
-    private Integer version;
-
-    @ManyToMany()
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
         name = "rel_livre__livre_cat",
