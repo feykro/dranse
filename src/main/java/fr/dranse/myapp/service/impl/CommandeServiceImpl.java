@@ -231,9 +231,20 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     public boolean commander(Commande commande) {
-        // todo check for null fields
-        commande.setPayee(true);
-        commandeRepository.save(commande);
+        Commande cmd = commandeRepository.getOne(commande.getId());
+        cmd.setPayee(true);
+        cmd.setUtilisateur(commande.getUtilisateur());
+        cmd.setPaysLivraison(commande.getPaysLivraison());
+        cmd.setCodePostalLivraison(commande.getCodePostalLivraison());
+        cmd.setVilleLivraison(commande.getVilleLivraison());
+        cmd.setRueLivraison(commande.getRueLivraison());
+        cmd.setNomLivraison(commande.getNomLivraison());
+        cmd.setPaysFacturation(commande.getPaysFacturation());
+        cmd.setCodePostalFacturation(commande.getCodePostalFacturation());
+        cmd.setVilleFacturation(commande.getVilleFacturation());
+        cmd.setRueFacturation(commande.getRueFacturation());
+        cmd.setNomFacturation(commande.getNomFacturation());
+        commandeRepository.save(cmd);
         return true;
     }
 }
