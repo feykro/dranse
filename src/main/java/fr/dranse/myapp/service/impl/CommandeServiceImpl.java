@@ -175,63 +175,55 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
 
-    // todo faire la difference entre ajouter et modifier !! (ajout = modifier avec ++)
-    // verifier si il ne decommande pas des livre non précedemment commandé
-    public Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite) {
-        Optional<Commande> opt = commandeRepository.findById(idCommande);
-        if (opt.isEmpty()) {
-            return null;
-        }
-        Commande commande = opt.get();
-        boolean newLivre = true;
-        for (LigneCommande ligne : commande.getLigneCommandes()) {
-            if (ligne.getLivre().getId() == idLivre) {
-                newLivre = false;
-                if (ligne.getQuantite() != quantite) {
-                    if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
-                        ligne.updateQuantite(quantite);
-                    }
-                }
-            }
-        }
-        if (newLivre) { // creation d'une nouvelle ligneCommande
-            LigneCommande ligneCommande = new LigneCommande();
-            Livre livre = livreService.reserver(idLivre, quantite);
-            if(livre != null){
-                ligneCommande.setLivreQuantite(livre, quantite);
-                commande.addLigneCommande(ligneCommande);
-            }
-            livreRepository.save(livre);
-        }
-        return commandeRepository.save(commande);
+    public Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite) {
+        return modifierOuAjouterLigneCommande(idCommande, idLivre, quantite, true);
     }
 
-    public Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite) {
+    public Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite) {
+        return modifierOuAjouterLigneCommande(idCommande, idLivre, quantite, false);
+    }
+
+    public Commande modifierOuAjouterLigneCommande(Long idCommande, Long idLivre, int quantite, boolean ajouter) {
         Optional<Commande> opt = commandeRepository.findById(idCommande);
         if (opt.isEmpty()) {
             return null;
         }
         Commande commande = opt.get();
-        boolean newLivre = true;
         for (LigneCommande ligne : commande.getLigneCommandes()) {
             if (ligne.getLivre().getId() == idLivre) {
-                newLivre = false;
-                if (ligne.getQuantite() != quantite) {
+                if(ajouter){
                     if(livreService.reserver(idLivre, quantite) != null){
                         ligne.updateQuantite(quantite + ligne.getQuantite());
+                        return commandeRepository.save(commande);
+                    }else{
+                        return null;
+                    }
+                }else{
+                    if (ligne.getQuantite() != quantite) {
+                        if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
+                            ligne.updateQuantite(quantite);
+                            if(ligne.getQuantite() == 0){
+                                commande.removeLigneCommande(ligne);
+                                ligneCommandeRepository.delete(ligne);
+                            }
+                            return commandeRepository.save(commande);
+                        }else{
+                            return null;
+                        }
                     }
                 }
             }
         }
-        if (newLivre) { // creation d'une nouvelle ligneCommande
-            LigneCommande ligneCommande = new LigneCommande();
-            Livre livre = livreService.reserver(idLivre, quantite);
-            if(livre != null){
-                ligneCommande.setLivreQuantite(livre, quantite);
-                commande.addLigneCommande(ligneCommande);
-            }
+        // creation d'une nouvelle ligneCommande
+        LigneCommande ligneCommande = new LigneCommande();
+        Livre livre = livreService.reserver(idLivre, quantite);
+        if(livre != null){
+            ligneCommande.setLivreQuantite(livre, quantite);
+            commande.addLigneCommande(ligneCommande);
+            return commandeRepository.save(commande);
+        }else{
+            return null;
         }
-        return commandeRepository.save(commande);
     }
 
     public Page<Commande> getHistory(Long id, Pageable pageable) {

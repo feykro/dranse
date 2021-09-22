@@ -37,9 +37,6 @@ export class PanierService {
       this.commandeService.getCommande(this.getPanierId())
     );
     commandeRequest.subscribe(value => {
-      if(value.body === null){
-        console.log("nooooooooooooooooooo\n\n\n")
-      }
       this.commande = <ICommande>value.body;
     });
     return this.commande;
