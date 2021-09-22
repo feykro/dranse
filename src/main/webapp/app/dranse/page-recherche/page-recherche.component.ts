@@ -43,7 +43,7 @@ export class PageRechercheComponent implements OnInit {
 
     this.activeRoute.params.subscribe((params: Params) => {
       this.typeRecherche = params['type'];
-      this.pageRecherche = params['page'];
+      this.pageRecherche = params['page'] - 1;
       this.argumentRecherche = params['arg'];
 
       if (this.typeRecherche === 'cat') {
@@ -82,7 +82,7 @@ export class PageRechercheComponent implements OnInit {
 
   gotoNext(): void {
     let numeroPage: number = +this.pageRecherche;
-    numeroPage += 1;
+    numeroPage += 2;
     const url = '/recherche/' + this.typeRecherche + '/' + this.argumentRecherche + '/' + numeroPage.toString();
     //this.router.navigate(['/recherche', this.typeRecherche, this.argumentRecherche, numeroPage.toString()]);
 
@@ -91,7 +91,7 @@ export class PageRechercheComponent implements OnInit {
 
   gotoPrevious(): void {
     this.router
-      .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche - 1])
+      .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche])
       .then(() => window.location.reload());
   }
 
