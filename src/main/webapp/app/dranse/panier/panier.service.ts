@@ -80,7 +80,7 @@ export class PanierService {
 
   modifierLigne(ligneCommande: ILigneCommande): Observable<HttpResponse<ICommande>> {
     const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
-      this.commandeService.ajoutLigneCommande(ligneCommande, this.getPanierId())
+      this.commandeService.modifierLigneCommande(ligneCommande, this.getPanierId())
     );
 
     return commandeRequest;
