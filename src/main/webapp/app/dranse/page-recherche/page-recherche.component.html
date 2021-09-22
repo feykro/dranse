@@ -2,6 +2,13 @@
   <div class="resultats-area">
     <div class="result-title">{{ titlePage }}</div>
 
+    <div class="page-navigation-area">
+      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche }}</div>
+      <button id="navButton" (click)="gotoNext()">Page Suivante</button>
+    </div>
+
     <div class="liste-resultats">
       <div class="carte-resultat" *ngFor="let item of livrePage" (click)="gotoLivre(item.id)">
         <img id="card-cover" src="https://storage.googleapis.com/bucketdranse/pictures/ {{ item.urlImage }}" />
@@ -17,7 +24,7 @@
   <div class="page-navigation-area">
     <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
 
-    <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '120pt' }">{{ pageRecherche }}</div>
+    <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche }}</div>
     <button id="navButton" (click)="gotoNext()">Page Suivante</button>
   </div>
 </div>
