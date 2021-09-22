@@ -1,8 +1,8 @@
-<div class="form-1">
-  <div class="progression-bar">
+<div class="form-1" xmlns:background="http://www.w3.org/1999/xhtml">
+  <div class="progression-bar" [style]="livraisonDone ? 'background:lightgreen' : 'background:lightgrey'">
     <div class="gauche">LIVRAISON</div>
     <div class="droite">
-      <button class="extend" (click)="showLivraison()">+</button>
+      <button class="extend" (click)="showLivraison()">&#10140;</button>
     </div>
   </div>
   <form class="formulaire" (submit)="submit1()" #profileForm [hidden]="livraison">
@@ -10,10 +10,9 @@
     <label> Nom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <label> Adresse : <input [name]="adresseLivraison" [(ngModel)]="adresseLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
-    <br />
     <label> Ville : <input [name]="villeLivraison" [(ngModel)]="villeLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Code Postal : <input [name]="cpLivraison" [(ngModel)]="cpLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
+    <label> Code Postal : <input [name]="cpLivraison" [(ngModel)]="cpLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <label> Pays : <input [name]="paysLivraison" [(ngModel)]="paysLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
@@ -21,10 +20,10 @@
 </div>
 <br />
 <div class="form-2">
-  <div class="progression-bar">
+  <div class="progression-bar" [style]="facturationDone ? 'background:lightgreen' : 'background:lightgrey'">
     <div class="gauche">FACTURATION</div>
     <div class="droite">
-      <button class="extend" (click)="showFacturation()">+</button>
+      <button class="extend" (click)="showFacturation()">&#10140;</button>
     </div>
   </div>
   <form class="formulaire" (submit)="submit2()" #profileForm [hidden]="facturation">
@@ -34,10 +33,9 @@
     <label>
       Adresse : <input [name]="adresseFacturation" [(ngModel)]="adresseFacturation" [ngModelOptions]="{ standalone: true }" />
     </label>
-    <br />
     <label> Ville : <input [name]="villeFacturation" [(ngModel)]="villeFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Code Postal : <input [name]="cpFacturation" [(ngModel)]="cpFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
+    <label> Code Postal : <input [name]="cpFacturation" [(ngModel)]="cpFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <label> Pays : <input [name]="paysFacturation" [(ngModel)]="paysFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
@@ -45,10 +43,10 @@
 </div>
 <br />
 <div class="form-3">
-  <div class="progression-bar">
+  <div class="progression-bar" [style]="paiementDone ? 'background:lightgreen' : 'background:lightgrey'">
     <div class="gauche">PAIEMENT</div>
     <div class="droite">
-      <button class="extend" (click)="showPaiement()">+</button>
+      <button class="extend" (click)="showPaiement()">&#10140;</button>
     </div>
   </div>
   <form class="formulaire" (submit)="submit3()" #profileForm [hidden]="paiement">

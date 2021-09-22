@@ -1,7 +1,11 @@
 <div class="all">
   <div class="items-list">
     <div class="order-item" *ngFor="let item of itemListCommande">
-      <img id="cover-image" src="{{ item.urlImage }}" (click)="gotoItem(item.identifiant)" />
+      <img
+        id="cover-image"
+        src="https://storage.googleapis.com/bucketdranse/pictures/ {{ item.urlImage }}"
+        (click)="gotoItem(item.identifiant)"
+      />
       <div id="informations">
         <div id="titre">{{ item.titre }}</div>
         <div id="auteur">{{ item.auteur }}</div>
