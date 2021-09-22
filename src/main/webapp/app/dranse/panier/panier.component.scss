@@ -1,3 +1,7 @@
+$theme-white: #edf2f3;
+$theme-light-blue: #afd8f2;
+$theme-dark-blue: #5289b5;
+
 //==== Containers =====
 .all {
   height: 80vh;
@@ -29,7 +33,7 @@
   width: calc(100% - 20pt);
   height: 25.6vh;
   min-height: 180pt;
-  background-color: lightblue;
+  background-color: $theme-light-blue;
   padding: 5pt 5pt 5pt 5pt;
   margin: 10pt 10pt 0pt 10pt;
   display: grid;
