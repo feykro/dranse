@@ -43,22 +43,32 @@ export class PageRechercheComponent implements OnInit {
 
     this.activeRoute.params.subscribe((params: Params) => {
       this.typeRecherche = params['type'];
-      this.pageRecherche = params['page'];
+      this.pageRecherche = params['page'] - 1;
       this.argumentRecherche = params['arg'];
 
       if (this.typeRecherche === 'cat') {
-        this.titlePage = this.titlePage + '(catégorie) ';
+        this.titlePage = this.titlePage + '(catégorie) ' + this.argumentRecherche;
+        this.populatePageCat();
+      } else {
+        this.titlePage = this.titlePage + this.argumentRecherche;
+        this.populatePageCherche();
       }
-      this.titlePage = this.titlePage + this.argumentRecherche;
     });
-
-    //  todo: mettre des tests et des valeurs par défaut pour la robustesse
-    this.populatePage();
   }
 
-  populatePage(): void {
+  populatePageCat(): void {
     const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
       this.getBookController.getPageParCategorie(this.argumentRecherche, this.pageRecherche, this.pageSize)
+    );
+    livreRqst.subscribe(data => {
+      this.livrePage = <ILivre[]>data.body;
+      this.nbResult = this.livrePage.length;
+    });
+  }
+
+  populatePageCherche(): void {
+    const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
+      this.getBookController.getPageRecherche(this.argumentRecherche, this.pageRecherche, this.pageSize)
     );
     livreRqst.subscribe(data => {
       this.livrePage = <ILivre[]>data.body;
@@ -72,7 +82,7 @@ export class PageRechercheComponent implements OnInit {
 
   gotoNext(): void {
     let numeroPage: number = +this.pageRecherche;
-    numeroPage += 1;
+    numeroPage += 2;
     const url = '/recherche/' + this.typeRecherche + '/' + this.argumentRecherche + '/' + numeroPage.toString();
     //this.router.navigate(['/recherche', this.typeRecherche, this.argumentRecherche, numeroPage.toString()]);
 
@@ -81,7 +91,7 @@ export class PageRechercheComponent implements OnInit {
 
   gotoPrevious(): void {
     this.router
-      .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche - 1])
+      .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche])
       .then(() => window.location.reload());
   }
 

@@ -1,11 +1,11 @@
 <div class="page-recherche">
-  <div class="resultats-area" *ngIf="nbResult > 0">
+  <div class="resultats-area" *ngIf="nbResult > 0 && pageRecherche >= 0">
     <div class="result-title">{{ titlePage }}</div>
 
     <div class="page-navigation-area">
-      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+      <button id="navButton" *ngIf="pageRecherche >= 1" (click)="gotoPrevious()">Page Precedente</button>
 
-      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche }}</div>
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche >= 1 ? '0pt' : '160pt' }">{{ pageRecherche + 1 }}</div>
       <button id="navButton" *ngIf="nbResult >= pageSize" (click)="gotoNext()">Page Suivante</button>
     </div>
 
@@ -21,14 +21,14 @@
     </div>
 
     <div class="page-navigation-area">
-      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+      <button id="navButton" *ngIf="pageRecherche >= 1" (click)="gotoPrevious()">Page Precedente</button>
 
-      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche }}</div>
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche >= 1 ? '0pt' : '160pt' }">{{ pageRecherche + 1 }}</div>
       <button id="navButton" *ngIf="nbResult >= pageSize" (click)="gotoNext()">Page Suivante</button>
     </div>
   </div>
 
-  <div class="display-error" *ngIf="nbResult <= 0">
+  <div class="display-error" *ngIf="nbResult <= 0 || pageRecherche < 0">
     <div id="error-message">Cette page est vide !</div>
     <button id="error-button" (click)="goBack()">Retourner en arrière</button>
     <button id="error-button" (click)="gotoHome()">Retourner à l'acceuil</button>

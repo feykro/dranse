@@ -15,12 +15,18 @@
   >
     <fa-icon icon="bars"></fa-icon>
   </a>
-  <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+  <div
+    class="navbar-collapse collapse"
+    id="navbarResponsive"
+    [ngbCollapse]="isNavbarCollapsed"
+    [ngSwitch]="account !== null"
+    (keydown.enter)="gotoRecherche()"
+  >
     <ul class="navbar-nav ml-auto">
       <!-- testing search bar -->
       <!-- TODO: ajuster la taille mieux, centrer, connecter au backend-->
       <li class="searchBarArea">
-        <input class="searchBar" placeholder="Rechercher" />
+        <input class="searchBar" placeholder="Rechercher" [(ngModel)]="searchBoxContent" [ngModelOptions]="{ standalone: true }" />
         <button class="searchButton" (click)="gotoRecherche()">
           <fa-icon icon="search" id="searchBarIcon"></fa-icon>
         </button>
@@ -234,7 +240,6 @@
               (click)="collapseNavbar()"
               data-cy="passwordItem"
             >
-
               <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
               <span jhiTranslate="global.menu.account.password">Password</span>
             </a>

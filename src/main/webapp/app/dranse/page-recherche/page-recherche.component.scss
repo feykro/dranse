@@ -48,13 +48,19 @@ $hover-border-color: rgb(245, 205, 130);
     height: 250pt;
     width: 200pt;
     display: -webkit-flex;
-    justify-items: left;
+    //justify-items: left;
+    justify-content: center;
+    vertical-align: middle;
   }
 
   #card-cover {
     margin-left: 25pt;
+    padding-top: 10pt;
+    padding-bottom: 10pt;
+    //height: calc(100% - 20pt);
     height: 100%;
     object-fit: cover;
+    vertical-align: middle;
   }
 
   #informations {
