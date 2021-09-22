@@ -43,7 +43,7 @@ export class PageRechercheComponent implements OnInit {
 
     this.activeRoute.params.subscribe((params: Params) => {
       this.typeRecherche = params['type'];
-      this.pageRecherche = params['page'];
+      this.pageRecherche = params['page'] - 1;
       this.argumentRecherche = params['arg'];
 
       if (this.typeRecherche === 'cat') {

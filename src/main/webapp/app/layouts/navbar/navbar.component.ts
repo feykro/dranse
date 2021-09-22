@@ -74,7 +74,6 @@ export class NavbarComponent implements OnInit {
   }
 
   gotoRecherche(): void {
-    //console.log(this.searchBoxContent);
     this.router.navigate(['/recherche', 'search', this.searchBoxContent, 1]);
   }
 }
