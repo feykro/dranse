@@ -1,11 +1,30 @@
+$theme-white: #edf2f3;
+$theme-light-blue: #afd8f2;
+$theme-dark-blue: #5289b5;
+
+.produit-div {
+  height: 90vh;
+  width: 100vw;
+  background-color: $theme-white;
+
+  margin-left: -10pt;
+  padding-right: 15pt;
+  padding-left: 15pt;
+}
+
 .image-livre {
   height: 250pt;
+}
+
+#image {
+  margin-top: 10pt;
+  margin-left: 20pt;
 }
 
 .infos {
   display: inline-block;
   vertical-align: top;
-  margin-left: 15pt;
+  margin-left: 25pt;
   width: 45%;
   min-width: 400px;
 }
@@ -33,22 +52,31 @@
 }
 
 .extra-info {
-  background-color: lightgrey;
+  background-color: $theme-dark-blue;
   border: solid 0.1em;
   border-color: black;
   width: 100%;
-  min-width: 400px;
+  min-width: 500px;
   min-height: 75px;
   height: 75px;
+
+  display: -webkit-flex;
+  justify-content: space-around;
+  vertical-align: middle;
 }
 
 .categories {
   display: inline-block;
-  padding-top: 15px;
+  //padding-top: 15px;
   text-align: center;
-  font-size: 15px;
+  font-size: 18pt;
+
+  font-weight: 400;
+
   height: 100%;
   width: 49%;
+
+  color: $theme-white;
 }
 
 .cat {
@@ -57,11 +85,13 @@
 
 .annee-publication {
   display: inline-block;
-  padding-top: 15px;
+  //padding-top: 15px;
   text-align: center;
-  font-size: 15px;
+  font-size: 18pt;
+  font-weight: 400;
   height: 100%;
   width: 49%;
+  color: $theme-white;
 }
 
 .prix {
@@ -74,10 +104,13 @@
 }
 
 .ajout-panier {
-  background-color: lightgreen;
+  background-color: $theme-dark-blue;
   border-color: black;
   width: 200px;
   height: 50px;
+
+  font-weight: 500;
+  color: $theme-white;
 }
 
 .ajout-panier:hover {
@@ -85,18 +118,26 @@
 }
 
 .ajout-panier:active {
-  background-color: rgba(144, 238, 144, 0.644);
+  background-color: $theme-light-blue;
 }
 
 .synopsis {
   font-size: 25px;
   font-weight: bolder;
+  margin-left: 5pt;
+  margin-right: 10pt;
+  margin-top: 10pt;
 }
 
 .synopsis-text {
   border: solid 0.1em;
   border-color: black;
-  background-color: lightgrey;
+
+  background-color: $theme-dark-blue;
+  color: $theme-white;
+  font-size: 16pt;
+  font-weight: 300;
+
   width: 100%;
   min-height: 150px;
   font-size: 20px;
