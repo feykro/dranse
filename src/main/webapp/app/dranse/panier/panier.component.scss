@@ -28,7 +28,7 @@
 .order-item {
   width: calc(100% - 20pt);
   height: 25.6vh;
-  min-height: 170pt;
+  min-height: 180pt;
   background-color: lightblue;
   padding: 5pt 5pt 5pt 5pt;
   margin: 10pt 10pt 0pt 10pt;
@@ -84,6 +84,13 @@
 .qte-button {
   height: 100%;
   width: 100%;
+}
+
+.price {
+  display: -webkit-flex;
+  justify-content: center;
+  gap: 30pt;
+  align-items: center;
 }
 
 // === contenu bandeau ===

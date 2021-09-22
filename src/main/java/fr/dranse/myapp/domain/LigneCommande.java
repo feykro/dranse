@@ -35,7 +35,7 @@ public class LigneCommande implements Serializable {
     @JsonIgnoreProperties(value = {"utilisateur", "ligneCommandes"}, allowSetters = true)
     private Commande commande;
 
-    @ManyToOne // todo: remove multiple fields of lignecommande
+    @ManyToOne(cascade = CascadeType.ALL) // todo: remove multiple fields of lignecommande
     @JsonIgnoreProperties(value = {"livre_cats"}, allowSetters = true)
     private Livre livre;
 

@@ -12,6 +12,7 @@ import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CommandeSearchRepository;
 import fr.dranse.myapp.service.CommandeService;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import fr.dranse.myapp.service.LivreService;
@@ -151,13 +152,10 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Override
     @Transactional()
-    public Commande newCommande(LigneCommande ligneCommande) {
+    public Commande newCommande(Long idLivre, int quantite) {
         Commande commande = new Commande();
-        commande.addLigneCommande(ligneCommande);
-        ligneCommande.setCommande(commande);
-        Commande result = commandeRepository.save(commande);
-        ligneCommandeRepository.save(ligneCommande);
-        return result;
+        commande = commandeRepository.save(commande);
+        return ajouterLigneCommande(commande.getId(), idLivre, quantite);
     }
 
     @Override
@@ -165,7 +163,6 @@ public class CommandeServiceImpl implements CommandeService {
     public Commande ajouterLigne(Long id, LigneCommande ligneCommande) {
         Commande commande = commandeRepository.getOne(id);
         commande.addLigneCommande(ligneCommande);
-        ligneCommande.setCommande(commande); // todo remove (implicit in addLigne commande)
         // todo verify if not already added
         Commande result = commandeRepository.save(commande);
         ligneCommandeRepository.save(ligneCommande);
@@ -184,36 +181,55 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
 
-    // todo faire la difference entre ajouter et modifier !! (ajout = modifier avec ++)
-    // verifier si il ne decommande pas des livre non précedemment commandé
+    public Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite) {
+        return modifierOuAjouterLigneCommande(idCommande, idLivre, quantite, true);
+    }
+
     public Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite) {
+        return modifierOuAjouterLigneCommande(idCommande, idLivre, quantite, false);
+    }
+
+    public Commande modifierOuAjouterLigneCommande(Long idCommande, Long idLivre, int quantite, boolean ajouter) {
         Optional<Commande> opt = commandeRepository.findById(idCommande);
         if (opt.isEmpty()) {
             return null;
         }
         Commande commande = opt.get();
-        boolean newLivre = true;
         for (LigneCommande ligne : commande.getLigneCommandes()) {
             if (ligne.getLivre().getId() == idLivre) {
-                newLivre = false;
-                if (ligne.getQuantite() != quantite) {
-                    if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
-                        ligne.updateQuantite(quantite);
-                        ligneCommandeRepository.save(ligne);
+                if(ajouter){
+                    if(livreService.reserver(idLivre, quantite) != null){
+                        ligne.updateQuantite(quantite + ligne.getQuantite());
+                        return commandeRepository.save(commande);
+                    }else{
+                        return null;
+                    }
+                }else{
+                    if (ligne.getQuantite() != quantite) {
+                        if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
+                            ligne.updateQuantite(quantite);
+                            if(ligne.getQuantite() == 0){
+                                commande.removeLigneCommande(ligne);
+                                ligneCommandeRepository.delete(ligne);
+                            }
+                            return commandeRepository.save(commande);
+                        }else{
+                            return null;
+                        }
                     }
                 }
             }
         }
-        if (newLivre) { // creation d'une nouvelle ligneCommande
-            LigneCommande ligneCommande = new LigneCommande();
-            Livre livre = livreService.reserver(idLivre, quantite);
-            if(livre != null){
-                ligneCommande.setLivreQuantite(livre, quantite);
-                commande.addLigneCommande(ligneCommande);
-                ligneCommandeRepository.save(ligneCommande);
-            }
+        // creation d'une nouvelle ligneCommande
+        LigneCommande ligneCommande = new LigneCommande();
+        Livre livre = livreService.reserver(idLivre, quantite);
+        if(livre != null){
+            ligneCommande.setLivreQuantite(livre, quantite);
+            commande.addLigneCommande(ligneCommande);
+            return commandeRepository.save(commande);
+        }else{
+            return null;
         }
-        return commandeRepository.save(commande);
     }
 
     public Page<Commande> getHistory(Pageable pageable) {
@@ -225,9 +241,20 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     public boolean commander(Commande commande) {
-        // todo check for null fields
-        commande.setPayee(true);
-        commandeRepository.save(commande);
+        Commande cmd = commandeRepository.getOne(commande.getId());
+        cmd.setPayee(true);
+        cmd.setUtilisateur(commande.getUtilisateur());
+        cmd.setPaysLivraison(commande.getPaysLivraison());
+        cmd.setCodePostalLivraison(commande.getCodePostalLivraison());
+        cmd.setVilleLivraison(commande.getVilleLivraison());
+        cmd.setRueLivraison(commande.getRueLivraison());
+        cmd.setNomLivraison(commande.getNomLivraison());
+        cmd.setPaysFacturation(commande.getPaysFacturation());
+        cmd.setCodePostalFacturation(commande.getCodePostalFacturation());
+        cmd.setVilleFacturation(commande.getVilleFacturation());
+        cmd.setRueFacturation(commande.getRueFacturation());
+        cmd.setNomFacturation(commande.getNomFacturation());
+        commandeRepository.save(cmd);
         return true;
     }
 }
