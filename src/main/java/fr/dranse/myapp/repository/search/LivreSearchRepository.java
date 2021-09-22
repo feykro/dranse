@@ -13,4 +13,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 public interface LivreSearchRepository extends ElasticsearchRepository<Livre, Long> {
     @Query("{\"fuzzy\" : {\"titre\" : {\"value\" : \"?0\", \"fuzziness\": \"AUTO\"}}}")
     Page<SearchHit<Livre>> searchByTitle(String titre, Pageable pageable);
+
+    @Query("{\"fuzzy\" : {\"auteur\" : {\"value\" : \"?0\", \"fuzziness\": \"AUTO\"}}}")
+    Page<SearchHit<Livre>> searchByAuthor(String auteur, Pageable pageable);
 }

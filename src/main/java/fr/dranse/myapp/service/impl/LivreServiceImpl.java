@@ -137,7 +137,8 @@ public class LivreServiceImpl implements LivreService {
     @Transactional(readOnly = true)
     public Page<Livre> findByAuthor(Pageable pageable, String author) {
         log.debug("Request to get Livre by author {}", author);
-        return livreRepository.findAllWithAuthor(pageable, author);
+        Page<SearchHit<Livre>> res = livreSearchRepository.searchByAuthor(author, pageable);
+        return res.map(sh -> sh.getContent());
     }
 
     @Override
