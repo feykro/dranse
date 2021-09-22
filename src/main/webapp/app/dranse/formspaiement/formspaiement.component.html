@@ -7,13 +7,17 @@
   </div>
   <form class="formulaire" (submit)="submit1()" #profileForm [hidden]="livraison">
     <br />
-    <label> Nom : <input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label><b>Nom</b><br /><input [name]="nomLivraison" [(ngModel)]="nomLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
-    <label> Adresse : <input [name]="adresseLivraison" [(ngModel)]="adresseLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Ville : <input [name]="villeLivraison" [(ngModel)]="villeLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label
+      ><b>Adresse</b><br /><input [name]="adresseLivraison" [(ngModel)]="adresseLivraison" [ngModelOptions]="{ standalone: true }" />
+    </label>
     <br />
-    <label> Code Postal : <input [name]="cpLivraison" [(ngModel)]="cpLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Pays : <input [name]="paysLivraison" [(ngModel)]="paysLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label><b>Ville</b><br /><input [name]="villeLivraison" [(ngModel)]="villeLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <br />
+    <label><b>Code Postal</b><br /><input [name]="cpLivraison" [(ngModel)]="cpLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
+    <br />
+    <label><b>Pays</b><br /><input [name]="paysLivraison" [(ngModel)]="paysLivraison" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
     <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
   </form>
@@ -28,15 +32,23 @@
   </div>
   <form class="formulaire" (submit)="submit2()" #profileForm [hidden]="facturation">
     <br />
-    <label> Nom : <input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label><b>Nom</b><br /><input [name]="nomFacturation" [(ngModel)]="nomFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
-    <label>
-      Adresse : <input [name]="adresseFacturation" [(ngModel)]="adresseFacturation" [ngModelOptions]="{ standalone: true }" />
+    <label
+      ><b>Adresse</b><br /><input [name]="adresseFacturation" [(ngModel)]="adresseFacturation" [ngModelOptions]="{ standalone: true }" />
     </label>
-    <label> Ville : <input [name]="villeFacturation" [(ngModel)]="villeFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
     <br />
-    <label> Code Postal : <input [name]="cpFacturation" [(ngModel)]="cpFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
-    <label> Pays : <input [name]="paysFacturation" [(ngModel)]="paysFacturation" [ngModelOptions]="{ standalone: true }" /> </label>
+    <label
+      ><b>Ville</b><br /><input [name]="villeFacturation" [(ngModel)]="villeFacturation" [ngModelOptions]="{ standalone: true }" />
+    </label>
+    <br />
+    <label
+      ><b>Code Postal</b><br /><input [name]="cpFacturation" [(ngModel)]="cpFacturation" [ngModelOptions]="{ standalone: true }" />
+    </label>
+    <br />
+    <label
+      ><b>Pays</b><br /><input [name]="paysFacturation" [(ngModel)]="paysFacturation" [ngModelOptions]="{ standalone: true }" />
+    </label>
     <br />
     <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
   </form>
@@ -52,16 +64,16 @@
   <form class="formulaire" (submit)="submit3()" #profileForm [hidden]="paiement">
     <br />
     <label>
-      Numéro CB :
+      <b>Numero CB</b><br />
       <input placeholder="ex : 0000 1111 2222 333" [name]="numCB" [(ngModel)]="numCB" [ngModelOptions]="{ standalone: true }" />
     </label>
     <br />
     <label>
-      Date Expiration :
+      <b>Date d'expiration</b><br />
       <input placeholder="mm/aa" [name]="dateExpiration" [(ngModel)]="dateExpiration" [ngModelOptions]="{ standalone: true }" />
     </label>
     <label>
-      Cryptogramme :
+      <b>Cryptogramme</b><br />
       <input placeholder="ex : 123" [name]="cryptogramme" [(ngModel)]="cryptogramme" [ngModelOptions]="{ standalone: true }" />
     </label>
     <br />
@@ -69,7 +81,7 @@
   </form>
 </div>
 <br />
-<h3 class="prix-total">Prix Total : {{ prixTotal }}</h3>
+<h1 class="prix-total">Prix Total : {{ prixTotal }}</h1>
 <div class="bottom">
   <button class="validation" (click)="validationAll()">VALIDER</button>
 </div>
