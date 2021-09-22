@@ -3,9 +3,9 @@
     <div class="result-title">{{ titlePage }}</div>
 
     <div class="page-navigation-area">
-      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+      <button id="navButton" *ngIf="pageRecherche >= 1" (click)="gotoPrevious()">Page Precedente</button>
 
-      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche + 1 }}</div>
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche >= 1 ? '0pt' : '160pt' }">{{ pageRecherche + 1 }}</div>
       <button id="navButton" *ngIf="nbResult >= pageSize" (click)="gotoNext()">Page Suivante</button>
     </div>
 
@@ -21,9 +21,9 @@
     </div>
 
     <div class="page-navigation-area">
-      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+      <button id="navButton" *ngIf="pageRecherche >= 1" (click)="gotoPrevious()">Page Precedente</button>
 
-      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche + 1 }}</div>
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche >= 1 ? '0pt' : '160pt' }">{{ pageRecherche + 1 }}</div>
       <button id="navButton" *ngIf="nbResult >= pageSize" (click)="gotoNext()">Page Suivante</button>
     </div>
   </div>
