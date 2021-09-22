@@ -10,8 +10,7 @@ import { HistoriqueComponent } from './historique/historique.component';
 import { ConfirmationachatComponent } from './confirmationachat/confirmationachat.component';
 
 @NgModule({
-  declarations: [ProduitComponent, AccueilComponent, PanierComponent, FormspaiementComponent, ConfirmationachatComponent],
-  declarations: [ProduitComponent, AccueilComponent, PanierComponent, FormspaiementComponent, HistoriqueComponent],
+  declarations: [ProduitComponent, AccueilComponent, PanierComponent, FormspaiementComponent, HistoriqueComponent, ConfirmationachatComponent],
   imports: [CommonModule, DranseRoutingModule, FormsModule],
 })
 export class DranseModule {}

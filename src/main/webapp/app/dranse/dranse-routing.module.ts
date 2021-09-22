@@ -25,6 +25,7 @@ const dranseRoute: Routes = [
   {
       path: 'historique',
       component: HistoriqueComponent,
+      canActivate: [UserRouteAccessService]
     },
   {
     path: 'verification',
