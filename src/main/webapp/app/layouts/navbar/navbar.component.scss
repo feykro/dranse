@@ -99,17 +99,12 @@ Logo styles
 //TODO: fix the bar to display full size logo
 
 .logo-img {
-  height: 90px;
-  width: 170px;
+  height: 65px;
+  width: 65px;
   display: inline-block;
   vertical-align: middle;
   background: url('../../../content/images/logo_dranse_v1.png') no-repeat center center;
   background-size: contain;
-}
-
-.navbar-brand-logo {
-  padding: 0 0 0 0;
-  margin-left: 10pt;
 }
 
 @media only screen and(max-width: 767px) {

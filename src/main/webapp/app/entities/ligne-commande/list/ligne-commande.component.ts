@@ -24,7 +24,6 @@ export class LigneCommandeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-  ligneId !: number;
 
   constructor(
     protected ligneCommandeService: LigneCommandeService,
@@ -33,7 +32,7 @@ export class LigneCommandeComponent implements OnInit {
     protected modalService: NgbModal
   ) {
     this.currentSearch = this.activatedRoute.snapshot.queryParams['search'] ?? '';
-      }
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
