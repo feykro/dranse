@@ -47,18 +47,28 @@ export class PageRechercheComponent implements OnInit {
       this.argumentRecherche = params['arg'];
 
       if (this.typeRecherche === 'cat') {
-        this.titlePage = this.titlePage + '(catégorie) ';
+        this.titlePage = this.titlePage + '(catégorie) ' + this.argumentRecherche;
+        this.populatePageCat();
+      } else {
+        this.titlePage = this.titlePage + this.argumentRecherche;
+        this.populatePageCherche();
       }
-      this.titlePage = this.titlePage + this.argumentRecherche;
     });
-
-    //  todo: mettre des tests et des valeurs par défaut pour la robustesse
-    this.populatePage();
   }
 
-  populatePage(): void {
+  populatePageCat(): void {
     const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
       this.getBookController.getPageParCategorie(this.argumentRecherche, this.pageRecherche, this.pageSize)
+    );
+    livreRqst.subscribe(data => {
+      this.livrePage = <ILivre[]>data.body;
+      this.nbResult = this.livrePage.length;
+    });
+  }
+
+  populatePageCherche(): void {
+    const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
+      this.getBookController.getPageRecherche(this.argumentRecherche, this.pageRecherche, this.pageSize)
     );
     livreRqst.subscribe(data => {
       this.livrePage = <ILivre[]>data.body;

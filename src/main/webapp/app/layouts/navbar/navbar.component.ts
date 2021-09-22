@@ -23,6 +23,8 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
 
+  searchBoxContent = '';
+
   constructor(
     private loginService: LoginService,
     private translateService: TranslateService,
@@ -72,6 +74,7 @@ export class NavbarComponent implements OnInit {
   }
 
   gotoRecherche(): void {
-    this.router.navigate(['/recherche']);
+    //console.log(this.searchBoxContent);
+    this.router.navigate(['/recherche', 'search', this.searchBoxContent, 1]);
   }
 }
