@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProduitComponent } from './produit/produit.component';
 import { PanierComponent } from './panier/panier.component';
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
+import { HistoriqueComponent } from './historique/historique.component';
 import { UserRouteAccessService } from '../core/auth/user-route-access.service';
 import { ConfirmationachatComponent } from './confirmationachat/confirmationachat.component';
 
@@ -22,6 +23,11 @@ const dranseRoute: Routes = [
     path: 'panier',
     component: PanierComponent,
   },
+  {
+      path: 'historique',
+      component: HistoriqueComponent,
+      canActivate: [UserRouteAccessService]
+    },
   {
     path: 'verification',
     component: FormspaiementComponent,

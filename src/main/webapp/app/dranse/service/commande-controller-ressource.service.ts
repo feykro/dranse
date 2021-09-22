@@ -35,4 +35,8 @@ export class CommandeControllerRessourceService {
   passerCommande(id: number, commande: ICommande): Observable<HttpResponse<boolean>> {
     return this.http.put<boolean>(`${this.resourceUrl}/commander/${id}`, commande, { observe: 'response' });
   }
+
+  getHistory(): Observable<EntityArrayResponseType> {
+    return this.http.get<ICommande[]>(`${this.resourceUrl}/history`, { observe: 'response' });
+  }
 }

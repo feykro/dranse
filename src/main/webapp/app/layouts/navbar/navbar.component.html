@@ -221,6 +221,12 @@
             </a>
           </li>
           <li *ngSwitchCase="true">
+            <a class="dropdown-item" routerLink="historique" routerLinkActive="active" (click)="collapseNavbar()" data-cy="settings">
+              <fa-icon icon="list" [fixedWidth]="true"></fa-icon>
+              <span> Historique</span>
+            </a>
+          </li>
+          <li *ngSwitchCase="true">
             <a
               class="dropdown-item"
               routerLink="account/password"
@@ -228,6 +234,7 @@
               (click)="collapseNavbar()"
               data-cy="passwordItem"
             >
+
               <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
               <span jhiTranslate="global.menu.account.password">Password</span>
             </a>

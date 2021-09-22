@@ -99,11 +99,10 @@ public interface CommandeService {
 
     /**
      * return the history of commands of an user
-     * @param id
      * @param pageable
      * @return
      */
-    Page<Commande> getHistory(Long id, Pageable pageable);
+    Page<Commande> getHistory(Pageable pageable);
 
     /**
      * Valider et passer une commande.

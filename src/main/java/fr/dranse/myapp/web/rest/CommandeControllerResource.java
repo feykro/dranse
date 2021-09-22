@@ -147,10 +147,10 @@ public class CommandeControllerResource {
             .build();
     }
 
-    @GetMapping("/history/{id}")
-    public ResponseEntity<List<Commande>> getHistory(@PathVariable Long id, Pageable pageable) {
+    @GetMapping("/history")
+    public ResponseEntity<List<Commande>> getHistory(Pageable pageable) {
         log.debug("REST request to get the history of a user");
-        Page<Commande> page = commandeService.getHistory(id, pageable);
+        Page<Commande> page = commandeService.getHistory(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
