@@ -65,11 +65,13 @@ export class PageRechercheComponent implements OnInit {
     const url = '/recherche/' + this.typeRecherche + '/' + this.argumentRecherche + '/' + numeroPage.toString();
     //this.router.navigate(['/recherche', this.typeRecherche, this.argumentRecherche, numeroPage.toString()]);
 
-    this.router.navigateByUrl(url);
+    this.router.navigateByUrl(url).then(() => window.location.reload());
   }
 
   gotoPrevious(): void {
-    this.router.navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche - 1]);
+    this.router
+      .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche - 1])
+      .then(() => window.location.reload());
   }
 
   fakeResultsGen(): void {
