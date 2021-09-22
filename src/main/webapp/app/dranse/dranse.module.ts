@@ -8,6 +8,7 @@ import { PageRechercheComponent } from './page-recherche/page-recherche.componen
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationachatComponent } from './confirmationachat/confirmationachat.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { ConfirmationachatComponent } from './confirmationachat/confirmationacha
     ConfirmationachatComponent,
     PageRechercheComponent,
   ],
-  imports: [CommonModule, DranseRoutingModule, FormsModule],
+  imports: [CommonModule, DranseRoutingModule, FormsModule, FontAwesomeModule],
 })
 export class DranseModule {}

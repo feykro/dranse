@@ -20,6 +20,7 @@
 
       <div class="price">
         <div id="item-prix">{{ item.prix }}</div>
+        <fa-icon [icon]="trash" (click)="supprimerLivre(item.position)"></fa-icon>
       </div>
     </div>
   </div>
