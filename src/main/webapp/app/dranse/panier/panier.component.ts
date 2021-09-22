@@ -163,7 +163,14 @@ export class PanierComponent implements OnInit {
   }
 
   supprimerLivre(pos: number): void {
-    // Suppr
+    const newLigne = this.lignes[pos];
+    newLigne.quantite = 0;
+    this.panierService.modifierLigne(newLigne).subscribe(value => {
+      if (value.body !== null) {
+        this.lignes[pos] = newLigne;
+      }
+      this.updateAll();
+    });
   }
 }
 
