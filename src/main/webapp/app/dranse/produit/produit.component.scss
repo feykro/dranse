@@ -1,30 +1,11 @@
-$theme-white: #edf2f3;
-$theme-light-blue: #afd8f2;
-$theme-dark-blue: #5289b5;
-
-.produit-div {
-  height: 90vh;
-  width: 100vw;
-  background-color: $theme-white;
-
-  margin-left: -10pt;
-  padding-right: 15pt;
-  padding-left: 15pt;
-}
-
 .image-livre {
-  height: 250pt;
-}
-
-#image {
-  margin-top: 10pt;
-  margin-left: 20pt;
+  height: 200pt;
 }
 
 .infos {
   display: inline-block;
   vertical-align: top;
-  margin-left: 25pt;
+  margin-left: 15pt;
   width: 45%;
   min-width: 400px;
 }
@@ -52,46 +33,31 @@ $theme-dark-blue: #5289b5;
 }
 
 .extra-info {
-  background-color: $theme-dark-blue;
+  background-color: lightgrey;
   border: solid 0.1em;
   border-color: black;
   width: 100%;
-  min-width: 500px;
+  min-width: 400px;
   min-height: 75px;
   height: 75px;
-
-  display: -webkit-flex;
-  justify-content: space-around;
-  vertical-align: middle;
 }
 
-.categories {
+.edition {
   display: inline-block;
-  //padding-top: 15px;
+  padding-top: 15px;
   text-align: center;
-  font-size: 18pt;
-
-  font-weight: 400;
-
+  font-size: 15px;
   height: 100%;
   width: 49%;
-
-  color: $theme-white;
-}
-
-.cat {
-  text-align: center;
 }
 
 .annee-publication {
   display: inline-block;
-  //padding-top: 15px;
+  padding-top: 15px;
   text-align: center;
-  font-size: 18pt;
-  font-weight: 400;
+  font-size: 15px;
   height: 100%;
   width: 49%;
-  color: $theme-white;
 }
 
 .prix {
@@ -104,13 +70,10 @@ $theme-dark-blue: #5289b5;
 }
 
 .ajout-panier {
-  background-color: $theme-dark-blue;
+  background-color: lightgreen;
   border-color: black;
   width: 200px;
   height: 50px;
-
-  font-weight: 500;
-  color: $theme-white;
 }
 
 .ajout-panier:hover {
@@ -118,26 +81,18 @@ $theme-dark-blue: #5289b5;
 }
 
 .ajout-panier:active {
-  background-color: $theme-light-blue;
+  background-color: rgba(144, 238, 144, 0.644);
 }
 
 .synopsis {
   font-size: 25px;
   font-weight: bolder;
-  margin-left: 5pt;
-  margin-right: 10pt;
-  margin-top: 10pt;
 }
 
 .synopsis-text {
   border: solid 0.1em;
   border-color: black;
-
-  background-color: $theme-dark-blue;
-  color: $theme-white;
-  font-size: 16pt;
-  font-weight: 300;
-
+  background-color: lightgrey;
   width: 100%;
   min-height: 150px;
   font-size: 20px;

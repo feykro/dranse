@@ -1,7 +1,7 @@
 <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
-  <a class="navbar-brand-logo" routerLink="/" (click)="collapseNavbar()">
+  <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
-    <!--<span class="navbar-title">Dranse</span>-->
+    <span class="navbar-title">Dranse</span>
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -15,19 +15,13 @@
   >
     <fa-icon icon="bars"></fa-icon>
   </a>
-  <div
-    class="navbar-collapse collapse"
-    id="navbarResponsive"
-    [ngbCollapse]="isNavbarCollapsed"
-    [ngSwitch]="account !== null"
-    (keydown.enter)="gotoRecherche()"
-  >
+  <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
     <ul class="navbar-nav ml-auto">
       <!-- testing search bar -->
       <!-- TODO: ajuster la taille mieux, centrer, connecter au backend-->
       <li class="searchBarArea">
-        <input class="searchBar" placeholder="Rechercher" [(ngModel)]="searchBoxContent" [ngModelOptions]="{ standalone: true }" />
-        <button class="searchButton" (click)="gotoRecherche()">
+        <input class="searchBar" placeholder="Rechercher" />
+        <button class="searchButton">
           <fa-icon icon="search" id="searchBarIcon"></fa-icon>
         </button>
       </li>
@@ -224,12 +218,6 @@
             <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active" (click)="collapseNavbar()" data-cy="settings">
               <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
               <span jhiTranslate="global.menu.account.settings">Settings</span>
-            </a>
-          </li>
-          <li *ngSwitchCase="true">
-            <a class="dropdown-item" routerLink="historique" routerLinkActive="active" (click)="collapseNavbar()" data-cy="settings">
-              <fa-icon icon="list" [fixedWidth]="true"></fa-icon>
-              <span> Historique</span>
             </a>
           </li>
           <li *ngSwitchCase="true">
