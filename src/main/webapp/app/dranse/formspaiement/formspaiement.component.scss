@@ -30,12 +30,13 @@
 .extend {
   width: 25pt;
   height: 25pt;
-  font-size: 18pt;
+  font-size: 17pt;
   display: -webkit-flex;
   text-align: center;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+  transform: rotate(90deg);
 }
 
 .extend:hover {
