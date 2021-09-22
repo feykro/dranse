@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
 import { GetBookControllerRessourceService } from '../service/get-book-controller-ressource.service';
 import { HttpResponse } from '@angular/common/http';
 import { ILivre } from 'app/entities/livre/livre.model';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'jhi-recherche',
@@ -42,7 +45,10 @@ export class PageRechercheComponent implements OnInit {
     });
 
     //  todo: mettre des tests et des valeurs par défaut pour la robustesse
+    this.populatePage();
+  }
 
+  populatePage(): void {
     const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
       this.getBookController.getPageParCategorie(this.argumentRecherche, this.pageRecherche, this.pageSize)
     );
@@ -51,6 +57,21 @@ export class PageRechercheComponent implements OnInit {
 
   gotoLivre(bookID?: number): void {
     this.router.navigate(['/produit', bookID]);
+  }
+
+  gotoNext(): void {
+    let numeroPage: number = +this.pageRecherche;
+    numeroPage += 1;
+    const url = '/recherche/' + this.typeRecherche + '/' + this.argumentRecherche + '/' + numeroPage.toString();
+    //this.router.navigate(['/recherche', this.typeRecherche, this.argumentRecherche, numeroPage.toString()]);
+
+    this.router.navigateByUrl(url).then(() => window.location.reload());
+  }
+
+  gotoPrevious(): void {
+    this.router
+      .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche - 1])
+      .then(() => window.location.reload());
   }
 
   fakeResultsGen(): void {
