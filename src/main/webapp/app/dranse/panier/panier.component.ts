@@ -123,6 +123,10 @@ export class PanierComponent implements OnInit {
     if (newLigne.quantite === null || newLigne.quantite === undefined) {
       newLigne.quantite = 1;
     } else if (newLigne.quantite <= 1) {
+      const res = confirm('Voulez-vous vraiment supprimer ce livre de la commande ?');
+      if (res === false) {
+        return;
+      }
       newLigne.quantite = 0;
     } else {
       newLigne.quantite -= 1;
@@ -163,14 +167,17 @@ export class PanierComponent implements OnInit {
   }
 
   supprimerLivre(pos: number): void {
-    const newLigne = this.lignes[pos];
-    newLigne.quantite = 0;
-    this.panierService.modifierLigne(newLigne).subscribe(value => {
-      if (value.body !== null) {
-        this.lignes[pos] = newLigne;
-      }
-      this.updateAll();
-    });
+    const res = confirm('Voulez-vous vraiment supprimer ce livre de la commande ?');
+    if (res === true) {
+      const newLigne = this.lignes[pos];
+      newLigne.quantite = 0;
+      this.panierService.modifierLigne(newLigne).subscribe(value => {
+        if (value.body !== null) {
+          this.lignes[pos] = newLigne;
+        }
+        this.updateAll();
+      });
+    }
   }
 }
 
