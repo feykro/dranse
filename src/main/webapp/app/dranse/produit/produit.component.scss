@@ -104,13 +104,14 @@ $theme-dark-blue: #5289b5;
 }
 
 .ajout-panier {
-  background-color: $theme-dark-blue;
+  background-color: $theme-light-blue;
   border-color: black;
   width: 200px;
   height: 50px;
 
+  font-size: 14pt;
   font-weight: 500;
-  color: $theme-white;
+  color: black;
 }
 
 .ajout-panier:hover {
@@ -118,7 +119,7 @@ $theme-dark-blue: #5289b5;
 }
 
 .ajout-panier:active {
-  background-color: $theme-light-blue;
+  background-color: #c3dff0;
 }
 
 .synopsis {

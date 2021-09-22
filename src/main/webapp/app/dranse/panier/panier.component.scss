@@ -4,6 +4,7 @@ $theme-dark-blue: #5289b5;
 
 //==== Containers =====
 .all {
+  margin-top: 15pt;
   height: 80vh;
   width: 100%;
   display: grid;
@@ -13,7 +14,7 @@ $theme-dark-blue: #5289b5;
 }
 
 .items-list {
-  border: solid black 0.1em;
+  //border: solid black 0.1em;
   width: 100%;
   height: 100%;
   grid-area: 'items-list';
@@ -26,6 +27,8 @@ $theme-dark-blue: #5289b5;
   width: 100%;
   display: grid;
   grid-template-columns: 50% 50%;
+
+  background-color: $theme-dark-blue;
 }
 
 // === Contenu commande ===
@@ -41,11 +44,16 @@ $theme-dark-blue: #5289b5;
   grid-template-rows: 1fr;
   grid-area: 'order-item';
   grid-template-areas: 'cover-image' 'informations' 'qte' 'price';
+
+  border: solid $theme-dark-blue 0.1em;
 }
 
 #cover-image {
   height: 170pt;
   grid-area: 'order-item';
+  display: -webkit-flex;
+  justify-content: center;
+  vertical-align: middle;
 }
 
 #cover-image:hover {
@@ -56,6 +64,7 @@ $theme-dark-blue: #5289b5;
   grid-area: 'informations';
   #titre {
     font-size: 25pt;
+    font-weight: bold;
   }
   #auteur {
     font-size: 20pt;
@@ -114,12 +123,14 @@ $theme-dark-blue: #5289b5;
   display: -webkit-flex;
   width: 100%;
   height: 100%;
-  background-color: lightblue;
+
   text-align: center;
   align-items: center;
   justify-content: center;
   font-size: 36pt;
   font-weight: bold;
+
+  color: $theme-white;
   //padding-top: 8%;
   //grid-area: total;
 }
@@ -128,7 +139,7 @@ $theme-dark-blue: #5289b5;
   display: -webkit-flex;
   width: 100%;
   height: 100%;
-  background-color: lightseagreen;
+
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -139,5 +150,16 @@ $theme-dark-blue: #5289b5;
 #order-button {
   width: 200pt;
   height: 30pt;
-  //margin: auto;
+  background-color: $theme-light-blue;
+  border: solid black 0.1em;
+
+  font-size: 18pt;
+}
+
+#order-button:active {
+  background-color: #c3dff0;
+}
+
+#order-button:hover {
+  border: solid $theme-white 0.1em;
 }
