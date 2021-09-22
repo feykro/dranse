@@ -56,7 +56,7 @@ public class CommandeControllerResource {
         if (ligneCommande.getId() != null) {
             throw new BadRequestAlertException("A new ligneCommande cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Commande result = commandeService.newCommande(ligneCommande);
+        Commande result = commandeService.newCommande(ligneCommande.getLivre().getId(), ligneCommande.getQuantite());
         return ResponseEntity
             .created(new URI("/api/commande-controller/get-commande/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.toString()))

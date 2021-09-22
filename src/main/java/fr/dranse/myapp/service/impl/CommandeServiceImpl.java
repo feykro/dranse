@@ -11,6 +11,7 @@ import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CommandeSearchRepository;
 import fr.dranse.myapp.service.CommandeService;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import fr.dranse.myapp.service.LivreService;
@@ -145,13 +146,10 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Override
     @Transactional()
-    public Commande newCommande(LigneCommande ligneCommande) {
+    public Commande newCommande(Long idLivre, int quantite) {
         Commande commande = new Commande();
-        commande.addLigneCommande(ligneCommande);
-        ligneCommande.setCommande(commande);
-        Commande result = commandeRepository.save(commande);
-        ligneCommandeRepository.save(ligneCommande);
-        return result;
+        commande = commandeRepository.save(commande);
+        return ajouterLigneCommande(commande.getId(), idLivre, quantite);
     }
 
     @Override
@@ -159,7 +157,6 @@ public class CommandeServiceImpl implements CommandeService {
     public Commande ajouterLigne(Long id, LigneCommande ligneCommande) {
         Commande commande = commandeRepository.getOne(id);
         commande.addLigneCommande(ligneCommande);
-        ligneCommande.setCommande(commande); // todo remove (implicit in addLigne commande)
         // todo verify if not already added
         Commande result = commandeRepository.save(commande);
         ligneCommandeRepository.save(ligneCommande);
@@ -193,7 +190,6 @@ public class CommandeServiceImpl implements CommandeService {
                 if (ligne.getQuantite() != quantite) {
                     if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
                         ligne.updateQuantite(quantite);
-                        ligneCommandeRepository.save(ligne);
                     }
                 }
             }
@@ -204,8 +200,8 @@ public class CommandeServiceImpl implements CommandeService {
             if(livre != null){
                 ligneCommande.setLivreQuantite(livre, quantite);
                 commande.addLigneCommande(ligneCommande);
-                ligneCommandeRepository.save(ligneCommande);
             }
+            livreRepository.save(livre);
         }
         return commandeRepository.save(commande);
     }
@@ -223,7 +219,6 @@ public class CommandeServiceImpl implements CommandeService {
                 if (ligne.getQuantite() != quantite) {
                     if(livreService.reserver(idLivre, quantite) != null){
                         ligne.updateQuantite(quantite + ligne.getQuantite());
-                        ligneCommandeRepository.save(ligne);
                     }
                 }
             }
@@ -234,7 +229,6 @@ public class CommandeServiceImpl implements CommandeService {
             if(livre != null){
                 ligneCommande.setLivreQuantite(livre, quantite);
                 commande.addLigneCommande(ligneCommande);
-                ligneCommandeRepository.save(ligneCommande);
             }
         }
         return commandeRepository.save(commande);

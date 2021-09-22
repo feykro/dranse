@@ -24,6 +24,10 @@ export class CommandeControllerRessourceService {
     return this.http.put<ICommande>(`${this.resourceUrl}/ajout/${id}`, ligneCommande, { observe: 'response' });
   }
 
+  modifierLigneCommande(ligneCommande: ILigneCommande, id: number): Observable<EntityResponseType> {
+    return this.http.put<ICommande>(`${this.resourceUrl}/modifier/${id}`, ligneCommande, { observe: 'response' });
+  }
+
   getCommande(id: number): Observable<EntityResponseType> {
     return this.http.get<ICommande>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

@@ -64,7 +64,7 @@ public interface CommandeService {
      * @param ligneCommande
      * @return
      */
-    Commande newCommande(LigneCommande ligneCommande);
+    Commande newCommande(Long idLivre, int quantite);
 
     /**
      * Ajouter un ligneCommande à une commande existante
