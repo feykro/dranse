@@ -45,7 +45,7 @@
     "languages": ["fr", "en"],
     "lastLiquibaseTimestamp": 1631117128000,
     "entities": ["Utilisateur", "Commande", "LigneCommande", "Livre", "Categorie", "Avis"],
-    "herokuAppName": null,
+    "herokuAppName": "projet-dranse",
     "herokuDeployType": "git",
     "herokuJavaVersion": "14"
   }
