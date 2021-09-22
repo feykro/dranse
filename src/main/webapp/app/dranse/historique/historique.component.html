@@ -9,7 +9,8 @@
       <div id="informations">
 
         <div id="commandNum"><strong>Commande n°</strong>: {{ item.id }}</div>
-        <div id="commandDate"><strong>Date</strong> :{{ displayDate(item.date) }}<br><br></div>
+        <div id="commandDate"><strong>Date</strong> :{{ displayDate(item.date) }}</div>
+        <div id="commandTotalPrice"><strong>Total Price</strong>: {{ sumCommand(item) }} €<br><br></div>
         <div class="total-info">
 
           <div class="infoLivraison"><strong>Info de Livraison:</strong>
@@ -32,6 +33,7 @@
             <div id="titre"><strong>Titre</strong> : {{ ligne.livre.titre }} </div>
             <div id="auteur"><strong>Auteur</strong> : {{ ligne.livre.auteur }} </div>
             <div id="quantite"><strong>Quantité</strong> : {{ ligne.quantite }} </div>
+            <div id="quantite"><strong>Prix</strong> : {{ significantDigits(ligne.prixPaye / ligne.quantite) }} </div>
           </div>
 
 
