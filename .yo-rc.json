@@ -44,6 +44,9 @@
     "clientThemeVariant": "",
     "languages": ["fr", "en"],
     "lastLiquibaseTimestamp": 1631117128000,
-    "entities": ["Utilisateur", "Commande", "LigneCommande", "Livre", "Categorie", "Avis"]
+    "entities": ["Utilisateur", "Commande", "LigneCommande", "Livre", "Categorie", "Avis"],
+    "herokuAppName": "projet-dranse",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "14"
   }
 }
