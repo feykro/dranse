@@ -1,0 +1,143 @@
+<div>
+  <h2 id="page-heading" data-cy="LivreHeading">
+    <span jhiTranslate="projetDranseApp.livre.home.title">Livres</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="projetDranseApp.livre.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-livre"
+        [routerLink]="['/livre/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="projetDranseApp.livre.home.createLabel"> Create a new Livre </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'projetDranseApp.livre.home.search' | translate }}"
+          />
+
+          <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+            <fa-icon icon="search"></fa-icon>
+          </button>
+
+          <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="livres?.length === 0">
+    <span jhiTranslate="projetDranseApp.livre.home.notFound">No livres found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="livres && livres.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="titre">
+            <span jhiTranslate="projetDranseApp.livre.titre">Titre</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="auteur">
+            <span jhiTranslate="projetDranseApp.livre.auteur">Auteur</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="prix"><span jhiTranslate="projetDranseApp.livre.prix">Prix</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="synopsis">
+            <span jhiTranslate="projetDranseApp.livre.synopsis">Synopsis</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="edition">
+            <span jhiTranslate="projetDranseApp.livre.edition">Edition</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anneePublication">
+            <span jhiTranslate="projetDranseApp.livre.anneePublication">Annee Publication</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="editeur">
+            <span jhiTranslate="projetDranseApp.livre.editeur">Editeur</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="stock">
+            <span jhiTranslate="projetDranseApp.livre.stock">Stock</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="urlImage">
+            <span jhiTranslate="projetDranseApp.livre.urlImage">Url Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let livre of livres; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/livre', livre.id, 'view']">{{ livre.id }}</a>
+          </td>
+          <td>{{ livre.titre }}</td>
+          <td>{{ livre.auteur }}</td>
+          <td>{{ livre.prix }}</td>
+          <td>{{ livre.synopsis }}</td>
+          <td>{{ livre.edition }}</td>
+          <td>{{ livre.anneePublication }}</td>
+          <td>{{ livre.editeur }}</td>
+          <td>{{ livre.stock }}</td>
+          <td>{{ livre.urlImage }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/livre', livre.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/livre', livre.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(livre)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="livres && livres.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

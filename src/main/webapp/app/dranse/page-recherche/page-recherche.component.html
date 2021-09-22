@@ -1,0 +1,36 @@
+<div class="page-recherche">
+  <div class="resultats-area" *ngIf="nbResult > 0">
+    <div class="result-title">{{ titlePage }}</div>
+
+    <div class="page-navigation-area">
+      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche }}</div>
+      <button id="navButton" *ngIf="nbResult >= pageSize" (click)="gotoNext()">Page Suivante</button>
+    </div>
+
+    <div class="liste-resultats">
+      <div class="carte-resultat" *ngFor="let item of livrePage" (click)="gotoLivre(item.id)">
+        <img id="card-cover" src="https://storage.googleapis.com/bucketdranse/pictures/ {{ item.urlImage }}" />
+        <div id="informations">
+          <div id="card-title">{{ item.titre }}</div>
+          <div id="card-author">{{ item.auteur }}</div>
+        </div>
+        <div id="card-price">{{ item.prix }}€</div>
+      </div>
+    </div>
+
+    <div class="page-navigation-area">
+      <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+
+      <div id="affichage-current" [ngStyle]="{ 'margin-left': pageRecherche > 1 ? '0pt' : '160pt' }">{{ pageRecherche }}</div>
+      <button id="navButton" *ngIf="nbResult >= pageSize" (click)="gotoNext()">Page Suivante</button>
+    </div>
+  </div>
+
+  <div class="display-error" *ngIf="nbResult <= 0">
+    <div id="error-message">Cette page est vide !</div>
+    <button id="error-button" (click)="goBack()">Retourner en arrière</button>
+    <button id="error-button" (click)="gotoHome()">Retourner à l'acceuil</button>
+  </div>
+</div>

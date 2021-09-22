@@ -1,0 +1,139 @@
+//==== Containers =====
+.all {
+  height: 80vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.8fr 0.2fr;
+  grid-template-areas: 'items-list' 'bandeau-total';
+}
+
+.items-list {
+  border: solid black 0.1em;
+  width: 100%;
+  height: 100%;
+  grid-area: 'items-list';
+  overflow-y: scroll;
+}
+
+.bandeau-total {
+  border: solid black 0.1em;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+// === Contenu commande ===
+.order-item {
+  width: calc(100% - 20pt);
+  height: 25.6vh;
+  min-height: 180pt;
+  background-color: lightblue;
+  padding: 5pt 5pt 5pt 5pt;
+  margin: 10pt 10pt 0pt 10pt;
+  display: grid;
+  grid-template-columns: 0.15fr 0.45fr 0.2fr 0.2fr;
+  grid-template-rows: 1fr;
+  grid-area: 'order-item';
+  grid-template-areas: 'cover-image' 'informations' 'qte' 'price';
+}
+
+#cover-image {
+  height: 170pt;
+  grid-area: 'order-item';
+}
+
+#cover-image:hover {
+  cursor: pointer;
+}
+
+#informations {
+  grid-area: 'informations';
+  #titre {
+    font-size: 25pt;
+  }
+  #auteur {
+    font-size: 20pt;
+  }
+}
+
+.qte-container {
+  height: 100%;
+  width: 100%;
+  padding: 10pt 10pt 10pt 10pt;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qte {
+  border: solid black 0.1em;
+  height: 20pt;
+  width: 80pt;
+  background-color: whitesmoke;
+  display: -webkit-flex;
+  justify-content: space-around;
+  gap: 10pt;
+  align-items: center;
+  #item-qte {
+    font-size: 18pt;
+  }
+}
+
+.qte-button {
+  height: 100%;
+  width: 100%;
+}
+
+.price {
+  display: -webkit-flex;
+  justify-content: center;
+  gap: 30pt;
+  align-items: center;
+}
+
+.poubelle {
+  font-size: 1.2em;
+}
+
+.poubelle:hover {
+  cursor: pointer;
+}
+
+.item-prix {
+  font-size: 18pt;
+}
+
+// === contenu bandeau ===
+#total {
+  display: -webkit-flex;
+  width: 100%;
+  height: 100%;
+  background-color: lightblue;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 36pt;
+  font-weight: bold;
+  //padding-top: 8%;
+  //grid-area: total;
+}
+
+#button-area {
+  display: -webkit-flex;
+  width: 100%;
+  height: 100%;
+  background-color: lightseagreen;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  //grid-area: button-area;
+}
+
+#order-button {
+  width: 200pt;
+  height: 30pt;
+  //margin: auto;
+}

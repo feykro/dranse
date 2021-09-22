@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ligneCommande">
+      <h2 data-cy="ligneCommandeDetailsHeading"><span jhiTranslate="projetDranseApp.ligneCommande.detail.title">Ligne Commande</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ ligneCommande.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.ligneCommande.quantite">Quantite</span></dt>
+        <dd>
+          <span>{{ ligneCommande.quantite }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.ligneCommande.prixPaye">Prix Paye</span></dt>
+        <dd>
+          <span>{{ ligneCommande.prixPaye }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.ligneCommande.commande">Commande</span></dt>
+        <dd>
+          <div *ngIf="ligneCommande.commande">
+            <a [routerLink]="['/commande', ligneCommande.commande?.id, 'view']">{{ ligneCommande.commande?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="projetDranseApp.ligneCommande.livre">Livre</span></dt>
+        <dd>
+          <div *ngIf="ligneCommande.livre">
+            <a [routerLink]="['/livre', ligneCommande.livre?.id, 'view']">{{ ligneCommande.livre?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ligne-commande', ligneCommande.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

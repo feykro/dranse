@@ -1,0 +1,107 @@
+.image-livre {
+  height: 250pt;
+}
+
+.infos {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 15pt;
+  width: 45%;
+  min-width: 400px;
+}
+
+.titre {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.note {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.auteur {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.prix-button {
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  width: 25%;
+}
+
+.extra-info {
+  background-color: lightgrey;
+  border: solid 0.1em;
+  border-color: black;
+  width: 100%;
+  min-width: 400px;
+  min-height: 75px;
+  height: 75px;
+}
+
+.categories {
+  display: inline-block;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 15px;
+  height: 100%;
+  width: 49%;
+}
+
+.cat {
+  text-align: center;
+}
+
+.annee-publication {
+  display: inline-block;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 15px;
+  height: 100%;
+  width: 49%;
+}
+
+.prix {
+  padding-top: 10%;
+  text-align: right;
+  padding-right: 12%;
+  padding-bottom: 5%;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.ajout-panier {
+  background-color: lightgreen;
+  border-color: black;
+  width: 200px;
+  height: 50px;
+}
+
+.ajout-panier:hover {
+  border-color: lightgrey;
+}
+
+.ajout-panier:active {
+  background-color: rgba(144, 238, 144, 0.644);
+}
+
+.synopsis {
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.synopsis-text {
+  border: solid 0.1em;
+  border-color: black;
+  background-color: lightgrey;
+  width: 100%;
+  min-height: 150px;
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}

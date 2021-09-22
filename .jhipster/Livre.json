@@ -1,0 +1,57 @@
+{
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auteur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "synopsis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "edition",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "anneePublication",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "editeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "stock",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "urlImage",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "livre_cat",
+      "otherEntityName": "categorie",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "livre"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Livre",
+  "changelogDate": "20210908151916"
+}

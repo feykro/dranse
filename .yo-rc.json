@@ -42,6 +42,8 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["fr", "en"]
+    "languages": ["fr", "en"],
+    "lastLiquibaseTimestamp": 1631117128000,
+    "entities": ["Utilisateur", "Commande", "LigneCommande", "Livre", "Categorie", "Avis"]
   }
 }

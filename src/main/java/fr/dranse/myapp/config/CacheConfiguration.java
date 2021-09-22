@@ -48,6 +48,17 @@ public class CacheConfiguration {
             createCache(cm, fr.dranse.myapp.domain.User.class.getName());
             createCache(cm, fr.dranse.myapp.domain.Authority.class.getName());
             createCache(cm, fr.dranse.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, fr.dranse.myapp.domain.Utilisateur.class.getName());
+            createCache(cm, fr.dranse.myapp.domain.Commande.class.getName());
+            createCache(cm, fr.dranse.myapp.domain.LigneCommande.class.getName());
+            createCache(cm, fr.dranse.myapp.domain.Commande.class.getName() + ".ligneCommandes");
+            createCache(cm, fr.dranse.myapp.domain.Livre.class.getName());
+            createCache(cm, fr.dranse.myapp.domain.Categorie.class.getName());
+            createCache(cm, fr.dranse.myapp.domain.Categorie.class.getName() + ".livres");
+            createCache(cm, fr.dranse.myapp.domain.Avis.class.getName());
+            createCache(cm, fr.dranse.myapp.domain.Utilisateur.class.getName() + ".commandes");
+            createCache(cm, fr.dranse.myapp.domain.Livre.class.getName() + ".categories");
+            createCache(cm, fr.dranse.myapp.domain.Livre.class.getName() + ".livre_cats");
             // jhipster-needle-ehcache-add-entry
         };
     }

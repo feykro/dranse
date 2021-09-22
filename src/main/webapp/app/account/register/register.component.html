@@ -212,6 +212,127 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="form-control-label" for="telephone">telephone</label>
+          <input
+            type="text"
+            class="form-control"
+            id="telephone"
+            name="telephone"
+            placeholder="{{ 'global.form.telephone.placeholder' | translate }}"
+            formControlName="telephone"
+            data-cy="telephone"
+          />
+
+          <div
+            *ngIf="
+              registerForm.get('telephone')!.invalid && (registerForm.get('telephone')!.dirty || registerForm.get('telephone')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('telephone')?.errors?.required">
+              Your telephone is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="adrRue">adrRue</label>
+          <input
+            type="text"
+            class="form-control"
+            id="adrRue"
+            name="adrRue"
+            placeholder="{{ 'global.form.adrRue.placeholder' | translate }}"
+            formControlName="adrRue"
+            data-cy="adrRue"
+          />
+
+          <div *ngIf="registerForm.get('adrRue')!.invalid && (registerForm.get('adrRue')!.dirty || registerForm.get('adrRue')!.touched)">
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrRue')?.errors?.required"> Your adrRue is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="adrCodePostal">adrCodePostal</label>
+          <input
+            type="text"
+            class="form-control"
+            id="adrCodePostal"
+            name="adrCodePostal"
+            placeholder="{{ 'global.form.adrCodePostal.placeholder' | translate }}"
+            formControlName="adrCodePostal"
+            data-cy="adrCodePostal"
+            #login
+          />
+
+          <div
+            *ngIf="
+              registerForm.get('adrCodePostal')!.invalid &&
+              (registerForm.get('adrCodePostal')!.dirty || registerForm.get('adrCodePostal')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrCodePostal')?.errors?.required">
+              Your adrCodePostal is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="adrPays">adrPays</label>
+          <input
+            type="text"
+            class="form-control"
+            id="adrPays"
+            name="adrPays"
+            placeholder="{{ 'global.form.adrPays.placeholder' | translate }}"
+            formControlName="adrPays"
+            data-cy="adrPays"
+            #login
+          />
+
+          <div *ngIf="registerForm.get('adrPays')!.invalid && (registerForm.get('adrPays')!.dirty || registerForm.get('adrPays')!.touched)">
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrPays')?.errors?.required"> Your adrPays is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="adrVille">adrVille</label>
+          <input
+            type="text"
+            class="form-control"
+            id="adrVille"
+            name="adrVille"
+            placeholder="{{ 'global.form.adrVille.placeholder' | translate }}"
+            formControlName="adrVille"
+            data-cy="adrVille"
+            #login
+          />
+
+          <div
+            *ngIf="registerForm.get('adrVille')!.invalid && (registerForm.get('adrVille')!.dirty || registerForm.get('adrVille')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="registerForm.get('adrVille')?.errors?.required"> Your adrVille is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="numCB">numCB</label>
+          <input
+            type="text"
+            class="form-control"
+            id="numCB"
+            name="numCB"
+            placeholder="{{ 'global.form.numCB.placeholder' | translate }}"
+            formControlName="numCB"
+            data-cy="numCB"
+            #login
+          />
+
+          <div *ngIf="registerForm.get('numCB')!.invalid && (registerForm.get('numCB')!.dirty || registerForm.get('numCB')!.touched)">
+            <small class="form-text text-danger" *ngIf="registerForm.get('numCB')?.errors?.required"> Your numCB is required. </small>
+          </div>
+        </div>
+
         <button
           type="submit"
           [disabled]="registerForm.invalid"
