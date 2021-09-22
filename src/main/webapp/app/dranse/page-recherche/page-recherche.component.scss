@@ -114,3 +114,25 @@ $hover-border-color: rgb(245, 205, 130);
     margin-left: 0;
   }
 }
+
+// === en cas de page sans livre ===
+.display-error {
+  width: 100%;
+  height: 30vh;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #error-message {
+    font-size: 20pt;
+    margin-bottom: 30pt;
+  }
+
+  #error-button {
+    height: 30pt;
+    width: 230pt;
+    font-size: 20pt;
+    margin-bottom: 30pt;
+  }
+}

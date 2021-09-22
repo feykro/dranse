@@ -8,6 +8,7 @@ import { ILivre } from 'app/entities/livre/livre.model';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'jhi-recherche',
@@ -20,12 +21,19 @@ export class PageRechercheComponent implements OnInit {
 
   pageSize = 20;
 
+  nbResult = 0; //  Variable pour l'affichage des pages "du fond"
+
   typeRecherche!: string; //  aut ou cat
   pageRecherche!: number;
   argumentRecherche!: string; //  nom du livre ou de l'auteur
   titlePage = 'Résultat pour: ';
 
-  constructor(private activeRoute: ActivatedRoute, private getBookController: GetBookControllerRessourceService, private router: Router) {
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private getBookController: GetBookControllerRessourceService,
+    private router: Router,
+    private loc: Location
+  ) {
     //  shutting down warnings
     const b = 0;
   }
@@ -52,7 +60,10 @@ export class PageRechercheComponent implements OnInit {
     const livreRqst: Observable<HttpResponse<ILivre[]>> = <Observable<HttpResponse<ILivre[]>>>(
       this.getBookController.getPageParCategorie(this.argumentRecherche, this.pageRecherche, this.pageSize)
     );
-    livreRqst.subscribe(data => (this.livrePage = <ILivre[]>data.body));
+    livreRqst.subscribe(data => {
+      this.livrePage = <ILivre[]>data.body;
+      this.nbResult = this.livrePage.length;
+    });
   }
 
   gotoLivre(bookID?: number): void {
@@ -72,6 +83,14 @@ export class PageRechercheComponent implements OnInit {
     this.router
       .navigate(['/recherche', this.typeRecherche, this.argumentRecherche, this.pageRecherche - 1])
       .then(() => window.location.reload());
+  }
+
+  goBack(): void {
+    this.loc.back();
+  }
+
+  gotoHome(): void {
+    this.router.navigate(['']);
   }
 
   fakeResultsGen(): void {
