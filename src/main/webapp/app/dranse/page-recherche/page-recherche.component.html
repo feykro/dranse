@@ -15,8 +15,9 @@
   </div>
 
   <div class="page-navigation-area">
-    <button id="navButton" *ngIf="pageRecherche > 1">Page Precedente</button>
-    <div id="affichage-current">{{ pageRecherche }}</div>
-    <button id="navButton">Page Suivante</button>
+    <button id="navButton" *ngIf="pageRecherche > 1" (click)="gotoPrevious()">Page Precedente</button>
+
+    <div id="affichage-current" [ngStyle]="{ 'margin-left': '50px' }">{{ pageRecherche }}></div>
+    <button id="navButton" (click)="gotoNext()">Page Suivante</button>
   </div>
 </div>
