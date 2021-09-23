@@ -2,6 +2,7 @@ package fr.dranse.myapp.web.rest;
 
 import fr.dranse.myapp.domain.Commande;
 import fr.dranse.myapp.domain.LigneCommande;
+import fr.dranse.myapp.domain.Utilisateur;
 import fr.dranse.myapp.repository.CommandeRepository;
 import fr.dranse.myapp.service.CommandeService;
 import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
@@ -9,7 +10,6 @@ import fr.dranse.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -19,11 +19,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+import fr.dranse.myapp.service.MailService;
+import fr.dranse.myapp.service.UtilisateurService;
 
 /**
  * CommandeControllerResource controller
@@ -40,10 +43,14 @@ public class CommandeControllerResource {
 
     private final CommandeService commandeService;
     private final CommandeRepository commandeRepository;
+    private final MailService mailService;
+    private final UtilisateurService utilisateurService;
 
-    public CommandeControllerResource(CommandeService commandeService, CommandeRepository commandeRepository) {
+    public CommandeControllerResource(CommandeService commandeService, CommandeRepository commandeRepository, MailService mailService, UtilisateurService utilisateurService) {
         this.commandeService = commandeService;
         this.commandeRepository = commandeRepository;
+        this.mailService = mailService;
+        this.utilisateurService = utilisateurService;
     }
 
     /**
@@ -108,17 +115,36 @@ public class CommandeControllerResource {
         @RequestBody Commande commande
     ) {
         // todo transactionnal
-        return commandeService.commander(commande);
+        boolean ret = commandeService.commander(commande);
+        if (ret){
+            String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+
+            Optional<Utilisateur> utilisateur = utilisateurService.utilisateurFromLogin(userLogin);
+            /*mailService.sendEmail(
+                utilisateur.get().getUserP().getEmail(),
+                "Confirmation commande",
+                "\n\n\nHello !",
+                false,
+                false);*/
+            mailService.sendEmailFromTemplate(utilisateur.get().getUserP(),
+                "mail/confirmationCommande",
+                "confirmation.commande.title");
+        }
+        return ret;
     }
 
     /**
      * GET getCommande
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Commande> getCommande(@PathVariable Long id) {
+    public Commande getCommande(@PathVariable Long id) {
         log.debug("REST request to get Commande (1) : {}", id);
         Optional<Commande> commande = commandeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(commande);
+        if(commande.isEmpty()){
+            return null;
+        }else{
+            return commande.get();
+        }
     }
 
     /**
