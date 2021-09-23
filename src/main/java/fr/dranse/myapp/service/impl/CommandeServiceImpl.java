@@ -276,10 +276,13 @@ public class CommandeServiceImpl implements CommandeService {
         return true;
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 2)
+    @Scheduled(fixedDelay = 1000 * 60 * 5)
     public void removeUselessCommande() {
         System.out.println("removing useless commands.");
         ZonedDateTime currentTime = ZonedDateTime.now();
-        commandeRepository.cleanIdsToDelete(currentTime.minusMinutes(120), currentTime.minusMinutes(30));
+        List<Long> listeIdtoDelete = commandeRepository.cleanIdsToDelete(currentTime.minusMinutes(120), currentTime.minusMinutes(30));
+        for (Long id : listeIdtoDelete) {
+            delete(id);
+        }
     }
 }
