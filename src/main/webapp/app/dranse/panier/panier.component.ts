@@ -38,14 +38,15 @@ export class PanierComponent implements OnInit {
       if (value.body === null && this.panierService.getPanierId() !== -1) {
         alert("Votre panier a été nettoyé en raison d'une inactivité prolongée");
         this.panierService.clearId();
+        this.newMessage("0");
       } else {
         this.getLignesCommande();
       }
     });
   }
 
-  newMessage(): void {
-    this.panierService.sendMessage(this.lignes.length.toString());
+  newMessage(message : string): void {
+    this.panierService.sendMessage(message);
   }
 
   /**
@@ -59,7 +60,7 @@ export class PanierComponent implements OnInit {
       i++;
     }
     this.updateTotalPrice();
-    this.newMessage();
+    this.newMessage(this.lignes.length.toString());
   }
 
   getLignesCommande(): void {
@@ -73,7 +74,7 @@ export class PanierComponent implements OnInit {
         this.convertCommande();
       }
     });
-    this.newMessage();
+    this.newMessage(this.lignes.length.toString());
   }
 
   convertLigneCommande(ligne: ILigneCommande, position: number): itemCommande {
@@ -97,7 +98,7 @@ export class PanierComponent implements OnInit {
       this.prixTotal = +this.prixTotal.toFixed(2);
       bookPrice = book.prix.toString();
     }
-    this.newMessage();
+    this.newMessage(this.lignes.length.toString());
     return new itemCommande(urlImage, bookTitle, bookAuthor, bookPrice, quantite, position, idLivre);
   }
 
@@ -106,7 +107,6 @@ export class PanierComponent implements OnInit {
     this.itemListCommande = [];
     this.getLignesCommande();
     this.updateTotalPrice();
-    this.newMessage();
   }
 
   updateTotalPrice(): void {
@@ -118,7 +118,6 @@ export class PanierComponent implements OnInit {
     }
     this.prixTotal = prix;
     this.prixTotal = +this.prixTotal.toFixed(2);
-    this.newMessage();
   }
 
   incrementerObjet(indice: number): void {
@@ -130,6 +129,7 @@ export class PanierComponent implements OnInit {
         alert("Votre panier a été nettoyé en raison d'une inactivité prolongée");
         this.panierService.clearId();
         this.updateAll();
+        this.newMessage("0");
       } else {
         const newLigne = this.lignes[indice];
         if (newLigne.quantite === null || newLigne.quantite === undefined) {
@@ -148,7 +148,6 @@ export class PanierComponent implements OnInit {
         });
       }
     });
-    this.newMessage();
   }
 
   decrementerObjet(indice: number): void {
@@ -160,6 +159,7 @@ export class PanierComponent implements OnInit {
         alert("Votre panier a été nettoyé en raison d'une inactivité prolongée");
         this.panierService.clearId();
         this.updateAll();
+        this.newMessage("0");
       } else {
         const newLigne = this.lignes[indice];
         if (newLigne.quantite === null || newLigne.quantite === undefined) {
@@ -182,7 +182,7 @@ export class PanierComponent implements OnInit {
         });
       }
     });
-    this.newMessage();
+    //this.newMessage();
   }
 
   gotoItem(id: number): void {
@@ -218,7 +218,7 @@ export class PanierComponent implements OnInit {
           this.router.navigate(['/verification']);
         }
       });
-      this.newMessage();
+      this.newMessage(this.lignes.length.toString());
     }
   }
 
@@ -231,6 +231,7 @@ export class PanierComponent implements OnInit {
         alert("Votre panier a été nettoyé en raison d'une inactivité prolongée");
         this.panierService.clearId();
         this.updateAll();
+        this.newMessage("0");
       } else {
         const res = confirm('Voulez-vous vraiment supprimer ce livre de la commande ?');
         if (res === true) {
@@ -245,7 +246,7 @@ export class PanierComponent implements OnInit {
         }
       }
     });
-    this.newMessage();
+    this.newMessage(this.lignes.length.toString());
   }
 }
 
