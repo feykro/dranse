@@ -11,28 +11,21 @@ import fr.dranse.myapp.repository.LigneCommandeRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CommandeSearchRepository;
 import fr.dranse.myapp.service.CommandeService;
-
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
-
-
-import java.util.ArrayList;
-import java.util.Optional;
-
 import fr.dranse.myapp.service.LivreService;
 import fr.dranse.myapp.service.UtilisateurService;
-
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +49,8 @@ public class CommandeServiceImpl implements CommandeService {
     @Autowired
     LivreService livreService;
 
+    @Autowired
+    UtilisateurService utilisateurService;
 
     public CommandeServiceImpl(
         CommandeRepository commandeRepository,
@@ -168,15 +163,12 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Override
     @Transactional
-    public Commande newCommande(LigneCommande ligneCommande) {
+    public Commande newCommande(Long idLivre, int quantite) {
         Commande commande = new Commande();
         commande.setDateCreation(ZonedDateTime.now());
         commande.setDateModification(ZonedDateTime.now());
-        commande.addLigneCommande(ligneCommande);
-        ligneCommande.setCommande(commande);
-        Commande result = commandeRepository.save(commande);
-        ligneCommandeRepository.save(ligneCommande);
-        return result;
+        commande = commandeRepository.save(commande);
+        return ajouterLigneCommande(commande.getId(), idLivre, quantite);
     }
 
     @Override
@@ -202,7 +194,7 @@ public class CommandeServiceImpl implements CommandeService {
         // todo verify if not another commande
         return commandeRepository.save(commande);
     }
-  
+
     //  todo : modifier temps dans ajouter et modifier
     public Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite) {
         return modifierOuAjouterLigneCommande(idCommande, idLivre, quantite, true);
@@ -221,23 +213,23 @@ public class CommandeServiceImpl implements CommandeService {
         commande.setDateModification(ZonedDateTime.now());
         for (LigneCommande ligne : commande.getLigneCommandes()) {
             if (ligne.getLivre().getId() == idLivre) {
-                if(ajouter){
-                    if(livreService.reserver(idLivre, quantite) != null){
+                if (ajouter) {
+                    if (livreService.reserver(idLivre, quantite) != null) {
                         ligne.updateQuantite(quantite + ligne.getQuantite());
                         return commandeRepository.save(commande);
-                    }else{
+                    } else {
                         return null;
                     }
-                }else{
+                } else {
                     if (ligne.getQuantite() != quantite) {
-                        if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
+                        if (livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null) {
                             ligne.updateQuantite(quantite);
-                            if(ligne.getQuantite() == 0){
+                            if (ligne.getQuantite() == 0) {
                                 commande.removeLigneCommande(ligne);
                                 ligneCommandeRepository.delete(ligne);
                             }
                             return commandeRepository.save(commande);
-                        }else{
+                        } else {
                             return null;
                         }
                     }
@@ -248,11 +240,11 @@ public class CommandeServiceImpl implements CommandeService {
         // creation d'une nouvelle ligneCommande
         LigneCommande ligneCommande = new LigneCommande();
         Livre livre = livreService.reserver(idLivre, quantite);
-        if(livre != null){
+        if (livre != null) {
             ligneCommande.setLivreQuantite(livre, quantite);
             commande.addLigneCommande(ligneCommande);
             return commandeRepository.save(commande);
-        }else{
+        } else {
             return null;
         }
     }
