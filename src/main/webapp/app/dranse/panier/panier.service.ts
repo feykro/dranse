@@ -90,6 +90,7 @@ export class PanierService {
     const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
       this.commandeService.passerCommande(this.getPanierId(), commande)
     );
+    this.sendMessage("0");
     commandeRequest.subscribe();
   }
 
