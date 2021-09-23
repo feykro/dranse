@@ -9,6 +9,21 @@ $background-color: #383b3c;
 Navbar
 ========================================================================== */
 
+// panier button----
+#panier-button {
+  background-color: transparent;
+  border: transparent;
+  color: $passive-color;
+}
+
+#panier-button:hover{
+  color: $active-color;
+}
+
+//--------------
+
+// badge ------
+
 .badge {
   padding-left: 9px;
   padding-right: 9px;
@@ -29,6 +44,8 @@ Navbar
     vertical-align: top;
     margin-left: -10px;
 }
+
+// ---------------------
 
 
 //test above
@@ -95,6 +112,7 @@ Navbar
 .nav-item {
   display: -webkit-flex;
   justify-content: center;
+  font-size:200%;
 }
 
 .navbar {
@@ -109,6 +127,7 @@ Navbar
 
   a.nav-link {
     font-weight: 400;
+     margin: -0.5rem -1rem;
   }
 }
 
