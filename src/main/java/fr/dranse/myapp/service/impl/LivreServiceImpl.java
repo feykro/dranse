@@ -8,10 +8,8 @@ import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
-
 import java.util.*;
 import java.util.function.Function;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -186,10 +184,10 @@ public class LivreServiceImpl implements LivreService {
         }
     }
 
-    @Scheduled(fixedDelay = 1000*60*60*24)
-    public void elasticSync(){
+    //@Scheduled(fixedDelay = 1000*60*60*24)
+    public void elasticSync() {
         System.out.println("\n\nsaving to elastic...");
-        for (Livre livre: livreRepository.findAll()){
+        for (Livre livre : livreRepository.findAll()) {
             livre.setLivre_cats(new HashSet<Categorie>());
             livreSearchRepository.save(livre);
         }
