@@ -15,8 +15,8 @@ $theme-dark-blue: #5289b5;
   height: 37vh;
   border-radius: 15pt;
   grid-template-columns: 1fr;
-  //grid-template-rows: 60fr 24fr 12fr 12fr;
-  grid-template-areas: 'bookImage' 'bookTitle' 'bookAuthor' 'bookPrice';
+  grid-template-rows: 60fr 36fr 12fr;
+  grid-template-areas: 'bookImage' 'bookInfo' 'bookPrice';
 }
 
 .bookCard:hover {
@@ -42,7 +42,22 @@ $theme-dark-blue: #5289b5;
   height: 150pt;
 }
 
-#bookTitle {
+
+#bookInfo {
+  font-size: 13pt;
+  font-weight: bold;
+  //max-height: 15%;
+  vertical-align: middle;
+  height: 100%;
+  max-height: 100%;
+  grid-area: bookInfo;
+  padding-left: 7px;
+  overflow-y: hidden;
+  color: black;
+
+}
+
+/*#bookTitle {
   font-size: 16pt;
   font-weight: bold;
   //max-height: 15%;
@@ -51,9 +66,7 @@ $theme-dark-blue: #5289b5;
   max-height: 100%;
   grid-area: bookTitle;
   padding-left: 7px;
-
   overflow-y: hidden;
-
   color: black;
 }
 
@@ -65,7 +78,7 @@ $theme-dark-blue: #5289b5;
   height: 100%;
   max-height: 100%;
   grid-area: bookAuthor;
-}
+}*/
 
 #bookPrice {
   text-align: right;
@@ -77,6 +90,8 @@ $theme-dark-blue: #5289b5;
   height: 100%;
   max-height: 100%;
   grid-area: bookPrice;
+  margin-left: 10pt;
+    margin-right: 10pt;
 }
 
 .catCard {
@@ -225,4 +240,7 @@ img {
   height: 100%;
   display: inline-block;
   object-fit: cover;
+}
+.notbold{
+    font-weight:normal
 }
