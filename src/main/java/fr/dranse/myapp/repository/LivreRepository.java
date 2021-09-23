@@ -38,4 +38,10 @@ public interface LivreRepository extends JpaRepository<Livre, Long> {
 
     @Query("select distinct livre from Livre livre join livre.livre_cats cat where cat.nom =:categorie")
     Page<Livre> findAllWithCat(Pageable pageable, @Param("categorie") String categorie);
+
+    @Query("SELECT l, SUM(lc.quantite) as total "//
+        + " FROM LigneCommande lc INNER JOIN lc.livre l" //
+        + " GROUP BY l.id" //
+        + " ORDER BY total DESC")
+    List<Livre> getBestSeller(Pageable pageable);
 }

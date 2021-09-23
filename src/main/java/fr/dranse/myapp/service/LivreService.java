@@ -1,6 +1,7 @@
 package fr.dranse.myapp.service;
 
 import fr.dranse.myapp.domain.Livre;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -71,4 +72,6 @@ public interface LivreService {
     Page<Livre> search(String query, Pageable pageable);
 
     Livre reserver(Long id, int quantite);
+
+    List<Livre> getBestSeller();
 }

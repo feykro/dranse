@@ -64,4 +64,8 @@ export class LivreService {
     }
     return livreCollection;
   }
+
+  getBestSeller(): Observable<HttpResponse<ILivre[]>> {
+    return this.http.get<ILivre[]>(`/api/livre-controller/get-bestseller`, { observe: 'response' });
+  }
 }

@@ -18,7 +18,6 @@ import { CategoriesControllerRessourceService } from '../service/categories-cont
 export class AccueilComponent implements OnInit {
   public nbBS = 5; //  nombre de best seller
   public nbCat = 12;
-  public idList = [1, 2, 3, 4, 5];
   public bestSellers = new Array<ILivre>();
   public popularCategories: ICategorie[] = [];
 
@@ -32,15 +31,14 @@ export class AccueilComponent implements OnInit {
   }
 
   navigate(n: number): void {
-    this.router.navigate(['/produit', this.idList[n]]);
+    this.router.navigate(['/produit', n]);
   }
 
   getBestSellers(): void {
     for (let i = 0; i < this.nbBS; i++) {
-      const bouquinRequest: Observable<HttpResponse<ILivre>> = <Observable<HttpResponse<ILivre>>>this.bookService.find(i + 1);
-
+      const bouquinRequest: Observable<HttpResponse<ILivre[]>> = this.bookService.getBestSeller();
       bouquinRequest.subscribe(data => {
-        this.bestSellers.push(<ILivre>data.body);
+        this.bestSellers = <ILivre[]>data.body;
       });
     }
   }
