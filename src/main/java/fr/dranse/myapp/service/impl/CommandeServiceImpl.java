@@ -276,6 +276,7 @@ public class CommandeServiceImpl implements CommandeService {
         return true;
     }
 
+    @Transactional
     @Scheduled(fixedDelay = 1000 * 60 * 5)
     public void removeUselessCommande() {
         System.out.println("removing useless commands.");
