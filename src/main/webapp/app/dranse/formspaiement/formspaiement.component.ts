@@ -181,7 +181,7 @@ export class FormspaiementComponent implements OnInit {
       } else {
         if (this.paiementDone === false) {
           this.showPaiement();
-          alert('Faire le paiement Facuration avant de valider');
+          alert('Faire le formulaire Paiement avant de valider');
         } else {
           this.commande.utilisateur = this.utilisateur;
           this.panierService.passerCommande(this.commande);
