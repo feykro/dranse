@@ -173,8 +173,8 @@ public class LivreControllerResource {
      * GET getBestseller
      */
     @GetMapping("/get-bestseller")
-    public String getBestseller() {
-        return "getBestseller";
+    public List<Livre> getBestseller() {
+        return livreService.getBestSeller();
     }
 
     /**

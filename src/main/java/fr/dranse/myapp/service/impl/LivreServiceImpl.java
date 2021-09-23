@@ -9,10 +9,11 @@ import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
 import java.util.*;
-import java.util.function.Function;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -182,6 +183,10 @@ public class LivreServiceImpl implements LivreService {
         } else {
             return null;
         }
+    }
+
+    public List<Livre> getBestSeller() {
+        return livreRepository.getBestSeller(PageRequest.of(0, 5));
     }
 
     @Scheduled(fixedDelay = 1000*60*60*24)

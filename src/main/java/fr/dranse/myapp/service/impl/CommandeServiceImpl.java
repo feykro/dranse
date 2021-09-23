@@ -212,7 +212,7 @@ public class CommandeServiceImpl implements CommandeService {
         Commande commande = opt.get();
         commande.setDateModification(ZonedDateTime.now());
         for (LigneCommande ligne : commande.getLigneCommandes()) {
-            if (ligne.getLivre().getId() == idLivre) {
+            if (ligne.getLivre().getId().equals(idLivre)) {
                 if (ajouter) {
                     if (livreService.reserver(idLivre, quantite) != null) {
                         ligne.updateQuantite(quantite + ligne.getQuantite());
@@ -221,10 +221,10 @@ public class CommandeServiceImpl implements CommandeService {
                         return null;
                     }
                 } else {
-                    if (ligne.getQuantite() != quantite) {
+                    if (ligne.getQuantite().intValue() != quantite) {
                         if (livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null) {
                             ligne.updateQuantite(quantite);
-                            if (ligne.getQuantite() == 0) {
+                            if (ligne.getQuantite().intValue() == 0) {
                                 commande.removeLigneCommande(ligne);
                                 ligneCommandeRepository.delete(ligne);
                             }
@@ -232,6 +232,8 @@ public class CommandeServiceImpl implements CommandeService {
                         } else {
                             return null;
                         }
+                    }else{
+                        return null;
                     }
                 }
             }
