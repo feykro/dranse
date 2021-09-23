@@ -56,7 +56,7 @@ public class CommandeControllerResource {
         if (ligneCommande.getId() != null) {
             throw new BadRequestAlertException("A new ligneCommande cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Commande result = commandeService.newCommande(ligneCommande);
+        Commande result = commandeService.newCommande(ligneCommande.getLivre().getId(), ligneCommande.getQuantite());
         return ResponseEntity
             .created(new URI("/api/commande-controller/get-commande/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.toString()))
@@ -67,7 +67,23 @@ public class CommandeControllerResource {
      * PUT ajoutLigne
      */
     // todo transact
-    @PutMapping("/ajout/{id}") // todo rename to update?? and simplifier avec 1qqt et 1 idlivre?
+    @PutMapping("/modifier/{id}") // todo rename to update?? and simplifier avec 1qqt et 1 idlivre?
+    public ResponseEntity<Commande> modifierLigne(
+        @PathVariable(value = "id", required = true) final Long id,
+        @RequestBody LigneCommande ligneCommande
+    ) throws URISyntaxException {
+        log.debug("REST request to modify line to existing command : {}, {}", id, ligneCommande);
+        if (!commandeRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+        Commande result = commandeService.modifierLigneCommande(id, ligneCommande.getLivre().getId(), ligneCommande.getQuantite());
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .body(result);
+    }
+
+    @PutMapping("/ajout/{id}")
     public ResponseEntity<Commande> ajoutLigne(
         @PathVariable(value = "id", required = true) final Long id,
         @RequestBody LigneCommande ligneCommande
@@ -76,7 +92,7 @@ public class CommandeControllerResource {
         if (!commandeRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-        Commande result = commandeService.modifierLigneCommande(id, ligneCommande.getLivre().getId(), ligneCommande.getQuantite());
+        Commande result = commandeService.ajouterLigneCommande(id, ligneCommande.getLivre().getId(), ligneCommande.getQuantite());
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
@@ -131,10 +147,10 @@ public class CommandeControllerResource {
             .build();
     }
 
-    @GetMapping("/history/{id}")
-    public ResponseEntity<List<Commande>> getHistory(@PathVariable Long id, Pageable pageable) {
+    @GetMapping("/history")
+    public ResponseEntity<List<Commande>> getHistory(Pageable pageable) {
         log.debug("REST request to get the history of a user");
-        Page<Commande> page = commandeService.getHistory(id, pageable);
+        Page<Commande> page = commandeService.getHistory(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

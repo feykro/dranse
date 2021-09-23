@@ -64,7 +64,7 @@ public interface CommandeService {
      * @param ligneCommande
      * @return
      */
-    Commande newCommande(LigneCommande ligneCommande);
+    Commande newCommande(Long idLivre, int quantite);
 
     /**
      * Ajouter un ligneCommande à une commande existante
@@ -94,14 +94,15 @@ public interface CommandeService {
      * @return
      */
     Commande modifierLigneCommande(Long idCommande, Long idLivre, int quantite);
+    Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite);
+    Commande modifierOuAjouterLigneCommande(Long idCommande, Long idLivre, int quantite, boolean ajouter);
 
     /**
      * return the history of commands of an user
-     * @param id
      * @param pageable
      * @return
      */
-    Page<Commande> getHistory(Long id, Pageable pageable);
+    Page<Commande> getHistory(Pageable pageable);
 
     /**
      * Valider et passer une commande.

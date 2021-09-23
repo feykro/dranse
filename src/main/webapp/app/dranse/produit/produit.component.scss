@@ -1,11 +1,30 @@
+$theme-white: #edf2f3;
+$theme-light-blue: #afd8f2;
+$theme-dark-blue: #5289b5;
+
+.produit-div {
+  height: 90vh;
+  width: 100vw;
+  background-color: $theme-white;
+
+  margin-left: -10pt;
+  padding-right: 15pt;
+  padding-left: 15pt;
+}
+
 .image-livre {
-  height: 200pt;
+  height: 250pt;
+}
+
+#image {
+  margin-top: 10pt;
+  margin-left: 20pt;
 }
 
 .infos {
   display: inline-block;
   vertical-align: top;
-  margin-left: 15pt;
+  margin-left: 25pt;
   width: 45%;
   min-width: 400px;
 }
@@ -33,31 +52,46 @@
 }
 
 .extra-info {
-  background-color: lightgrey;
+  background-color: $theme-dark-blue;
   border: solid 0.1em;
   border-color: black;
   width: 100%;
-  min-width: 400px;
+  min-width: 500px;
   min-height: 75px;
   height: 75px;
+
+  display: -webkit-flex;
+  justify-content: space-around;
+  vertical-align: middle;
 }
 
-.edition {
+.categories {
   display: inline-block;
-  padding-top: 15px;
+  //padding-top: 15px;
   text-align: center;
-  font-size: 15px;
+  font-size: 18pt;
+
+  font-weight: 400;
+
   height: 100%;
   width: 49%;
+
+  color: $theme-white;
+}
+
+.cat {
+  text-align: center;
 }
 
 .annee-publication {
   display: inline-block;
-  padding-top: 15px;
+  //padding-top: 15px;
   text-align: center;
-  font-size: 15px;
+  font-size: 18pt;
+  font-weight: 400;
   height: 100%;
   width: 49%;
+  color: $theme-white;
 }
 
 .prix {
@@ -70,34 +104,44 @@
 }
 
 .ajout-panier {
-  background-color: lightgreen;
+  background-color: $theme-light-blue;
   border-color: black;
   width: 200px;
   height: 50px;
+
+  font-size: 14pt;
+  font-weight: 500;
+  color: black;
 }
 
 .ajout-panier:hover {
-  border-color: lightgrey;
+  border-color: $theme-white;
 }
 
 .ajout-panier:active {
-  background-color: rgba(144, 238, 144, 0.644);
+  background-color: #c3dff0;
 }
 
 .synopsis {
   font-size: 25px;
   font-weight: bolder;
+  margin-left: 5pt;
+  margin-right: 10pt;
+  margin-top: 10pt;
 }
 
 .synopsis-text {
+  padding: 10pt 10pt 10pt 10pt;
+
   border: solid 0.1em;
   border-color: black;
-  background-color: lightgrey;
+
+  background-color: $theme-dark-blue;
+  color: $theme-white;
+  font-size: 16pt;
+  font-weight: 300;
+
   width: 100%;
   min-height: 150px;
   font-size: 20px;
-  padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
 }

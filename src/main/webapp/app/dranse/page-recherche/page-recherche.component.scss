@@ -1,0 +1,144 @@
+$card-color: rgb(207, 231, 238);
+$hover-border-color: rgb(245, 205, 130);
+
+//  === Zones d'affichage ===
+.page-recherche {
+  width: 100%;
+}
+
+.resultats-area {
+  width: 100%;
+  background-color: whitesmoke;
+  display: list-item block;
+}
+
+.result-title {
+  padding-left: 10pt;
+  padding-top: 5pt;
+  font-size: 20pt;
+  font-weight: bold;
+  margin-bottom: 20pt;
+}
+
+.liste-resultats {
+  height: 100%;
+  width: 100%;
+}
+
+//  === Carte resultat ===
+
+.carte-resultat {
+  height: 200pt;
+  width: calc(100% - 20pt);
+  border-radius: 25pt;
+
+  border: solid black 0.1em;
+
+  min-width: 600pt;
+  background-color: $card-color;
+  margin-top: 10pt;
+  margin-left: 10pt;
+  margin-right: 10pt;
+  margin-bottom: none;
+
+  display: grid;
+  grid-template-columns: 200pt calc((100% - 200pt) * 0.6) calc((100% - 200pt) * 0.4);
+
+  #image-container {
+    height: 250pt;
+    width: 200pt;
+    display: -webkit-flex;
+    //justify-items: left;
+    justify-content: center;
+    vertical-align: middle;
+  }
+
+  #card-cover {
+    margin-left: 25pt;
+    padding-top: 10pt;
+    padding-bottom: 10pt;
+    //height: calc(100% - 20pt);
+    height: 100%;
+    object-fit: cover;
+    vertical-align: middle;
+  }
+
+  #informations {
+    height: 100%;
+    width: 100%;
+    display: list-item block;
+    //grid-template-rows: 60% 40%;
+
+    #card-title {
+      font-size: 20pt;
+      font-weight: bold;
+    }
+
+    #card-author {
+      font-size: 16pt;
+    }
+  }
+
+  #card-price {
+    display: -webkit-flex;
+    font-size: 20pt;
+    justify-content: left;
+    justify-items: left;
+    margin: auto;
+  }
+}
+
+.carte-resultat:hover {
+  border: solid $hover-border-color 0.1em;
+  cursor: pointer;
+}
+
+//  === zone navigation page ===
+.page-navigation-area {
+  width: 100%;
+  height: 50pt;
+  display: -webkit-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  border: solid black 0.1em;
+  border-radius: 15pt;
+
+  margin-top: 15pt;
+
+  #navButton {
+    margin-left: 20pt;
+    margin-right: 20pt;
+
+    width: 120pt;
+    height: 22pt;
+  }
+
+  #affichage-current {
+    font-size: 18pt;
+    margin-left: 0;
+  }
+}
+
+// === en cas de page sans livre ===
+.display-error {
+  width: 100%;
+  height: 30vh;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #error-message {
+    font-size: 20pt;
+    margin-bottom: 30pt;
+  }
+
+  #error-button {
+    height: 30pt;
+    width: 230pt;
+    font-size: 20pt;
+    margin-bottom: 30pt;
+  }
+}

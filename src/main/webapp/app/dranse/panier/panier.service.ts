@@ -52,7 +52,7 @@ export class PanierService {
       } else {
         this.commande = value.body;
         localStorage.setItem('panierId', JSON.stringify(<number>value.body.id));
-        confirm('Le produit a été ajouté au panier');
+        alert('Le produit a été ajouté au panier');
       }
     });
   }
@@ -66,7 +66,7 @@ export class PanierService {
         alert("Le livre n'a pas été trouvé ou n'est plus en stock");
       } else {
         this.commande = value.body;
-        confirm('Le produit a été ajouté au panier');
+        alert('Le produit a été ajouté au panier');
       }
     });
   }
@@ -80,7 +80,7 @@ export class PanierService {
 
   modifierLigne(ligneCommande: ILigneCommande): Observable<HttpResponse<ICommande>> {
     const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
-      this.commandeService.ajoutLigneCommande(ligneCommande, this.getPanierId())
+      this.commandeService.modifierLigneCommande(ligneCommande, this.getPanierId())
     );
 
     return commandeRequest;

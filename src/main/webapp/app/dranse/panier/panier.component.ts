@@ -1,13 +1,13 @@
 import { Router } from '@angular/router';
 import { CommandeControllerRessourceService } from './../service/commande-controller-ressource.service';
-import { LigneCommande } from './../../entities/ligne-commande/ligne-commande.model';
-import { ILivre, Livre } from './../../entities/livre/livre.model';
 import { ILigneCommande } from 'app/entities/ligne-commande/ligne-commande.model';
 import { Component, OnInit } from '@angular/core';
 import { PanierService } from './panier.service';
-import { Commande, ICommande } from 'app/entities/commande/commande.model';
+import { ICommande } from 'app/entities/commande/commande.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { LigneCommandeService } from 'app/entities/ligne-commande/service/ligne-commande.service';
 
 @Component({
   selector: 'jhi-panier',
@@ -16,9 +16,9 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class PanierComponent implements OnInit {
   panierId!: number;
-  //commande!: Commande;
   lignes!: ILigneCommande[];
   prixTotal = 0;
+  trash = faTrash;
 
   itemListCommande: itemCommande[] = [];
 
@@ -123,6 +123,10 @@ export class PanierComponent implements OnInit {
     if (newLigne.quantite === null || newLigne.quantite === undefined) {
       newLigne.quantite = 1;
     } else if (newLigne.quantite <= 1) {
+      const res = confirm('Voulez-vous vraiment supprimer ce livre de la commande ?');
+      if (res === false) {
+        return;
+      }
       newLigne.quantite = 0;
     } else {
       newLigne.quantite -= 1;
@@ -159,6 +163,20 @@ export class PanierComponent implements OnInit {
       alert('Impossible de payer avec un panier vide');
     } else {
       this.router.navigate(['/verification']);
+    }
+  }
+
+  supprimerLivre(pos: number): void {
+    const res = confirm('Voulez-vous vraiment supprimer ce livre de la commande ?');
+    if (res === true) {
+      const newLigne = this.lignes[pos];
+      newLigne.quantite = 0;
+      this.panierService.modifierLigne(newLigne).subscribe(value => {
+        if (value.body !== null) {
+          this.lignes[pos] = newLigne;
+        }
+        this.updateAll();
+      });
     }
   }
 }

@@ -1,3 +1,4 @@
+import { PageRechercheComponent } from './page-recherche/page-recherche.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -5,7 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProduitComponent } from './produit/produit.component';
 import { PanierComponent } from './panier/panier.component';
 import { FormspaiementComponent } from './formspaiement/formspaiement.component';
+import { HistoriqueComponent } from './historique/historique.component';
 import { UserRouteAccessService } from '../core/auth/user-route-access.service';
+import { ConfirmationachatComponent } from './confirmationachat/confirmationachat.component';
 
 const dranseRoute: Routes = [
   {
@@ -21,13 +24,26 @@ const dranseRoute: Routes = [
     component: PanierComponent,
   },
   {
+      path: 'historique',
+      component: HistoriqueComponent,
+      canActivate: [UserRouteAccessService]
+    },
+  {
     path: 'verification',
     component: FormspaiementComponent,
     canActivate: [UserRouteAccessService],
   },
   {
+    path: 'confirmation',
+    component: ConfirmationachatComponent,
+  },
+  {
     path: '',
     component: AccueilComponent,
+  },
+  {
+    path: 'recherche/:type/:arg/:page',
+    component: PageRechercheComponent,
   },
 ];
 
