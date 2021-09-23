@@ -22,7 +22,12 @@ export class PanierComponent implements OnInit {
 
   itemListCommande: itemCommande[] = [];
 
-  constructor(private panierService: PanierService, public commandeService: CommandeControllerRessourceService, private router: Router) {
+  message !: string;
+
+  constructor(
+    private panierService: PanierService,
+    public commandeService: CommandeControllerRessourceService,
+    private router: Router) {
     this.panierId = this.panierService.getPanierId();
   }
 
@@ -36,8 +41,15 @@ export class PanierComponent implements OnInit {
         this.panierService.clearId();
       } else {
         this.getLignesCommande();
+        this.panierService.fetchMessage().subscribe(message => this.message = message)
+
       }
     });
+
+  }
+
+  newMessage() : void {
+    this.panierService.sendMessage(this.lignes.length.toString());
   }
 
   /**
@@ -51,6 +63,7 @@ export class PanierComponent implements OnInit {
       i++;
     }
     this.updateTotalPrice();
+    this.newMessage();
   }
 
   getLignesCommande(): void {
@@ -64,6 +77,7 @@ export class PanierComponent implements OnInit {
         this.convertCommande();
       }
     });
+    this.newMessage();
   }
 
   convertLigneCommande(ligne: ILigneCommande, position: number): itemCommande {
@@ -87,7 +101,7 @@ export class PanierComponent implements OnInit {
       this.prixTotal = +this.prixTotal.toFixed(2);
       bookPrice = book.prix.toString();
     }
-
+    this.newMessage();
     return new itemCommande(urlImage, bookTitle, bookAuthor, bookPrice, quantite, position, idLivre);
   }
 
@@ -96,6 +110,7 @@ export class PanierComponent implements OnInit {
     this.itemListCommande = [];
     this.getLignesCommande();
     this.updateTotalPrice();
+    this.newMessage();
   }
 
   updateTotalPrice(): void {
@@ -107,6 +122,7 @@ export class PanierComponent implements OnInit {
     }
     this.prixTotal = prix;
     this.prixTotal = +this.prixTotal.toFixed(2);
+    this.newMessage();
   }
 
   incrementerObjet(indice: number): void {
@@ -136,6 +152,7 @@ export class PanierComponent implements OnInit {
         });
       }
     });
+    this.newMessage();
   }
 
   decrementerObjet(indice: number): void {
@@ -169,6 +186,8 @@ export class PanierComponent implements OnInit {
         });
       }
     });
+    this.newMessage();
+
   }
 
   gotoItem(id: number): void {
@@ -197,12 +216,14 @@ export class PanierComponent implements OnInit {
         this.commandeService.getCommande(this.panierService.getPanierId())
       );
       commandeRequest.subscribe(value => {
+        const test = value.body?.ligneCommandes;
         if (value.body?.ligneCommandes?.length === 0) {
           alert('Vous devez avoir au moins un livre dans votre commande pour passer commande');
         } else {
           this.router.navigate(['/verification']);
         }
       });
+      this.newMessage();
     }
   }
 
@@ -229,6 +250,7 @@ export class PanierComponent implements OnInit {
         }
       }
     });
+    this.newMessage();
   }
 }
 

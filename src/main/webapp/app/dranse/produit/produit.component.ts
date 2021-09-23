@@ -18,6 +18,8 @@ export class ProduitComponent implements OnInit {
   public livreId = 0;
   public livreInfo!: ILivre;
 
+  message !: string;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private livreService: LivreService,
@@ -33,6 +35,13 @@ export class ProduitComponent implements OnInit {
     bouquinRequest.subscribe(value => {
       this.livreInfo = <ILivre>value.body;
     });
+    this.panierService.fetchMessage().subscribe(message => this.message = message)
+
+  }
+
+  newMessage(message : string) : void {
+      //const ret = Number(this.message)+1;
+      this.panierService.sendMessage(message);
   }
 
   ajoutPanier(): void {
@@ -56,5 +65,6 @@ export class ProduitComponent implements OnInit {
         }
       });
     }
+
   }
 }

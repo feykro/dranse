@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { ICommande } from 'app/entities/commande/commande.model';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,20 @@ export class PanierService {
   public commande!: ICommande;
   private lignes!: ILigneCommande[];
 
+  private messageSource = new BehaviorSubject('0');
+
   constructor(private commandeService: CommandeControllerRessourceService) {
     // Not empty
   }
+
+  fetchMessage(): Observable<string> {
+    return this.messageSource.asObservable();
+  }
+  sendMessage(message : string) : void {
+    this.messageSource.next(message);
+  }
+
+
 
   getPanierId(): number {
     const id = <number | null>JSON.parse(<string>localStorage.getItem('panierId'));
@@ -66,6 +78,8 @@ export class PanierService {
         alert("Le livre n'a pas été trouvé ou n'est plus en stock");
       } else {
         this.commande = value.body;
+        this.sendMessage(this.commande.ligneCommandes!.length.toString());
+
         alert('Le produit a été ajouté au panier');
       }
     });

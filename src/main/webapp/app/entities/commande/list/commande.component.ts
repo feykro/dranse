@@ -77,6 +77,9 @@ export class CommandeComponent implements OnInit {
       );
   }
 
+
+
+
   search(query: string): void {
     this.currentSearch = query;
     this.loadPage(1);

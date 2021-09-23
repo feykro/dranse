@@ -107,15 +107,16 @@ $theme-dark-blue: #5289b5;
 }
 
 .poubelle {
-  font-size: 1.2em;
+  font-size: 200%;
 }
 
 .poubelle:hover {
   cursor: pointer;
 }
 
-.item-prix {
-  font-size: 18pt;
+#item-prix {
+  font-weight: bold;
+  font-size: 25pt;
 }
 
 // === contenu bandeau ===
