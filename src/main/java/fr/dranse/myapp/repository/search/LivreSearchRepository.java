@@ -11,8 +11,11 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * Spring Data Elasticsearch repository for the {@link Livre} entity.
  */
 public interface LivreSearchRepository extends ElasticsearchRepository<Livre, Long> {
-    @Query("{\"fuzzy\" : {\"titre\" : {\"value\" : \"?0\", \"fuzziness\": \"AUTO\"}}}")
+    @Query("{\"match\" : {\"titre\" : {\"query\" : \"?0\", \"fuzziness\": \"2\"}}}")
     Page<SearchHit<Livre>> searchByTitle(String titre, Pageable pageable);
+
+    @Query("{\"multi_match\" : {\"query\" : \"?0\", \"fields\": [ \"titre\", \"auteur\" ], \"fuzziness\": \"AUTO\"}}")
+    Page<SearchHit<Livre>> globalSearch(String value, Pageable pageable);
 
     @Query("{\"fuzzy\" : {\"auteur\" : {\"value\" : \"?0\", \"fuzziness\": \"AUTO\"}}}")
     Page<SearchHit<Livre>> searchByAuthor(String auteur, Pageable pageable);

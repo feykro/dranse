@@ -121,9 +121,6 @@ public class LivreControllerResource {
             .body(result);
     }
 
-    /**
-     * TODO: (maybe) commanderLivre
-     */
 
     // ADD HERE
 
@@ -144,11 +141,15 @@ public class LivreControllerResource {
      * GET rechercheParTitre
      */
     @GetMapping("/recherche-par-titre/{titre}")
-    //public String rechercheParTitre() {
-    //    return "rechercheParTitre";
-    //}
     public ResponseEntity<List<Livre>> rechercheParTitre(Pageable pageable, @PathVariable String titre) {
         Page<Livre> page = livreService.findByTitle(pageable, titre);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/recherche/{titre}")
+    public ResponseEntity<List<Livre>> recherche(Pageable pageable, @PathVariable String titre) {
+        Page<Livre> page = livreService.globalSearch(pageable, titre);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

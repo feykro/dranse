@@ -22,7 +22,7 @@ export class GetBookControllerRessourceService {
   }
 
   getPageRecherche(recherche: string, numPage: number, pageSize: number): Observable<EntityArrayResponseType> {
-    return this.http.get<ILivre[]>(`${this.resourceUrl}/recherche-par-titre/${recherche}?page=${numPage}&size=${pageSize})`, {
+    return this.http.get<ILivre[]>(`${this.resourceUrl}/recherche/${recherche}?page=${numPage}&size=${pageSize})`, {
       observe: 'response',
     });
   }

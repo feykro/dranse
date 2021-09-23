@@ -53,6 +53,7 @@ public interface LivreService {
     Page<Livre> findByAuthor(Pageable pageable, String author);
     Page<Livre> findByTitle(Pageable pageable, String title);
     Page<Livre> findByCategorie(Pageable pageable, String Categorie);
+    Page<Livre> globalSearch(Pageable pageable, String value);
 
     /**
      * Delete the "id" livre.

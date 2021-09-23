@@ -150,6 +150,13 @@ public class LivreServiceImpl implements LivreService {
 
     @Override
     @Transactional(readOnly = true)
+    public Page<Livre> globalSearch(Pageable pageable, String value) {
+        Page<SearchHit<Livre>> res = livreSearchRepository.globalSearch(value, pageable);
+        return res.map(sh -> sh.getContent());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Page<Livre> findByCategorie(Pageable pageable, String categorie) {
         log.debug("Request to get Livre by categorie {}", categorie);
         return livreRepository.findAllWithCat(pageable, categorie);

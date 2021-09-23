@@ -52,7 +52,7 @@ class LivreControllerResourceIT {
      */
     @Test
     void testRechercheParTitre() throws Exception {
-        restMockMvc.perform(get("/api/livre-controller/recherche-par-titre")).andExpect(status().isOk());
+        restMockMvc.perform(get("/api/livre-controller/recherche")).andExpect(status().isOk());
     }
 
     /**
