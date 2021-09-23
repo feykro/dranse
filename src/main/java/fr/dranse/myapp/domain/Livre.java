@@ -7,9 +7,6 @@ import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import static javax.persistence.LockModeType.WRITE;
 
 /**
  * A Livre.
@@ -66,6 +63,7 @@ public class Livre implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "livre_cat_id")
     )
     @JsonIgnoreProperties(value = { "livres" }, allowSetters = true)
+    @org.springframework.data.annotation.Transient()
     private Set<Categorie> livre_cats = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -181,7 +181,7 @@ export class FormspaiementComponent implements OnInit {
       } else {
         if (this.paiementDone === false) {
           this.showPaiement();
-          alert('Faire le paiement Facuration avant de valider');
+          alert('Faire le formulaire Paiement avant de valider');
         } else {
           this.commande.utilisateur = this.utilisateur;
           this.panierService.passerCommande(this.commande);
@@ -193,20 +193,32 @@ export class FormspaiementComponent implements OnInit {
   }
 
   showLivraison(): void {
-    this.livraison = false;
-    this.facturation = true;
-    this.paiement = true;
+    if (this.livraison) {
+      this.livraison = false;
+      this.facturation = true;
+      this.paiement = true;
+    } else {
+      this.livraison = true;
+    }
   }
 
   showFacturation(): void {
-    this.livraison = true;
-    this.facturation = false;
-    this.paiement = true;
+    if (this.facturation) {
+      this.livraison = true;
+      this.facturation = false;
+      this.paiement = true;
+    } else {
+      this.facturation = true;
+    }
   }
 
   showPaiement(): void {
-    this.livraison = true;
-    this.facturation = true;
-    this.paiement = false;
+    if (this.paiement) {
+      this.livraison = true;
+      this.facturation = true;
+      this.paiement = false;
+    } else {
+      this.paiement = true;
+    }
   }
 }

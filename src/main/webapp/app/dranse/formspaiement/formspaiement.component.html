@@ -70,18 +70,30 @@
     <br />
     <label>
       <b>Date d'expiration</b><br />
-      <input placeholder="mm/aa" [name]="dateExpiration" [(ngModel)]="dateExpiration" [ngModelOptions]="{ standalone: true }" />
+      <input
+        id="exp-crypto"
+        placeholder="mm/aa"
+        [name]="dateExpiration"
+        [(ngModel)]="dateExpiration"
+        [ngModelOptions]="{ standalone: true }"
+      />
     </label>
     <label>
       <b>Cryptogramme</b><br />
-      <input placeholder="ex : 123" [name]="cryptogramme" [(ngModel)]="cryptogramme" [ngModelOptions]="{ standalone: true }" />
+      <input
+        id="exp-crypto"
+        placeholder="ex : 123"
+        [name]="cryptogramme"
+        [(ngModel)]="cryptogramme"
+        [ngModelOptions]="{ standalone: true }"
+      />
     </label>
     <br />
     <button class="valider" type="submit" [disabled]="!profileForm.checkValidity()">Suivant</button>
   </form>
 </div>
 <br />
-<h1 class="prix-total">Prix Total : {{ prixTotal }}</h1>
+<h1 class="prix-total">Prix Total : {{ prixTotal }} €</h1>
 <div class="bottom">
   <button class="validation" (click)="validationAll()">VALIDER</button>
 </div>

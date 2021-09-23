@@ -11,11 +11,11 @@ $theme-dark-blue: #5289b5;
   background-color: whitesmoke;
   border: solid black 0.1em;
   min-width: 220px;
-  min-height: 300px;
+  min-height: 300pt;
   height: 37vh;
   border-radius: 15pt;
   grid-template-columns: 1fr;
-  grid-template-rows: 60fr 24fr 12fr 12fr;
+  //grid-template-rows: 60fr 24fr 12fr 12fr;
   grid-template-areas: 'bookImage' 'bookTitle' 'bookAuthor' 'bookPrice';
 }
 
@@ -26,7 +26,7 @@ $theme-dark-blue: #5289b5;
 }
 
 #bookImage {
-  height: 220px;
+  height: 170pt;
 
   display: -webkit-flex;
   justify-content: center;
@@ -39,7 +39,7 @@ $theme-dark-blue: #5289b5;
 }
 
 #coverTest {
-  height: 200px;
+  height: 150pt;
 }
 
 #bookTitle {
@@ -133,7 +133,7 @@ $theme-dark-blue: #5289b5;
   border: solid black 0.1em;
   display: grid;
   height: 50vh;
-  min-height: 440px;
+  min-height: 400pt;
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 0.8fr;
   grid-gap: 0.2rem;
@@ -148,8 +148,8 @@ $theme-dark-blue: #5289b5;
   grid-area: bestSellers;
   //border: solid black 0.1em;
   display: grid;
-  height: 39vh;
-  min-height: 330px;
+  height: 100%;
+  min-height: 350pt;
   grid-template-columns: 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
   grid-template-rows: 1fr;
   grid-gap: 0.4rem;
