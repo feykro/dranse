@@ -137,10 +137,14 @@ public class CommandeControllerResource {
      * GET getCommande
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Commande> getCommande(@PathVariable Long id) {
+    public Commande getCommande(@PathVariable Long id) {
         log.debug("REST request to get Commande (1) : {}", id);
         Optional<Commande> commande = commandeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(commande);
+        if(commande.isEmpty()){
+            return null;
+        }else{
+            return commande.get();
+        }
     }
 
     /**
