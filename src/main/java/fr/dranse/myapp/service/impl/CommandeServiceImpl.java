@@ -11,17 +11,20 @@ import fr.dranse.myapp.repository.LigneCommandeRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.CommandeSearchRepository;
 import fr.dranse.myapp.service.CommandeService;
-
-import java.util.ArrayList;
-import java.util.Optional;
-
 import fr.dranse.myapp.service.LivreService;
 import fr.dranse.myapp.service.UtilisateurService;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +52,12 @@ public class CommandeServiceImpl implements CommandeService {
     @Autowired
     UtilisateurService utilisateurService;
 
-    public CommandeServiceImpl(CommandeRepository commandeRepository, CommandeSearchRepository commandeSearchRepository, LigneCommandeRepository ligneCommandeRepository, LivreRepository livreRepository) {
+    public CommandeServiceImpl(
+        CommandeRepository commandeRepository,
+        CommandeSearchRepository commandeSearchRepository,
+        LigneCommandeRepository ligneCommandeRepository,
+        LivreRepository livreRepository
+    ) {
         this.commandeRepository = commandeRepository;
         this.commandeSearchRepository = commandeSearchRepository;
         this.ligneCommandeRepository = ligneCommandeRepository;
@@ -67,13 +75,16 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public Optional<Commande> partialUpdate(Commande commande) {
         log.debug("Request to partially update Commande : {}", commande);
-
+        commande.setDateModification(ZonedDateTime.now());
         return commandeRepository
             .findById(commande.getId())
             .map(
                 existingCommande -> {
-                    if (commande.getDate() != null) {
-                        existingCommande.setDate(commande.getDate());
+                    if (commande.getDateCreation() != null) {
+                        existingCommande.setDateCreation(commande.getDateCreation());
+                    }
+                    if (commande.getDateModification() != null) {
+                        existingCommande.setDateModification(commande.getDateModification());
                     }
                     if (commande.getPaysLivraison() != null) {
                         existingCommande.setPaysLivraison(commande.getPaysLivraison());
@@ -151,17 +162,20 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Commande newCommande(Long idLivre, int quantite) {
         Commande commande = new Commande();
+        commande.setDateCreation(ZonedDateTime.now());
+        commande.setDateModification(ZonedDateTime.now());
         commande = commandeRepository.save(commande);
         return ajouterLigneCommande(commande.getId(), idLivre, quantite);
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Commande ajouterLigne(Long id, LigneCommande ligneCommande) {
         Commande commande = commandeRepository.getOne(id);
+        commande.setDateModification(ZonedDateTime.now());
         commande.addLigneCommande(ligneCommande);
         // todo verify if not already added
         Commande result = commandeRepository.save(commande);
@@ -170,9 +184,10 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public Commande SupprimerLigne(Long idCommande, Long idLigne) {
         Commande commande = commandeRepository.getOne(idCommande);
+        commande.setDateModification(ZonedDateTime.now());
         LigneCommande ligneCommande = ligneCommandeRepository.getOne(idLigne);
         commande.removeLigneCommande(ligneCommande);
         ligneCommandeRepository.delete(ligneCommande);
@@ -180,7 +195,7 @@ public class CommandeServiceImpl implements CommandeService {
         return commandeRepository.save(commande);
     }
 
-
+    //  todo : modifier temps dans ajouter et modifier
     public Commande ajouterLigneCommande(Long idCommande, Long idLivre, int quantite) {
         return modifierOuAjouterLigneCommande(idCommande, idLivre, quantite, true);
     }
@@ -195,39 +210,41 @@ public class CommandeServiceImpl implements CommandeService {
             return null;
         }
         Commande commande = opt.get();
+        commande.setDateModification(ZonedDateTime.now());
         for (LigneCommande ligne : commande.getLigneCommandes()) {
             if (ligne.getLivre().getId() == idLivre) {
-                if(ajouter){
-                    if(livreService.reserver(idLivre, quantite) != null){
+                if (ajouter) {
+                    if (livreService.reserver(idLivre, quantite) != null) {
                         ligne.updateQuantite(quantite + ligne.getQuantite());
                         return commandeRepository.save(commande);
-                    }else{
+                    } else {
                         return null;
                     }
-                }else{
+                } else {
                     if (ligne.getQuantite() != quantite) {
-                        if(livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null){
+                        if (livreService.reserver(idLivre, quantite - ligne.getQuantite()) != null) {
                             ligne.updateQuantite(quantite);
-                            if(ligne.getQuantite() == 0){
+                            if (ligne.getQuantite() == 0) {
                                 commande.removeLigneCommande(ligne);
                                 ligneCommandeRepository.delete(ligne);
                             }
                             return commandeRepository.save(commande);
-                        }else{
+                        } else {
                             return null;
                         }
                     }
                 }
             }
         }
+
         // creation d'une nouvelle ligneCommande
         LigneCommande ligneCommande = new LigneCommande();
         Livre livre = livreService.reserver(idLivre, quantite);
-        if(livre != null){
+        if (livre != null) {
             ligneCommande.setLivreQuantite(livre, quantite);
             commande.addLigneCommande(ligneCommande);
             return commandeRepository.save(commande);
-        }else{
+        } else {
             return null;
         }
     }
@@ -242,6 +259,7 @@ public class CommandeServiceImpl implements CommandeService {
 
     public boolean commander(Commande commande) {
         Commande cmd = commandeRepository.getOne(commande.getId());
+        cmd.setDateModification(ZonedDateTime.now());
         cmd.setPayee(true);
         cmd.setUtilisateur(commande.getUtilisateur());
         cmd.setPaysLivraison(commande.getPaysLivraison());
@@ -256,5 +274,12 @@ public class CommandeServiceImpl implements CommandeService {
         cmd.setNomFacturation(commande.getNomFacturation());
         commandeRepository.save(cmd);
         return true;
+    }
+
+    @Scheduled(fixedDelay = 1000 * 60 * 2)
+    public void removeUselessCommande() {
+        System.out.println("removing useless commands.");
+        ZonedDateTime currentTime = ZonedDateTime.now();
+        commandeRepository.cleanIdsToDelete(currentTime.minusMinutes(120), currentTime.minusMinutes(30));
     }
 }

@@ -26,7 +26,7 @@ export class PageRechercheComponent implements OnInit {
   typeRecherche!: string; //  aut ou cat
   pageRecherche!: number;
   argumentRecherche!: string; //  nom du livre ou de l'auteur
-  titlePage = 'Résultat pour: ';
+  titlePage = '';
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -35,17 +35,18 @@ export class PageRechercheComponent implements OnInit {
     private loc: Location
   ) {
     //  shutting down warnings
-    const b = 0;
+    this.titlePage = '';
   }
 
   ngOnInit(): void {
     //this.fakeResultsGen();
+    this.titlePage = '';
 
     this.activeRoute.params.subscribe((params: Params) => {
       this.typeRecherche = params['type'];
       this.pageRecherche = params['page'] - 1;
       this.argumentRecherche = params['arg'];
-
+      this.titlePage = 'Résultat pour: ';
       if (this.typeRecherche === 'cat') {
         this.titlePage = this.titlePage + '(catégorie) ' + this.argumentRecherche;
         this.populatePageCat();

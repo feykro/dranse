@@ -8,10 +8,8 @@ import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
-
 import java.util.*;
 import java.util.function.Function;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
