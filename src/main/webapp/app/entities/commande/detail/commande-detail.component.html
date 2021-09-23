@@ -16,7 +16,10 @@
         </dd>
         <dt><span jhiTranslate="projetDranseApp.commande.date">Date</span></dt>
         <dd>
-          <span>{{ commande.date | formatMediumDatetime }}</span>
+          <span>{{ commande.dateCreation | formatMediumDatetime }}</span>
+        </dd>
+        <dd>
+          <span>{{ commande.dateModification | formatMediumDatetime }}</span>
         </dd>
         <dt><span jhiTranslate="projetDranseApp.commande.paysLivraison">Pays Livraison</span></dt>
         <dd>

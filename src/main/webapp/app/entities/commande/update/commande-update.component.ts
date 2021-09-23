@@ -24,7 +24,8 @@ export class CommandeUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    date: [],
+    dateCreation: [],
+    dateModification: [],
     paysLivraison: [],
     codePostalLivraison: [],
     villeLivraison: [],
@@ -50,7 +51,7 @@ export class CommandeUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ commande }) => {
       if (commande.id === undefined) {
         const today = dayjs().startOf('day');
-        commande.date = today;
+        commande.dateCreation = today;
       }
 
       this.updateForm(commande);
@@ -99,7 +100,6 @@ export class CommandeUpdateComponent implements OnInit {
   protected updateForm(commande: ICommande): void {
     this.editForm.patchValue({
       id: commande.id,
-      date: commande.date ? commande.date.format(DATE_TIME_FORMAT) : null,
       paysLivraison: commande.paysLivraison,
       codePostalLivraison: commande.codePostalLivraison,
       villeLivraison: commande.villeLivraison,
@@ -136,7 +136,12 @@ export class CommandeUpdateComponent implements OnInit {
     return {
       ...new Commande(),
       id: this.editForm.get(['id'])!.value,
-      date: this.editForm.get(['date'])!.value ? dayjs(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
+      dateCreation: this.editForm.get(['dateCreation'])!.value
+        ? dayjs(this.editForm.get(['dateCreation'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      dateModification: this.editForm.get(['dateModification'])!.value
+        ? dayjs(this.editForm.get(['dateModification'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       paysLivraison: this.editForm.get(['paysLivraison'])!.value,
       codePostalLivraison: this.editForm.get(['codePostalLivraison'])!.value,
       villeLivraison: this.editForm.get(['villeLivraison'])!.value,

@@ -2,6 +2,7 @@ package fr.dranse.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,8 +27,11 @@ public class Commande implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "date")
-    private ZonedDateTime date;
+    @Column(name = "date_creation")
+    private ZonedDateTime dateCreation;
+
+    @Column(name = "date_modification")
+    private ZonedDateTime dateModification;
 
     @Column(name = "pays_livraison")
     private String paysLivraison;
@@ -85,17 +89,30 @@ public class Commande implements Serializable {
         return this;
     }
 
-    public ZonedDateTime getDate() {
-        return this.date;
+    public ZonedDateTime getDateCreation() {
+        return this.dateCreation;
     }
 
-    public Commande date(ZonedDateTime date) {
-        this.date = date;
+    public Commande dateCreation(ZonedDateTime date) {
+        this.dateCreation = date;
         return this;
     }
 
-    public void setDate(ZonedDateTime date) {
-        this.date = date;
+    public void setDateModification(ZonedDateTime date) {
+        this.dateModification = date;
+    }
+
+    public ZonedDateTime getDateModification() {
+        return this.dateModification;
+    }
+
+    public Commande dateModification(ZonedDateTime date) {
+        this.dateModification = date;
+        return this;
+    }
+
+    public void setDateCreation(ZonedDateTime date) {
+        this.dateCreation = date;
     }
 
     public String getPaysLivraison() {
@@ -309,7 +326,8 @@ public class Commande implements Serializable {
     public String toString() {
         return "Commande{" +
             "id=" + getId() +
-            ", date='" + getDate() + "'" +
+            ", dateCreation='" + getDateCreation()   + "'" +
+            ", dateModification='" + getDateModification()   + "'" +
             ", paysLivraison='" + getPaysLivraison() + "'" +
             ", codePostalLivraison=" + getCodePostalLivraison() +
             ", villeLivraison='" + getVilleLivraison() + "'" +

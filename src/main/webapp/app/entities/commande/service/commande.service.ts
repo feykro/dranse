@@ -84,13 +84,13 @@ export class CommandeService {
 
   protected convertDateFromClient(commande: ICommande): ICommande {
     return Object.assign({}, commande, {
-      date: commande.date?.isValid() ? commande.date.toJSON() : undefined,
+      date: commande.dateCreation?.isValid() ? commande.dateCreation.toJSON() : undefined,
     });
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.date = res.body.date ? dayjs(res.body.date) : undefined;
+      res.body.dateCreation = res.body.dateCreation ? dayjs(res.body.dateCreation) : undefined;
     }
     return res;
   }
@@ -98,7 +98,7 @@ export class CommandeService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((commande: ICommande) => {
-        commande.date = commande.date ? dayjs(commande.date) : undefined;
+        commande.dateCreation = commande.dateCreation ? dayjs(commande.dateCreation) : undefined;
       });
     }
     return res;

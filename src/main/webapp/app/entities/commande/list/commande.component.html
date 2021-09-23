@@ -59,7 +59,11 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="date">
-            <span jhiTranslate="projetDranseApp.commande.date">Date</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="projetDranseApp.commande.dateCreation">Date de création</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="projetDranseApp.commande.dateModification">Date de dernière modification</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="paysLivraison">
             <span jhiTranslate="projetDranseApp.commande.paysLivraison">Pays Livraison</span> <fa-icon icon="sort"></fa-icon>
@@ -106,7 +110,8 @@
           <td>
             <a [routerLink]="['/commande', commande.id, 'view']">{{ commande.id }}</a>
           </td>
-          <td>{{ commande.date | formatMediumDatetime }}</td>
+          <td>{{ commande.dateCreation | formatMediumDatetime }}</td>
+          <td>{{ commande.dateModification | formatMediumDatetime }}</td>
           <td>{{ commande.paysLivraison }}</td>
           <td>{{ commande.codePostalLivraison }}</td>
           <td>{{ commande.villeLivraison }}</td>

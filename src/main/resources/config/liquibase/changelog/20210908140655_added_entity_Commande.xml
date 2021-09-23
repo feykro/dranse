@@ -14,7 +14,10 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="date" type="${datetimeType}">
+            <column name="date_creation" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_modification" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="pays_livraison" type="varchar(255)">
@@ -55,7 +58,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="commande" columnName="date" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -74,7 +76,6 @@
                   separator=";"
                   tableName="commande">
             <column name="id" type="numeric"/>
-            <column name="date" type="${datetimeType}"/>
             <column name="pays_livraison" type="string"/>
             <column name="code_postal_livraison" type="numeric"/>
             <column name="ville_livraison" type="string"/>
