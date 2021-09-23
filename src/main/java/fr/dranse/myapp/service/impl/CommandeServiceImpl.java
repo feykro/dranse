@@ -232,7 +232,7 @@ public class CommandeServiceImpl implements CommandeService {
                         } else {
                             return null;
                         }
-                    }else{
+                    } else {
                         return null;
                     }
                 }
