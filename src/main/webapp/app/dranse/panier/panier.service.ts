@@ -63,6 +63,7 @@ export class PanierService {
         alert("Le livre n'a pas été trouvé ou n'est plus en stock");
       } else {
         this.commande = value.body;
+        this.sendMessage(this.commande.ligneCommandes!.length.toString());
         localStorage.setItem('panierId', JSON.stringify(<number>value.body.id));
         alert('Le produit a été ajouté au panier');
       }

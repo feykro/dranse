@@ -35,13 +35,15 @@ export class PanierComponent implements OnInit {
     const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
       this.commandeService.getCommande(this.panierService.getPanierId())
     );
+
     commandeRequest.subscribe(value => {
+      this.panierService.fetchMessage().subscribe(message => this.message = message);
       if (value.body === null) {
         alert("Votre panier a été nettoyé en raison d'une inactivité prolongée");
         this.panierService.clearId();
       } else {
         this.getLignesCommande();
-        this.panierService.fetchMessage().subscribe(message => this.message = message)
+
 
       }
     });
