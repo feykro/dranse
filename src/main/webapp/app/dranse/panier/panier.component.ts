@@ -113,8 +113,10 @@ export class PanierComponent implements OnInit {
     this.panierService.modifierLigne(newLigne).subscribe(value => {
       if (value.body !== null) {
         this.lignes[indice] = newLigne;
+        this.updateAll();
+      } else {
+        alert("Le livre n'est plus en stock");
       }
-      this.updateAll();
     });
   }
 
@@ -162,7 +164,17 @@ export class PanierComponent implements OnInit {
     if (this.panierService.getPanierId() === -1) {
       alert('Impossible de payer avec un panier vide');
     } else {
-      this.router.navigate(['/verification']);
+      const commandeRequest: Observable<HttpResponse<ICommande>> = <Observable<HttpResponse<ICommande>>>(
+        this.commandeService.getCommande(this.panierService.getPanierId())
+      );
+      commandeRequest.subscribe(value => {
+        const test = value.body?.ligneCommandes;
+        if (value.body?.ligneCommandes?.length === 0) {
+          alert('Vous devez avoir au moins un livre dans votre commande pour passer commande');
+        } else {
+          this.router.navigate(['/verification']);
+        }
+      });
     }
   }
 
