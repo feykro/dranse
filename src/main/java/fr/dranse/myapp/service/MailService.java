@@ -61,7 +61,7 @@ public class MailService {
             subject,
             content
         );
-
+        System.out.println("\n\n INSIDE SEND EMAIL \n\n");
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {

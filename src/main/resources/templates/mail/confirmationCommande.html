@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="fr">
+<head>
+  <title th:text="#{confirmation.commande.title}">Confirmation de commande</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+<p th:text="#{email.activation.greeting(${user.login})}">Cher</p>
+<p>Votre commande a bien été effectuée !</p>
+<p>
+  Veuillez trouvez une historique de vos commandes <a th:with="url=(@{|${baseUrl}/historique|})" th:href="${url}" th:text="${url}">ici</a>.
+</p>
+<p>
+  <span th:text="#{email.activation.text2}">Cordialement, </span>
+  <br />
+  <em th:text="#{email.signature}">Team Dranse</em>
+</p>
+</body>
+</html>
