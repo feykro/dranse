@@ -8,13 +8,15 @@ import fr.dranse.myapp.repository.CategorieRepository;
 import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
+import java.util.function.Function;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -135,14 +137,16 @@ public class LivreServiceImpl implements LivreService {
     @Transactional(readOnly = true)
     public Page<Livre> findByAuthor(Pageable pageable, String author) {
         log.debug("Request to get Livre by author {}", author);
-        return livreRepository.findAllWithAuthor(pageable, author);
+        Page<SearchHit<Livre>> res = livreSearchRepository.searchByAuthor(author, pageable);
+        return res.map(sh -> sh.getContent());
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<Livre> findByTitle(Pageable pageable, String title) {
         log.debug("Request to get Livre by title {}", title);
-        return livreSearchRepository.searchByTitle(title, pageable);
+        Page<SearchHit<Livre>> res = livreSearchRepository.searchByTitle(title, pageable);
+        return res.map(sh -> sh.getContent());
     }
 
     @Override
