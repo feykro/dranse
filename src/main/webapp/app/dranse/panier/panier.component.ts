@@ -22,12 +22,9 @@ export class PanierComponent implements OnInit {
 
   itemListCommande: itemCommande[] = [];
 
-  message !: string;
+  message!: string;
 
-  constructor(
-    private panierService: PanierService,
-    public commandeService: CommandeControllerRessourceService,
-    private router: Router) {
+  constructor(private panierService: PanierService, public commandeService: CommandeControllerRessourceService, private router: Router) {
     this.panierId = this.panierService.getPanierId();
   }
 
@@ -37,20 +34,17 @@ export class PanierComponent implements OnInit {
     );
 
     commandeRequest.subscribe(value => {
-      this.panierService.fetchMessage().subscribe(message => this.message = message);
-      if (value.body === null) {
+      this.panierService.fetchMessage().subscribe(message => (this.message = message));
+      if (value.body === null && this.panierService.getPanierId() !== -1) {
         alert("Votre panier a été nettoyé en raison d'une inactivité prolongée");
         this.panierService.clearId();
       } else {
         this.getLignesCommande();
-
-
       }
     });
-
   }
 
-  newMessage() : void {
+  newMessage(): void {
     this.panierService.sendMessage(this.lignes.length.toString());
   }
 
@@ -189,7 +183,6 @@ export class PanierComponent implements OnInit {
       }
     });
     this.newMessage();
-
   }
 
   gotoItem(id: number): void {
