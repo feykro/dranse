@@ -29,14 +29,4 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
         @Param("tempsLimiteCreation") ZonedDateTime tempsLimiteCreation,
         @Param("tempsLimiteModification") ZonedDateTime tempsLimiteModification
     );
-    /*
-    @Modifying
-    @Query(
-        value = "delete from LigneCommande where  commande = ( SELECT id from commande  utilisateur IS NULL AND (:tempsLimiteCreation > dateCreation OR :tempsLimiteModification > dateModification)"
-    )
-    void cleanIdsToDelete(
-        @Param("tempsLimiteCreation") ZonedDateTime tempsLimiteCreation,
-        @Param("tempsLimiteModification") ZonedDateTime tempsLimiteModification
-    );
-*/
 }

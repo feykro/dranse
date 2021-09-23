@@ -187,7 +187,7 @@ public class LivreServiceImpl implements LivreService {
     @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void elasticSync() {
         System.out.println("\n\nSync with elastic...");
-        livreSearchRepository.saveAll(livreRepository.findAll());
+        livreSearchRepository.saveAll(livreRepository.findAll().subList(0, 300));
         System.out.println("end...\n");
     }
 }
