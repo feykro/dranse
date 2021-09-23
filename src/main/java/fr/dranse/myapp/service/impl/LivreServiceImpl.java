@@ -9,7 +9,7 @@ import fr.dranse.myapp.repository.LivreRepository;
 import fr.dranse.myapp.repository.search.LivreSearchRepository;
 import fr.dranse.myapp.service.LivreService;
 import java.util.*;
-
+import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -189,10 +189,10 @@ public class LivreServiceImpl implements LivreService {
         return livreRepository.getBestSeller(PageRequest.of(0, 5));
     }
 
-    @Scheduled(fixedDelay = 1000*60*60*24)
-    public void elasticSync(){
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    public void elasticSync() {
         System.out.println("\n\nSync with elastic...");
-        livreSearchRepository.saveAll(livreRepository.findAll());
+        livreSearchRepository.saveAll(livreRepository.findAll().subList(0, 300));
         System.out.println("end...\n");
     }
 }
