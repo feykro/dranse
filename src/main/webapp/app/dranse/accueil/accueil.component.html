@@ -2,7 +2,7 @@
   <div id="topSection">
     <p id="topTitle">Best Sellers</p>
     <div id="bestSellers">
-      <div class="bookCard" *ngFor="let book of bestSellers" (click)="navigate(book.id! - 1)" outerLinkActive="router-link-active">
+      <div class="bookCard" *ngFor="let book of bestSellers" (click)="navigate(book.id!)" outerLinkActive="router-link-active">
         <div id="bookImage">
           <img id="coverTest" src="https://storage.googleapis.com/bucketdranse/pictures/ {{ book.urlImage }}" />
         </div>

@@ -13,6 +13,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -184,10 +185,14 @@ public class LivreServiceImpl implements LivreService {
         }
     }
 
+    public List<Livre> getBestSeller() {
+        return livreRepository.getBestSeller(PageRequest.of(0, 5));
+    }
+
     @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void elasticSync() {
         System.out.println("\n\nSync with elastic...");
-        livreSearchRepository.saveAll(livreRepository.findAll());
+        livreSearchRepository.saveAll(livreRepository.findAll().subList(0, 300));
         System.out.println("end...\n");
     }
 }
