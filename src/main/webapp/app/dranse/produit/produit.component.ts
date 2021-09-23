@@ -27,10 +27,6 @@ export class ProduitComponent implements OnInit {
     private commandeService: CommandeControllerRessourceService
   ) {}
 
-
-
-  constructor(private activatedRoute: ActivatedRoute, private livreService: LivreService, private panierService: PanierService) {   }
-
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.livreId = params['livreId'];
@@ -43,9 +39,9 @@ export class ProduitComponent implements OnInit {
 
   }
 
-  newMessage() : void {
-      const ret = Number(this.message)+1;
-      this.panierService.sendMessage(ret.toString());
+  newMessage(message : string) : void {
+      //const ret = Number(this.message)+1;
+      this.panierService.sendMessage(message);
   }
 
   ajoutPanier(): void {
@@ -69,6 +65,6 @@ export class ProduitComponent implements OnInit {
         }
       });
     }
-    this.newMessage();
+
   }
 }
