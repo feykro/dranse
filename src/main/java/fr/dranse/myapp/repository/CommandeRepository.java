@@ -23,10 +23,20 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 
     @Modifying
     @Query(
-        value = "delete from Commande where utilisateur IS NULL AND (:tempsLimiteCreation > dateCreation OR :tempsLimiteModification > dateModification)"
+        "select id from Commande where utilisateur IS NULL AND (:tempsLimiteCreation > dateCreation OR :tempsLimiteModification > dateModification)"
+    )
+    List<Long> cleanIdsToDelete(
+        @Param("tempsLimiteCreation") ZonedDateTime tempsLimiteCreation,
+        @Param("tempsLimiteModification") ZonedDateTime tempsLimiteModification
+    );
+    /*
+    @Modifying
+    @Query(
+        value = "delete from LigneCommande where  commande = ( SELECT id from commande  utilisateur IS NULL AND (:tempsLimiteCreation > dateCreation OR :tempsLimiteModification > dateModification)"
     )
     void cleanIdsToDelete(
         @Param("tempsLimiteCreation") ZonedDateTime tempsLimiteCreation,
         @Param("tempsLimiteModification") ZonedDateTime tempsLimiteModification
     );
+*/
 }
