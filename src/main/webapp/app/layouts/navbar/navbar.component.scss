@@ -9,6 +9,30 @@ $background-color: #383b3c;
 Navbar
 ========================================================================== */
 
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #edf2f3;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #3e8acc;
+    color: #edf2f3;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+}
+
+
+//test above
+
 .searchBarArea {
   width: 40vw;
   border: solid black 0.1em;

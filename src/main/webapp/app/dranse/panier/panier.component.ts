@@ -22,13 +22,23 @@ export class PanierComponent implements OnInit {
 
   itemListCommande: itemCommande[] = [];
 
-  constructor(private panierService: PanierService, public commandeService: CommandeControllerRessourceService, private router: Router) {
+  message !: string;
+
+  constructor(
+    private panierService: PanierService,
+    public commandeService: CommandeControllerRessourceService,
+    private router: Router) {
     this.panierId = this.panierService.getPanierId();
   }
 
   ngOnInit(): void {
     this.getLignesCommande();
+    this.panierService.fetchMessage().subscribe(message => this.message = message)
     //this.fakeCommandeInit();
+  }
+
+  newMessage() : void {
+    this.panierService.sendMessage(this.lignes.length.toString());
   }
 
   /**
@@ -42,6 +52,7 @@ export class PanierComponent implements OnInit {
       i++;
     }
     this.updateTotalPrice();
+    this.newMessage();
   }
 
   getLignesCommande(): void {
@@ -56,7 +67,9 @@ export class PanierComponent implements OnInit {
         this.lignes = test;
         this.convertCommande();
       }
+      this.newMessage();
     });
+    this.newMessage();
   }
 
   convertLigneCommande(ligne: ILigneCommande, position: number): itemCommande {
@@ -80,7 +93,7 @@ export class PanierComponent implements OnInit {
       this.prixTotal = +this.prixTotal.toFixed(2);
       bookPrice = book.prix.toString();
     }
-
+    this.newMessage();
     return new itemCommande(urlImage, bookTitle, bookAuthor, bookPrice, quantite, position, idLivre);
   }
 
@@ -89,6 +102,7 @@ export class PanierComponent implements OnInit {
     this.itemListCommande = [];
     this.getLignesCommande();
     this.updateTotalPrice();
+    this.newMessage();
   }
 
   updateTotalPrice(): void {
@@ -100,6 +114,7 @@ export class PanierComponent implements OnInit {
     }
     this.prixTotal = prix;
     this.prixTotal = +this.prixTotal.toFixed(2);
+    this.newMessage();
   }
 
   incrementerObjet(indice: number): void {
@@ -118,6 +133,7 @@ export class PanierComponent implements OnInit {
         alert("Le livre n'est plus en stock");
       }
     });
+    this.newMessage();
   }
 
   decrementerObjet(indice: number): void {
@@ -140,6 +156,8 @@ export class PanierComponent implements OnInit {
       }
       this.updateAll();
     });
+    this.newMessage();
+
   }
 
   gotoItem(id: number): void {
@@ -175,6 +193,7 @@ export class PanierComponent implements OnInit {
           this.router.navigate(['/verification']);
         }
       });
+      this.newMessage();
     }
   }
 
@@ -189,6 +208,7 @@ export class PanierComponent implements OnInit {
         }
         this.updateAll();
       });
+      this.newMessage();
     }
   }
 }
